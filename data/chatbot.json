@@ -1,0 +1,58 @@
+[
+  {
+    "id": "seed-default",
+    "question": "",
+    "answer": "Hi! I'm NexBot. Ask me about our virtual assistant services, AI automation, pricing, or how to get started — I'm happy to help.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:00.000Z"
+  },
+  {
+    "id": "seed-services",
+    "question": "What services do you offer?",
+    "answer": "We provide virtual assistant and AI automation services across Administrative Support, Insurance Support, Real Estate, Legal, Healthcare, Marketing, Bookkeeping and AI Automation.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:01.000Z"
+  },
+  {
+    "id": "seed-pricing",
+    "question": "What is the pricing?",
+    "answer": "We offer a dedicated team or pay-as-you-go options with onboarding within days and no long-term lock-in.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:02.000Z"
+  },
+  {
+    "id": "seed-ai",
+    "question": "Do you provide AI automation?",
+    "answer": "Yes! We design and deploy AI automations for lead qualification, chatbots, document processing and workflow automation.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:03.000Z"
+  },
+  {
+    "id": "seed-appointment",
+    "question": "How do I book an appointment?",
+    "answer": "You can book a free consultation at calendly.com/virtualnexgen-info/30min — pick a slot that works for you.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:04.000Z"
+  },
+  {
+    "id": "seed-contact",
+    "question": "How can I contact support?",
+    "answer": "Call us at +1 341 888 6504 or book a call via Calendly and our team will reach out to you.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:05.000Z"
+  },
+  {
+    "id": "seed-addservice",
+    "question": "How do I add a new service in the admin panel?",
+    "answer": "To add a new service: 1) Log in to the admin panel at /admin. 2) Open Services from the left side menu. 3) Click 'Add New Service'. 4) Enter the Heading Name (required). 5) Optionally fill Eyebrow Label, Short Text and the Main Image (upload or paste a URL). 6) Add Page Sections — each section has a heading, content text and an optional image. 7) Adjust the Get Started (CTA) section: heading, description, button label, phone number and checklist points. 8) Click 'Add Service' to save. The new service instantly appears in the services dropdown.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:06.000Z"
+  },
+  {
+    "id": "seed-adminpanel",
+    "question": "What is the admin panel and how does it work?",
+    "answer": "The admin panel is the dashboard where you manage the website content without touching code. From the left side menu you can: open the Dashboard to see stats, manage Services (add/edit/delete services, sections, images and the Get Started text), and manage the Chatbot (add questions and answers for the site chatbot, including voice-recorded answers). The right side NexBot popup is available across admin pages for help. Login happens at /admin with your admin credentials.",
+    "audio": "",
+    "createdAt": "2026-01-02T09:00:07.000Z"
+  }
+]
