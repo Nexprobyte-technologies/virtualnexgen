@@ -67,10 +67,12 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24">
+      <main className="pt-10">
         {/* Hero Banner */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-cream-1 to-background py-20">
-          <div className="mx-auto max-w-7xl px-6 text-center">
+        <section className="relative overflow-hidden py-8" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
+          <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
+          <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
+          <div className="relative mx-auto max-w-7xl px-6 text-center">
             <SectionHeading
               eyebrow="About Us"
               title={heroTitle || "About Virtual Nexgen Solutions"}

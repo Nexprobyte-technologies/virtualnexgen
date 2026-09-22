@@ -9,7 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@gsap/react": "^2.1.2",
+    "@mui/icons-material": "^9.4.0",
+    "@mui/material": "^9.4.0",
     "@studio-freight/lenis": "^1.0.42",
     "date-fns": "^4.4.0",
     "framer-motion": "^13.4.0",

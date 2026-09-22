@@ -25,25 +25,25 @@ export default async function BlogListPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-brand-deep via-brand-dark to-[#001a33]">
-        <div className="pointer-events-none absolute inset-0 bg-aurora opacity-40" />
-        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/40 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-5 pt-32 pb-14 sm:px-8">
-          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
+      <div className="relative overflow-hidden py-6" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
+        <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
+        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-ink/50">
             <Link
               href="/"
-              className="flex items-center gap-1.5 transition hover:text-white"
+              className="flex items-center gap-1.5 transition hover:text-ink"
             >
               <Home className="h-3.5 w-3.5" /> Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/40" />
-            <span className="text-white/90">Blog</span>
+            <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
+            <span className="text-ink/80">Blog</span>
           </nav>
-          <h1 className="mt-6 max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-ink sm:text-4xl lg:text-5xl">
             Insights, Tips &amp;{" "}
-            <span className="text-brand-accent">Updates</span>
+            <span className="text-brand-dark">Updates</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg">
             Expert advice on virtual assistants, AI automation and business
             process optimization — straight from the Virtual Nexgen Solutions
             team.

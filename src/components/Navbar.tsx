@@ -60,8 +60,8 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-transparent" : ""}`} style={scrolled ? {} : { background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
-        <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/80 backdrop-blur-xl px-6 py-2">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-transparent" : ""}`} style={!scrolled ? { background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" } : {}}>
+        <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/80 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
@@ -136,7 +136,7 @@ export default function Navbar() {
                   </button>
 
                   {servicesOpen && (
-                    <div className="absolute top-full right-0 mt-3 w-80 rounded-2xl border border-line bg-white shadow-2xl py-3 z-50">
+                    <div className="absolute top-full right-0 mt-3 w-140 rounded-2xl border border-line bg-white shadow-2xl py-3 z-50">
                       <Link
                         href="/services"
                         onClick={() => setServicesOpen(false)}
@@ -313,7 +313,7 @@ export default function Navbar() {
         )}
       </header>
 
-      <div className="h-[80px]" />
+      <div className="h-[40px]" />
 
       <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>

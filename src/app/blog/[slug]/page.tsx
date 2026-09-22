@@ -218,37 +218,37 @@ export default async function BlogDetailPage({
   return (
     <main className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-brand-deep via-brand-dark to-[#001a33]">
-        <div className="pointer-events-none absolute inset-0 bg-aurora opacity-40" />
-        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/40 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-5 pt-32 pb-10 sm:px-8">
-          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
+      <div className="relative overflow-hidden py-5" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
+        <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
+        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-ink/50">
             <Link
               href="/"
-              className="flex items-center gap-1.5 transition hover:text-white"
+              className="flex items-center gap-1.5 transition hover:text-ink"
             >
               <Home className="h-3.5 w-3.5" /> Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/40" />
-            <Link href="/blog" className="transition hover:text-white">
+            <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
+            <Link href="/blog" className="transition hover:text-ink">
               Blog
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/40" />
-            <span className="max-w-[30ch] truncate text-white/90">
+            <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
+            <span className="max-w-[30ch] truncate text-ink/80">
               {post.title}
             </span>
           </nav>
 
-          <div className="mt-4 flex items-center gap-3">
-            <span className="rounded-full bg-brand/20 px-3 py-1 text-xs font-bold text-brand-accent">
+          <div className="mt-3 flex items-center gap-3">
+            <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-brand-dark">
               {category}
             </span>
-            <span className="flex items-center gap-1 text-xs text-white/50">
+            <span className="flex items-center gap-1 text-xs text-ink/50">
               <Clock className="h-3 w-3" /> {readTime} min read
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-2xl font-extrabold leading-[1.2] tracking-tight text-white sm:text-3xl lg:text-4xl">
+          <h1 className="mt-4 max-w-4xl text-2xl font-extrabold leading-[1.2] tracking-tight text-ink sm:text-3xl lg:text-4xl">
             {post.title}
           </h1>
         </div>
