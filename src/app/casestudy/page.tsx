@@ -6,6 +6,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeading from "@/components/SectionHeading";
+import { ArrowRight } from "lucide-react";
 import type { CaseStudy } from "@/lib/types";
 
 export default function CaseStudiesPage() {
@@ -25,24 +26,23 @@ export default function CaseStudiesPage() {
         <section className="relative overflow-hidden bg-gradient-to-b from-cream-1 to-background py-20">
           <div className="mx-auto max-w-7xl px-6 text-center">
             <SectionHeading
-              eyebrow="Our Work"
-              title="Case Studies"
-              description="See how we've helped businesses transform with virtual assistance and AI automation."
+              eyebrow="Case Study"
+              title="How Our Virtual Assistants and AI Automation Services Transformed Businesses."
             />
           </div>
         </section>
 
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
               {studies.map((study) => (
                 <Link
                   key={study.slug}
                   href={`/casestudy/${study.slug}`}
-                  className="group block rounded-2xl border border-line bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+                  className="group relative block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all hover:shadow-lg"
                 >
                   {study.image && (
-                    <div className="relative mb-4 aspect-video overflow-hidden rounded-xl">
+                    <div className="relative aspect-video overflow-hidden">
                       <Image
                         src={study.image}
                         alt={study.title}
@@ -51,17 +51,25 @@ export default function CaseStudiesPage() {
                       />
                     </div>
                   )}
-                  <h3 className="mb-2 text-lg font-bold text-ink group-hover:text-brand transition-colors">
-                    {study.title}
-                  </h3>
-                  <p className="text-sm text-ink/60 line-clamp-3">
-                    {study.excerpt}
-                  </p>
-                  {study.industry && (
-                    <span className="mt-3 inline-block rounded-full bg-cream-2 px-3 py-1 text-xs font-medium text-brand-dark">
-                      {study.industry}
+                  <div className="p-6">
+                    {study.tag && (
+                      <span className="mb-2 inline-block rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand-dark">
+                        {study.tag}
+                      </span>
+                    )}
+                    {study.tags && (
+                      <p className="mb-2 text-xs text-ink/50">{study.tags}</p>
+                    )}
+                    <h3 className="mb-3 text-lg font-bold text-ink group-hover:text-brand transition-colors line-clamp-2">
+                      {study.title}
+                    </h3>
+                    <p className="text-sm text-ink/60 line-clamp-3 mb-4">
+                      {study.excerpt}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand group-hover:text-brand-dark transition-colors">
+                      <ArrowRight className="h-4 w-4" />
                     </span>
-                  )}
+                  </div>
                 </Link>
               ))}
             </div>

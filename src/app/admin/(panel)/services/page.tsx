@@ -496,7 +496,7 @@ export default function AdminServices() {
                     )}
                   </p>
                   <input
-                    value={section.heading}
+                    value={section.heading ?? ""}
                     onChange={(e) =>
                       updateSection(i, { heading: e.target.value })
                     }
@@ -504,7 +504,7 @@ export default function AdminServices() {
                     className="mb-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
                   />
                   <textarea
-                    value={section.text}
+                    value={section.text ?? ""}
                     onChange={(e) =>
                       updateSection(i, { text: e.target.value })
                     }
@@ -530,7 +530,7 @@ export default function AdminServices() {
                       className="hidden"
                     />
                     <input
-                      value={section.imageUrl}
+                      value={section.imageUrl ?? ""}
                       onChange={(e) =>
                         updateSection(i, {
                           imageUrl: e.target.value,

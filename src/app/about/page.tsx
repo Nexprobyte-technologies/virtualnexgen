@@ -5,11 +5,47 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionHeading from "@/components/SectionHeading";
-import type { AboutSection } from "@/lib/types";
+import ProseContent from "@/components/ProseContent";
+import type { AboutSection, AboutFeature } from "@/lib/types";
+import {
+  Building2,
+  Award,
+  Sparkles,
+  Target,
+  ShieldCheck,
+  UserCheck,
+  SlidersHorizontal,
+  Clock,
+  DollarSign,
+  Headphones,
+  BadgeCheck,
+  Circle,
+} from "lucide-react";
+
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Building2,
+  Award,
+  Sparkles,
+  Target,
+  ShieldCheck,
+  UserCheck,
+  SlidersHorizontal,
+  Clock,
+  DollarSign,
+  Headphones,
+  BadgeCheck,
+};
+
+function getIcon(name: string) {
+  return ICON_MAP[name] || Circle;
+}
 
 export default function AboutPage() {
   const [sections, setSections] = useState<AboutSection[]>([]);
+  const [features, setFeatures] = useState<AboutFeature[]>([]);
   const [heroTitle, setHeroTitle] = useState("");
+  const [heroSubtitle, setHeroSubtitle] = useState("");
+  const [heroImage, setHeroImage] = useState("");
   const [heroDescription, setHeroDescription] = useState("");
 
   useEffect(() => {
@@ -18,7 +54,10 @@ export default function AboutPage() {
       .then((data) => {
         if (data) {
           setSections(data.sections || []);
+          setFeatures(data.features || []);
           setHeroTitle(data.heroTitle || "");
+          setHeroSubtitle(data.heroSubtitle || "");
+          setHeroImage(data.heroImage || "");
           setHeroDescription(data.heroDescription || "");
         }
       })
@@ -29,50 +68,62 @@ export default function AboutPage() {
     <>
       <Navbar />
       <main className="pt-24">
-        {/* Hero */}
+        {/* Hero Banner */}
         <section className="relative overflow-hidden bg-gradient-to-b from-cream-1 to-background py-20">
           <div className="mx-auto max-w-7xl px-6 text-center">
             <SectionHeading
               eyebrow="About Us"
               title={heroTitle || "About Virtual Nexgen Solutions"}
-              description={heroDescription || "We deliver world-class virtual assistant and AI automation solutions that help businesses scale efficiently."}
+              description={heroSubtitle || heroDescription || "Transforming Businesses with AI & Virtual Assistance Since 2016"}
             />
           </div>
         </section>
 
         {/* Dynamic Sections */}
-        {sections.map((section, i) => (
-          <section
-            key={section.id || i}
-            className={`py-20 ${i % 2 === 0 ? "bg-background" : "bg-cream-1"}`}
-          >
-            <div className="mx-auto max-w-7xl px-6">
-              <div className={`flex flex-col gap-12 lg:flex-row ${i % 2 !== 0 ? "lg:flex-row-reverse" : ""} items-center`}>
-                {section.image && (
-                  <div className="relative w-full lg:w-1/2">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line">
-                      <Image
-                        src={section.image}
-                        alt={section.title}
-                        fill
-                        className="object-cover"
-                      />
+        {sections.map((section, i) => {
+          const SectionIcon = getIcon(section.icon || "");
+          return (
+            <section
+              key={section.id || i}
+              className={`py-20 ${i % 2 === 0 ? "bg-background" : "bg-cream-1"}`}
+            >
+              <div className="mx-auto max-w-7xl px-6">
+                <div className={`flex flex-col gap-12 lg:flex-row ${i % 2 !== 0 ? "lg:flex-row-reverse" : ""} items-center`}>
+                  {section.image && (
+                    <div className="relative w-full lg:w-1/2">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                        <Image
+                          src={section.image}
+                          alt={section.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
+                  )}
+                  <div className={`w-full ${section.image ? "lg:w-1/2" : ""}`}>
+                    {section.eyebrow && (
+                      <span className="inline-flex items-center gap-2 rounded-full bg-cream-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark mb-4">
+                        {section.icon && <SectionIcon className="h-3.5 w-3.5" />}
+                        {section.eyebrow}
+                      </span>
+                    )}
+                    <h2 className="mb-4 text-3xl font-bold text-ink">
+                      {section.title}
+                    </h2>
+                    <ProseContent
+                      html={section.content}
+                      className="prose prose-lg max-w-none text-ink/70"
+                    />
                   </div>
-                )}
-                <div className={`w-full ${section.image ? "lg:w-1/2" : ""}`}>
-                  <h2 className="mb-4 text-3xl font-bold text-ink">
-                    {section.title}
-                  </h2>
-                  <div
-                    className="prose prose-lg max-w-none text-ink/70"
-                    dangerouslySetInnerHTML={{ __html: section.content }}
-                  />
                 </div>
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          );
+        })}
+
+        {/* Why Choose Us - Features with left icons */}
+        
       </main>
       <Footer />
     </>

@@ -6,12 +6,17 @@ const FILE = join(process.cwd(), "data", "casestudy.json");
 export interface CaseStudy {
   slug: string;
   title: string;
+  tag?: string;
+  tags?: string;
   excerpt: string;
   content: string;
   image: string;
-  industry: string;
-  date: string;
-  results: string;
+  industry?: string;
+  date?: string;
+  results?: string;
+  clientOverview?: string;
+  challenge?: string;
+  solution?: string;
   createdAt: string;
 }
 

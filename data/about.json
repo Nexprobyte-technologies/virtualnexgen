@@ -1,26 +1,92 @@
 {
   "id": "about-main",
-  "heroTitle": "About Virtual Nexgen Solutions",
+  "heroTitle": "About Us",
   "heroSubtitle": "Transforming Businesses with AI & Virtual Assistance Since 2016",
-  "heroImage": "https://virtualnexgen.com/assets/uploads/aboutus/21686.png",
+  "heroImage": "/uploads/about-who-we-are.png",
   "sections": [
     {
       "id": "who-we-are",
-      "title": "Who We Are",
-      "content": "<h3><b>About Virtual Nexgen Solutions</b></h3><div><b><br></b>Transforming Businesses with AI &amp; Virtual Assistance Since 2016&nbsp;</div><div><br></div><div>In today’s fast-paced digital world, businesses need efficient solutions to stay ahead. At VIRTUAL NEXGEN SOLUTIONS, we empower businesses through AI automation and virtual assistant services, helping them optimize processes, increase productivity, and scale with confidence.\n\n \n\nWho We Are\nFounded in 2016, Virtual Nexgen Solutions was built on the belief that businesses of all sizes should have access to advanced automation tools and skilled virtual professionals to reduce operational burdens. Our team consists of AI experts, virtual assistants, and process optimization specialists who work together to streamline your business operations and drive growth.\n\n \n\nOver the years, we have helped B2B businesses, law firms, insurance agencies, healthcare providers, marketing firms, real estate professionals, and many others enhance efficiency, save time, and improve their bottom line.</div>",
-      "image": "https://virtualnexgen.com/assets/uploads/aboutus/11960.jpg"
+      "title": "About Virtual Nexgen Solutions",
+      "eyebrow": "About Virtual Nexgen Solutions",
+      "icon": "Building2",
+      "content": "<p>In today's fast-paced digital world, businesses need efficient solutions to stay ahead. At VIRTUAL NEXGEN SOLUTIONS, we empower businesses through AI automation and virtual assistant services, helping them optimize processes, increase productivity, and scale with confidence.</p><h3><strong>Who We Are</strong></h3><p>Founded in 2016, Virtual Nexgen Solutions was built on the belief that businesses of all sizes should have access to advanced automation tools and skilled virtual professionals to reduce operational burdens. Our team consists of AI experts, virtual assistants, and process optimization specialists who work together to streamline your business operations and drive growth.</p><p>Over the years, we have helped B2B businesses, law firms, insurance agencies, healthcare providers, marketing firms, real estate professionals, and many others enhance efficiency, save time, and improve their bottom line.</p>",
+      "image": "/uploads/about-who-we-are.png"
     },
     {
       "id": "why-choose",
-      "title": "Why Choose Us",
-      "content": "",
-      "image": "https://virtualnexgen.com/assets/uploads/about/81743.png"
+      "title": "Years of Experience in Virtual Assistant & AI Automation Services",
+      "eyebrow": "Why Choose Us",
+      "icon": "Award",
+      "content": "<p>At <strong>VIRTUAL NEXGEN SOLUTIONS,</strong> we provide dedicated, professional virtual assistants to help your business run smoother and smarter. Here's why we stand out:</p><div class=\"mt-8 space-y-4\"><div class=\"flex items-start gap-4\"><span class=\"flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white\"><i data-lucide=\"UserCheck\" class=\"h-6 w-6\"></i></span><div><strong>Skilled Professionals</strong><p class=\"mt-1 text-ink/60\">Our virtual assistants are experts in administrative, creative, and technical tasks.</p></div></div><div class=\"flex items-start gap-4\"><span class=\"flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white\"><i data-lucide=\"SlidersHorizontal\" class=\"h-6 w-6\"></i></span><div><strong>Tailored Support</strong><p class=\"mt-1 text-ink/60\">Customized solutions to match your specific business needs.</p></div></div><div class=\"flex items-start gap-4\"><span class=\"flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white\"><i data-lucide=\"Clock\" class=\"h-6 w-6\"></i></span><div><strong>Time-Saving Efficiency</strong><p class=\"mt-1 text-ink/60\">Focus on growing your business while we handle the day-to-day tasks.</p></div></div><div class=\"flex items-start gap-4\"><span class=\"flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white\"><i data-lucide=\"DollarSign\" class=\"h-6 w-6\"></i></span><div><strong>Cost-Effective Solutions</strong><p class=\"mt-1 text-ink/60\">Affordable, scalable plans to fit your budget.</p></div></div><div class=\"flex items-start gap-4\"><span class=\"flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white\"><i data-lucide=\"Headphones\" class=\"h-6 w-6\"></i></span><div><strong>24/7 Availability</strong><p class=\"mt-1 text-ink/60\">Round-the-clock support to keep your operations running seamlessly.</p></div></div><div class=\"flex items-start gap-4\"><span class=\"flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white\"><i data-lucide=\"BadgeCheck\" class=\"h-6 w-6\"></i></span><div><strong>Proven Reliability</strong><p class=\"mt-1 text-ink/60\">Trusted by businesses for delivering consistent, high-quality support.</p></div></div></div>",
+      "image": "/uploads/about-why-choose.jpg"
     },
     {
       "id": "what-sets-apart",
       "title": "What Sets Us Apart",
-      "content": "",
-      "image": "https://virtualnexgen.com/assets/uploads/aboutus/13394.png"
+      "eyebrow": "What Sets Us Apart",
+      "icon": "Sparkles",
+      "content": "<h3><strong>Proven Industry Experience</strong></h3><p>With nearly a decade of experience, we have successfully helped businesses across multiple industries automate and optimize their operations.</p><h3><strong>Customized Solutions for Every Business</strong></h3><p>We don't believe in a one-size-fits-all approach. Our AI-driven automation and virtual assistant services are tailored to fit your business needs, ensuring maximum efficiency and cost-effectiveness.</p><h3><strong>Scalability & Growth-Oriented Approach</strong></h3><p>Whether you are a startup, small business, or enterprise, our solutions are designed to scale with you as your business expands.</p><h3><strong>Data Security & Reliability</strong></h3><p>We prioritize confidentiality and data protection, ensuring all information is handled with the highest security standards.</p><h3><strong>Cost-Effective & Time-Saving Solutions</strong></h3><p>By automating repetitive tasks and leveraging virtual assistants, businesses save both time and money, allowing them to focus on innovation and growth.</p>",
+      "image": "/uploads/about-sets-apart.png"
+    },
+    {
+      "id": "mission-vision",
+      "title": "Our Mission & Vision",
+      "eyebrow": "Our Mission & Vision",
+      "icon": "Target",
+      "content": "<h3><strong>Our Mission</strong></h3><p>To empower businesses with AI automation and virtual assistance, enabling them to operate smarter, reduce inefficiencies, and focus on strategic growth.</p><h3><strong>Our Vision</strong></h3><p>To become a global leader in AI-driven business solutions and virtual assistance, helping businesses achieve operational excellence through automation and digital transformation.</p>",
+      "image": "/uploads/about-mission-vision.png"
+    },
+    {
+      "id": "data-security",
+      "title": "Commitment to Data Security and Confidentiality",
+      "eyebrow": "Commitment to Data Security and Confidentiality",
+      "icon": "ShieldCheck",
+      "content": "<h3><strong>Ensuring Your Privacy is Our Top Priority</strong></h3><p>At Virtual Nexgen Solutions, we prioritize data security by strictly adhering to privacy and confidentiality protocols to protect against data breaches.</p><h3><strong>Our Team: Full-Time Professionals, No Freelancers</strong></h3><ul><li>All team members are full-time employees who sign confidentiality agreements to ensure privacy and security.</li><li>We strictly follow employment regulations and protocols, holding each employee accountable for confidentiality.</li><li>A dedicated team is assigned to each client, guaranteeing personalized attention and security.</li></ul><h3><strong>Robust Data Security Measures</strong></h3><ul><li>We employ advanced data protection tools to safeguard your information.</li><li>A secure VPN connection is maintained with each client for remote work.</li><li>Our fingerprint verification process ensures the identity of each employee working on your account.</li><li>Security personnel are on-site 24/7 to further protect client data.</li></ul><h3><strong>Flexible Delivery Models Tailored to Your Needs</strong></h3><ul><li>We offer a full-time model (8 hours a day/40 hours a week) and a part-time model (4 hours a day/20 hours a week), which can be adjusted to fit your business hours.</li><li>We are capable of quickly scaling up our workforce to meet your needs, with the flexibility to arrange additional team members on short notice.</li><li>Transparent pricing ensures no hidden charges for any process. We provide a simplified, upfront cost structure so you can easily plan your budget.</li></ul>",
+      "image": "/uploads/about-security.png"
+    }
+  ],
+  "features": [
+    {
+      "id": "skilled-pros",
+      "icon": "UserCheck",
+      "title": "Skilled Professionals",
+      "text": "Our virtual assistants are experts in administrative, creative, and technical tasks.",
+      "image": ""
+    },
+    {
+      "id": "tailored-support",
+      "icon": "SlidersHorizontal",
+      "title": "Tailored Support",
+      "text": "Customized solutions to match your specific business needs.",
+      "image": ""
+    },
+    {
+      "id": "time-saving",
+      "icon": "Clock",
+      "title": "Time-Saving Efficiency",
+      "text": "Focus on growing your business while we handle the day-to-day tasks.",
+      "image": ""
+    },
+    {
+      "id": "cost-effective",
+      "icon": "DollarSign",
+      "title": "Cost-Effective Solutions",
+      "text": "Affordable, scalable plans to fit your budget.",
+      "image": ""
+    },
+    {
+      "id": "availability",
+      "icon": "Headphones",
+      "title": "24/7 Availability",
+      "text": "Round-the-clock support to keep your operations running seamlessly.",
+      "image": ""
+    },
+    {
+      "id": "reliability",
+      "icon": "BadgeCheck",
+      "title": "Proven Reliability",
+      "text": "Trusted by businesses for delivering consistent, high-quality support.",
+      "image": ""
     }
   ],
   "missionTitle": "Our Mission",
@@ -37,6 +103,6 @@
     "Our fingerprint verification process ensures the identity of each employee working on your account.",
     "Security personnel are on-site 24/7 to further protect client data."
   ],
-  "updatedAt": "2026-09-21T10:32:24.682Z",
-  "heroDescription": ""
+  "updatedAt": "2026-09-22T00:00:00.000Z",
+  "heroDescription": "We deliver world-class virtual assistant and AI automation solutions that help businesses scale efficiently."
 }

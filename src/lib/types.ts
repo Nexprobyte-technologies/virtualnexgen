@@ -94,6 +94,8 @@ export interface Appointment {
 export interface AboutSection {
   id: string;
   title: string;
+  eyebrow?: string;
+  icon?: string;
   content: string;
   image: string;
 }
@@ -115,12 +117,17 @@ export interface AboutPage {
 export interface CaseStudy {
   slug: string;
   title: string;
+  tag?: string;
+  tags?: string;
   excerpt: string;
   content: string;
   image: string;
-  industry: string;
-  date: string;
-  results: string;
+  industry?: string;
+  date?: string;
+  results?: string;
+  clientOverview?: string;
+  challenge?: string;
+  solution?: string;
   createdAt: string;
 }
 

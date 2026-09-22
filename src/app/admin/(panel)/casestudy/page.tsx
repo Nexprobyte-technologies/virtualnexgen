@@ -44,9 +44,9 @@ export default function AdminCaseStudyPage() {
       excerpt: study.excerpt,
       content: study.content,
       image: study.image,
-      industry: study.industry,
-      date: study.date,
-      results: study.results,
+      industry: study.industry ?? "",
+      date: study.date ?? "",
+      results: study.results ?? "",
     });
   }
 
@@ -127,46 +127,46 @@ export default function AdminCaseStudyPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <input
             placeholder="Title"
-            value={form.title}
+            value={form.title ?? ""}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             placeholder="Industry"
-            value={form.industry}
+            value={form.industry ?? ""}
             onChange={(e) => setForm({ ...form, industry: e.target.value })}
             className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             placeholder="Image URL"
-            value={form.image}
+            value={form.image ?? ""}
             onChange={(e) => setForm({ ...form, image: e.target.value })}
             className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             placeholder="Date (YYYY-MM-DD)"
-            value={form.date}
+            value={form.date ?? ""}
             onChange={(e) => setForm({ ...form, date: e.target.value })}
             className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
         <textarea
           placeholder="Excerpt"
-          value={form.excerpt}
+          value={form.excerpt ?? ""}
           onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
           rows={2}
           className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
         />
         <textarea
           placeholder="Full Content"
-          value={form.content}
+          value={form.content ?? ""}
           onChange={(e) => setForm({ ...form, content: e.target.value })}
           rows={5}
           className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
         />
         <textarea
           placeholder="Results"
-          value={form.results}
+          value={form.results ?? ""}
           onChange={(e) => setForm({ ...form, results: e.target.value })}
           rows={2}
           className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"

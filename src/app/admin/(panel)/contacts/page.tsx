@@ -67,7 +67,7 @@ export default function AdminContactsPage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
           <input
-            value={form.address}
+            value={form.address ?? ""}
             onChange={(e) => setForm({ ...form, address: e.target.value })}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
@@ -76,7 +76,7 @@ export default function AdminContactsPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
             <input
-              value={form.phone}
+              value={form.phone ?? ""}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
             />
@@ -84,7 +84,7 @@ export default function AdminContactsPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
-              value={form.email}
+              value={form.email ?? ""}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
             />
@@ -93,7 +93,7 @@ export default function AdminContactsPage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Business Hours</label>
           <input
-            value={form.hours}
+            value={form.hours ?? ""}
             onChange={(e) => setForm({ ...form, hours: e.target.value })}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
