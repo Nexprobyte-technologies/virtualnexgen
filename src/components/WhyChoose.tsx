@@ -7,7 +7,6 @@ import Reveal from "./Reveal";
 const complianceItems = [
   "Ongoing Compliance Training",
   "Data Privacy First Approach",
-  "ISO 27001 Standards",
   "NDA-Protected Assistants",
   "Secure Remote Access",
 ];

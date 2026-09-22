@@ -6,25 +6,20 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import TypewriterText from "./TypewriterText";
 
 const typewriterWords = [
-  "Administrative Support",
   "Insurance",
   "Real Estate",
   "Legal",
+  "Healthcare",
 ];
 
 const industryCards: Record<string, { icon: typeof FileText; title: string; subtitle: string; tag: string; percent: number; glass: boolean }[]> = {
-  "Administrative Support": [
-    { icon: ClipboardCheck, title: "Data Entry & Processing", subtitle: "120 Records Updated Today", tag: "Accuracy 99.2%", percent: 95, glass: true },
-    { icon: FileText, title: "Document Management", subtitle: "86 Files Organized", tag: "Fully Synced", percent: 88, glass: false },
-    { icon: RefreshCcw, title: "Email & Calendar Management", subtitle: "64 Tasks Handled", tag: "On Schedule", percent: 91, glass: true },
-  ],
   "Insurance": [
-    { icon: FileText, title: "Policy Servicing & Endorsements", subtitle: "52 Requests Completed", tag: "Quality Verified", percent: 92, glass: true },
-    { icon: RefreshCcw, title: "Policy Renewals in Progress", subtitle: "48 Policies Updated", tag: "On Schedule", percent: 87, glass: false },
+    { icon: FileText, title: "COI Processing & Endorsements", subtitle: "52 Requests Completed", tag: "Quality Verified", percent: 92, glass: true },
+    { icon: RefreshCcw, title: "Policy Renewals Managed", subtitle: "48 Policies Updated", tag: "On Schedule", percent: 87, glass: false },
     { icon: CheckCircle, title: "New Business Quotes Processed", subtitle: "36 Quotes Submitted", tag: "Turnaround Optimized", percent: 78, glass: true },
   ],
   "Real Estate": [
-    { icon: Home, title: "Property Listings Managed", subtitle: "34 Listings Updated", tag: "MLs Synced", percent: 94, glass: true },
+    { icon: Home, title: "Property Listings Managed", subtitle: "34 Listings Updated", tag: "MLS Synced", percent: 94, glass: true },
     { icon: MapPin, title: "Lead Follow-ups Completed", subtitle: "28 Leads Contacted", tag: "Response < 1hr", percent: 90, glass: false },
     { icon: FileSearch, title: "Transaction Coordination", subtitle: "18 Closings Tracked", tag: "On Track", percent: 85, glass: true },
   ],
@@ -32,6 +27,11 @@ const industryCards: Record<string, { icon: typeof FileText; title: string; subt
     { icon: Scale, title: "Case File Preparation", subtitle: "42 Files Reviewed", tag: "Compliance OK", percent: 93, glass: true },
     { icon: Calculator, title: "Billing & Time Entries", subtitle: "56 Entries Logged", tag: "No Missed Hours", percent: 89, glass: false },
     { icon: Building2, title: "Court Filing Support", subtitle: "24 Filings Processed", tag: "Deadline Met", percent: 96, glass: true },
+  ],
+  "Healthcare": [
+    { icon: ClipboardCheck, title: "Medical Records Management", subtitle: "68 Records Updated", tag: "HIPAA Compliant", percent: 95, glass: true },
+    { icon: FileText, title: "Insurance Verification", subtitle: "41 Claims Verified", tag: "Accuracy 99.5%", percent: 91, glass: false },
+    { icon: RefreshCcw, title: "Appointment Scheduling", subtitle: "73 Appointments Set", tag: "On Schedule", percent: 88, glass: true },
   ],
 };
 

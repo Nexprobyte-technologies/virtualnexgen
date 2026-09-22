@@ -5,6 +5,7 @@ import { slugify } from "./services";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "blog.json");
+const FULL_DATA_FILE = path.join(DATA_DIR, "blogs_full.json");
 
 const seed: BlogPost[] = [
   {
@@ -57,6 +58,22 @@ const seed: BlogPost[] = [
   },
 ];
 
+async function loadFullContent(): Promise<Record<string, { contentHtml: string; contentText: string }>> {
+  try {
+    const raw = await fs.readFile(FULL_DATA_FILE, "utf-8");
+    const list = JSON.parse(raw) as Array<{ slug: string; contentHtml: string; contentText: string }>;
+    const map: Record<string, { contentHtml: string; contentText: string }> = {};
+    for (const item of list) {
+      if (item.slug && item.contentHtml) {
+        map[item.slug] = { contentHtml: item.contentHtml, contentText: item.contentText };
+      }
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}
+
 async function ensureFile(): Promise<BlogPost[]> {
   await fs.mkdir(DATA_DIR, { recursive: true });
   try {
@@ -72,12 +89,23 @@ async function ensureFile(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  return ensureFile();
+  const [posts, fullMap] = await Promise.all([ensureFile(), loadFullContent()]);
+  return posts.map((post) => {
+    const full = fullMap[post.slug];
+    if (full) {
+      return { ...post, content: full.contentHtml };
+    }
+    return post;
+  });
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const all = await getBlogPosts();
-  return all.find((p) => p.slug === slug) ?? null;
+  const [all, fullMap] = await Promise.all([getBlogPosts(), loadFullContent()]);
+  const post = all.find((p) => p.slug === slug) ?? null;
+  if (post && fullMap[slug]) {
+    return { ...post, content: fullMap[slug].contentHtml };
+  }
+  return post;
 }
 
 export type BlogPostInput = {

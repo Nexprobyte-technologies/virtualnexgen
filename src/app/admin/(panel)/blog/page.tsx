@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Bold,
-  Eye,
+  ChevronLeft,
+  ChevronRight,
   FileText,
   Heading2,
   Heading3,
@@ -65,6 +66,8 @@ export default function AdminBlog() {
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);
   const fileRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -159,14 +162,6 @@ export default function AdminBlog() {
     if (fileRef.current) fileRef.current.value = "";
   }
 
-  const filteredPosts = filter.trim()
-    ? posts.filter((p) =>
-        `${p.title} ${p.slug} ${p.author}`
-          .toLowerCase()
-          .includes(filter.trim().toLowerCase()),
-      )
-    : posts;
-
   async function uploadImage(file: File): Promise<string> {
     const form = new FormData();
     form.append("image", file);
@@ -225,6 +220,7 @@ export default function AdminBlog() {
       );
       await load();
       window.setTimeout(() => setSuccess(""), 4000);
+      setShowForm(false);
     } catch (err) {
       setFormError(err instanceof Error ? err.message : "Network error, please try again");
     } finally {
@@ -252,8 +248,22 @@ export default function AdminBlog() {
     }
     setFormError("");
     setSuccess("");
-    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setShowForm(true);
   }
+
+  const filteredPosts = filter.trim()
+    ? posts.filter((p) =>
+        `${p.title} ${p.slug} ${p.author}`
+          .toLowerCase()
+          .includes(filter.trim().toLowerCase()),
+      )
+    : posts;
+
+  const totalPages = Math.ceil(filteredPosts.length / pageSize);
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   async function handleDelete(slug: string) {
     if (!confirm(`Delete "${slug}"? This cannot be undone.`)) return;

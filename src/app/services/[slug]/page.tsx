@@ -1,3 +1,4 @@
+import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -15,6 +16,64 @@ import {
 } from "lucide-react";
 import { getService, getServices } from "@/lib/services";
 import Reveal from "@/components/Reveal";
+
+const RICH_HTML_STYLES = [
+  "h2", "h3", "h4", "p", "strong", "em", "a", "ul", "ol", "li", "blockquote",
+  "hr", "code", "pre", "table", "thead", "tbody", "tr", "th", "td", "br", "span",
+  "img", "u", "s", "div", "b", "i"
+];
+
+function RenderRichHtml({ html }: { html: string }) {
+  const safe = sanitizeHtml(html, {
+    allowedTags: RICH_HTML_STYLES,
+    allowedAttributes: {
+      a: ["href", "target", "rel"],
+      img: ["src", "alt", "title", "style", "width", "height"],
+      td: ["colspan", "rowspan"],
+      th: ["colspan", "rowspan"],
+      div: ["class", "style"],
+      span: ["class", "style"],
+      p: ["class", "style"],
+      h2: ["class", "style"],
+      h3: ["class", "style"],
+      h4: ["class", "style"],
+      ul: ["class", "style"],
+      ol: ["class", "style"],
+      li: ["class", "style"],
+      strong: ["class", "style"],
+      em: ["class", "style"],
+    },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
+    transformTags: {
+      a: (tagName, attribs) => ({
+        tagName,
+        attribs: {
+          href: attribs.href,
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+      }),
+      img: (tagName, attribs) => ({
+        tagName,
+        attribs: {
+          src: attribs.src,
+          alt: attribs.alt || "",
+          title: attribs.title,
+          style: attribs.style,
+          width: attribs.width,
+          height: attribs.height,
+        },
+      }),
+    },
+  });
+
+  return (
+    <div
+      className="rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-lg [&_h4]:font-bold [&_h4]:text-ink [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-4 [&_img]:mb-6 [&_b]:font-bold [&_i]:italic [&_div]:my-2 [&_span]:inline"
+      dangerouslySetInnerHTML={{ __html: safe }}
+    />
+  );
+}
 
 export const dynamic = "force-dynamic";
 
@@ -345,71 +404,44 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Service Sections from Backend */}
-      {service.sections.length > 0 && (
+      {/* Full Content from services_full.json */}
+      {service.fullContent?.contentHtml && (
         <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
           <Reveal>
             <div className="text-center">
               <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
-                Our Services
+                Complete Overview
               </span>
               <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-                What We{" "}
-                <span className="text-brand-dark">Deliver</span>
+                Everything About{" "}
+                <span className="text-brand-dark">{service.name}</span>
               </h2>
             </div>
           </Reveal>
 
-          <div className="mt-14 space-y-16">
-            {service.sections.map((section, i) => (
-              <div
-                key={i}
-                className={`grid items-center gap-10 lg:grid-cols-2 lg:gap-14 ${
-                  i % 2 === 1 ? "lg:[direction:rtl]" : ""
-                }`}
-              >
-                <div
-                  className={`lg:col-span-1 ${i % 2 === 1 ? "lg:[direction:ltr]" : ""}`}
-                >
-                  {section.image ? (
-                    <div className="overflow-hidden rounded-2xl border border-line shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
+          <div className="mt-12 max-w-4xl mx-auto">
+            <RenderRichHtml html={service.fullContent.contentHtml} />
+          </div>
+
+          {/* Additional Images from full content */}
+          {service.fullContent?.images && service.fullContent.images.length > 1 && (
+            <div className="mt-16 max-w-4xl mx-auto">
+              <Reveal>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {service.fullContent.images.slice(1).map((img: string, idx: number) => (
+                    <div key={idx} className="overflow-hidden rounded-2xl border border-line shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
                       <img
-                        src={section.image}
-                        alt={section.heading || service.name}
-                        loading={i === 0 ? "eager" : "lazy"}
-                        className="h-auto w-full object-cover mix-blend-multiply"
+                        src={img}
+                        alt={`${service.name} - Image ${idx + 2}`}
+                        loading="lazy"
+                        className="h-auto w-full object-cover"
                       />
                     </div>
-                  ) : (
-                    <div className="flex h-full min-h-[260px] items-center justify-center overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-cream to-cream-2">
-                      <span className="text-7xl font-extrabold text-brand/15">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                  )}
+                  ))}
                 </div>
-
-                <div
-                  className={`lg:col-span-1 ${i % 2 === 1 ? "lg:[direction:ltr]" : ""}`}
-                >
-                  {section.heading && (
-                    <span className="inline-block rounded-full bg-brand/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-dark">
-                      Step {String(i + 1).padStart(2, "0")}
-                    </span>
-                  )}
-                  <h3 className="mt-4 text-2xl font-extrabold leading-snug text-ink">
-                    {section.heading ||
-                      (service.sections.length > 1
-                        ? `${service.name} — Step ${i + 1}`
-                        : service.name)}
-                  </h3>
-                  <p className="mt-4 text-base leading-relaxed text-ink/65">
-                    {section.text}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+              </Reveal>
+            </div>
+          )}
         </section>
       )}
 
@@ -431,10 +463,10 @@ export default async function ServiceDetailPage({
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="relative rounded-2xl border border-line bg-white p-6 text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-lg font-extrabold text-brand-dark">
+                <div className="rounded-2xl border border-line bg-white p-6 text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-lg font-extrabold text-brand-dark">
                     {step.num}
-                  </span>
+                  </div>
                   <h4 className="mt-4 text-base font-extrabold text-ink">
                     {step.title}
                   </h4>

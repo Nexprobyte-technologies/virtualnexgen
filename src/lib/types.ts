@@ -54,6 +54,18 @@ export interface Service {
   pricing?: ServicePricing[];
   testimonials?: ServiceTestimonial[];
   faqs?: ServiceFaq[];
+  fullContent?: {
+    contentHtml?: string;
+    contentText?: string;
+    headings?: string[];
+    tasks?: Array<{ title: string; description: string; number: number }>;
+    images?: string[];
+    metaDescription?: string;
+    intro?: string;
+    url?: string;
+    title?: string;
+    image?: string;
+  };
 }
 
 export interface ChatbotEntry {

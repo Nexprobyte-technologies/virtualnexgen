@@ -4,6 +4,7 @@ import type { Service, ServiceSection } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "services.json");
+const FULL_DATA_FILE = path.join(DATA_DIR, "services_full.json");
 
 const seed: Array<Omit<Service, "sections">> = [
   {
@@ -76,6 +77,22 @@ const seed: Array<Omit<Service, "sections">> = [
   },
 ];
 
+async function loadFullContent(): Promise<Record<string, any>> {
+  try {
+    const raw = await fs.readFile(FULL_DATA_FILE, "utf-8");
+    const list = JSON.parse(raw) as any[];
+    const map: Record<string, any> = {};
+    for (const item of list) {
+      if (item.slug) {
+        map[item.slug.toLowerCase().replace(/[^a-z0-9]+/g, '-')] = item;
+      }
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}
+
 async function ensureFile(): Promise<void> {
   await fs.mkdir(DATA_DIR, { recursive: true });
   try {
@@ -90,16 +107,32 @@ async function ensureFile(): Promise<void> {
 }
 
 function normalizeSections(
-  service: Omit<Service, "sections"> & { sections?: ServiceSection[] },
+  service: Omit<Service, "sections"> & { sections?: ServiceSection[]; fullContent?: any },
 ): Service {
   let sections: ServiceSection[];
   if (Array.isArray(service.sections) && service.sections.length > 0) {
     sections = service.sections;
-  } else {
-    sections = service.content
+  } else if (service.fullContent?.tasks && Array.isArray(service.fullContent.tasks)) {
+    // Use tasks from full content to create sections
+    sections = service.fullContent.tasks
       .slice(0, 5)
-      .map((text) => ({ heading: "", text, image: "" }));
-    if (sections.length === 0 && service.image) {
+      .map((task: any) => ({
+        heading: task.title,
+        text: task.description,
+        image: "",
+      }));
+  } else if (service.fullContent?.headings && Array.isArray(service.fullContent.headings)) {
+    // Use headings from full content
+    sections = service.fullContent.headings
+      .slice(0, 5)
+      .map((heading: string) => ({
+        heading,
+        text: "",
+        image: "",
+      }));
+  } else {
+    sections = [];
+    if (service.image) {
       sections.push({ heading: "", text: service.short, image: service.image });
     }
   }
@@ -126,16 +159,23 @@ function normalizeSections(
 
 export async function getServices(): Promise<Service[]> {
   await ensureFile();
-  const raw = await fs.readFile(DATA_FILE, "utf-8");
+  const [raw, fullMap] = await Promise.all([
+    fs.readFile(DATA_FILE, "utf-8"),
+    loadFullContent(),
+  ]);
   const list = JSON.parse(raw) as Service[];
-  return list.map(normalizeSections);
+  return list.map((s) => normalizeSections({ ...s, fullContent: fullMap[s.slug] }));
 }
 
 export async function getService(
   slug: string,
 ): Promise<Service | null> {
-  const all = await getServices();
-  return all.find((s) => s.slug === slug) ?? null;
+  const [all, fullMap] = await Promise.all([getServices(), loadFullContent()]);
+  const service = all.find((s) => s.slug === slug) ?? null;
+  if (service && fullMap[slug]) {
+    return { ...service, fullContent: fullMap[slug] };
+  }
+  return service;
 }
 
 export function slugify(text: string): string {
