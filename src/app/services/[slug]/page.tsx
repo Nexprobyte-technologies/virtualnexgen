@@ -23,55 +23,210 @@ const RICH_HTML_STYLES = [
   "img", "u", "s", "div", "b", "i"
 ];
 
-function RenderRichHtml({ html }: { html: string }) {
-  const safe = sanitizeHtml(html, {
-    allowedTags: RICH_HTML_STYLES,
-    allowedAttributes: {
-      a: ["href", "target", "rel"],
-      img: ["src", "alt", "title", "style", "width", "height"],
-      td: ["colspan", "rowspan"],
-      th: ["colspan", "rowspan"],
-      div: ["class", "style"],
-      span: ["class", "style"],
-      p: ["class", "style"],
-      h2: ["class", "style"],
-      h3: ["class", "style"],
-      h4: ["class", "style"],
-      ul: ["class", "style"],
-      ol: ["class", "style"],
-      li: ["class", "style"],
-      strong: ["class", "style"],
-      em: ["class", "style"],
-    },
-    allowedSchemes: ["http", "https", "mailto", "tel"],
-    transformTags: {
-      a: (tagName, attribs) => ({
-        tagName,
-        attribs: {
-          href: attribs.href,
-          target: "_blank",
-          rel: "noopener noreferrer",
-        },
-      }),
-      img: (tagName, attribs) => ({
-        tagName,
-        attribs: {
-          src: attribs.src,
-          alt: attribs.alt || "",
-          title: attribs.title,
-          style: attribs.style,
-          width: attribs.width,
-          height: attribs.height,
-        },
-      }),
-    },
-  });
+const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
+  allowedTags: RICH_HTML_STYLES,
+  allowedAttributes: {
+    a: ["href", "target", "rel"],
+    img: ["src", "alt", "title", "style", "width", "height"],
+    td: ["colspan", "rowspan"],
+    th: ["colspan", "rowspan"],
+    div: ["class", "style"],
+    span: ["class", "style"],
+    p: ["class", "style"],
+    h2: ["class", "style"],
+    h3: ["class", "style"],
+    h4: ["class", "style"],
+    ul: ["class", "style"],
+    ol: ["class", "style"],
+    li: ["class", "style"],
+    strong: ["class", "style"],
+    em: ["class", "style"],
+  },
+  allowedSchemes: ["http", "https", "mailto", "tel"],
+  transformTags: {
+    a: (tagName, attribs) => ({
+      tagName,
+      attribs: {
+        href: attribs.href,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+    }),
+    img: (tagName, attribs) => ({
+      tagName,
+      attribs: {
+        src: attribs.src,
+        alt: attribs.alt || "",
+        title: attribs.title,
+        style: attribs.style,
+        width: attribs.width,
+        height: attribs.height,
+      },
+    }),
+  },
+};
+
+const RICH_CONTENT_CLASSES =
+  "rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-lg [&_h4]:font-bold [&_h4]:text-ink [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-4 [&_img]:mb-6 [&_b]:font-bold [&_i]:italic [&_div]:my-2 [&_span]:inline";
+
+type FullContentCard = {
+  headingTag: "h2" | "h3" | "h4" | null;
+  heading: string | null;
+  body: string;
+};
+
+function splitFullContentCards(html: string): FullContentCard[] {
+  const cards: FullContentCard[] = [];
+  const re = /<h([234])(?:\s[^>]*)?>([\s\S]*?)<\/h\1>/g;
+  let match: RegExpExecArray | null;
+  let cursor = 0;
+  let current: FullContentCard | null = null;
+
+  while ((match = re.exec(html)) !== null) {
+    const leading = html.slice(cursor, match.index);
+    if (current) {
+      current.body += leading;
+    } else if (leading.trim()) {
+      cards.push({ headingTag: null, heading: null, body: leading });
+    }
+    current = {
+      headingTag: `h${match[1]}` as FullContentCard["headingTag"],
+      heading: match[2],
+      body: "",
+    };
+    cards.push(current);
+    cursor = re.lastIndex;
+  }
+
+  const trailing = html.slice(cursor);
+  if (current) current.body += trailing;
+  else if (trailing.trim()) cards.push({ headingTag: null, heading: null, body: trailing });
+
+  return cards;
+}
+
+function isGridCard(card: FullContentCard): boolean {
+  if (!card.heading) return false;
+  const text = card.heading.replace(/<[^>]*>/g, "").trim();
+  if (card.headingTag === "h4") return true;
+  return /^\d{1,2}\.\s/.test(text);
+}
+
+function FullContentCards({ html }: { html: string }) {
+  const safe = sanitizeHtml(html, SANITIZE_OPTIONS);
+  const cards = splitFullContentCards(safe);
+  if (cards.length === 0) return null;
+
+  function renderHeading(card: FullContentCard) {
+    if (!card.heading) return null;
+    const heading = card.heading.replace(/<strong>(.*?)<\/strong>/g, "$1");
+    if (card.headingTag === "h2") {
+      return (
+        <h2
+          className="text-2xl font-extrabold leading-tight text-ink"
+          dangerouslySetInnerHTML={{ __html: heading }}
+        />
+      );
+    }
+    if (card.headingTag === "h4") {
+      return (
+        <h4
+          className="text-lg font-extrabold text-ink"
+          dangerouslySetInnerHTML={{ __html: heading }}
+        />
+      );
+    }
+    return (
+      <h3
+        className="text-xl font-extrabold text-ink"
+        dangerouslySetInnerHTML={{ __html: heading }}
+      />
+    );
+  }
+
+  function isWhyChooseImageCard(card: FullContentCard): boolean {
+    const text = (card.heading || "").replace(/<[^>]*>/g, "").toLowerCase();
+    return (
+      text.includes("why choose") &&
+      /\<img/i.test(card.body)
+    );
+  }
+
+  function renderCard(card: FullContentCard) {
+    if (isWhyChooseImageCard(card)) {
+      const images = card.body.match(/<img[^>]*>/gi) || [];
+      const textBody = card.body.replace(/<img[^>]*>/gi, "");
+      return (
+        <article className="h-full rounded-2xl border border-line bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-8">
+          {renderHeading(card)}
+          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start">
+            <div className="min-w-0 flex-1">
+              <div
+                className={RICH_CONTENT_CLASSES}
+                dangerouslySetInnerHTML={{ __html: textBody }}
+              />
+            </div>
+            <div className="flex w-full flex-col gap-4 lg:w-[42%] lg:shrink-0">
+              {images.map((tag, i) => {
+                const src = (tag.match(/src="([^"]*)"/) || [])[1] || "";
+                return (
+                  <img
+                    key={i}
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className="h-auto w-full rounded-2xl border border-line object-cover"
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </article>
+      );
+    }
+
+    return (
+      <article className="h-full rounded-2xl border border-line bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-8">
+        {renderHeading(card)}
+        <div
+          className={`${RICH_CONTENT_CLASSES} [&_img]:mx-auto [&_img]:max-w-2xl`}
+          dangerouslySetInnerHTML={{ __html: card.body }}
+        />
+      </article>
+    );
+  }
+
+  const introCards = cards.slice(0, 2);
+  const restCards = cards.slice(2);
 
   return (
-    <div
-      className="rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-lg [&_h4]:font-bold [&_h4]:text-ink [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-4 [&_img]:mb-6 [&_b]:font-bold [&_i]:italic [&_div]:my-2 [&_span]:inline"
-      dangerouslySetInnerHTML={{ __html: safe }}
-    />
+    <div className="mx-auto mt-12 flex max-w-5xl flex-col gap-6">
+      {introCards.length > 0 && (
+        <div className="flex flex-wrap gap-6">
+          {introCards.map((card, i) => (
+            <div key={i} className="min-w-[280px] flex-1 basis-[320px]">
+              {renderCard(card)}
+            </div>
+          ))}
+        </div>
+      )}
+      {restCards.length > 0 && (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {restCards.map((card, i) => (
+            <div
+              key={i}
+              className={
+                isGridCard(card)
+                  ? ""
+                  : "sm:col-span-2 lg:col-span-3"
+              }
+            >
+              {renderCard(card)}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -106,25 +261,6 @@ const defaultSteps = [
     num: "04",
     title: "Scale Operations",
     desc: "Your VA handles daily tasks so your team focuses on growth.",
-  },
-];
-
-const defaultFaqs = [
-  {
-    q: "How is this different from generic outsourcing?",
-    a: "We focus on your industry exclusively. Our VAs are trained in your specific workflows, tools, and compliance requirements, meaning they integrate on day one without general admin training.",
-  },
-  {
-    q: "Is the VA dedicated solely to my business?",
-    a: "Yes. Every resource is 100% dedicated to your business, ensuring consistency and a deep understanding of your specific workflows.",
-  },
-  {
-    q: "What tools and systems do they support?",
-    a: "Our team is proficient in all major industry-specific platforms and tools. We align with your existing tech stack during onboarding.",
-  },
-  {
-    q: "How quickly can we start?",
-    a: "We can typically move from consultation to onboarding within 5-10 business days, depending on your specific requirements.",
   },
 ];
 
@@ -197,7 +333,6 @@ export default async function ServiceDetailPage({
   const steps = service.steps?.length ? service.steps : defaultSteps;
   const pricing = service.pricing?.length ? service.pricing : defaultPricing;
   const testimonials = service.testimonials?.length ? service.testimonials : defaultTestimonials;
-  const faqs = service.faqs?.length ? service.faqs : defaultFaqs;
 
   return (
     <main className="min-h-screen bg-white">
@@ -406,6 +541,13 @@ export default async function ServiceDetailPage({
 
       {/* Full Content from services_full.json */}
       {service.fullContent?.contentHtml && (
+        (() => {
+          const contentHtml = service.fullContent?.contentHtml || "";
+          const extraImages = (service.fullContent?.images ?? [])
+            .slice(1)
+            .filter((img) => !contentHtml.includes(img));
+
+          return (
         <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
           <Reveal>
             <div className="text-center">
@@ -419,16 +561,16 @@ export default async function ServiceDetailPage({
             </div>
           </Reveal>
 
-          <div className="mt-12 max-w-4xl mx-auto">
-            <RenderRichHtml html={service.fullContent.contentHtml} />
+          <div className="mt-12">
+            <FullContentCards html={contentHtml} />
           </div>
 
-          {/* Additional Images from full content */}
-          {service.fullContent?.images && service.fullContent.images.length > 1 && (
+          {/* Additional Images from full content (skip any already shown above) */}
+          {extraImages.length > 0 && (
             <div className="mt-16 max-w-4xl mx-auto">
               <Reveal>
                 <div className="grid gap-6 sm:grid-cols-2">
-                  {service.fullContent.images.slice(1).map((img: string, idx: number) => (
+                  {extraImages.map((img: string, idx: number) => (
                     <div key={idx} className="overflow-hidden rounded-2xl border border-line shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
                       <img
                         src={img}
@@ -443,6 +585,8 @@ export default async function ServiceDetailPage({
             </div>
           )}
         </section>
+          );
+        })()
       )}
 
       {/* How It Works */}
@@ -481,7 +625,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Pricing Comparison */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      {/* <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <Reveal>
           <div className="text-center">
             <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
@@ -522,7 +666,7 @@ export default async function ServiceDetailPage({
             </Reveal>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials */}
       <section className="border-y border-line bg-cream/30 py-20 overflow-hidden">
@@ -559,33 +703,6 @@ export default async function ServiceDetailPage({
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
-        <Reveal>
-          <div className="text-center">
-            <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
-              FAQ
-            </span>
-            <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-              Frequently Asked Questions
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {faqs.map((faq, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-                <h4 className="text-base font-bold text-ink">{faq.q}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-ink/60">
-                  {faq.a}
-                </p>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </section>
 

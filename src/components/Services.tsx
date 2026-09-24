@@ -118,7 +118,7 @@ export default function Services() {
             href="https://calendly.com/virtualnexgen-info/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-ink shadow-[0_14px_40px_rgba(255,122,0,0.4)] transition hover:shadow-[0_14px_56px_rgba(255,122,0,0.6)]"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-ink transition"
           >
             Connect With Us
           </a>

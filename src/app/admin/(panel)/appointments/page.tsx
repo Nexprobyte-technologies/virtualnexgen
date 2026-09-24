@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import {
   CalendarClock,
   CheckCircle,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   Trash2,
   XCircle,
@@ -18,6 +20,8 @@ import type { Appointment } from "@/lib/types";
 export default function AdminAppointments() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(5);
 
   async function fetchAppointments() {
     setLoading(true);
@@ -59,6 +63,30 @@ export default function AdminAppointments() {
   const pending = appointments.filter((a) => a.status === "pending");
   const confirmed = appointments.filter((a) => a.status === "confirmed");
   const cancelled = appointments.filter((a) => a.status === "cancelled");
+
+  const totalPages = Math.max(
+    Math.ceil(appointments.length / pageSize),
+    1,
+  );
+  const page = Math.min(Math.max(currentPage, 1), totalPages);
+  const paginatedAppointments = appointments.slice(
+    (page - 1) * pageSize,
+    page * pageSize,
+  );
+
+  function pageList(current: number, total: number): (number | "…")[] {
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+    const pages = new Set<number>([1, total, current - 1, current, current + 1]);
+    const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b);
+    const out: (number | "…")[] = [];
+    let prev = 0;
+    for (const p of sorted) {
+      if (p - prev > 1) out.push("…");
+      out.push(p);
+      prev = p;
+    }
+    return out;
+  }
 
   const stats = [
     {
@@ -161,8 +189,9 @@ export default function AdminAppointments() {
             No appointments yet.
           </p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+          <>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-slate-100 bg-slate-50/70 text-xs uppercase tracking-wide text-slate-500">
                   <th className="px-5 py-2.5 font-semibold">Client</th>
@@ -175,7 +204,7 @@ export default function AdminAppointments() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {appointments.map((apt) => (
+                {paginatedAppointments.map((apt) => (
                   <tr
                     key={apt.id}
                     className="transition hover:bg-slate-50"
@@ -257,6 +286,61 @@ export default function AdminAppointments() {
               </tbody>
             </table>
           </div>
+          {totalPages > 1 && (
+            <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-100 px-4 py-3 sm:flex-row">
+              <p className="text-xs text-slate-500">
+                Showing{" "}
+                <span className="font-semibold text-slate-700">
+                  {(page - 1) * pageSize + 1}–
+                  {Math.min(page * pageSize, appointments.length)}
+                </span>{" "}
+                of <span className="font-semibold text-slate-700">{appointments.length}</span>
+              </p>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  disabled={page === 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  aria-label="Previous page"
+                  className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                {pageList(page, totalPages).map((pg, i) =>
+                  pg === "…" ? (
+                    <span key={`e-${i}`} className="px-1 text-xs text-slate-400">
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={pg}
+                      type="button"
+                      onClick={() => setCurrentPage(pg)}
+                      aria-label={`Page ${pg}`}
+                      aria-current={pg === page ? "page" : undefined}
+                      className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
+                        pg === page
+                          ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                          : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
+                      }`}
+                    >
+                      {pg}
+                    </button>
+                  ),
+                )}
+                <button
+                  type="button"
+                  disabled={page === totalPages}
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  aria-label="Next page"
+                  className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          )}
+          </>
         )}
       </div>
 

@@ -67,7 +67,7 @@ export default function AdminBlog() {
   const [success, setSuccess] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(5);
   const fileRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -87,6 +87,15 @@ export default function AdminBlog() {
   useEffect(() => {
     load();
   }, [load]);
+
+  useEffect(() => {
+    const open = showForm || Boolean(editingSlug);
+    const prev = document.body.style.overflow;
+    if (open) document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [showForm, editingSlug]);
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -260,10 +269,25 @@ export default function AdminBlog() {
     : posts;
 
   const totalPages = Math.ceil(filteredPosts.length / pageSize);
+  const page = Math.min(Math.max(currentPage, 1), Math.max(totalPages, 1));
   const paginatedPosts = filteredPosts.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
+    (page - 1) * pageSize,
+    page * pageSize
   );
+
+  function pageList(current: number, total: number): (number | "…")[] {
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+    const pages = new Set<number>([1, total, current - 1, current, current + 1]);
+    const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b);
+    const out: (number | "…")[] = [];
+    let prev = 0;
+    for (const p of sorted) {
+      if (p - prev > 1) out.push("…");
+      out.push(p);
+      prev = p;
+    }
+    return out;
+  }
 
   async function handleDelete(slug: string) {
     if (!confirm(`Delete "${slug}"? This cannot be undone.`)) return;
@@ -303,25 +327,37 @@ export default function AdminBlog() {
       </div>
 
       {(showForm || editingSlug) && (
-      <div
-        ref={formRef}
-        className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
-      >
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-bold text-slate-900">
-            {editingSlug ? "Edit Blog Post" : "Add Blog Post"}
-          </h3>
-          {!editingSlug && (
+      <>
+        <div
+          className="fixed inset-0 z-40 animate-[fade-in_0.2s_ease] bg-ink/40 backdrop-blur-[2px]"
+          onClick={() => { setShowForm(false); resetForm(); }}
+        />
+        <div
+          ref={formRef}
+          className="fixed inset-y-0 right-0 z-50 flex w-full max-w-2xl animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl"
+        >
+          <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
+            <div className="min-w-0">
+              <h3 className="text-base font-extrabold text-slate-900">
+                {editingSlug ? "Edit Blog Post" : "Add Blog Post"}
+              </h3>
+              <p className="mt-0.5 truncate text-xs text-slate-500">
+                {editingSlug
+                  ? "Update this blog post and publish your changes."
+                  : "Create a new blog post for the public /blog page."}
+              </p>
+            </div>
             <button
+              type="button"
               onClick={() => { setShowForm(false); resetForm(); }}
-              className="text-sm text-slate-500 hover:text-slate-700"
+              aria-label="Close form"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition hover:bg-ink/10 hover:text-ink"
             >
-              Cancel
+              <X className="h-4 w-4" />
             </button>
-          )}
-        </div>
+          </div>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+          <form onSubmit={handleSubmit} className="flex-1 space-y-3 overflow-y-auto px-5 py-4">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold text-slate-600">
               Title *
@@ -615,10 +651,11 @@ export default function AdminBlog() {
             </button>
           </div>
         </form>
-      </div>
+        </div>
+      </>
       )}
 
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-4 py-3">
           <h3 className="flex items-center gap-2 text-sm font-bold text-slate-900">
             <FileText className="h-4 w-4 text-brand-dark" /> Posts
@@ -632,12 +669,13 @@ export default function AdminBlog() {
             <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               value={filter}
-              onChange={(e) => setFilter(e.target.value)}
+              onChange={(e) => { setFilter(e.target.value); setCurrentPage(1); }}
               placeholder="Search posts..."
               className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-9 pr-3 text-sm text-slate-800 outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20"
             />
           </div>
         </div>
+
         {loading ? (
           <p className="px-4 py-8 text-center text-sm text-slate-500">
             Loading posts...
@@ -651,53 +689,145 @@ export default function AdminBlog() {
               : "No posts match your search."}
           </p>
         ) : (
-          <ul className="divide-y divide-slate-100">
-            {filteredPosts.map((post) => (
-              <li key={post.id} className="flex items-start gap-3 p-4">
-                {post.image ? (
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="h-14 w-14 shrink-0 rounded-lg border border-slate-200 object-cover"
-                  />
-                ) : (
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-lg bg-brand/15 text-brand-dark">
-                    <FileText className="h-5 w-5" />
-                  </div>
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-slate-800">
-                    {post.title}
-                  </p>
-                  <p className="mt-0.5 truncate text-xs text-slate-500">
-                    /blog/{post.slug}
-                  </p>
-                  <p className="mt-1 text-[11px] text-slate-400">
-                    {post.author} · {post.date}
-                    {post.link && " · has link"}
-                  </p>
-                </div>
-                <div className="flex shrink-0 items-center gap-1">
+          <>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                    <th className="px-4 py-3 font-semibold">Post</th>
+                    <th className="hidden px-4 py-3 font-semibold md:table-cell">
+                      Slug
+                    </th>
+                    <th className="hidden px-4 py-3 font-semibold sm:table-cell">
+                      Author
+                    </th>
+                    <th className="hidden px-4 py-3 font-semibold sm:table-cell">
+                      Date
+                    </th>
+                    <th className="px-4 py-3 text-right font-semibold">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {paginatedPosts.map((post) => (
+                    <tr key={post.id} className="transition hover:bg-slate-50/70">
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          {post.image ? (
+                            <img
+                              src={post.image}
+                              alt={post.title}
+                              className="h-11 w-11 shrink-0 rounded-lg border border-slate-200 object-cover"
+                            />
+                          ) : (
+                            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-brand/15 text-brand-dark">
+                              <FileText className="h-5 w-5" />
+                            </div>
+                          )}
+                          <div className="min-w-0">
+                            <p className="max-w-[220px] truncate font-semibold text-slate-800">
+                              {post.title}
+                            </p>
+                            <p className="mt-0.5 truncate text-xs text-slate-400">
+                              /blog/{post.slug}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="hidden px-4 py-3 text-xs text-slate-500 md:table-cell">
+                        {post.slug}
+                      </td>
+                      <td className="hidden px-4 py-3 text-xs text-slate-500 sm:table-cell">
+                        {post.author}
+                      </td>
+                      <td className="hidden px-4 py-3 text-xs text-slate-500 sm:table-cell">
+                        {post.date}
+                        {post.link && (
+                          <span className="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500">
+                            Link
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center justify-end gap-1">
+                          <button
+                            type="button"
+                            onClick={() => handleEdit(post)}
+                            aria-label={`Edit ${post.title}`}
+                            className="grid h-7 w-7 place-items-center rounded-md bg-slate-100 text-slate-500 transition hover:bg-brand/10 hover:text-brand-dark"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(post.slug)}
+                            aria-label={`Delete ${post.title}`}
+                            className="grid h-7 w-7 place-items-center rounded-md bg-slate-100 text-slate-500 transition hover:bg-ink/10 hover:text-ink"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {totalPages > 1 && (
+              <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-100 px-4 py-3 sm:flex-row">
+                <p className="text-xs text-slate-500">
+                  Showing{" "}
+                  <span className="font-semibold text-slate-700">
+                    {(page - 1) * pageSize + 1}–
+                    {Math.min(page * pageSize, filteredPosts.length)}
+                  </span>{" "}
+                  of <span className="font-semibold text-slate-700">{filteredPosts.length}</span>
+                </p>
+                <div className="flex items-center gap-1">
                   <button
                     type="button"
-                    onClick={() => handleEdit(post)}
-                    aria-label={`Edit ${post.title}`}
-                    className="grid h-7 w-7 place-items-center rounded-md bg-slate-100 text-slate-500 transition hover:bg-brand/10 hover:text-brand-dark"
+                    disabled={page === 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    aria-label="Previous page"
+                    className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    <Pencil className="h-3.5 w-3.5" />
+                    <ChevronLeft className="h-4 w-4" />
                   </button>
+                  {pageList(page, totalPages).map((pg, i) =>
+                    pg === "…" ? (
+                      <span key={`e-${i}`} className="px-1 text-xs text-slate-400">
+                        …
+                      </span>
+                    ) : (
+                      <button
+                        key={pg}
+                        type="button"
+                        onClick={() => setCurrentPage(pg)}
+                        aria-label={`Page ${pg}`}
+                        aria-current={pg === page ? "page" : undefined}
+                        className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
+                          pg === page
+                            ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                            : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
+                        }`}
+                      >
+                        {pg}
+                      </button>
+                    ),
+                  )}
                   <button
                     type="button"
-                    onClick={() => handleDelete(post.slug)}
-                    aria-label={`Delete ${post.title}`}
-                    className="grid h-7 w-7 place-items-center rounded-md bg-slate-100 text-slate-500 transition hover:bg-ink/10 hover:text-ink"
+                    disabled={page === totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    aria-label="Next page"
+                    className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    <Trash2 className="h-3.5 w-3.5" />
+                    <ChevronRight className="h-4 w-4" />
                   </button>
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -117,10 +117,10 @@ export default function BuiltFor() {
                 <Reveal y={30}>
                   <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-ink leading-tight mb-2 sm:mb-3">
                     Built for{" "}
-                    <span className="text-brand">Your Business</span>
+                    <span className="text-[#145454]">Your Business</span>
                     <br />
                     Powered by{" "}
-                    <span className="text-brand">People</span>
+                    <span className="text-[#145454]">People</span>
                   </h2>
                 </Reveal>
                 <Reveal y={20} delay={0.1}>

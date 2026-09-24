@@ -12,6 +12,7 @@ html {
 
   /* palette - #A4BDBC, #000000, #FFFFFF */
   --brand: #A4BDBC;
+  --secondary: #145454;
   --brand-deep: #8AACAC;
   --brand-dark: #6B8E8E;
   --brand-accent: #C5D6D6;
@@ -106,10 +107,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 .text-gradient {
-  background: linear-gradient(120deg, #A4BDBC 0%, #8AACAC 50%, #6B8E8E 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #145454;
+  -webkit-text-fill-color: #145454;
 }
 
 .glass {
@@ -130,6 +129,24 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Bot,
+  ChevronLeft,
   ChevronRight,
   Loader2,
   Mic,
@@ -39,6 +40,8 @@ export default function AdminChatbot() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(5);
   const [message, setMessage] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [recordingRow, setRecordingRow] = useState<string | null>(null);
   const recordersRef = useRef<Record<string, MediaRecorder>>({});
@@ -70,6 +73,14 @@ export default function AdminChatbot() {
       window.speechSynthesis?.cancel();
     };
   }, []);
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    if (drawerOpen) document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [drawerOpen]);
 
   function updateRow(index: number, patch: Partial<RowDraft>) {
     setRows((prev) => prev.map((r, i) => (i === index ? { ...r, ...patch } : r)));
@@ -266,6 +277,24 @@ async function handleSave() {
   }
 
   const readyCount = rows.filter((r) => r.question.trim() || r.answer.trim()).length;
+
+  const totalPages = Math.max(Math.ceil(entries.length / pageSize), 1);
+  const page = Math.min(Math.max(currentPage, 1), totalPages);
+  const paginatedEntries = entries.slice((page - 1) * pageSize, page * pageSize);
+
+  function pageList(current: number, total: number): (number | "…")[] {
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+    const pages = new Set<number>([1, total, current - 1, current, current + 1]);
+    const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b);
+    const out: (number | "…")[] = [];
+    let prev = 0;
+    for (const p of sorted) {
+      if (p - prev > 1) out.push("…");
+      out.push(p);
+      prev = p;
+    }
+    return out;
+  }
 
   return (
     <div className="space-y-5">
@@ -535,8 +564,9 @@ async function handleSave() {
             No chatbot entries yet — open the panel and add your first one.
           </p>
         ) : (
-          <ul className="divide-y divide-slate-100">
-            {entries.map((entry) => (
+          <>
+            <ul className="divide-y divide-slate-100">
+            {paginatedEntries.map((entry) => (
               <li key={entry.id} className="flex items-start gap-3 p-4">
                 <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand/15 text-brand-dark">
                   <Bot className="h-4 w-4" />
@@ -582,7 +612,62 @@ async function handleSave() {
                 </div>
               </li>
             ))}
-          </ul>
+</ul>
+            {totalPages > 1 && (
+              <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-100 px-4 py-3 sm:flex-row">
+                <p className="text-xs text-slate-500">
+                  Showing{" "}
+                  <span className="font-semibold text-slate-700">
+                    {(page - 1) * pageSize + 1}–
+                    {Math.min(page * pageSize, entries.length)}
+                  </span>{" "}
+                  of <span className="font-semibold text-slate-700">{entries.length}</span>
+                </p>
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    disabled={page === 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    aria-label="Previous page"
+                    className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  {pageList(page, totalPages).map((pg, i) =>
+                    pg === "…" ? (
+                      <span key={`e-${i}`} className="px-1 text-xs text-slate-400">
+                        …
+                      </span>
+                    ) : (
+                      <button
+                        key={pg}
+                        type="button"
+                        onClick={() => setCurrentPage(pg)}
+                        aria-label={`Page ${pg}`}
+                        aria-current={pg === page ? "page" : undefined}
+                        className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
+                          pg === page
+                            ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                            : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
+                        }`}
+                      >
+                        {pg}
+                      </button>
+                    ),
+                  )}
+                  <button
+                    type="button"
+                    disabled={page === totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    aria-label="Next page"
+                    className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </section>
     </div>

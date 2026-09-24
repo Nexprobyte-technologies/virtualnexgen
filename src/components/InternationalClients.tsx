@@ -19,7 +19,7 @@ export default function InternationalClients() {
             </span>
             <h2 className="mt-4 sm:mt-6 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-ink">
               We Welcome{" "}
-              <span className="bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
+              <span className="text-[#145454]">
                 International Clients
               </span>
             </h2>

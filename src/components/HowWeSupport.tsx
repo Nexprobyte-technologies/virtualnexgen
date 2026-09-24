@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, CheckCircle, FileSearch, Layers, Rocket, ShieldCheck, TrendingUp } from "lucide-react";
+import { ArrowUpRight, CheckCircle } from "lucide-react";
+import { FaSearch, FaLayerGroup, FaRocket, FaShieldAlt, FaChartLine } from "react-icons/fa";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const steps = [
@@ -9,7 +10,7 @@ const steps = [
     num: "01",
     label: "Strategy",
     phase: "Discovery & Workflow Assessment",
-    icon: FileSearch,
+    icon: FaSearch,
     title: "Strategy",
     desc: "We assess your workflow, service gaps, and operational bottlenecks to build a tailored support plan that aligns with your agency goals.",
     features: ["Workflow & bottleneck audit", "Service gap analysis", "SLA benchmark definition"],
@@ -18,7 +19,7 @@ const steps = [
     num: "02",
     label: "Workflow Mapping",
     phase: "Process Design & SOP Creation",
-    icon: Layers,
+    icon: FaLayerGroup,
     title: "Workflow Mapping",
     desc: "We design clear SOPs and map every task flow so your virtual assistant can execute consistently from day one.",
     features: ["Custom SOP development", "Task flow documentation", "Tool integration setup"],
@@ -27,7 +28,7 @@ const steps = [
     num: "03",
     label: "Execution",
     phase: "Deployment & Task Management",
-    icon: Rocket,
+    icon: FaRocket,
     title: "Execution",
     desc: "Your trained VA begins handling real tasks under structured workflows, with daily tracking and seamless handoffs.",
     features: ["Dedicated VA assignment", "Daily task management", "Real-time status updates"],
@@ -36,7 +37,7 @@ const steps = [
     num: "04",
     label: "Quality Control",
     phase: "Review & Accuracy Assurance",
-    icon: ShieldCheck,
+    icon: FaShieldAlt,
     title: "Quality Control",
     desc: "Every output is reviewed through a multi-layer QA process to ensure accuracy, compliance, and consistency.",
     features: ["Multi-step QA reviews", "Accuracy tracking", "Compliance checks"],
@@ -45,7 +46,7 @@ const steps = [
     num: "05",
     label: "Scale & Optimize",
     phase: "Growth & Continuous Improvement",
-    icon: TrendingUp,
+    icon: FaChartLine,
     title: "Scale & Optimize",
     desc: "As your agency grows, we scale support seamlessly and continuously refine processes for maximum efficiency.",
     features: ["Flexible team scaling", "Process optimization", "Performance reporting"],
@@ -140,10 +141,10 @@ export default function HowWeSupport() {
                     : "bg-white/70 text-ink/60 border-gray-300 hover:bg-white hover:border-gray-400"
                 }`}
               >
-                <span className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold transition-colors ${
+                <span className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center ${
                   i === current ? "bg-brand text-ink" : "bg-gray-300 text-ink/50"
                 }`}>
-                  {s.num}
+                  <s.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                 </span>
                 <span className="whitespace-nowrap">{s.label}</span>
               </button>
@@ -162,10 +163,10 @@ export default function HowWeSupport() {
                     : "bg-white/70 text-ink/60 border border-gray-300"
                 }`}
               >
-                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[8px] font-bold ${
+                <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center ${
                   i === current ? "bg-brand text-ink" : "bg-gray-300 text-ink/50"
                 }`}>
-                  {s.num}
+                  <s.icon className="w-2 h-2" />
                 </span>
                 {s.label}
               </button>
@@ -215,7 +216,7 @@ export default function HowWeSupport() {
 
                 <div className="hidden md:flex flex-col items-center justify-center p-5 bg-white/70 backdrop-blur-sm rounded-2xl border border-white/80 shadow-xs min-w-[130px] text-center">
                   <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-brand text-ink">
-                    {step.num}
+                    <step.icon className="w-12 h-12 sm:w-16 sm:h-16" />
                   </div>
                   <span className="text-xs font-bold text-ink tracking-wide">
                     Step {step.num} of 05

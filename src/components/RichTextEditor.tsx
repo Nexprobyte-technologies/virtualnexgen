@@ -54,11 +54,11 @@ export default function RichTextEditor({ value, onChange, rows = 8 }: RichTextEd
   }, [onChange]);
 
   const insertHeading = useCallback((tag: string) => {
-    execCmd("formatBlock", tag);
+    execCmd("formatBlock", `<${tag}>`);
   }, [execCmd]);
 
   const insertParagraph = useCallback(() => {
-    execCmd("formatBlock", "p");
+    execCmd("formatBlock", "<p>");
   }, [execCmd]);
 
   const insertLink = useCallback(() => {
@@ -130,11 +130,13 @@ export default function RichTextEditor({ value, onChange, rows = 8 }: RichTextEd
         <ToolbarButton onClick={() => execCmd("italic")} title="Italic">
           <Italic className="h-4 w-4" />
         </ToolbarButton>
-        <ToolbarButton onClick={() => execCmd("underline")} title="Underline">
-          <Underline className="h-4 w-4" />
+        {/* Increase Font Size +20px */}
+        <ToolbarButton onClick={() => execCmd("fontSize", "7")} title="Increase Font (+20px)">
+          <span className="text-xs font-bold" style={{ fontSize: "20px" }}>A</span>
         </ToolbarButton>
-        <ToolbarButton onClick={() => execCmd("strikeThrough")} title="Strikethrough">
-          <Strikethrough className="h-4 w-4" />
+        {/* Increase Font Size +10px */}
+        <ToolbarButton onClick={() => execCmd("fontSize", "5")} title="Increase Font (+10px)">
+          <span className="text-xs font-bold" style={{ fontSize: "14px" }}>A</span>
         </ToolbarButton>
 
         <Separator />

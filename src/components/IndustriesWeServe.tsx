@@ -55,7 +55,7 @@ export default function IndustriesWeServe() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-10 sm:mt-12 md:mt-16 rounded-2xl bg-gradient-to-br from-[#3B5998] to-[#2D4373] p-4 sm:p-6 md:p-8 lg:p-10">
+          <div className="mt-10 sm:mt-12 md:mt-16 rounded-2xl bg-[#145454] p-4 sm:p-6 md:p-8 lg:p-10">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {industries.map((industry) => {
                 const Icon = industry.icon;

@@ -15,7 +15,7 @@ import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import InternationalClients from "@/components/InternationalClients";
 import IndustriesWeServe from "@/components/IndustriesWeServe";
-import FAQ from "@/components/FAQ";
+
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothAnchor from "@/components/SmoothAnchor";
@@ -47,7 +47,6 @@ export default function Home() {
         
         <Services />
         <IndustriesWeServe />
-        <FAQ />
         <Testimonials />
         <CTA />
         <InternationalClients />

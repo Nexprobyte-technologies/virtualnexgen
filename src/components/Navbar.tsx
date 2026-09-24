@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import type { Service } from "@/lib/types";
-import BookingModal from "./BookingModal";
 
 const aboutLinks = [
   { label: "About Us", href: "/about" },
@@ -21,7 +20,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/services") || pathname.startsWith("/about") || pathname.startsWith("/casestudy") || pathname.startsWith("/contacts");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [bookingOpen, setBookingOpen] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -180,12 +178,12 @@ export default function Navbar() {
                 </li>
 
                 <li>
-                  <button
-                    onClick={() => setBookingOpen(true)}
+                  <Link
+                    href="/book-consultation"
                     className="rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-2 text-sm font-semibold text-ink transition-all duration-300 hover:shadow-[0_4px_16px_rgba(164,189,188,0.35)] whitespace-nowrap"
                   >
                     Appointment
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -280,15 +278,13 @@ export default function Navbar() {
                     <Phone className="h-4 w-4" />
                     +1 341 888 6504
                   </a>
-                  <button
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setBookingOpen(true);
-                    }}
+                  <Link
+                    href="/book-consultation"
+                    onClick={() => setMobileOpen(false)}
                     className="mt-2 w-full rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-3 text-sm font-semibold text-ink"
                   >
                     Book Appointment
-                  </button>
+                  </Link>
                 </div>
 
                 <div className="mt-3 border-t border-line pt-3 flex flex-col gap-1">
@@ -314,8 +310,6 @@ export default function Navbar() {
       </header>
 
       <div className="h-[40px]" />
-
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 }

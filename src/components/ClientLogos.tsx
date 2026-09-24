@@ -23,7 +23,7 @@ export default function ClientLogos() {
             </span>
             <h2 className="mt-3 sm:mt-5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-ink">
               Our VAs Are Experts in All Major{" "}
-              <span className="bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
+              <span className="text-[#145454]">
                 Insurance Software
               </span>
             </h2>

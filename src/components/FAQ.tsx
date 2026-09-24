@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Reveal from "./Reveal";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -45,6 +46,18 @@ const faqs = [
     question: "What is the process to get started?",
     answer: "Getting started is simple: 1) Schedule a free consultation call with us, 2) Discuss your business needs and requirements, 3) We match you with the right virtual assistant, 4) Onboarding and trial period begins, 5) Your VA starts delivering results. The entire process takes just 2-3 business days.",
   },
+  {
+    question: "How does the FAQ accordion improve user experience?",
+    answer: "The accordion lets users quickly find answers without scrolling through long lists, keeping the page clean and responsive."
+  },
+  {
+    question: "Can I customize the FAQ styling to match my brand?",
+    answer: "Yes, you can modify Tailwind classes in the FAQ component to adjust colors, typography, and spacing."
+  },
+  {
+    question: "Is the FAQ component accessible?",
+    answer: "The component uses semantic button elements and ARIA attributes can be added to ensure keyboard navigation and screen reader support."
+  }
 ];
 
 export default function FAQ() {
@@ -68,11 +81,12 @@ export default function FAQ() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3">
             {faqs.map((faq, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="border border-soft rounded-xl overflow-hidden transition-all duration-300 hover:border-brand/30"
+                layout
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -87,20 +101,22 @@ export default function FAQ() {
                     }`}
                   />
                 </button>
-                <div
-                  className={`transition-all duration-300 ease-in-out ${
-                    openIndex === index
-                      ? "max-h-96 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="px-5 sm:px-6 pb-4 sm:pb-5 text-sm sm:text-base text-ink/70 leading-relaxed">
-                    {faq.answer}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      className="px-5 sm:px-6 pb-4 sm:pb-5 text-sm sm:text-base text-ink/70 leading-relaxed"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+          )}
         </Reveal>
       </div>
     </section>

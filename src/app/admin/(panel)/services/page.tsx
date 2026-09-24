@@ -16,6 +16,8 @@ import {
   Sparkles,
   Zap,
   Users,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import type { Service, ServiceBenefit, ServiceStep, ServicePricing, ServiceTestimonial, ServiceFaq } from "@/lib/types";
 
@@ -98,6 +100,9 @@ export default function AdminServices() {
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
   const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(5);
   const fileRef = useRef<HTMLInputElement>(null);
   const sectionFileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
@@ -131,6 +136,15 @@ export default function AdminServices() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    const open = showForm || Boolean(editingSlug);
+    const prev = document.body.style.overflow;
+    if (open) document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [showForm, editingSlug]);
 
   function handleMainFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -201,6 +215,30 @@ export default function AdminServices() {
           .includes(filter.trim().toLowerCase()),
       )
     : services;
+
+  const totalPages = Math.max(
+    Math.ceil(filteredServices.length / pageSize),
+    1,
+  );
+  const page = Math.min(Math.max(currentPage, 1), totalPages);
+  const paginatedServices = filteredServices.slice(
+    (page - 1) * pageSize,
+    page * pageSize,
+  );
+
+  function pageList(current: number, total: number): (number | "…")[] {
+    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+    const pages = new Set<number>([1, total, current - 1, current, current + 1]);
+    const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b);
+    const out: (number | "…")[] = [];
+    let prev = 0;
+    for (const p of sorted) {
+      if (p - prev > 1) out.push("…");
+      out.push(p);
+      prev = p;
+    }
+    return out;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -329,7 +367,6 @@ export default function AdminServices() {
     });
     setFormError("");
     setSuccess("");
-    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   async function handleDelete(slug: string) {
@@ -355,37 +392,50 @@ export default function AdminServices() {
             Add, edit and delete services. Each service supports rich content, benefits, steps, pricing, testimonials and FAQs.
           </p>
         </div>
-      </div>
-
-      <div className="grid gap-5 lg:grid-cols-3">
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2"
-      >
-        <h2 className="flex items-center gap-2 text-sm font-bold text-slate-900">
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-brand/15 text-brand-dark">
-            <Plus className="h-4 w-4" />
-          </span>
-          {editingSlug ? "Edit Service" : "Add New Service"}
-          {editingSlug && (
-            <span className="ml-1 truncate rounded-full bg-brand/10 px-2 py-0.5 text-[11px] font-semibold text-brand-dark">
-              {editingSlug}
-            </span>
-          )}
-        </h2>
-
-        {editingSlug && (
+        {!showForm && !editingSlug && (
           <button
-            type="button"
-            onClick={resetForm}
-            className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark"
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-ink shadow-[0_4px_12px_rgba(164,189,188,0.3)] transition hover:shadow-[0_4px_20px_rgba(164,189,188,0.45)]"
           >
-            <X className="h-3.5 w-3.5" /> Cancel Edit
+            <Plus className="h-4 w-4" /> Add Service
           </button>
         )}
+      </div>
 
-        <div className="mt-4 space-y-3">
+      {(showForm || editingSlug) && (
+      <>
+        <div
+          className="fixed inset-0 z-40 animate-[fade-in_0.2s_ease] bg-ink/40 backdrop-blur-[2px]"
+          onClick={() => { setShowForm(false); resetForm(); }}
+        />
+        <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-2xl animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl">
+          <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
+            <div className="min-w-0">
+              <h3 className="text-base font-extrabold text-slate-900">
+                {editingSlug ? "Edit Service" : "Add New Service"}
+              </h3>
+              <p className="mt-0.5 truncate text-xs text-slate-500">
+                {editingSlug
+                  ? `Updating /services/${editingSlug}`
+                  : "Create a new service that appears instantly in the dropdown."}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => { setShowForm(false); resetForm(); }}
+              aria-label="Close form"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition hover:bg-ink/10 hover:text-ink"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex-1 overflow-y-auto px-5 py-4"
+          >
+            <div className="space-y-3">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold text-slate-600">
               Heading Name *
@@ -885,9 +935,12 @@ export default function AdminServices() {
             )}
           </button>
         </div>
-      </form>
+        </form>
+        </div>
+      </>
+      )}
 
-      <div className="h-fit rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-4 py-3">
           <h2 className="flex items-center gap-2 text-sm font-bold text-slate-900">
             <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-brand/15 text-brand-dark">
@@ -910,7 +963,7 @@ export default function AdminServices() {
             <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               value={filter}
-              onChange={(e) => setFilter(e.target.value)}
+              onChange={(e) => { setFilter(e.target.value); setCurrentPage(1); }}
               placeholder="Search services..."
               className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-9 pr-3 text-sm text-slate-800 outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20"
             />
@@ -934,7 +987,7 @@ export default function AdminServices() {
             </p>
           ) : (
             <ul className="divide-y divide-slate-100">
-              {filteredServices.map((service) => (
+              {paginatedServices.map((service) => (
                 <li key={service.id} className="flex items-start gap-3 p-4">
                   {service.image ? (
                     <img
@@ -986,8 +1039,62 @@ export default function AdminServices() {
             </ul>
           )}
         </div>
+
+        {!loading && !loadError && filteredServices.length > 0 && (
+          <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-100 px-4 py-3 sm:flex-row">
+            <p className="text-xs text-slate-500">
+              Showing{" "}
+              <span className="font-semibold text-slate-700">
+                {(page - 1) * pageSize + 1}–
+                {Math.min(page * pageSize, filteredServices.length)}
+              </span>{" "}
+              of <span className="font-semibold text-slate-700">{filteredServices.length}</span>
+            </p>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                disabled={page === 1}
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                aria-label="Previous page"
+                className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              {pageList(page, totalPages).map((pg, i) =>
+                pg === "…" ? (
+                  <span key={`e-${i}`} className="px-1 text-xs text-slate-400">
+                    …
+                  </span>
+                ) : (
+                  <button
+                    key={pg}
+                    type="button"
+                    onClick={() => setCurrentPage(pg)}
+                    aria-label={`Page ${pg}`}
+                    aria-current={pg === page ? "page" : undefined}
+                    className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
+                      pg === page
+                        ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                        : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
+                    }`}
+                  >
+                    {pg}
+                  </button>
+                ),
+              )}
+              <button
+                type="button"
+                disabled={page === totalPages}
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                aria-label="Next page"
+                className="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-brand hover:text-brand-dark disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
     </div>
   );
 }

@@ -156,7 +156,7 @@ export default function Testimonials() {
             <Reveal y={30} delay={0.12}>
               <h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-ink">
                 Hear How Our Solutions{" "}
-                <span className="bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">
+                <span className="text-[#145454]">
                   Made a Difference
                 </span>
               </h2>
