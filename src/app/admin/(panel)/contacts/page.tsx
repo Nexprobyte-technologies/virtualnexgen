@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
-import type { ContactPage as ContactPageData } from "@/lib/types";
+import type { ContactInfo } from "@/lib/contacts";
 
 export default function AdminContactsPage() {
-  const [form, setForm] = useState({
-    address: "",
-    phone: "",
+  const [form, setForm] = useState<ContactInfo>({
+    phoneUS: "",
+    phoneIndia: "",
+    addressUS: "",
+    addressIndia: "",
     email: "",
-    hours: "",
   });
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
@@ -20,10 +21,11 @@ export default function AdminContactsPage() {
       .then((data) => {
         if (data) {
           setForm({
-            address: data.address || "",
-            phone: data.phone || "",
+            phoneUS: data.phoneUS || "",
+            phoneIndia: data.phoneIndia || "",
+            addressUS: data.addressUS || "",
+            addressIndia: data.addressIndia || "",
             email: data.email || "",
-            hours: data.hours || "",
           });
         }
       })
@@ -64,37 +66,45 @@ export default function AdminContactsPage() {
       </div>
 
       <div className="space-y-4 rounded-xl bg-white p-6 shadow">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">Phone (US)</label>
+            <input
+              value={form.phoneUS ?? ""}
+              onChange={(e) => setForm({ ...form, phoneUS: e.target.value })}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">Phone (India)</label>
+            <input
+              value={form.phoneIndia ?? ""}
+              onChange={(e) => setForm({ ...form, phoneIndia: e.target.value })}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+            />
+          </div>
+        </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+          <label className="mb-1 block text-sm font-medium text-gray-700">Email</label>
           <input
-            value={form.address ?? ""}
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
+            value={form.email ?? ""}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-            <input
-              value={form.phone ?? ""}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              value={form.email ?? ""}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-            />
-          </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-gray-700">Address (US)</label>
+          <input
+            value={form.addressUS ?? ""}
+            onChange={(e) => setForm({ ...form, addressUS: e.target.value })}
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Business Hours</label>
+          <label className="mb-1 block text-sm font-medium text-gray-700">Address (India)</label>
           <input
-            value={form.hours ?? ""}
-            onChange={(e) => setForm({ ...form, hours: e.target.value })}
+            value={form.addressIndia ?? ""}
+            onChange={(e) => setForm({ ...form, addressIndia: e.target.value })}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
           />
         </div>

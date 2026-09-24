@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FAQ9 from "@/components/FAQ9";
 import SectionHeading from "@/components/SectionHeading";
 import ProseContent from "@/components/ProseContent";
 import type { AboutSection, AboutFeature } from "@/lib/types";
@@ -133,6 +134,7 @@ export default function AboutPage() {
         {/* Why Choose Us - Features with left icons */}
         
       </main>
+      <FAQ9 />
       <Footer />
     </>
   );

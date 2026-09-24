@@ -61,8 +61,8 @@ export default function FAQ9() {
   return (
     <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-white">
       <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
-        <div className="grid lg:grid-cols-[1fr_380px] gap-8 lg:gap-12">
-          <div>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
+          <div className="flex-1 min-w-0">
             <Reveal>
               <div className="mb-8 sm:mb-10">
                 <span className="text-sm font-semibold uppercase tracking-wider text-brand">
@@ -78,12 +78,11 @@ export default function FAQ9() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div className="flex flex-col gap-4">
                 {faqs.map((faq, index) => (
                   <motion.div
                     key={index}
                     className="group border border-soft rounded-xl overflow-hidden transition-all duration-300 hover:border-brand/30 bg-white"
-                    layout
                     whileHover={{ y: -2, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}
                   >
                     <button
@@ -118,7 +117,7 @@ export default function FAQ9() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.2} className="hidden lg:block">
+          <Reveal delay={0.2} className="hidden w-[380px] shrink-0 lg:block">
             <div className="sticky top-24 space-y-6">
               <div className="bg-ink rounded-2xl p-6 sm:p-8 text-white">
                 <h3 className="text-xl sm:text-2xl font-bold mb-6">

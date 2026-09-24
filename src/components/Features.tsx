@@ -179,7 +179,7 @@ export default function Features() {
               rel="noopener noreferrer"
               data-animate
               data-service-card
-              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] lg:w-[370px] border border-line rounded-3xl bg-white"
+              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] lg:w-[370px] border border-line rounded-3xl bg-white transition-all duration-300 hover:border-[#00ADB5]/50 hover:shadow-[0_16px_40px_rgba(0,173,181,0.12)]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -190,7 +190,7 @@ export default function Features() {
                   loading="lazy"
                   className="object-cover"
                 />
-                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-dark shadow-sm">
+                <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#0A192F] shadow-sm">
                   {service.category}
                 </span>
               </div>
@@ -201,7 +201,7 @@ export default function Features() {
                 <p className="mt-2 text-sm leading-relaxed text-ink/60">
                   {service.description}
                 </p>
-                <span className="mt-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white">
+                <span className="mt-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#0A192F] text-white transition-colors duration-300 hover:bg-[#00ADB5]">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
@@ -217,7 +217,7 @@ export default function Features() {
             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-cream-2">
               <div
                 ref={progressRef}
-                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-brand-deep to-brand"
+                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#0A192F] via-[#00ADB5] to-[#00D2D3]"
               />
             </div>
           </div>

@@ -10,35 +10,58 @@ html {
   --foreground: #000000;
   --night: #000000;
 
-  /* palette - #A4BDBC, #000000, #FFFFFF */
-  --brand: #A4BDBC;
-  --secondary: #145454;
-  --brand-deep: #8AACAC;
-  --brand-dark: #6B8E8E;
-  --brand-accent: #C5D6D6;
-  --brand-accent-light: #E8F0F0;
-  --ink: #000000;
-  --ink-soft: #1a1a1a;
-  --accent-blue: #7AABAB;
-  --cream: #f8f8f8;
-  --cream-2: #f0f0f0;
-  --line: #e0e0e0;
+  /* Royal Look Palette - Navy Blue, Turkish Blue, Black, White */
+  --navy: #0A192F;
+  --navy-deep: #071324;
+  --navy-royal: #0D2340;
+  --navy-light: #162E50;
 
-  --violet: var(--brand);
+  --turkish: #00ADB5;
+  --turkish-glow: #00D2D3;
+  --turkish-deep: #00828A;
+  --turkish-light: #EBF9FA;
+
+  --black: #000000;
+  --white: #FFFFFF;
+
+  --brand: #00ADB5;
+  --secondary: #0A192F;
+  --brand-deep: #00828A;
+  --brand-dark: #0A192F;
+  --brand-accent: #00D2D3;
+  --brand-accent-light: #EBF9FA;
+  --ink: #000000;
+  --ink-soft: #0A192F;
+  --accent-blue: #00ADB5;
+  --cream: #F8FAFC;
+  --cream-2: #F1F5F9;
+  --line: #E2E8F0;
+
+  --violet: var(--navy);
   --indigo: var(--brand-deep);
-  --cyan: var(--accent-blue);
-  --fuchsia: var(--brand-dark);
-  --emerald: #5a9e9e;
+  --cyan: var(--turkish);
+  --fuchsia: var(--navy-royal);
+  --emerald: var(--turkish-glow);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-night: var(--night);
-  --color-accent: var(--violet);
-  --color-accent-2: var(--indigo);
-  --color-accent-3: var(--cyan);
-  --color-accent-4: var(--fuchsia);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-royal: var(--navy-royal);
+  --color-navy-light: var(--navy-light);
+  --color-turkish: var(--turkish);
+  --color-turkish-glow: var(--turkish-glow);
+  --color-turkish-deep: var(--turkish-deep);
+  --color-turkish-light: var(--turkish-light);
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-accent: var(--turkish);
+  --color-accent-2: var(--navy);
+  --color-accent-3: var(--turkish-glow);
+  --color-accent-4: var(--navy-royal);
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
   --color-brand-dark: var(--brand-dark);
@@ -102,24 +125,26 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 ::selection {
-  background: rgba(164, 189, 188, 0.3);
-  color: var(--ink);
+  background: rgba(0, 173, 181, 0.25);
+  color: #0A192F;
 }
 
 .text-gradient {
-  color: #145454;
-  -webkit-text-fill-color: #145454;
+  background: linear-gradient(135deg, #0A192F 0%, #00ADB5 60%, #00D2D3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #00ADB5;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(10, 25, 47, 0.08);
   backdrop-filter: blur(14px);
 }
 
 .grid-bg {
-  background-image: linear-gradient(rgba(164, 189, 188, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(164, 189, 188, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(0, 173, 181, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 173, 181, 0.08) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -225,8 +250,15 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   .animate-marquee,
   .typewriter-caret,
   .hero-slide,
-  .nav-drop {
+  .nav-drop,
+  .animated-gradient,
+  .ring-pulse,
+  .deck-border {
     animation: none;
+  }
+
+  .shine::after {
+    transition: none;
   }
 
   [data-animate] {
@@ -252,13 +284,13 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand-dark);
+  color: #0A192F;
   background: linear-gradient(
     120deg,
-    rgba(255, 170, 34, 0.16),
-    rgba(255, 122, 0, 0.14)
+    rgba(0, 173, 181, 0.15),
+    rgba(10, 25, 47, 0.08)
   );
-  border: 1px solid rgba(255, 170, 34, 0.35);
+  border: 1px solid rgba(0, 173, 181, 0.35);
 }
 
 .card {
@@ -274,12 +306,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 
 .card:hover {
   transform: translateY(-8px);
-  border-color: rgba(164, 189, 188, 0.6);
-  box-shadow: 0 28px 70px rgba(164, 189, 188, 0.2);
+  border-color: rgba(0, 173, 181, 0.5);
+  box-shadow: 0 24px 60px rgba(10, 25, 47, 0.12);
 }
 
 .card-soft {
-  background: linear-gradient(180deg, #ffffff, #f8f8f8);
+  background: linear-gradient(180deg, #ffffff, #F8FAFC);
 }
 
 .icon-tile {
@@ -287,25 +319,25 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   place-items: center;
   border-radius: 1.1rem;
   color: #ffffff;
-  background: linear-gradient(135deg, #A4BDBC, #8AACAC);
-  box-shadow: 0 12px 28px rgba(164, 189, 188, 0.35);
+  background: linear-gradient(135deg, #0A192F, #00ADB5);
+  box-shadow: 0 12px 28px rgba(0, 173, 181, 0.35);
 }
 
 .bg-aurora {
   background:
     radial-gradient(
       circle at 12% 18%,
-      rgba(164, 189, 188, 0.15),
+      rgba(0, 173, 181, 0.12),
       transparent 45%
     ),
     radial-gradient(
       circle at 88% 12%,
-      rgba(138, 172, 172, 0.12),
+      rgba(10, 25, 47, 0.08),
       transparent 45%
     ),
     radial-gradient(
       circle at 50% 100%,
-      rgba(107, 142, 142, 0.1),
+      rgba(0, 210, 211, 0.08),
       transparent 55%
     ),
     var(--cream);
@@ -316,9 +348,72 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(164, 189, 188, 0.5),
+    rgba(0, 173, 181, 0.5),
     transparent
   );
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background-image: linear-gradient(
+    120deg,
+    #0A192F,
+    #000000,
+    #00ADB5,
+    #0D2340
+  );
+  background-size: 300% 300%;
+  animation: gradient-pan 10s ease infinite;
+}
+
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.ring-pulse {
+  animation: ring-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-130%);
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 80%
+  );
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.shine:hover::after {
+  transform: translateX(130%);
 }
 
 @keyframes border-orbit {
@@ -334,12 +429,25 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 .bento-border-glow {
-  background: linear-gradient(90deg, transparent 0%, transparent 40%, #A4BDBC 50%, transparent 60%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, transparent 40%, #00ADB5 50%, transparent 60%, transparent 100%);
   background-size: 200% 100%;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   padding: 2px;
   animation: border-orbit 2s linear infinite;
+}
+
+.deck-border {
+  background-image: linear-gradient(
+    115deg,
+    #00D2D3,
+    #00ADB5,
+    #0A192F,
+    #00ADB5,
+    #00D2D3
+  );
+  background-size: 300% 300%;
+  animation: border-orbit 6s linear infinite;
 }
 
 .motion-wrapper section {
@@ -369,7 +477,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 40px;
   height: 40px;
-  border: 2px solid #A4BDBC;
+  border: 2px solid #00ADB5;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -382,7 +490,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 6px;
   height: 6px;
-  background: #A4BDBC;
+  background: #00ADB5;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -394,14 +502,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .custom-cursor.cursor-hover {
   width: 60px;
   height: 60px;
-  border-color: #8AACAC;
-  background: rgba(164, 189, 188, 0.15);
+  border-color: #00D2D3;
+  background: rgba(0, 173, 181, 0.15);
 }
 
 .custom-cursor-dot.cursor-dot-hover {
   width: 10px;
   height: 10px;
-  background: #8AACAC;
+  background: #00D2D3;
 }
 
 @media (max-width: 1024px) {

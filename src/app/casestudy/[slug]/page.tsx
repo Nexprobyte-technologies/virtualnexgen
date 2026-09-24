@@ -6,43 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ChevronRight } from "lucide-react";
+import { CalendarDays, ChevronRight, Phone } from "lucide-react";
 import type { CaseStudy } from "@/lib/types";
-
-const SERVICES = [
-  { name: "Insurance Virtual Assistants", slug: "Insurance-Virtual-Assistants" },
-  { name: "Real Estate Virtual Assistants", slug: "Real-Estate-Virtual-Assistants" },
-  { name: "Legal Virtual Assistants", slug: "Legal-Virtual-Assistants" },
-  { name: "Healthcare Virtual Assistants", slug: "Healthcare-Virtual-Assistants" },
-  { name: "Marketing Virtual Assistants", slug: "Marketing-Virtual-Assistants" },
-  { name: "Administrative Support", slug: "Administrative-Support" },
-  { name: "Bookkeeping Virtual Assistants", slug: "Bookkeeping-Virtual-Assistants" },
-  { name: "AI Automation Services", slug: "AI-Automation-Services" },
-  { name: "Manufacturing & Engineering Services with Excellence", slug: "Manufacturing-Engineering-Services-with-Excellence" },
-];
-
-const TAGS = [
-  { label: "Insurance Solutions", slug: "Insurance-Virtual-Assistants" },
-  { label: "Real Estate Solutions", slug: "Real-Estate-Virtual-Assistants" },
-  { label: "Legal Solutions", slug: "Legal-Virtual-Assistants" },
-  { label: "Healthcare Solutions", slug: "Healthcare-Virtual-Assistants" },
-  { label: "Marketing Solutions", slug: "Marketing-Virtual-Assistants" },
-  { label: "Admin Solutions", slug: "Administrative-Support" },
-  { label: "Bookkeeping Solutions", slug: "Bookkeeping-Virtual-Assistants" },
-  { label: "AI Solutions", slug: "AI-Automation-Services" },
-  { label: "Manufacturing & Engineering Services with Excellence", slug: "Manufacturing-Engineering-Services-with-Excellence" },
-];
-
-const BLOG_IMAGES = [
-  { slug: "restoration-virtual-assistant-administrative-support", image: "https://virtualnexgen.com/assets/uploads/blog/50402.png" },
-  { slug: "plumbing-virtual-assistant-pre-service-support", image: "https://virtualnexgen.com/assets/uploads/blog/11318.png" },
-  { slug: "hvac-virtual-assistant-call-booking-support", image: "https://virtualnexgen.com/assets/uploads/blog/35847.png" },
-  { slug: "wealth-management-virtual-assistant-client-support", image: "https://virtualnexgen.com/assets/uploads/blog/22695.png" },
-  { slug: "insurance-virtual-assistant-client-request-support", image: "https://virtualnexgen.com/assets/uploads/blog/34381.png" },
-  { slug: "ecommerce-virtual-assistant-administrative-support", image: "https://virtualnexgen.com/assets/uploads/blog/30607.png" },
-  { slug: "property-management-virtual-assistant-operations-support", image: "https://virtualnexgen.com/assets/uploads/blog/57929.png" },
-  { slug: "real-estate-lead-management-support", image: "https://virtualnexgen.com/assets/uploads/blog/73004.png" },
-];
 
 export default function CaseStudyDetailPage() {
   const params = useParams();
@@ -101,102 +66,98 @@ export default function CaseStudyDetailPage() {
           </div>
         </section>
 
-        {/* Content + Sidebar */}
+        {/* Content */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="flex flex-col gap-12 lg:flex-row">
-              {/* Main Content - 8/12 */}
-              <div className="w-full lg:w-2/3">
-                {study.image && (
-                  <div className="relative mb-8 aspect-video overflow-hidden rounded-2xl">
-                    <Image
-                      src={study.image}
-                      alt={study.title}
-                      fill
-                      className="object-cover"
-                    />
+            <div className="mx-auto w-full max-w-4xl">
+              {study.image && (
+                <div className="relative aspect-video overflow-hidden rounded-2xl">
+                  <Image
+                    src={study.image}
+                    alt={study.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
+              {/* Below image: h2 / p / span */}
+              <div className="mt-10">
+                {/* Tag pills (span) */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {study.tag && (
+                    <span className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-dark" />
+                      {study.tag}
+                    </span>
+                  )}
+                  {study.industry && (
+                    <span className="inline-flex items-center gap-2 rounded-full bg-cream-2 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-ink/60">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                      {study.industry}
+                    </span>
+                  )}
+                  {study.date && (
+                    <span className="inline-flex items-center gap-1.5 px-1 text-sm font-medium text-ink/50">
+                      <CalendarDays className="h-4 w-4 text-brand-dark" />
+                      {new Date(study.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                  )}
+                </div>
+
+                {/* Heading (h2) with accent bar */}
+                {study.excerpt && (
+                  <div className="relative mt-7 pl-5">
+                    <span className="absolute bottom-1 left-0 top-1 w-1 rounded-full bg-gradient-to-b from-brand to-brand-deep" />
+                    <span className="mb-2 inline-block text-xs font-bold uppercase tracking-[0.25em] text-brand-dark">
+                      The Challenge
+                    </span>
+                    <h2 className="max-w-3xl text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-3xl">
+                      {study.excerpt}
+                    </h2>
                   </div>
                 )}
 
-                <div
-                  className="prose prose-lg max-w-none text-ink/70 prose-headings:text-ink prose-strong:text-ink prose-li:text-ink/70"
-                  dangerouslySetInnerHTML={{ __html: study.content }}
-                />
+                {/* Paragraph (p) */}
+                {study.results && (
+                  <p className="mt-6 max-w-3xl border-l-2 border-brand/25 pl-5 text-lg leading-relaxed text-ink/70">
+                    <span className="mb-1 block text-xs font-bold uppercase tracking-[0.25em] text-brand-dark">
+                      The Result
+                    </span>
+                    {study.results}
+                  </p>
+                )}
 
-                {/* CTA Button */}
-                <div className="mt-10">
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/casestudy"
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+                  >
+                    Explore all case studies
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
                   <a
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-dark transition-colors hover:text-ink"
                   >
-                    Get in Touch Now! <ChevronRight className="h-4 w-4" />
+                    <Phone className="h-4 w-4" />
+                    Get in Touch Now!
                   </a>
                 </div>
+
+                <div className="mt-10 h-px w-full bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
               </div>
 
-              {/* Sidebar - 4/12 */}
-              <div className="w-full lg:w-1/3">
-                <div className="sticky top-28 space-y-8">
-                  {/* Our Services */}
-                  <div className="rounded-2xl border border-line bg-white p-6">
-                    <h3 className="mb-4 text-lg font-bold text-ink">Our Services</h3>
-                    <ul className="space-y-3">
-                      {SERVICES.map((service) => (
-                        <li key={service.slug} className="flex items-center gap-3">
-                          <span className="flex-shrink-0 flex h-3 w-3 items-center justify-center">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-                          </span>
-                          <Link
-                            href={`/services/${service.slug}`}
-                            className="text-sm text-ink/70 hover:text-brand transition-colors"
-                          >
-                            {service.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Tag Cloud */}
-                  <div className="rounded-2xl border border-line bg-white p-6">
-                    <h3 className="mb-4 text-lg font-bold text-ink">Tag Cloud</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {TAGS.map((tag) => (
-                        <Link
-                          key={tag.slug}
-                          href={`/services/${tag.slug}`}
-                          className="rounded-full bg-cream-2 px-3 py-1.5 text-xs font-medium text-ink/70 hover:bg-brand/10 hover:text-brand-dark transition-colors"
-                        >
-                          {tag.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Insights & Updates */}
-                  <div className="rounded-2xl border border-line bg-white p-6">
-                    <h3 className="mb-4 text-lg font-bold text-ink">Insights & Updates</h3>
-                    <div className="grid grid-cols-3 gap-2">
-                      {BLOG_IMAGES.map((blog) => (
-                        <Link
-                          key={blog.slug}
-                          href={`/blog/${blog.slug}`}
-                          className="group relative aspect-square overflow-hidden rounded-lg"
-                        >
-                          <Image
-                            src={blog.image}
-                            alt="Blog"
-                            fill
-                            className="object-cover transition-transform group-hover:scale-110"
-                          />
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div
+                className="prose prose-lg max-w-none text-ink/70 prose-headings:text-ink prose-strong:text-ink prose-li:text-ink/70"
+                dangerouslySetInnerHTML={{ __html: study.content }}
+              />
             </div>
           </div>
         </section>

@@ -1,7 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, FileText, Pencil, Plus, Trash2, X } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Code2,
+  FileText,
+  Pencil,
+  Plus,
+  Trash2,
+  X,
+} from "lucide-react";
 import type { CaseStudy } from "@/lib/types";
 import RichTextEditor from "@/components/RichTextEditor";
 
@@ -210,11 +219,13 @@ export default function AdminCaseStudyPage() {
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
               />
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Full Content</label>
+                <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-gray-700">
+                  <Code2 className="h-4 w-4 text-brand-dark" /> Full Content
+                </label>
                 <RichTextEditor
                   value={form.content ?? ""}
                   onChange={(val) => setForm({ ...form, content: val })}
-                  rows={10}
+                  rows={12}
                 />
               </div>
               <textarea

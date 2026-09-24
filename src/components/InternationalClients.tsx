@@ -8,18 +8,18 @@ const Globe3D = dynamic(() => import("./Globe3D"), { ssr: false });
 
 export default function InternationalClients() {
   return (
-    <section className="relative overflow-hidden bg-[#f8f8f8] py-12 sm:py-16 lg:py-24">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[600px] -translate-x-1/2 rounded-full bg-brand/8 blur-[140px]" />
+    <section className="relative overflow-hidden bg-[#F8FAFC] py-12 sm:py-16 lg:py-24">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[600px] -translate-x-1/2 rounded-full bg-[#00ADB5]/10 blur-[140px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col items-center gap-8 sm:gap-12 lg:flex-row lg:items-center lg:justify-between">
           <Reveal className="max-w-xl text-center lg:text-left">
-            <span className="inline-block rounded-full bg-brand/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark ring-1 ring-brand/20">
+            <span className="inline-block rounded-full bg-[#00ADB5]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#0A192F] ring-1 ring-[#00ADB5]/30">
               Global Reach
             </span>
             <h2 className="mt-4 sm:mt-6 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-ink">
               We Welcome{" "}
-              <span className="text-[#145454]">
+              <span className="text-[#00ADB5]">
                 International Clients
               </span>
             </h2>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import Reveal from "./Reveal";
 import {
   Shield,
@@ -40,8 +42,29 @@ const industries = [
 ];
 
 export default function IndustriesWeServe() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        "[data-industry-card]",
+        { autoAlpha: 0, y: 60, scale: 0.9 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+          stagger: 0.06,
+          ease: "power3.out",
+          scrollTrigger: { trigger: "[data-industry-grid]", start: "top 85%" },
+        },
+      );
+    },
+    { scope: rootRef },
+  );
+
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-white">
+    <section ref={rootRef} className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-white">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 text-center">
         <Reveal>
           <span className="text-sm font-semibold uppercase tracking-wider text-brand">
@@ -55,17 +78,19 @@ export default function IndustriesWeServe() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-10 sm:mt-12 md:mt-16 rounded-2xl bg-[#145454] p-4 sm:p-6 md:p-8 lg:p-10">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#0A192F] via-[#071324] to-[#000000] border border-[#00ADB5]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(10,25,47,0.3)]">
+            <div data-industry-grid className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {industries.map((industry) => {
                 const Icon = industry.icon;
                 return (
                   <div
                     key={industry.name}
-                    className="group flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 sm:p-4 transition-all duration-300 hover:bg-white/20 hover:border-white/40 cursor-default"
+                    data-animate
+                    data-industry-card
+                    className="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 transition-all duration-300 hover:bg-[#00ADB5]/15 hover:border-[#00ADB5]/50 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,173,181,0.2)] cursor-default"
                   >
-                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/10 flex-shrink-0">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={1.5} />
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#00ADB5]/15 flex-shrink-0 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#00ADB5]">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ADB5] group-hover:text-black transition-colors duration-300" strokeWidth={1.75} />
                     </div>
                     <span className="text-xs sm:text-sm md:text-base font-semibold text-white leading-tight">
                       {industry.name}

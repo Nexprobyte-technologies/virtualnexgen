@@ -66,7 +66,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative bg-[#f8f8f8] overflow-hidden shadow-[0_-4px_30px_rgba(0,0,0,0.05)]">
+    <footer id="contact" className="relative bg-[#F8FAFC] overflow-hidden shadow-[0_-4px_30px_rgba(10,25,47,0.05)]">
       <div className="divider-gradient" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 lg:px-10">
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-4">
@@ -91,7 +91,7 @@ export default function Footer() {
               </h4>
               <a
                 href="tel:+13418886504"
-                className="inline-flex items-center gap-2 text-base font-semibold text-brand-dark transition hover:text-brand-deep"
+                className="inline-flex items-center gap-2 text-base font-semibold text-[#0A192F] transition hover:text-[#00ADB5]"
               >
                 <Phone className="h-4 w-4" />
                 +1 341 888 6504
@@ -106,7 +106,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-cream-2 text-ink/60 transition hover:bg-brand hover:text-ink"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-cream-2 text-ink/60 transition hover:bg-[#00ADB5] hover:text-white"
                     >
                       <Icon className="h-4 w-4" />
                     </a>

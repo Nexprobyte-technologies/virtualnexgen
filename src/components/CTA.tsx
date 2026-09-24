@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function CTA() {
   return (
-    <section id="faq" className="py-6 sm:py-10 md:py-16 lg:py-20 bg-[#f8f8f8] rounded-b-[30px] lg:rounded-b-[60px] mb-[-60px] relative z-10">
+    <section id="faq" className="py-6 sm:py-10 md:py-16 lg:py-20 bg-[#F8FAFC] rounded-b-[30px] lg:rounded-b-[60px] mb-[-60px] relative z-10">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
 
         <Reveal y={30}>
@@ -20,17 +20,17 @@ export default function CTA() {
         </Reveal>
 
         <Reveal y={30} delay={0.15}>
-          <div className="bg-brand rounded-2xl sm:rounded-3xl border border-brand-deep px-5 sm:px-8 md:px-10 py-6 sm:py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-ink text-center md:text-left">
+          <div className="bg-gradient-to-r from-[#000000] via-[#0A192F] to-[#0A192F] rounded-2xl sm:rounded-3xl border border-[#00ADB5]/40 px-5 sm:px-8 md:px-10 py-6 sm:py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-[0_25px_60px_rgba(10,25,47,0.35)]">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white text-center md:text-left">
               Start Saving With a Free Consultation
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center md:justify-end gap-3 sm:gap-4 w-full sm:w-auto">
               <a
                 href="#services"
-                className="group inline-flex items-center gap-3 rounded-full border border-ink/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-ink hover:shadow-md w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/60 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-[#00ADB5] hover:bg-white/10 w-full sm:w-auto justify-center"
               >
-                <span className="text-sm sm:text-base font-bold text-ink whitespace-nowrap">Calculate Savings</span>
-                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-ink text-white flex-shrink-0 transition-colors duration-300 group-hover:bg-brand-deep">
+                <span className="text-sm sm:text-base font-bold text-white whitespace-nowrap">Calculate Savings</span>
+                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white text-black flex-shrink-0 transition-colors duration-300 group-hover:bg-[#00ADB5] group-hover:text-black">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
                 </span>
               </a>
@@ -38,10 +38,10 @@ export default function CTA() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full border border-ink/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-ink hover:shadow-md bg-ink w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-3 rounded-full bg-[#00ADB5] border border-[#00ADB5] px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_4px_20px_rgba(0,173,181,0.4)] transition-all duration-300 hover:bg-[#00D2D3] hover:border-[#00D2D3] w-full sm:w-auto justify-center"
               >
-                <span className="text-sm sm:text-base font-bold text-white whitespace-nowrap">Book Your Demo</span>
-                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-brand text-ink flex-shrink-0 transition-colors duration-300 group-hover:bg-white">
+                <span className="text-sm sm:text-base font-bold text-black whitespace-nowrap">Book Your Demo</span>
+                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-black text-[#00ADB5] flex-shrink-0 transition-colors duration-300 group-hover:bg-white group-hover:text-black">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
                 </span>
               </a>

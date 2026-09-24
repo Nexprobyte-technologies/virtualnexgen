@@ -142,10 +142,3 @@ export interface CaseStudy {
   solution?: string;
   createdAt: string;
 }
-
-export interface ContactPage {
-  address: string;
-  phone: string;
-  email: string;
-  hours: string;
-}

@@ -78,7 +78,7 @@ export default function Services() {
           <div className="pointer-events-none absolute left-0 right-0 top-28 hidden h-px lg:block">
             <div
               data-process-line
-              className="h-full w-full origin-left bg-gradient-to-r from-brand-deep/50 via-brand/50 to-transparent"
+              className="h-full w-full origin-left bg-gradient-to-r from-[#0A192F]/60 via-[#00ADB5]/60 to-transparent"
             />
           </div>
 
@@ -95,7 +95,7 @@ export default function Services() {
                   data-process-card
                   className="card group relative p-5 sm:p-6 lg:p-8"
                 >
-                  <span className="absolute right-4 sm:right-6 top-4 sm:top-5 text-3xl sm:text-4xl font-extrabold text-brand/25 transition group-hover:text-brand-accent-light">
+                  <span className="absolute right-4 sm:right-6 top-4 sm:top-5 text-3xl sm:text-4xl font-extrabold text-[#00ADB5]/25 transition group-hover:text-[#00ADB5]">
                     {step.number}
                   </span>
                   <div className="icon-tile mb-4 sm:mb-6 h-11 w-11 sm:h-14 sm:w-14 transition-transform duration-300 group-hover:scale-110">

@@ -19,13 +19,12 @@ import IndustriesWeServe from "@/components/IndustriesWeServe";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothAnchor from "@/components/SmoothAnchor";
-import ChatBot from "@/components/ChatBot";
 import MotionWrapper from "@/components/MotionWrapper";
 import CustomCursor from "@/components/CustomCursor";
 
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col" style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #A4BDBC 50%, #000000 100%)" }}>
+    <main className="flex flex-1 flex-col bg-white text-ink">
       <ScrollProgress />
       <SmoothAnchor />
       <CustomCursor />
@@ -35,7 +34,8 @@ export default function Home() {
         <Marquee />
         <HowWeSupport />   
         <CounterStats />
-        <ClientLogos />
+        <IndustriesWeServe />
+        {/* <ClientLogos /> */}
         <WhyChoose />
         {/* <Stats /> */}
         <Features />
@@ -46,13 +46,12 @@ export default function Home() {
         
         
         <Services />
-        <IndustriesWeServe />
+        
         <Testimonials />
         <CTA />
         <InternationalClients />
       </MotionWrapper>
       <Footer />
-      <ChatBot />
     </main>
   );
 }

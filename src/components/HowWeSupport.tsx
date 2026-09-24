@@ -137,12 +137,12 @@ export default function HowWeSupport() {
                 onClick={() => setCurrent(i)}
                 className={`relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full border text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer flex-shrink-0 ${
                   i === current
-                    ? "bg-ink text-white border-ink shadow-md scale-[1.02]"
-                    : "bg-white/70 text-ink/60 border-gray-300 hover:bg-white hover:border-gray-400"
+                    ? "bg-[#0A192F] text-white border-[#0A192F] shadow-md scale-[1.02]"
+                    : "bg-white text-ink/70 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
                 }`}
               >
                 <span className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center ${
-                  i === current ? "bg-brand text-ink" : "bg-gray-300 text-ink/50"
+                  i === current ? "bg-[#00ADB5] text-black" : "bg-slate-200 text-ink/50"
                 }`}>
                   <s.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                 </span>
@@ -159,12 +159,12 @@ export default function HowWeSupport() {
                 onClick={() => setCurrent(i)}
                 className={`flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold transition-all flex-shrink-0 ${
                   i === current
-                    ? "bg-ink text-white"
-                    : "bg-white/70 text-ink/60 border border-gray-300"
+                    ? "bg-[#0A192F] text-white"
+                    : "bg-white/80 text-ink/60 border border-slate-200"
                 }`}
               >
                 <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center ${
-                  i === current ? "bg-brand text-ink" : "bg-gray-300 text-ink/50"
+                  i === current ? "bg-[#00ADB5] text-black" : "bg-slate-200 text-ink/50"
                 }`}>
                   <s.icon className="w-2 h-2" />
                 </span>
@@ -175,15 +175,15 @@ export default function HowWeSupport() {
 
           {/* Content card */}
           <div ref={cardRef} className="w-full">
-            <div className="bg-gradient-to-br from-white via-cream-1 to-brand-accent-light border border-brand-accent/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.06)] relative overflow-hidden">
-              <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-brand/[0.07]">
+            <div className="bg-gradient-to-br from-white via-[#F8FAFC] to-[#EBF9FA] border border-[#00ADB5]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(10,25,47,0.06)] relative overflow-hidden">
+              <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-[#00ADB5]/[0.08]">
                 {step.num}
               </div>
 
               <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-4 sm:gap-6 lg:gap-8 items-center">
                 <div className="text-left">
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-[30px] mb-2 sm:mb-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-brand/15 text-[#8F6114]">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-[#00ADB5]/15 text-[#00828A]">
                       Phase {step.num}
                     </span>
                     <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-ink/60">
@@ -192,8 +192,8 @@ export default function HowWeSupport() {
                   </div>
 
                   <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
-                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-brand flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-ink" />
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#0A192F] flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#00ADB5]" />
                     </div>
                     <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold text-ink leading-snug">
                       {step.title}
@@ -204,19 +204,19 @@ export default function HowWeSupport() {
                     {step.desc}
                   </p>
 
-                  <div className="pt-2 sm:pt-3 border-t border-gray-300/30 flex flex-wrap gap-1.5 sm:gap-2.5">
+                  <div className="pt-2 sm:pt-3 border-t border-slate-200 flex flex-wrap gap-1.5 sm:gap-2.5">
                     {step.features.map((f) => (
-                      <div key={f} className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-ink/75 bg-white/70 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border border-gray-300/30">
-                        <CheckCircle className="w-3 h-3 text-brand flex-shrink-0" />
+                      <div key={f} className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-ink/75 bg-white/90 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border border-slate-200">
+                        <CheckCircle className="w-3 h-3 text-[#00ADB5] flex-shrink-0" />
                         <span>{f}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="hidden md:flex flex-col items-center justify-center p-5 bg-white/70 backdrop-blur-sm rounded-2xl border border-white/80 shadow-xs min-w-[130px] text-center">
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-brand text-ink">
-                    <step.icon className="w-12 h-12 sm:w-16 sm:h-16" />
+                <div className="hidden md:flex flex-col items-center justify-center p-5 bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-xs min-w-[130px] text-center">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-[#0A192F] text-[#00ADB5]">
+                    <step.icon className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-bold text-ink tracking-wide">
                     Step {step.num} of 05
@@ -228,10 +228,10 @@ export default function HowWeSupport() {
           </div>
 
           {/* Progress bar */}
-          <div className="mt-4 sm:mt-6 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+          <div className="mt-4 sm:mt-6 h-1.5 bg-slate-200 rounded-full overflow-hidden">
             <div
               ref={progressRef}
-              className="h-full rounded-full bg-gradient-to-r from-brand via-brand-deep to-brand"
+              className="h-full rounded-full bg-gradient-to-r from-[#0A192F] via-[#00ADB5] to-[#00D2D3]"
               style={{ width: `${((current + 1) / steps.length) * 100}%` }}
             />
           </div>
@@ -243,7 +243,7 @@ export default function HowWeSupport() {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === current ? "w-8 bg-brand" : "w-3 bg-brand/30 hover:bg-brand/60"
+                  i === current ? "w-8 bg-[#00ADB5]" : "w-3 bg-[#00ADB5]/30 hover:bg-[#00ADB5]/60"
                 }`}
               />
             ))}

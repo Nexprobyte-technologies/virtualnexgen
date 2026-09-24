@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import type { Service } from "@/lib/types";
+import ChatBot from "@/components/ChatBot";
 
 const aboutLinks = [
   { label: "About Us", href: "/about" },
@@ -58,8 +59,8 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-transparent" : ""}`} style={!scrolled ? { background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" } : {}}>
-        <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/80 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-transparent" : ""}`} style={!scrolled ? { background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(235,249,250,0.9) 50%, rgba(255,255,255,0.95) 100%)" } : {}}>
+        <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/90 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(10,25,47,0.08)]">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
@@ -180,7 +181,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/book-consultation"
-                    className="rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-2 text-sm font-semibold text-ink transition-all duration-300 hover:shadow-[0_4px_16px_rgba(164,189,188,0.35)] whitespace-nowrap"
+                    className="rounded-full bg-gradient-to-r from-[#0A192F] to-[#00ADB5] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 shadow-[0_4px_16px_rgba(0,173,181,0.35)] hover:shadow-[0_6px_22px_rgba(0,173,181,0.5)] hover:scale-105 whitespace-nowrap"
                   >
                     Appointment
                   </Link>
@@ -281,7 +282,7 @@ export default function Navbar() {
                   <Link
                     href="/book-consultation"
                     onClick={() => setMobileOpen(false)}
-                    className="mt-2 w-full rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-3 text-sm font-semibold text-ink"
+                    className="mt-2 w-full rounded-full bg-gradient-to-r from-[#0A192F] to-[#00ADB5] px-5 py-3 text-sm font-semibold text-white text-center shadow-[0_4px_16px_rgba(0,173,181,0.35)] block"
                   >
                     Book Appointment
                   </Link>
@@ -310,6 +311,7 @@ export default function Navbar() {
       </header>
 
       <div className="h-[40px]" />
+      <ChatBot />
     </>
   );
 }

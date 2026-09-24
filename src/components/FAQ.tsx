@@ -116,7 +116,8 @@ export default function FAQ() {
                 </AnimatePresence>
               </motion.div>
 
-          )}
+            ))}
+          </div>
         </Reveal>
       </div>
     </section>

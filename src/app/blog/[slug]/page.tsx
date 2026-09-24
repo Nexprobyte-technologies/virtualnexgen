@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  CalendarCheck,
   ChevronRight,
   Clock,
   ExternalLink,
   Home,
+  List,
+  Phone,
+  ShieldCheck,
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import sanitizeHtml from "sanitize-html";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
+import AskAboutUs from "@/components/AskAboutUs";
 
 export const dynamic = "force-dynamic";
 
@@ -28,17 +33,32 @@ function estimateReadTime(content: string): number {
   return Math.max(1, Math.round(words / 200));
 }
 
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
 function extractHeadings(content: string): { id: string; text: string }[] {
   const headings: { id: string; text: string }[] = [];
-  const regex = /#{2,3}\s+(.+)/g;
-  let match;
-  while ((match = regex.exec(content)) !== null) {
-    const text = match[1].trim();
-    const id = text
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-");
-    headings.push({ id, text });
+  const counts = new Map<string, number>();
+  const pushHeading = (text: string) => {
+    const base = slugifyHeading(text);
+    if (!base) return;
+    const count = counts.get(base) ?? 0;
+    counts.set(base, count + 1);
+    headings.push({ id: count > 0 ? `${base}-${count}` : base, text });
+  };
+  const markdownRegex = /#{2,3}\s+(.+)/g;
+  let match: RegExpExecArray | null;
+  while ((match = markdownRegex.exec(content)) !== null) {
+    pushHeading(match[1].trim());
+  }
+  const htmlRegex = /<h([23])[^>]*>(.*?)<\/h\1>/gi;
+  while ((match = htmlRegex.exec(content)) !== null) {
+    const text = (match[2] ?? "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+    if (text) pushHeading(text);
   }
   return headings;
 }
@@ -95,10 +115,23 @@ function RenderRichHtml({ html }: { html: string }) {
 
   return (
     <div
-      className="rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-[10px] [&_img]:mb-6"
-      dangerouslySetInnerHTML={{ __html: safe }}
+      className="rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink [&_h2]:scroll-mt-36 sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_h3]:scroll-mt-36 [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-[10px] [&_img]:mb-6"
+      dangerouslySetInnerHTML={{ __html: addHeadingIds(safe) }}
     />
   );
+}
+
+function addHeadingIds(html: string): string {
+  const counts = new Map<string, number>();
+  return html.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/gi, (whole, level, attrs, inner) => {
+    const text = inner.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+    const base = slugifyHeading(text);
+    if (!base) return whole;
+    const count = counts.get(base) ?? 0;
+    counts.set(base, count + 1);
+    const id = count > 0 ? `${base}-${count}` : base;
+    return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
+  });
 }
 
 const MARKDOWN_COMPONENTS = {
@@ -112,7 +145,7 @@ const MARKDOWN_COMPONENTS = {
       <h2
         {...props}
         id={id}
-        className="mt-10 mb-4 text-2xl font-extrabold leading-tight text-ink sm:text-3xl"
+        className="mt-10 mb-4 scroll-mt-36 text-2xl font-extrabold leading-tight text-ink sm:text-3xl"
       />
     );
   },
@@ -126,7 +159,7 @@ const MARKDOWN_COMPONENTS = {
       <h3
         {...props}
         id={id}
-        className="mt-8 mb-3 text-xl font-extrabold leading-snug text-ink"
+        className="mt-8 mb-3 scroll-mt-36 text-xl font-extrabold leading-snug text-ink"
       />
     );
   },
@@ -267,6 +300,11 @@ export default async function BlogDetailPage({
         </div>
       )}
 
+      {/* Ask AI */}
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 mt-6">
+        <AskAboutUs />
+      </div>
+
       {/* Author Row */}
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex items-center gap-4 py-6 border-b border-line">
@@ -282,7 +320,8 @@ export default async function BlogDetailPage({
 
       {/* Content */}
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-14">
-        <article className="min-w-0 max-w-4xl">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <article className="min-w-0 max-w-4xl">
             {post.excerpt && (
               <p className="mb-6 text-lg font-medium leading-relaxed text-ink/75 border-l-4 border-brand pl-5">
                 {post.excerpt}
@@ -340,6 +379,82 @@ export default async function BlogDetailPage({
               </div>
             </div>
           </article>
+
+          {/* Right Sidebar */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-32 space-y-6">
+              {headings.length > 0 && (
+                <div className="rounded-2xl border border-line bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-ink">
+                    <List className="h-4 w-4 text-brand-dark" /> On This Page
+                  </h3>
+                  <nav className="mt-4">
+                    <ul className="space-y-2.5">
+                      {headings.map((h) => (
+                        <li key={h.id}>
+                          <a
+                            href={`#${h.id}`}
+                            className="group flex items-start gap-2 text-sm leading-snug text-ink/70 transition hover:text-brand-dark"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand/50 transition group-hover:bg-brand-dark" />
+                            {h.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+              )}
+
+              <div className="rounded-2xl border border-line bg-gradient-to-br from-brand-deep/10 to-brand/10 p-6">
+                <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-ink">
+                  <ShieldCheck className="h-4 w-4 text-brand-dark" /> Why Virtual Nexgen
+                </h3>
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-ink/75">
+                  <li className="flex gap-2">
+                    <span className="mt-1 text-emerald-500">•</span>
+                    Dedicated virtual assistants trained for your industry workflow
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 text-emerald-500">•</span>
+                    Flexible scheduling aligned with U.S. time zones
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 text-emerald-500">•</span>
+                    Fast onboarding — extra support within days
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 text-emerald-500">•</span>
+                    AI automation to cut repetitive admin work
+                  </li>
+                </ul>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl bg-ink text-white shadow-[0_16px_48px_rgba(0,0,0,0.25)]">
+                <div className="p-6">
+                  <h3 className="text-xs font-extrabold uppercase tracking-widest text-white/60">
+                    Need Support Like This?
+                  </h3>
+                  <p className="mt-3 text-sm font-medium leading-relaxed text-white/90">
+                    Let a Virtual Nexgen assistant handle your back-office workload so your team stays focused on the job.
+                  </p>
+                  <a
+                    href="/book-consultation"
+                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-ink transition hover:shadow-[0_8px_24px_rgba(164,189,188,0.4)]"
+                  >
+                    <CalendarCheck className="h-4 w-4" /> Book a Free Call
+                  </a>
+                  <a
+                    href="tel:+13418886504"
+                    className="mt-3 flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
+                  >
+                    <Phone className="h-4 w-4" /> +1 341 888 6504
+                  </a>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
 
       {/* Related Articles */}

@@ -64,10 +64,28 @@ const adminKeywords = [
   "delete",
 ];
 
-export default function ChatBot({ variant = "site" }: { variant?: "site" | "admin" }) {
+interface ChatBotProps {
+  variant?: "site" | "admin";
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export default function ChatBot({ variant = "site", open: openProp, onOpenChange }: ChatBotProps) {
   const isAdmin = variant === "admin";
   const suggestions = isAdmin ? adminSuggestions : siteSuggestions;
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = typeof openProp === "boolean";
+  const open = isControlled ? openProp : internalOpen;
+  const setOpen = useCallback(
+    (value: boolean) => {
+      if (isControlled) {
+        onOpenChange?.(value);
+      } else {
+        setInternalOpen(value);
+      }
+    },
+    [isControlled, onOpenChange],
+  );
   const [mounted, setMounted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -79,6 +97,16 @@ export default function ChatBot({ variant = "site" }: { variant?: "site" | "admi
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ question?: string }>).detail;
+      if (detail?.question) setInput(detail.question);
+      setOpen(true);
+    };
+    window.addEventListener("nexbot:open", handler);
+    return () => window.removeEventListener("nexbot:open", handler);
+  }, [setOpen]);
 
   useEffect(() => {
     if (!open) return;
@@ -275,7 +303,7 @@ export default function ChatBot({ variant = "site" }: { variant?: "site" | "admi
     <>
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(!open)}
         aria-label={open ? "Close chat" : "Open chat"}
         className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-ink shadow-[0_16px_44px_rgba(164,189,188,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(164,189,188,0.6)]"
       >

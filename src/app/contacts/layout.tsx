@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Virtual Nexgen Solutions",
+  title: "Contact Virtual Nexgen Solutions | Virtual Assistant & AI Automation",
   description:
-    "Get in touch with Virtual Nexgen Solutions for virtual assistant and AI automation services.",
+    "Talk to sales, support, or careers at Virtual Nexgen Solutions. Tell us about your requirements and get a free consultation.",
 };
 
 export default function ContactsLayout({

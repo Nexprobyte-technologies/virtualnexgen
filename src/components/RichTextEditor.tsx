@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import {
   Bold,
   Italic,
@@ -12,10 +12,12 @@ import {
   Minus,
   Link2,
   RemoveFormatting,
-  Heading2,
-  Heading3,
-  Heading4,
-  Type,
+  ChevronDown,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  Text,
 } from "lucide-react";
 
 interface RichTextEditorProps {
@@ -24,124 +26,312 @@ interface RichTextEditorProps {
   rows?: number;
 }
 
-const COLORS = [
-  "#000000", "#434343", "#666666", "#999999", "#b7b7b7", "#cccccc", "#d9d9d9", "#efefef", "#f3f3f3", "#ffffff",
-  "#980000", "#ff0000", "#ff9900", "#ffff00", "#00ff00", "#00ffff", "#4a86e8", "#0000ff", "#9900ff", "#ff00ff",
-  "#e6b8af", "#f4cccc", "#fce5cd", "#fff2cc", "#d9ead3", "#d0e0e3", "#c9daf8", "#cfe2f3", "#d9d2e9", "#ead1dc",
-  "#dd7e6b", "#ea9999", "#f9cb9c", "#ffe599", "#b6d7a8", "#a2c4c9", "#a4c2f4", "#9fc5e8", "#b4a7d6", "#d5a6bd",
-  "#cc4125", "#e06666", "#f6b26b", "#ffd966", "#93c47d", "#76a5af", "#6d9eeb", "#6fa8dc", "#8e7cc3", "#c27ba0",
-  "#a61c00", "#cc0000", "#e69138", "#f1c232", "#6aa84f", "#45818e", "#3c78d8", "#3d85c6", "#674ea7", "#a64d79",
-  "#85200c", "#990000", "#b45f06", "#bf9000", "#38761d", "#134f5c", "#1155cc", "#0b5394", "#351c75", "#741b47",
-  "#5b0f00", "#660000", "#783f04", "#7f6000", "#274e13", "#0c343d", "#1c4587", "#073763", "#20124d", "#4c1130",
+const HEADING_OPTIONS = [
+  { label: "Paragraph", value: "p" },
+  { label: "H1", value: "h1" },
+  { label: "H2", value: "h2" },
+  { label: "H3", value: "h3" },
+  { label: "H4", value: "h4" },
+  { label: "H5", value: "h5" },
+  { label: "H6", value: "h6" },
 ];
+
+const FONT_SIZES = [
+  { label: "Small (12px)", value: "1" },
+  { label: "Normal (16px)", value: "3" },
+  { label: "Large (18px)", value: "4" },
+  { label: "Larger (24px)", value: "5" },
+  { label: "Huge (32px)", value: "6" },
+  { label: "Biggest (42px)", value: "7" },
+];
+
+const FONT_PX: Record<string, string> = {
+  "1": "12px",
+  "2": "14px",
+  "3": "16px",
+  "4": "18px",
+  "5": "24px",
+  "6": "32px",
+  "7": "42px",
+};
+
+const LINE_HEIGHTS = [
+  { label: "Tight (1.2)", value: "1.2" },
+  { label: "Normal (1.5)", value: "1.5" },
+  { label: "Relaxed (1.8)", value: "1.8" },
+  { label: "Loose (2.2)", value: "2.2" },
+];
+
+const PRESET_COLORS = [
+  "#111827",
+  "#dc2626",
+  "#ea580c",
+  "#d97706",
+  "#16a34a",
+  "#0d9488",
+  "#2563eb",
+  "#7c3aed",
+  "#db2777",
+  "#6b7280",
+];
+
+const BLOCK_TAGS = /^(P|H[1-6]|DIV|LI|BLOCKQUOTE)$/;
 
 export default function RichTextEditor({ value, onChange, rows = 8 }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const colorPickerRef = useRef<HTMLInputElement>(null);
+  const [openDropdown, setOpenDropdown] = useState<"heading" | "size" | "line" | null>(null);
+  const [activeHeading, setActiveHeading] = useState("p");
+  const [activeColor, setActiveColor] = useState("#111827");
 
-  const execCmd = useCallback((command: string, val?: string) => {
-    document.execCommand(command, false, val);
-    editorRef.current?.focus();
-    if (editorRef.current) {
-      onChange(editorRef.current.innerHTML);
+  /* Track current block tag under caret for heading dropdown label */
+  useEffect(() => {
+    function syncBlockFormat() {
+      const sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0) return;
+      let node: Node | null = sel.anchorNode;
+      while (node) {
+        if (node instanceof HTMLElement && BLOCK_TAGS.test(node.tagName)) {
+          setActiveHeading(node.tagName.toLowerCase());
+          return;
+        }
+        node = node.parentNode;
+      }
     }
+    document.addEventListener("selectionchange", syncBlockFormat);
+    return () => document.removeEventListener("selectionchange", syncBlockFormat);
+  }, []);
+
+  /* Close dropdown on outside click */
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-rte-dropdown]")) setOpenDropdown(null);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const emit = useCallback(() => {
+    if (editorRef.current) onChange(editorRef.current.innerHTML);
   }, [onChange]);
 
-  const handleInput = useCallback(() => {
-    if (editorRef.current) {
-      onChange(editorRef.current.innerHTML);
-    }
-  }, [onChange]);
+  const execCmd = useCallback(
+    (command: string, val?: string) => {
+      const el = editorRef.current;
+      if (!el) return;
+      el.focus();
+      document.execCommand(command, false, val);
+      emit();
+    },
+    [emit]
+  );
 
-  const insertHeading = useCallback((tag: string) => {
-    execCmd("formatBlock", `<${tag}>`);
-  }, [execCmd]);
+  /* Convert execCommand <font size="n"> tags into clean <span style="font-size"> */
+  const normalizeFontTags = useCallback(() => {
+    const el = editorRef.current;
+    if (!el) return;
+    el.querySelectorAll("font[size]").forEach((font) => {
+      const span = document.createElement("span");
+      span.style.fontSize = FONT_PX[font.getAttribute("size") || "3"] || "16px";
+      while (font.firstChild) span.appendChild(font.firstChild);
+      font.replaceWith(span);
+    });
+  }, []);
 
-  const insertParagraph = useCallback(() => {
-    execCmd("formatBlock", "<p>");
-  }, [execCmd]);
+  const applyFontSize = useCallback(
+    (size: string) => {
+      execCmd("fontSize", size);
+      normalizeFontTags();
+      emit();
+      setOpenDropdown(null);
+    },
+    [execCmd, normalizeFontTags, emit]
+  );
+
+  const applyColor = useCallback(
+    (color: string) => {
+      setActiveColor(color);
+      execCmd("foreColor", color);
+    },
+    [execCmd]
+  );
+
+  /* Apply line-height to selected blocks (or the caret's block when nothing selected) */
+  const applyLineHeight = useCallback(
+    (lh: string) => {
+      const el = editorRef.current;
+      if (!el) return;
+      el.focus();
+
+      const blocks = new Set<HTMLElement>();
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+        const range = sel.getRangeAt(0);
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT);
+        while (walker.nextNode()) {
+          const node = walker.currentNode as HTMLElement;
+          if (BLOCK_TAGS.test(node.tagName) && range.intersectsNode(node)) {
+            blocks.add(node);
+          }
+        }
+      }
+      if (blocks.size === 0 && sel) {
+        let node: Node | null = sel.anchorNode;
+        while (node && node !== el) {
+          if (node instanceof HTMLElement && BLOCK_TAGS.test(node.tagName)) {
+            blocks.add(node);
+            break;
+          }
+          node = node.parentNode;
+        }
+      }
+      blocks.forEach((block) => {
+        block.style.lineHeight = lh;
+        block.querySelectorAll<HTMLElement>("span, strong, em, b, i").forEach((child) => {
+          child.style.lineHeight = "";
+        });
+      });
+      emit();
+      setOpenDropdown(null);
+    },
+    [emit]
+  );
 
   const insertLink = useCallback(() => {
     const url = prompt("Enter URL:");
     if (url) execCmd("createLink", url);
   }, [execCmd]);
 
-  const insertHR = useCallback(() => {
-    execCmd("insertHorizontalRule");
-  }, [execCmd]);
+  const handleInput = useCallback(() => emit(), [emit]);
 
-  const handleColor = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    execCmd("foreColor", e.target.value);
-  }, [execCmd]);
-
-  const ToolbarButton = ({
-    onClick,
-    title,
-    children,
-    active = false,
-  }: {
-    onClick: () => void;
-    title: string;
-    children: React.ReactNode;
-    active?: boolean;
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      title={title}
-      className={`inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
-        active
-          ? "bg-brand/20 text-brand-dark"
-          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-      }`}
-    >
-      {children}
-    </button>
-  );
-
-  const Separator = () => (
-    <div className="mx-1 h-6 w-px bg-gray-300" />
-  );
+  function toggleDropdown(name: "heading" | "size" | "line") {
+    setOpenDropdown((cur) => (cur === name ? null : name));
+  }
 
   return (
-    <div className="rounded-lg border border-gray-300 overflow-hidden">
+    <div className="overflow-hidden rounded-lg border border-gray-300 bg-white">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-0.5 border-b border-gray-200 bg-gray-50 px-2 py-1.5">
-        {/* Headings */}
-        <ToolbarButton onClick={() => insertHeading("h2")} title="Heading 2">
-          <Heading2 className="h-4 w-4" />
-        </ToolbarButton>
-        <ToolbarButton onClick={() => insertHeading("h3")} title="Heading 3">
-          <Heading3 className="h-4 w-4" />
-        </ToolbarButton>
-        <ToolbarButton onClick={() => insertHeading("h4")} title="Heading 4">
-          <Heading4 className="h-4 w-4" />
-        </ToolbarButton>
-        <ToolbarButton onClick={insertParagraph} title="Paragraph">
-          <Type className="h-4 w-4" />
-        </ToolbarButton>
+        {/* Heading dropdown */}
+        <div className="relative" data-rte-dropdown>
+          <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => toggleDropdown("heading")}
+            className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
+          >
+            {HEADING_OPTIONS.find((o) => o.value === activeHeading)?.label ?? "Paragraph"}
+            <ChevronDown className="h-3.5 w-3.5" />
+          </button>
+          {openDropdown === "heading" && (
+            <div className="absolute left-0 top-full z-50 mt-1 w-36 rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
+              {HEADING_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => execCmd("formatBlock", `<${opt.value}>`)}
+                  className={`block w-full px-3 py-1.5 text-left text-sm transition hover:bg-gray-100 ${
+                    opt.value === activeHeading
+                      ? "bg-brand/10 font-semibold text-brand-dark"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
-        <Separator />
+        {/* Font size dropdown */}
+        <div className="relative" data-rte-dropdown>
+          <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => toggleDropdown("size")}
+            title="Font Size"
+            className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
+          >
+            <Text className="h-4 w-4" />
+            <ChevronDown className="h-3.5 w-3.5" />
+          </button>
+          {openDropdown === "size" && (
+            <div className="absolute left-0 top-full z-50 mt-1 w-36 rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
+              {FONT_SIZES.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => applyFontSize(opt.value)}
+                  className="block w-full px-3 py-1.5 text-left text-sm text-gray-700 transition hover:bg-gray-100"
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
-        {/* Text formatting */}
+        {/* Line height dropdown */}
+        <div className="relative" data-rte-dropdown>
+          <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => toggleDropdown("line")}
+            title="Line Spacing"
+            className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
+          >
+            <AlignJustify className="h-4 w-4" />
+            <ChevronDown className="h-3.5 w-3.5" />
+          </button>
+          {openDropdown === "line" && (
+            <div className="absolute left-0 top-full z-50 mt-1 w-36 rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
+              {LINE_HEIGHTS.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => applyLineHeight(opt.value)}
+                  className="block w-full px-3 py-1.5 text-left text-sm text-gray-700 transition hover:bg-gray-100"
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <Divider />
+
         <ToolbarButton onClick={() => execCmd("bold")} title="Bold">
           <Bold className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton onClick={() => execCmd("italic")} title="Italic">
           <Italic className="h-4 w-4" />
         </ToolbarButton>
-        {/* Increase Font Size +20px */}
-        <ToolbarButton onClick={() => execCmd("fontSize", "7")} title="Increase Font (+20px)">
-          <span className="text-xs font-bold" style={{ fontSize: "20px" }}>A</span>
+        <ToolbarButton onClick={() => execCmd("underline")} title="Underline">
+          <Underline className="h-4 w-4" />
         </ToolbarButton>
-        {/* Increase Font Size +10px */}
-        <ToolbarButton onClick={() => execCmd("fontSize", "5")} title="Increase Font (+10px)">
-          <span className="text-xs font-bold" style={{ fontSize: "14px" }}>A</span>
+        <ToolbarButton onClick={() => execCmd("strikeThrough")} title="Strikethrough">
+          <Strikethrough className="h-4 w-4" />
         </ToolbarButton>
 
-        <Separator />
+        <Divider />
 
-        {/* Lists */}
+        <ToolbarButton onClick={() => execCmd("justifyLeft")} title="Align Left">
+          <AlignLeft className="h-4 w-4" />
+        </ToolbarButton>
+        <ToolbarButton onClick={() => execCmd("justifyCenter")} title="Align Center">
+          <AlignCenter className="h-4 w-4" />
+        </ToolbarButton>
+        <ToolbarButton onClick={() => execCmd("justifyRight")} title="Align Right">
+          <AlignRight className="h-4 w-4" />
+        </ToolbarButton>
+
+        <Divider />
+
         <ToolbarButton onClick={() => execCmd("insertUnorderedList")} title="Bullet List">
           <List className="h-4 w-4" />
         </ToolbarButton>
@@ -149,76 +339,108 @@ export default function RichTextEditor({ value, onChange, rows = 8 }: RichTextEd
           <ListOrdered className="h-4 w-4" />
         </ToolbarButton>
 
-        <Separator />
+        <Divider />
 
-        {/* Block */}
-        <ToolbarButton onClick={() => execCmd("formatBlock", "blockquote")} title="Quote">
+        <ToolbarButton
+          onClick={() => execCmd("formatBlock", "<blockquote>")}
+          title="Quote"
+        >
           <Quote className="h-4 w-4" />
         </ToolbarButton>
-        <ToolbarButton onClick={insertHR} title="Horizontal Line">
+        <ToolbarButton onClick={() => execCmd("insertHorizontalRule")} title="Horizontal Line">
           <Minus className="h-4 w-4" />
         </ToolbarButton>
 
-        <Separator />
+        <Divider />
 
-        {/* Link */}
         <ToolbarButton onClick={insertLink} title="Insert Link">
           <Link2 className="h-4 w-4" />
         </ToolbarButton>
 
-        <Separator />
+        <Divider />
 
-        {/* Color picker */}
-        <div className="relative">
+        {/* Custom color picker */}
+        <div className="relative" data-rte-dropdown>
           <button
             type="button"
+            onMouseDown={(e) => e.preventDefault()}
             onClick={() => colorPickerRef.current?.click()}
             title="Text Color"
-            className="inline-flex h-8 items-center gap-1 rounded-md px-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            className="inline-flex h-8 items-center gap-1 rounded-md px-2 text-gray-600 transition hover:bg-gray-100"
           >
-            <span className="text-sm font-bold">A</span>
-            <div className="h-1 w-4 rounded-sm bg-black" />
+            <span className="text-sm font-bold" style={{ color: activeColor }}>
+              A
+            </span>
+            <span className="h-1.5 w-4 rounded-sm" style={{ backgroundColor: activeColor }} />
           </button>
           <input
             ref={colorPickerRef}
             type="color"
-            onChange={handleColor}
+            value={activeColor}
+            onChange={(e) => applyColor(e.target.value)}
             className="absolute bottom-0 left-0 h-0 w-0 opacity-0"
           />
         </div>
 
         {/* Preset colors */}
         <div className="flex items-center gap-0.5">
-          {["#000000", "#e06666", "#f6b26b", "#93c47d", "#6d9eeb", "#8e7cc3"].map((c) => (
+          {PRESET_COLORS.map((c) => (
             <button
               key={c}
               type="button"
-              onClick={() => execCmd("foreColor", c)}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => applyColor(c)}
               title={c}
-              className="h-5 w-5 rounded-sm border border-gray-300"
+              className="h-5 w-5 rounded-sm border border-gray-300 transition hover:scale-110"
               style={{ backgroundColor: c }}
             />
           ))}
         </div>
 
-        <Separator />
+        <Divider />
 
-        {/* Clear formatting */}
         <ToolbarButton onClick={() => execCmd("removeFormat")} title="Clear Formatting">
           <RemoveFormatting className="h-4 w-4" />
         </ToolbarButton>
       </div>
 
-      {/* Editor */}
+      {/* Editor surface */}
       <div
         ref={editorRef}
         contentEditable
+        suppressContentEditableWarning
         onInput={handleInput}
         onBlur={handleInput}
-        className="min-h-[200px] max-h-[500px] overflow-y-auto px-4 py-3 text-sm text-gray-900 focus:outline-none prose prose-sm max-w-none"
-        style={{ minHeight: `${rows * 1.5}rem` }}
+        className="prose prose-sm max-w-none min-h-[220px] max-h-[520px] overflow-y-auto px-4 py-3 text-sm leading-relaxed text-gray-900 focus:outline-none [&:empty]:before:text-gray-400 [&:empty]:before:content-['Write_your_content_here...']"
+        style={{ minHeight: `${Math.max(rows * 1.6, 13)}rem` }}
         dangerouslySetInnerHTML={{ __html: value }}
       />
     </div>
   );
+}
+
+function ToolbarButton({
+  onClick,
+  title,
+  children,
+}: {
+  onClick: () => void;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onMouseDown={(e) => e.preventDefault()}
+      onClick={onClick}
+      title={title}
+      className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-600 transition hover:bg-gray-200/70 hover:text-gray-900"
+    >
+      {children}
+    </button>
+  );
+}
+
+function Divider() {
+  return <div className="mx-1 h-6 w-px bg-gray-300" />;
 }
