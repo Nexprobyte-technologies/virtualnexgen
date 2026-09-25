@@ -312,7 +312,7 @@ export default function AdminAboutPage() {
           <h2 className="text-lg font-semibold text-gray-900">Sections</h2>
           <button
             onClick={addSection}
-            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-sm font-semibold text-ink shadow-[0_4px_12px_rgba(164,189,188,0.3)] transition hover:shadow-[0_4px_20px_rgba(164,189,188,0.45)]"
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(249,115,22,0.3)] transition hover:shadow-[0_4px_20px_rgba(249,115,22,0.45)]"
           >
             <Plus className="h-4 w-4" /> Add Section
           </button>
@@ -588,7 +588,7 @@ export default function AdminAboutPage() {
           <h2 className="text-lg font-semibold text-gray-900">Features (Why Choose Us)</h2>
           <button
             onClick={addFeature}
-            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-sm font-semibold text-ink shadow-[0_4px_12px_rgba(164,189,188,0.3)] transition hover:shadow-[0_4px_20px_rgba(164,189,188,0.45)]"
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(249,115,22,0.3)] transition hover:shadow-[0_4px_20px_rgba(249,115,22,0.45)]"
           >
             <Plus className="h-4 w-4" /> Add Feature
           </button>
@@ -691,7 +691,7 @@ export default function AdminAboutPage() {
       <button
         onClick={handleSave}
         disabled={saving}
-        className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-ink shadow-[0_10px_24px_rgba(164,189,188,0.3)] transition hover:shadow-[0_10px_36px_rgba(164,189,188,0.45)] disabled:opacity-60"
+        className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(249,115,22,0.3)] transition hover:shadow-[0_10px_36px_rgba(249,115,22,0.45)] disabled:opacity-60"
       >
         {saving ? (
           <>

@@ -318,7 +318,7 @@ async function handleSave() {
                 setRows((prev) => [...prev, { id: crypto.randomUUID(), question: "", answer: "", audioUrl: "", editedId: null }]);
               }
             }}
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-xs font-semibold text-ink shadow-[0_4px_12px_rgba(164,189,188,0.3)] transition hover:shadow-[0_4px_20px_rgba(164,189,188,0.45)]"
+            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-xs font-semibold text-white shadow-[0_4px_12px_rgba(249,115,22,0.3)] transition hover:shadow-[0_4px_20px_rgba(249,115,22,0.45)]"
           >
             <Plus className="h-3.5 w-3.5" /> Add Entry
           </button>
@@ -511,7 +511,7 @@ async function handleSave() {
                       type="button"
                       onClick={() => sendRow(index)}
                       disabled={saving || (!row.question.trim() && !row.answer.trim())}
-                      className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-xs font-semibold text-ink shadow-[0_8px_20px_rgba(164,189,188,0.3)] transition hover:shadow-[0_8px_32px_rgba(164,189,188,0.45)] disabled:opacity-40"
+                      className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-4 py-2 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(249,115,22,0.3)] transition hover:shadow-[0_8px_32px_rgba(249,115,22,0.45)] disabled:opacity-40"
                     >
                       <Send className="h-3.5 w-3.5" /> Send
                     </button>
@@ -524,7 +524,7 @@ async function handleSave() {
                   type="button"
                   onClick={handleSave}
                   disabled={saving}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-ink shadow-[0_10px_24px_rgba(164,189,188,0.3)] transition hover:shadow-[0_10px_36px_rgba(164,189,188,0.45)] disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(249,115,22,0.3)] transition hover:shadow-[0_10px_36px_rgba(249,115,22,0.45)] disabled:opacity-60"
                 >
                   {saving ? (
                     <>
@@ -647,7 +647,7 @@ async function handleSave() {
                         aria-current={pg === page ? "page" : undefined}
                         className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
                           pg === page
-                            ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                            ? "bg-gradient-to-r from-brand-deep to-brand text-white shadow"
                             : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
                         }`}
                       >

@@ -78,7 +78,7 @@ export default function Services() {
           <div className="pointer-events-none absolute left-0 right-0 top-28 hidden h-px lg:block">
             <div
               data-process-line
-              className="h-full w-full origin-left bg-gradient-to-r from-[#0A192F]/60 via-[#00ADB5]/60 to-transparent"
+              className="h-full w-full origin-left bg-gradient-to-r from-[#0B2A4A]/60 via-[#F97316]/60 to-transparent"
             />
           </div>
 
@@ -95,7 +95,7 @@ export default function Services() {
                   data-process-card
                   className="card group relative p-5 sm:p-6 lg:p-8"
                 >
-                  <span className="absolute right-4 sm:right-6 top-4 sm:top-5 text-3xl sm:text-4xl font-extrabold text-[#00ADB5]/25 transition group-hover:text-[#00ADB5]">
+                  <span className="absolute right-4 sm:right-6 top-4 sm:top-5 text-3xl sm:text-4xl font-extrabold text-[#F97316]/25 transition group-hover:text-[#F97316]">
                     {step.number}
                   </span>
                   <div className="icon-tile mb-4 sm:mb-6 h-11 w-11 sm:h-14 sm:w-14 transition-transform duration-300 group-hover:scale-110">
@@ -118,7 +118,7 @@ export default function Services() {
             href="https://calendly.com/virtualnexgen-info/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-ink transition"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-white transition"
           >
             Connect With Us
           </a>

@@ -251,7 +251,7 @@ export default async function BlogDetailPage({
   return (
     <main className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-5" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
+      <div className="relative overflow-hidden py-5" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)" }}>
         <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -440,7 +440,7 @@ export default async function BlogDetailPage({
                   </p>
                   <a
                     href="/book-consultation"
-                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-ink transition hover:shadow-[0_8px_24px_rgba(164,189,188,0.4)]"
+                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:shadow-[0_8px_24px_rgba(249,115,22,0.4)]"
                   >
                     <CalendarCheck className="h-4 w-4" /> Book a Free Call
                   </a>
@@ -469,7 +469,7 @@ export default async function BlogDetailPage({
                 <Link
                   key={p.id}
                   href={`/blog/${p.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(164,189,188,0.12)]"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)]"
                 >
                   <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden">
                     {p.image ? (

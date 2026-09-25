@@ -32,7 +32,7 @@ export default function MouseCursor() {
       <span className="absolute -inset-3 rounded-full bg-brand/8" />
       <span className="relative flex h-4 w-4 -translate-x-1/2 -translate-y-1/2">
         <span className="absolute inline-flex h-full w-full rounded-full bg-brand/30" />
-        <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-brand bg-brand/50 shadow-[0_0_20px_rgba(164,189,188,0.5)]" />
+        <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-brand bg-brand/50 shadow-[0_0_20px_rgba(249,115,22,0.5)]" />
       </span>
     </div>
   );

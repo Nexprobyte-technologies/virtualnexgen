@@ -188,8 +188,8 @@ interface GhostFibersProps {
 const contexts = new WeakMap();
 
 const GhostFibers = ({
-  lineColor = "#A4BDBC",
-  glowColor = "#A4BDBC",
+  lineColor = "#F97316",
+  glowColor = "#F97316",
   speed = 0.2,
   scale = 2,
   rotation = 0,

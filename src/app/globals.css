@@ -6,36 +6,37 @@ html {
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --night: #000000;
+  --background: #FFF7ED;
+  --foreground: #0B2A4A;
+  --night: #0B2A4A;
 
-  /* Royal Look Palette - Navy Blue, Turkish Blue, Black, White */
-  --navy: #0A192F;
-  --navy-deep: #071324;
-  --navy-royal: #0D2340;
-  --navy-light: #162E50;
+  /* Theme: navy, mint, orange, cream */
+  --navy: #0B2A4A;
+  --navy-deep: #0B2A4A;
+  --navy-royal: #0B2A4A;
+  --navy-light: #0B2A4A;
 
-  --turkish: #00ADB5;
-  --turkish-glow: #00D2D3;
-  --turkish-deep: #00828A;
-  --turkish-light: #EBF9FA;
+  --turkish: #F97316;
+  --turkish-glow: #F97316;
+  --turkish-deep: #0B2A4A;
+  --turkish-light: #ECFDE5;
 
   --black: #000000;
   --white: #FFFFFF;
 
-  --brand: #00ADB5;
-  --secondary: #0A192F;
-  --brand-deep: #00828A;
-  --brand-dark: #0A192F;
-  --brand-accent: #00D2D3;
-  --brand-accent-light: #EBF9FA;
-  --ink: #000000;
-  --ink-soft: #0A192F;
-  --accent-blue: #00ADB5;
-  --cream: #F8FAFC;
-  --cream-2: #F1F5F9;
-  --line: #E2E8F0;
+  --brand: #F97316;
+  --secondary: #0B2A4A;
+  --brand-deep: #0B2A4A;
+  --brand-dark: #0B2A4A;
+  --brand-accent: #F97316;
+  --brand-accent-light: #ECFDE5;
+  --ink: #0B2A4A;
+  --ink-soft: #0B2A4A;
+  --accent-blue: #F97316;
+  --cream: #FFF7ED;
+  --cream-1: #ECFDE5;
+  --cream-2: #ECFDE5;
+  --line: #E8D5C4;
 
   --violet: var(--navy);
   --indigo: var(--brand-deep);
@@ -71,6 +72,7 @@ html {
   --color-ink-soft: var(--ink-soft);
   --color-accent-blue: var(--accent-blue);
   --color-cream: var(--cream);
+  --color-cream-1: var(--cream-1);
   --color-cream-2: var(--cream-2);
   --color-line: var(--line);
   --font-sans: var(--font-dm-sans);
@@ -125,26 +127,26 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 ::selection {
-  background: rgba(0, 173, 181, 0.25);
-  color: #0A192F;
+  background: rgba(249, 115, 22, 0.25);
+  color: #0B2A4A;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #0A192F 0%, #00ADB5 60%, #00D2D3 100%);
+  background: linear-gradient(135deg, #0B2A4A 0%, #F97316 60%, #ECFDE5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #00ADB5;
+  color: #F97316;
 }
 
 .glass {
   background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(10, 25, 47, 0.08);
+  border: 1px solid rgba(11, 42, 74, 0.08);
   backdrop-filter: blur(14px);
 }
 
 .grid-bg {
-  background-image: linear-gradient(rgba(0, 173, 181, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 173, 181, 0.08) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.08) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -302,13 +304,13 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #0A192F;
+  color: #0B2A4A;
   background: linear-gradient(
     120deg,
-    rgba(0, 173, 181, 0.15),
-    rgba(10, 25, 47, 0.08)
+    rgba(249, 115, 22, 0.15),
+    rgba(11, 42, 74, 0.08)
   );
-  border: 1px solid rgba(0, 173, 181, 0.35);
+  border: 1px solid rgba(249, 115, 22, 0.35);
 }
 
 .card {
@@ -324,12 +326,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 
 .card:hover {
   transform: translateY(-8px);
-  border-color: rgba(0, 173, 181, 0.5);
-  box-shadow: 0 24px 60px rgba(10, 25, 47, 0.12);
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 24px 60px rgba(11, 42, 74, 0.12);
 }
 
 .card-soft {
-  background: linear-gradient(180deg, #ffffff, #F8FAFC);
+  background: linear-gradient(180deg, #ffffff, #FFF7ED);
 }
 
 .icon-tile {
@@ -337,25 +339,25 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   place-items: center;
   border-radius: 1.1rem;
   color: #ffffff;
-  background: linear-gradient(135deg, #0A192F, #00ADB5);
-  box-shadow: 0 12px 28px rgba(0, 173, 181, 0.35);
+  background: linear-gradient(135deg, #0B2A4A, #F97316);
+  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.35);
 }
 
 .bg-aurora {
   background:
     radial-gradient(
       circle at 12% 18%,
-      rgba(0, 173, 181, 0.12),
+      rgba(249, 115, 22, 0.12),
       transparent 45%
     ),
     radial-gradient(
       circle at 88% 12%,
-      rgba(10, 25, 47, 0.08),
+      rgba(11, 42, 74, 0.08),
       transparent 45%
     ),
     radial-gradient(
       circle at 50% 100%,
-      rgba(0, 210, 211, 0.08),
+      rgba(236, 253, 229, 0.55),
       transparent 55%
     ),
     var(--cream);
@@ -366,7 +368,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 173, 181, 0.5),
+    rgba(249, 115, 22, 0.5),
     transparent
   );
 }
@@ -386,10 +388,10 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .animated-gradient {
   background-image: linear-gradient(
     120deg,
-    #0A192F,
-    #000000,
-    #00ADB5,
-    #0D2340
+    #0B2A4A,
+    #0B2A4A,
+    #F97316,
+    #ECFDE5
   );
   background-size: 300% 300%;
   animation: gradient-pan 10s ease infinite;
@@ -447,7 +449,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 .bento-border-glow {
-  background: linear-gradient(90deg, transparent 0%, transparent 40%, #00ADB5 50%, transparent 60%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, transparent 40%, #F97316 50%, transparent 60%, transparent 100%);
   background-size: 200% 100%;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
@@ -458,11 +460,11 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .deck-border {
   background-image: linear-gradient(
     115deg,
-    #00D2D3,
-    #00ADB5,
-    #0A192F,
-    #00ADB5,
-    #00D2D3
+    #ECFDE5,
+    #F97316,
+    #0B2A4A,
+    #F97316,
+    #ECFDE5
   );
   background-size: 300% 300%;
   animation: border-orbit 6s linear infinite;
@@ -495,7 +497,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 40px;
   height: 40px;
-  border: 2px solid #00ADB5;
+  border: 2px solid #F97316;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -508,7 +510,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 6px;
   height: 6px;
-  background: #00ADB5;
+  background: #F97316;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -520,14 +522,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .custom-cursor.cursor-hover {
   width: 60px;
   height: 60px;
-  border-color: #00D2D3;
-  background: rgba(0, 173, 181, 0.15);
+  border-color: #ECFDE5;
+  background: rgba(249, 115, 22, 0.15);
 }
 
 .custom-cursor-dot.cursor-dot-hover {
   width: 10px;
   height: 10px;
-  background: #00D2D3;
+  background: #F97316;
 }
 
 @media (max-width: 1024px) {

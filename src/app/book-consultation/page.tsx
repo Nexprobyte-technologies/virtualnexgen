@@ -106,7 +106,7 @@ export default function BookConsultationPage() {
         <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-[0_24px_70px_rgba(15,23,42,0.12)]">
           <div className="grid md:grid-cols-[340px_1fr]">
             {/* Left panel — event info (Calendly style) */}
-            <aside className="relative flex flex-col justify-between gap-6 bg-gradient-to-b from-[#e8f2f2] to-cream-1 px-6 py-7 sm:px-8">
+            <aside className="relative flex flex-col justify-between gap-6 bg-gradient-to-b from-[#ECFDE5] to-cream-1 px-6 py-7 sm:px-8">
               <div className="flex items-center gap-4">
                 <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand/15 text-brand-deep">
                   <Video className="h-6 w-6" />
@@ -169,7 +169,7 @@ export default function BookConsultationPage() {
                           onClick={() => pickDay(day)}
                           className={`flex w-[74px] shrink-0 flex-col items-center rounded-2xl border px-3 py-3 transition ${
                             active
-                              ? "border-brand bg-brand text-ink shadow-[0_8px_24px_rgba(164,189,188,0.4)]"
+                              ? "border-brand bg-brand text-ink shadow-[0_8px_24px_rgba(249,115,22,0.4)]"
                               : weekend
                                 ? "cursor-not-allowed border-line bg-slate-50 text-slate-300"
                                 : "border-line bg-white text-ink hover:border-brand/40 hover:bg-brand/5"
@@ -341,7 +341,7 @@ export default function BookConsultationPage() {
 
                     <button
                       type="submit"
-                      className="mt-1 w-full rounded-full bg-gradient-to-r from-brand-deep to-brand py-3 text-sm font-bold text-ink shadow-[0_8px_24px_rgba(164,189,188,0.3)] transition hover:shadow-[0_8px_32px_rgba(164,189,188,0.45)]"
+                      className="mt-1 w-full rounded-full bg-gradient-to-r from-brand-deep to-brand py-3 text-sm font-bold text-white shadow-[0_8px_24px_rgba(249,115,22,0.3)] transition hover:shadow-[0_8px_32px_rgba(249,115,22,0.45)]"
                     >
                       Confirm Booking
                     </button>
@@ -375,7 +375,7 @@ export default function BookConsultationPage() {
                     </button>
                     <Link
                       href="/"
-                      className="rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-ink shadow transition"
+                      className="rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-white shadow transition"
                     >
                       Back to Home
                     </Link>

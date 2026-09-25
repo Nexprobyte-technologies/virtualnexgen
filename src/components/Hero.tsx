@@ -171,18 +171,18 @@ export default function Hero() {
       id="home"
       ref={rootRef}
       className="relative overflow-hidden py-6 sm:py-8 md:py-10 lg:py-16"
-      style={{ background: "#ffffff", backgroundImage: "linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(235,249,250,0.85) 50%, rgba(241,245,249,1) 100%)" }}
+      style={{ background: "#ffffff", backgroundImage: "linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(236,253,229,0.85) 50%, rgba(255,247,237,1) 100%)" }}
     >
-      <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#00ADB5]/12 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#0A192F]/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#F97316]/12 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#0B2A4A]/10 blur-[120px]" />
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
         <div className="grid lg:grid-cols-[1.2fr_0.8fr] xl:grid-cols-[1.3fr_0.7fr] gap-6 lg:gap-2 items-center">
           {/* Left: Text Content */}
           <div className="max-w-[720px] mx-auto lg:mx-0 text-left order-1">
             <div ref={badgeRef}>
-              <span className="inline-flex items-center gap-2 bg-white border border-[#00ADB5]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-ink">
-                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#00ADB5] rounded-full animate-pulse flex-shrink-0" />
+              <span className="inline-flex items-center gap-2 bg-white border border-[#F97316]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-ink">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#F97316] rounded-full animate-pulse flex-shrink-0" />
                 <span>Virtual Assistants for Your Business</span>
               </span>
             </div>
@@ -199,8 +199,8 @@ export default function Hero() {
             <div ref={typewriterRef}>
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-ink mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
                 Powered By Trained VAs in <br />
-                <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#00ADB5] font-semibold relative">
-                  <TypewriterText words={typewriterWords} className="text-[#00ADB5]" onWordChange={handleWordChange} />
+                <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#F97316] font-semibold relative">
+                  <TypewriterText words={typewriterWords} className="text-[#F97316]" onWordChange={handleWordChange} />
                 </span>
               </p>
             </div>
@@ -223,7 +223,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     aria-label={ai.name}
                     title={ai.name}
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-line bg-white text-ink/60 transition-all duration-300 hover:bg-[#00ADB5] hover:text-white hover:border-[#00ADB5] hover:shadow-[0_4px_16px_rgba(0,173,181,0.4)] hover:-translate-y-0.5"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-line bg-white text-ink/60 transition-all duration-300 hover:bg-[#F97316] hover:text-white hover:border-[#F97316] hover:shadow-[0_4px_16px_rgba(249,115,22,0.4)] hover:-translate-y-0.5"
                   >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                       <path d={ai.icon} />
@@ -238,16 +238,16 @@ export default function Hero() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full border border-ink/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-[#00ADB5] hover:shadow-md w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-3 rounded-full border border-ink/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-[#F97316] hover:shadow-md w-full sm:w-auto justify-center"
               >
                 <span className="text-sm sm:text-base font-bold text-ink whitespace-nowrap">Book a Demo</span>
-                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-ink text-white flex-shrink-0 transition-all duration-300 group-hover:bg-[#00ADB5] group-hover:shadow-[0_4px_16px_rgba(0,173,181,0.35)]">
+                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-ink text-white flex-shrink-0 transition-all duration-300 group-hover:bg-[#F97316] group-hover:shadow-[0_4px_16px_rgba(249,115,22,0.35)]">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </a>
               <a
                 href="#services"
-                className="group inline-flex items-center justify-center sm:justify-start gap-2 text-ink/75 hover:text-[#00ADB5] font-semibold text-sm sm:text-base transition-colors py-2"
+                className="group inline-flex items-center justify-center sm:justify-start gap-2 text-ink/75 hover:text-[#F97316] font-semibold text-sm sm:text-base transition-colors py-2"
               >
                 <span>See Your Savings Estimate</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -285,7 +285,7 @@ export default function Hero() {
                   ref={progressRef}
                   className="h-full rounded-full"
                   style={{
-                    background: "linear-gradient(90deg, #0A192F 0%, #00ADB5 50%, #00D2D3 100%)",
+                    background: "linear-gradient(90deg, #0B2A4A 0%, #F97316 50%, #ECFDE5 100%)",
                     backgroundSize: "200% 100%",
                     width: `${slide.percent}%`,
                   }}
@@ -293,10 +293,10 @@ export default function Hero() {
               </div>
 
               <div className="flex justify-between items-center">
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-2 sm:px-3 lg:px-4 py-1 lg:py-1.5 bg-[#0A192F] rounded-full">
+                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-2 sm:px-3 lg:px-4 py-1 lg:py-1.5 bg-[#0B2A4A] rounded-full">
                   {slide.tag}
                 </p>
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-3 sm:px-4 lg:px-6 py-1 lg:py-1.5 bg-[#0A192F] rounded-full">
+                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-3 sm:px-4 lg:px-6 py-1 lg:py-1.5 bg-[#0B2A4A] rounded-full">
                   {slide.percent}%
                 </p>
               </div>
@@ -311,8 +311,8 @@ export default function Hero() {
                   aria-label={`Go to card ${i + 1}`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === cardIndex
-                      ? "w-6 sm:w-8 bg-[#00ADB5]"
-                      : "w-2 sm:w-3 bg-[#00ADB5]/30 hover:bg-[#00ADB5]/60"
+                      ? "w-6 sm:w-8 bg-[#F97316]"
+                      : "w-2 sm:w-3 bg-[#F97316]/30 hover:bg-[#F97316]/60"
                   }`}
                 />
               ))}

@@ -303,7 +303,7 @@ export default function BookingModal({
                 <button
                   type="submit"
                   disabled={loading || !selectedTime}
-                  className="mt-1 w-full rounded-full bg-gradient-to-r from-brand-deep to-brand py-3 text-sm font-bold text-ink shadow-[0_8px_24px_rgba(164,189,188,0.3)] transition hover:shadow-[0_8px_32px_rgba(164,189,188,0.45)] disabled:opacity-50"
+                  className="mt-1 w-full rounded-full bg-gradient-to-r from-brand-deep to-brand py-3 text-sm font-bold text-white shadow-[0_8px_24px_rgba(249,115,22,0.3)] transition hover:shadow-[0_8px_32px_rgba(249,115,22,0.45)] disabled:opacity-50"
                 >
                   {loading ? "Booking..." : "Confirm Booking"}
                 </button>

@@ -113,7 +113,7 @@ export default function Stats3({ stats }: { stats: StatItem[] }) {
                   data-stat3-card
                   className="flex-shrink-0 w-[280px] lg:w-[320px]"
                 >
-                  <div className="group relative rounded-[1.5rem] bg-gradient-to-br from-white to-cream p-6 sm:p-8 shadow-[0_12px_40px_rgba(164,189,188,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(164,189,188,0.2)] hover:-translate-y-1">
+                  <div className="group relative rounded-[1.5rem] bg-gradient-to-br from-white to-cream p-6 sm:p-8 shadow-[0_12px_40px_rgba(249,115,22,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(249,115,22,0.2)] hover:-translate-y-1">
                     <div className="absolute inset-0 rounded-[1.5rem] p-[1px] pointer-events-none">
                       <div className="relative h-full w-full rounded-[1.5rem] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [mask-composite:exclude] [-webkit-mask-composite:xor] bg-gradient-to-r from-brand/30 via-brand-deep/30 to-brand-accent/30" />
                     </div>
@@ -140,7 +140,7 @@ export default function Stats3({ stats }: { stats: StatItem[] }) {
                   key={`${stat.id}-clone`}
                   className="flex-shrink-0 w-[280px] lg:w-[320px]"
                 >
-                  <div className="group relative rounded-[1.5rem] bg-gradient-to-br from-white to-cream p-6 sm:p-8 shadow-[0_12px_40px_rgba(164,189,188,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(164,189,188,0.2)] hover:-translate-y-1">
+                  <div className="group relative rounded-[1.5rem] bg-gradient-to-br from-white to-cream p-6 sm:p-8 shadow-[0_12px_40px_rgba(249,115,22,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(249,115,22,0.2)] hover:-translate-y-1">
                     <div className="absolute inset-0 rounded-[1.5rem] p-[1px] pointer-events-none">
                       <div className="relative h-full w-full rounded-[1.5rem] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [mask-composite:exclude] [-webkit-mask-composite:xor] bg-gradient-to-r from-brand/30 via-brand-deep/30 to-brand-accent/30" />
                     </div>

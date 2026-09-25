@@ -319,7 +319,7 @@ export default function AdminBlog() {
         {!showForm && !editingSlug && (
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-ink shadow-[0_4px_12px_rgba(164,189,188,0.3)] transition hover:shadow-[0_4px_20px_rgba(164,189,188,0.45)]"
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(249,115,22,0.3)] transition hover:shadow-[0_4px_20px_rgba(249,115,22,0.45)]"
           >
             <Plus className="h-4 w-4" /> Add Blog Post
           </button>
@@ -633,7 +633,7 @@ export default function AdminBlog() {
             <button
               type="submit"
               disabled={submitting}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-ink shadow-[0_10px_24px_rgba(164,189,188,0.3)] transition hover:shadow-[0_10px_36px_rgba(164,189,188,0.45)] disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(249,115,22,0.3)] transition hover:shadow-[0_10px_36px_rgba(249,115,22,0.45)] disabled:opacity-60"
             >
               {submitting ? (
                 <>
@@ -807,7 +807,7 @@ export default function AdminBlog() {
                         aria-current={pg === page ? "page" : undefined}
                         className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
                           pg === page
-                            ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                            ? "bg-gradient-to-r from-brand-deep to-brand text-white shadow"
                             : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
                         }`}
                       >

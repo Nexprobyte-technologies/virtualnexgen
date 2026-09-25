@@ -305,7 +305,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
         type="button"
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-ink shadow-[0_16px_44px_rgba(164,189,188,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(164,189,188,0.6)]"
+        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-white shadow-[0_16px_44px_rgba(249,115,22,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(249,115,22,0.6)]"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
         {!open && (
@@ -382,7 +382,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                     msg.from === "user"
-                      ? "rounded-tr-sm bg-gradient-to-r from-brand-deep to-brand text-ink"
+                      ? "rounded-tr-sm bg-gradient-to-r from-brand-deep to-brand text-white"
                       : "rounded-tl-sm bg-white text-ink/85"
                   }`}
                 >
@@ -437,7 +437,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
                 type="button"
                 onClick={() => send()}
                 aria-label="Send message"
-                className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-r from-brand-deep to-brand text-ink shadow-[0_10px_26px_rgba(164,189,188,0.4)] transition hover:shadow-[0_10px_40px_rgba(164,189,188,0.55)]"
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-r from-brand-deep to-brand text-white shadow-[0_10px_26px_rgba(249,115,22,0.4)] transition hover:shadow-[0_10px_40px_rgba(249,115,22,0.55)]"
               >
                 <Send className="h-5 w-5" />
               </button>

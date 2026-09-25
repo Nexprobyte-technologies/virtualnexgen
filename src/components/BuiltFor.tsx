@@ -47,7 +47,7 @@ function FeatureCard({
   text: string;
 }) {
   return (
-    <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:border-brand/40 hover:shadow-[0_8px_30px_rgba(0,173,181,0.12)]">
+    <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:border-brand/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)]">
       <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
         <Icon className="h-5 w-5 text-brand" />
       </div>
@@ -107,7 +107,7 @@ export default function BuiltFor() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#F8FAFC]">
+      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#FFF7ED]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
 
@@ -117,10 +117,10 @@ export default function BuiltFor() {
                 <Reveal y={30}>
                   <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-ink leading-tight mb-2 sm:mb-3">
                     Built for{" "}
-                    <span className="text-[#00ADB5]">Your Business</span>
+                    <span className="text-[#F97316]">Your Business</span>
                     <br />
                     Powered by{" "}
-                    <span className="text-[#0A192F]">People</span>
+                    <span className="text-[#0B2A4A]">People</span>
                   </h2>
                 </Reveal>
                 <Reveal y={20} delay={0.1}>

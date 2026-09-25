@@ -37,7 +37,7 @@ export default function AdminSidebar() {
   return (
     <aside className="sticky top-0 flex h-screen w-[15%] min-w-44 shrink-0 flex-col bg-slate-900 text-white max-lg:hidden">
       <div className="flex items-center gap-2 border-b border-white/10 px-3 py-4">
-        <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-brand-deep to-brand text-ink">
+        <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-brand-deep to-brand text-white">
           <PanelLeft className="h-4 w-4" />
         </div>
         <div className="min-w-0">
@@ -61,7 +61,7 @@ export default function AdminSidebar() {
                   href={link.href}
                   className={`relative flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition ${
                     active
-                      ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow-[0_8px_20px_rgba(164,189,188,0.25)]"
+                      ? "bg-gradient-to-r from-brand-deep to-brand text-white shadow-[0_8px_20px_rgba(249,115,22,0.25)]"
                       : "text-white/70 hover:bg-white/10 hover:text-white"
                   }`}
                 >

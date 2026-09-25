@@ -144,7 +144,7 @@ export default function Testimonials() {
 
       <section
         id="testimonials"
-        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#F8FAFC]"
+        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#FFF7ED]"
       >
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-3xl text-center">
@@ -156,7 +156,7 @@ export default function Testimonials() {
             <Reveal y={30} delay={0.12}>
               <h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-ink">
                 Hear How Our Solutions{" "}
-                <span className="text-[#00ADB5]">
+                <span className="text-[#F97316]">
                   Made a Difference
                 </span>
               </h2>

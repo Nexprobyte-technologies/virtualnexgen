@@ -78,7 +78,7 @@ export default function IndustriesWeServe() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#0A192F] via-[#071324] to-[#000000] border border-[#00ADB5]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(10,25,47,0.3)]">
+          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#0B2A4A] via-[#0B2A4A] to-[#000000] border border-[#F97316]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(11,42,74,0.3)]">
             <div data-industry-grid className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {industries.map((industry) => {
                 const Icon = industry.icon;
@@ -87,10 +87,10 @@ export default function IndustriesWeServe() {
                     key={industry.name}
                     data-animate
                     data-industry-card
-                    className="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 transition-all duration-300 hover:bg-[#00ADB5]/15 hover:border-[#00ADB5]/50 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,173,181,0.2)] cursor-default"
+                    className="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 transition-all duration-300 hover:bg-[#F97316]/15 hover:border-[#F97316]/50 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(249,115,22,0.2)] cursor-default"
                   >
-                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#00ADB5]/15 flex-shrink-0 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#00ADB5]">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ADB5] group-hover:text-black transition-colors duration-300" strokeWidth={1.75} />
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#F97316]/15 flex-shrink-0 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#F97316]">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#F97316] group-hover:text-black transition-colors duration-300" strokeWidth={1.75} />
                     </div>
                     <span className="text-xs sm:text-sm md:text-base font-semibold text-white leading-tight">
                       {industry.name}

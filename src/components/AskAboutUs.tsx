@@ -47,7 +47,7 @@ export default function AskAboutUs() {
         <button
           type="button"
           onClick={() => openChat()}
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-ink shadow-[0_8px_24px_rgba(164,189,188,0.35)] transition hover:shadow-[0_10px_36px_rgba(164,189,188,0.5)]"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(249,115,22,0.35)] transition hover:shadow-[0_10px_36px_rgba(249,115,22,0.5)]"
         >
           <Bot className="h-4 w-4" />
           Ask AI about us

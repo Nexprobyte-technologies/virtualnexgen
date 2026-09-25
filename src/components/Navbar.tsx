@@ -68,7 +68,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/90 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(10,25,47,0.08)]">
+        <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/90 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(11,42,74,0.08)]">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
@@ -189,7 +189,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/book-consultation"
-                    className="rounded-full bg-gradient-to-r from-[#0A192F] to-[#00ADB5] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 shadow-[0_4px_16px_rgba(0,173,181,0.35)] hover:shadow-[0_6px_22px_rgba(0,173,181,0.5)] hover:scale-105 whitespace-nowrap"
+                    className="rounded-full bg-gradient-to-r from-[#0B2A4A] to-[#F97316] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 shadow-[0_4px_16px_rgba(249,115,22,0.35)] hover:shadow-[0_6px_22px_rgba(249,115,22,0.5)] hover:scale-105 whitespace-nowrap"
                   >
                     Appointment
                   </Link>
@@ -290,7 +290,7 @@ export default function Navbar() {
                   <Link
                     href="/book-consultation"
                     onClick={() => setMobileOpen(false)}
-                    className="mt-2 w-full rounded-full bg-gradient-to-r from-[#0A192F] to-[#00ADB5] px-5 py-3 text-sm font-semibold text-white text-center shadow-[0_4px_16px_rgba(0,173,181,0.35)] block"
+                    className="mt-2 w-full rounded-full bg-gradient-to-r from-[#0B2A4A] to-[#F97316] px-5 py-3 text-sm font-semibold text-white text-center shadow-[0_4px_16px_rgba(249,115,22,0.35)] block"
                   >
                     Book Appointment
                   </Link>

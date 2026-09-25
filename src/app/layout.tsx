@@ -24,8 +24,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${dmSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body
+        className="min-h-full flex flex-col bg-background text-foreground"
+        suppressHydrationWarning
+      >
         <noscript>
           <style>{`[data-animate]{opacity:1 !important;visibility:visible !important;}`}</style>
         </noscript>

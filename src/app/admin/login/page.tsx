@@ -93,7 +93,7 @@ export default function AdminLogin() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-3.5 text-sm font-semibold text-ink shadow-[0_12px_32px_rgba(164,189,188,0.35)] transition hover:shadow-[0_12px_40px_rgba(164,189,188,0.5)] disabled:opacity-60"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(249,115,22,0.35)] transition hover:shadow-[0_12px_40px_rgba(249,115,22,0.5)] disabled:opacity-60"
         >
           {loading ? (
             <>

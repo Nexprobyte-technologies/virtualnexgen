@@ -176,7 +176,7 @@ function FullContentCards({ html }: { html: string }) {
       <article className="group overflow-hidden rounded-3xl border border-line bg-white shadow-[0_4px_28px_rgba(0,0,0,0.05)]">
         <div className={`grid lg:grid-cols-2 ${flip ? "lg:[direction:rtl]" : ""}`}>
           <div className="p-8 sm:p-10 lg:[direction:ltr]">
-            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(0,173,181,0.15)]" />
+            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(249,115,22,0.15)]" />
             {renderHeading(card, "light")}
             <div
               className={`${RICH_CONTENT_CLASSES} mt-2 [&_h2]:mt-4`}
@@ -201,7 +201,7 @@ function FullContentCards({ html }: { html: string }) {
               </div>
             ) : (
               <div className="flex h-full items-center justify-center">
-                <div className="flex h-28 w-28 rounded-full bg-gradient-to-br from-brand to-brand-deep shadow-[0_18px_44px_rgba(0,173,181,0.35)]">
+                <div className="flex h-28 w-28 rounded-full bg-gradient-to-br from-brand to-brand-deep shadow-[0_18px_44px_rgba(249,115,22,0.35)]">
                   <FolderOpen className="m-auto h-12 w-12 text-white" />
                 </div>
               </div>
@@ -224,14 +224,14 @@ function FullContentCards({ html }: { html: string }) {
     const heading = (card.heading || "").replace(/<[^>]*>/g, "").trim();
     const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
     return (
-      <article className="relative overflow-hidden rounded-3xl border border-line bg-white p-7 shadow-[0_2px_18px_rgba(0,0,0,0.04)] transition duration-300 hover:shadow-[0_14px_44px_rgba(164,189,188,0.16)] sm:p-9">
+      <article className="relative overflow-hidden rounded-3xl border border-line bg-white p-7 shadow-[0_2px_18px_rgba(0,0,0,0.04)] transition duration-300 hover:shadow-[0_14px_44px_rgba(249,115,22,0.16)] sm:p-9">
         <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
           {indexFromCard(card)}
         </span>
         <div className="relative grid gap-7 lg:grid-cols-[1fr_320px] lg:items-start">
           <div className="min-w-0">
             <div className="flex items-start gap-4">
-              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(0,173,181,0.3)]">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(249,115,22,0.3)]">
                 {indexFromCard(card)}
               </span>
               <div className="pt-1">
@@ -577,7 +577,7 @@ export default async function ServiceDetailPage({
   return (
     <main className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-5" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
+      <div className="relative overflow-hidden py-5" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)" }}>
         <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -614,7 +614,7 @@ export default async function ServiceDetailPage({
                   href="https://calendly.com/virtualnexgen-info/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-7 py-3.5 text-sm font-semibold text-ink shadow-[0_16px_44px_rgba(164,189,188,0.35)] transition hover:shadow-[0_16px_60px_rgba(164,189,188,0.5)]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(249,115,22,0.35)] transition hover:shadow-[0_16px_60px_rgba(249,115,22,0.5)]"
                 >
                   Book Your Demo
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -758,7 +758,7 @@ export default async function ServiceDetailPage({
               const Icon = iconMap[item.icon] || Zap;
               return (
                 <Reveal key={i} delay={i * 0.08}>
-                  <div className="group rounded-2xl border border-line bg-white p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(164,189,188,0.1)]">
+                  <div className="group rounded-2xl border border-line bg-white p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(249,115,22,0.1)]">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 transition-colors group-hover:bg-brand/20">
                       <Icon className="h-5 w-5 text-brand-dark" />
                     </div>
@@ -836,7 +836,7 @@ export default async function ServiceDetailPage({
           className="relative overflow-hidden py-16 sm:py-24"
           style={{
             background:
-              "linear-gradient(160deg, #0A192F 0%, #062c36 55%, #0A192F 100%)",
+              "linear-gradient(160deg, #0B2A4A 0%, #0B2A4A 55%, #0B2A4A 100%)",
           }}
         >
           <div className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-brand/15 blur-[130px]" />
@@ -943,7 +943,7 @@ export default async function ServiceDetailPage({
             <Reveal key={i} delay={i * 0.1}>
               <div className={`relative rounded-2xl border p-8 shadow-[0_2px_16px_rgba(0,0,0,0.04)] ${
                 item.highlighted
-                  ? "border-2 border-brand bg-gradient-to-br from-brand/5 to-white shadow-[0_8px_40px_rgba(164,189,188,0.12)]"
+                  ? "border-2 border-brand bg-gradient-to-br from-brand/5 to-white shadow-[0_8px_40px_rgba(249,115,22,0.12)]"
                   : "border-line bg-white"
               }`}>
                 {item.highlighted && (
@@ -1009,7 +1009,7 @@ export default async function ServiceDetailPage({
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="overflow-hidden rounded-[2rem] border border-line bg-gradient-to-br from-[#001a33] via-brand-dark to-[#000000] p-8 sm:p-14">
+          <div className="overflow-hidden rounded-[2rem] border border-line bg-gradient-to-br from-[#0B2A4A] via-brand-dark to-[#000000] p-8 sm:p-14">
             <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
             <div className="relative">
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
@@ -1067,7 +1067,7 @@ export default async function ServiceDetailPage({
                 <Reveal key={s.slug} delay={i * 0.1}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(164,189,188,0.1)]"
+                    className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(249,115,22,0.1)]"
                   >
                     {s.image && (
                       <div className="relative aspect-[16/9] overflow-hidden">

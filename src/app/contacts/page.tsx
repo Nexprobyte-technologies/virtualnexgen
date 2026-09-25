@@ -168,7 +168,7 @@ export default function ContactPage() {
           className="relative overflow-hidden pb-10 pt-28 sm:pt-32"
           style={{
             background:
-              "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)",
+              "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)",
           }}
         >
           <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand/10 blur-[120px]" />
@@ -274,7 +274,7 @@ export default function ContactPage() {
                   <Reveal delay={0.2}>
                     <a
                       href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
-                      className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition hover:border-brand hover:shadow-[0_8px_30px_rgba(164,189,188,0.25)]"
+                      className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition hover:border-brand hover:shadow-[0_8px_30px_rgba(249,115,22,0.25)]"
                     >
                       <span className="grid h-10 w-10 place-items-center rounded-full bg-cream-2 text-brand-dark">
                         <Phone className="h-4 w-4" />
@@ -365,7 +365,7 @@ export default function ContactPage() {
                           required
                           checked={agree}
                           onChange={(e) => setAgree(e.target.checked)}
-                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#145454]"
+                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#F97316]"
                         />
                         <span>
                           I agree to be contacted by Virtual Nexgen Solutions regarding my inquiry
@@ -424,7 +424,7 @@ export default function ContactPage() {
               <div className="mt-12 grid gap-6 md:grid-cols-2">
                 {locations.map((loc, i) => (
                   <Reveal key={loc.country} delay={0.08 * i}>
-                    <div className="overflow-hidden rounded-[2rem] bg-[#0f2a3d] text-white shadow-[0_24px_60px_rgba(15,42,61,0.25)]">
+                    <div className="overflow-hidden rounded-[2rem] bg-[#0B2A4A] text-white shadow-[0_24px_60px_rgba(11, 42, 74,0.25)]">
                       <div className="p-7 sm:p-8">
                         <div className="flex items-start justify-between gap-4">
                           <div>

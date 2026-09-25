@@ -186,7 +186,7 @@ export default function AdminHeader() {
               }}
               className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-2 py-1.5 transition hover:border-brand"
             >
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-brand-deep to-brand text-xs font-bold text-ink">
+              <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-brand-deep to-brand text-xs font-bold text-white">
                 VN
               </span>
               <span className="hidden text-sm font-semibold text-slate-700 sm:block">

@@ -60,14 +60,14 @@ export default function CounterStats() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div
           ref={rootRef}
-          className="relative grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden rounded-xl sm:rounded-[2rem] bg-gradient-to-r from-[#000000] via-[#0A192F] to-[#000000] border border-[#00ADB5]/30 px-4 sm:px-6 py-5 sm:py-7 shadow-[0_20px_50px_rgba(10,25,47,0.25)] lg:grid-cols-4"
+          className="relative grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden rounded-xl sm:rounded-[2rem] bg-gradient-to-r from-[#000000] via-[#0B2A4A] to-[#000000] border border-[#F97316]/30 px-4 sm:px-6 py-5 sm:py-7 shadow-[0_20px_50px_rgba(11,42,74,0.25)] lg:grid-cols-4"
         >
           {stats.map((stat) => (
             <div key={stat.label} data-animate data-stat-item className="text-center">
               <p
                 data-counter={stat.end}
                 data-suffix={stat.suffix}
-                className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#00D2D3]"
+                className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#F97316]"
               >
                 0{stat.suffix}
               </p>

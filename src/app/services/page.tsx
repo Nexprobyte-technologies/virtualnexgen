@@ -11,7 +11,7 @@ export default async function ServicesListPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-6" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(151,199,199,1) 50%, rgba(255,255,255,1) 100%)" }}>
+      <div className="relative overflow-hidden py-6" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)" }}>
         <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -49,7 +49,7 @@ export default async function ServicesListPage() {
               <Reveal key={service.slug} delay={i * 0.08}>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_16px_48px_rgba(164,189,188,0.12)]"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)]"
                 >
                   {service.image ? (
                     <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">

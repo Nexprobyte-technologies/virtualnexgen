@@ -90,7 +90,7 @@ export function Card({
         boxShadow:
           "0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
       }}
-      className="max-w-5xl -mt-12 mx-auto h-[32rem] md:h-[44rem] w-full border-4 border-[#002a54]/20 bg-[#002a54] p-2 md:p-4 rounded-[30px] shadow-2xl"
+      className="max-w-5xl -mt-12 mx-auto h-[32rem] md:h-[44rem] w-full border-4 border-[#0B2A4A]/20 bg-[#0B2A4A] p-2 md:p-4 rounded-[30px] shadow-2xl"
     >
       <div className="h-full w-full overflow-hidden rounded-2xl bg-white p-2 md:p-4">
         {children}

@@ -149,7 +149,7 @@ export default function About() {
                 href="https://virtualnexgen.com/contacts"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0A192F] to-[#00ADB5] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_14px_38px_rgba(0,173,181,0.35)] transition hover:shadow-[0_14px_54px_rgba(0,173,181,0.5)]"
+                className="group mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0B2A4A] to-[#F97316] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_14px_38px_rgba(249,115,22,0.35)] transition hover:shadow-[0_14px_54px_rgba(249,115,22,0.5)]"
               >
                 Contact Us
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -183,7 +183,7 @@ export default function About() {
                 rel="noopener noreferrer"
                 data-animate
                 data-case-card
-                className="card group flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(0,173,181,0.16)]"
+                className="card group flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(249,115,22,0.16)]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -203,15 +203,15 @@ export default function About() {
                   <p className="text-[11px] font-bold uppercase tracking-widest text-ink/40">
                     {cs.tags}
                   </p>
-                  <h3 className="mt-2.5 text-lg font-bold leading-snug text-ink transition group-hover:text-[#00ADB5]">
+                  <h3 className="mt-2.5 text-lg font-bold leading-snug text-ink transition group-hover:text-[#F97316]">
                     {cs.title}
                   </h3>
                   <p className="mt-2.5 text-sm leading-relaxed text-ink/60">
                     {cs.text}
                   </p>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-bold uppercase tracking-wider text-[#0A192F]">
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-bold uppercase tracking-wider text-[#0B2A4A]">
                     See the Impact
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#00ADB5] text-white transition-all duration-300 group-hover:translate-x-1 group-hover:shadow-[0_4px_12px_rgba(0,173,181,0.4)]">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#F97316] text-white transition-all duration-300 group-hover:translate-x-1 group-hover:shadow-[0_4px_12px_rgba(249,115,22,0.4)]">
                       <ArrowUpRight className="h-3 w-3" />
                     </span>
                   </span>

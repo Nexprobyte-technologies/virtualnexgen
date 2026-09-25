@@ -21,7 +21,7 @@ export default function ClientLogos() {
             </span>
             <h2 className="mt-3 sm:mt-5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-ink">
               Our VAs Are Experts in All Major{" "}
-              <span className="text-[#00ADB5]">Insurance Software</span>
+              <span className="text-[#F97316]">Insurance Software</span>
             </h2>
           </div>
         </Reveal>
@@ -62,7 +62,7 @@ export default function ClientLogos() {
             })}
           </div>
 
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-deep via-brand to-brand-accent text-center text-[10px] font-extrabold uppercase tracking-wider text-white shadow-[0_12px_36px_rgba(0,173,181,0.4)] ring-8 ring-brand/10 sm:h-24 sm:w-24 sm:text-xs">
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-deep via-brand to-brand-accent text-center text-[10px] font-extrabold uppercase tracking-wider text-white shadow-[0_12px_36px_rgba(249,115,22,0.4)] ring-8 ring-brand/10 sm:h-24 sm:w-24 sm:text-xs">
             AMS
             <br />
             Experts

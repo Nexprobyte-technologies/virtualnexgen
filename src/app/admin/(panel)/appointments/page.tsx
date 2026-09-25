@@ -320,7 +320,7 @@ export default function AdminAppointments() {
                       aria-current={pg === page ? "page" : undefined}
                       className={`min-w-[2rem] rounded-lg px-2 text-sm font-semibold transition ${
                         pg === page
-                          ? "bg-gradient-to-r from-brand-deep to-brand text-ink shadow"
+                          ? "bg-gradient-to-r from-brand-deep to-brand text-white shadow"
                           : "border border-slate-200 bg-white text-slate-600 hover:border-brand hover:text-brand-dark"
                       }`}
                     >

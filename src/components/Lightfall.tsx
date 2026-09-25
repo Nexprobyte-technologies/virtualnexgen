@@ -42,7 +42,7 @@ const hexToRGB = (hex: string): RGB => {
 
 const prepColors = (input?: string[]) => {
   const base = (
-    input && input.length ? input : ["#00ADB5", "#00D2D3", "#5227FF"]
+    input && input.length ? input : ["#F97316", "#ECFDE5", "#0B2A4A"]
   ).slice(0, MAX_COLORS);
   const count = base.length;
   const arr: RGB[] = [];
@@ -215,8 +215,8 @@ const Lightfall: React.FC<LightfallProps> = ({
   className = "",
   dpr,
   paused = false,
-  colors = ["#00ADB5", "#00D2D3", "#5227FF"],
-  backgroundColor = "#0A29FF",
+  colors = ["#F97316", "#ECFDE5", "#0B2A4A"],
+  backgroundColor = "#0B2A4A",
   speed = 0.5,
   streakCount = 3,
   streakWidth = 1.2,

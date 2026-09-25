@@ -47,7 +47,7 @@ function BentoCard({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl border border-line bg-cream transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,173,181,0.15)] ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-line bg-cream transition-all duration-500 hover:shadow-[0_8px_40px_rgba(249,115,22,0.15)] ${className}`}
       style={{ perspective: "800px" }}
     >
       {/* Animated border glow */}
@@ -58,7 +58,7 @@ function BentoCard({
         className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,173,181,0.08), transparent 40%)",
+            "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249,115,22,0.08), transparent 40%)",
         }}
       />
       {/* Border glow */}
@@ -66,7 +66,7 @@ function BentoCard({
         className="pointer-events-none absolute -inset-px z-0 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,173,181,0.3), transparent 40%)",
+            "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249,115,22,0.3), transparent 40%)",
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
           padding: "1px",

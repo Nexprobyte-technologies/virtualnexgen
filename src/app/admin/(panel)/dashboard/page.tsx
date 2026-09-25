@@ -67,7 +67,7 @@ export default async function AdminDashboard() {
       desc: "Create a new service that appears instantly in the dropdown.",
       href: "/admin/services",
       icon: FileText,
-      accent: "from-brand-deep to-brand text-ink",
+      accent: "from-brand-deep to-brand text-white",
     },
     {
       title: "Manage Services",
@@ -106,7 +106,7 @@ export default async function AdminDashboard() {
           </div>
           <Link
             href="/admin/services"
-            className="group inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-ink shadow-[0_12px_30px_rgba(164,189,188,0.4)] transition hover:shadow-[0_12px_44px_rgba(164,189,188,0.55)]"
+            className="group inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-deep to-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.4)] transition hover:shadow-[0_12px_44px_rgba(249,115,22,0.55)]"
           >
             Add Service
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
