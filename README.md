@@ -1,119 +1,66 @@
-# Virtual Nexgen Solutions
+# Project: Color Palette Demo
 
-Virtual assistant and AI automation services website built with Next.js 16, React 19, and Tailwind CSS 4.
+## Overview
+This is a lightweight static web project that demonstrates a full‑theme implementation using the color palette you provided:
 
-## Tech Stack
+- **Primary dark:** `#07111F`
+- **Secondary dark blue:** `#0B1B33`
+- **Primary blue:** `#2563EB`
+- **AI purple:** `#7C3AED`
+- **Cyan accent:** `#06B6D4`
+- **Light background:** `#F6F8FC`
+- **Soft background:** `#F8FAFC`
+- **White:** `#FFFFFF`
+- **Main text:** `#0F172A`
+- **Muted text:** `#64748B`
 
-- **Framework:** Next.js 16 (App Router, Turbopack)
-- **UI:** React 19, Tailwind CSS 4
-- **Animations:** GSAP (ScrollTrigger), Framer Motion
-- **Calendar:** react-day-picker + date-fns
-- **Icons:** Lucide React
-- **Storage:** JSON file-based (no database)
+The project consists of three files:
 
-## Features
+| File | Purpose |
+|------|---------|
+| `index.html` | Page markup with a navigation bar, hero section, feature cards, and a dark‑mode toggle button. |
+| `styles.css` | Defines CSS **variables** for every color and sets up both **light** and **dark** theme rules. All component styles reference these variables, so changing a palette entry updates the whole UI instantly. |
+| `script.js` | Handles the theme toggle, persisting the user’s choice in `localStorage`. |
 
-### Public Site
-- Responsive navbar with services dropdown and booking modal
-- Hero section with animated content
-- Auto-scrolling client logos carousel
-- Counter stats and feature sections
-- Auto-cycling testimonials with circular progress indicators
-- FAQ accordion with glass-card UI
-- International clients section with world map and animated dots
-- NexBot chatbot with voice support
+## How the theme works
+1. All colors are stored as **CSS custom properties** (`--primary-dark`, `--primary-blue`, …) inside `:root`.
+2. Two theme containers – `[data-theme="light"]` and `[data-theme="dark"]` – map those variables to concrete background, text, and accent colors.
+3. Every component (navbar, buttons, cards, etc.) uses the semantic variables (`var(--bg-color)`, `var(--text-color)`, `var(--primary-blue)`, …). This makes the UI automatically adapt when the theme switches.
+4. The JavaScript toggles the `data-theme` attribute on the `<html>` element and saves the selection.
 
-### Admin Panel (`/admin`)
-- Dashboard with stats and quick actions
-- Services CRUD (add/edit/delete with sections and images)
-- Blog CRUD with rich text editor
-- Appointments management (view/confirm/cancel/delete)
-- Chatbot knowledge base manager with voice recording
+## Changing the palette
+To adjust the colors globally, edit only the **variable definitions** in `styles.css`:
 
-### Booking System
-- Calendar-based appointment picker
-- Time slot selection
-- Client details form
-- Saves to `data/appointments.json`
-- Admin can view and manage bookings
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
+```css
+:root {
+  --primary-dark: #07111F;   /* Update this value */
+  --secondary-dark-blue: #0B1B33;
+  --primary-blue: #2563EB;
+  --ai-purple: #7C3AED;
+  --cyan-accent: #06B6D4;
+  --light-bg: #F6F8FC;
+  --soft-bg: #F8FAFC;
+  --white: #FFFFFF;
+  --main-text: #0F172A;
+  --muted-text: #64748B;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+After saving the file, reload the page – the new colors will be reflected everywhere.
 
-## Admin Access
+## Running the project
+1. Open `index.html` in any modern browser (no server needed).
+2. Click **Toggle Dark** to switch between the light and dark themes.
+3. To develop further, you can serve the folder with a static server, e.g.:
+   ```bash
+   npx serve .
+   ```
+   (requires Node.js).
 
-- URL: `/admin/login`
-- Username: `admin`
-- Password: `admin@123`
+## Extending the project
+- **Add more components** – use the same CSS variables for colors.
+- **Integrate with a framework** – copy `styles.css` and the variable definitions into your framework’s global stylesheet, and keep the `data-theme` attribute logic.
+- **Customize the toggle UI** – modify `script.js` or replace the button with a switch component.
 
-## Project Structure
-
-```
-src/
-  app/
-    page.tsx              # Home page
-    layout.tsx            # Root layout
-    admin/
-      login/              # Admin login
-      (panel)/
-        dashboard/        # Admin dashboard
-        services/         # Services CRUD
-        blog/             # Blog CRUD
-        appointments/     # Appointments management
-    api/
-      services/           # Services API
-      blog/               # Blog API
-      chatbot/            # Chatbot API
-      appointments/       # Appointments API
-      auth/               # Authentication
-  components/
-    Navbar.tsx            # Navigation bar
-    Hero.tsx              # Hero section
-    Marquee.tsx           # Scrolling text marquee
-    ClientLogos.tsx       # Client logos carousel
-    Features.tsx          # Features section
-    About.tsx             # About section
-    Services.tsx          # Services section
-    Testimonials.tsx      # Testimonials carousel
-    CTA.tsx               # FAQ + CTA section
-    InternationalClients.tsx  # World map section
-    BookingModal.tsx      # Appointment booking popup
-    ChatBot.tsx           # NexBot chatbot widget
-    Footer.tsx            # Footer
-  lib/
-    types.ts              # TypeScript types
-    auth.ts               # Authentication
-    services.ts           # Services data layer
-    blog.ts               # Blog data layer
-    chatbot.ts            # Chatbot data layer
-    appointments.ts       # Appointments data layer
-    gsap.ts               # GSAP configuration
-data/
-  services.json           # Services data
-  blog.json               # Blog data
-  chatbot.json            # Chatbot data
-  appointments.json       # Appointments data
-```
-
-## Environment
-
-No `.env` file required. All data is stored in local JSON files under `data/`.
-
-## License
-
-Private project — Virtual Nexgen Solutions.
+---
+*Created with the Antigravity AI coding assistant.*

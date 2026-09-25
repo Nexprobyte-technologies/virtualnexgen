@@ -650,6 +650,12 @@ export default async function ServiceDetailPage({
           </Reveal>
         </div>
       </section>
+{/* Content Image */}
+{service.fullContent?.image && (
+  <section className="mx-auto max-w-7xl px-5 sm:px-8 py-8">
+    <img src={service.fullContent.image} alt={`${service.name} image`} className="w-full rounded-2xl" />
+  </section>
+)}
 
       {/* Trust Badges Marquee */}
       <section className="border-y border-line bg-cream/30 py-6 overflow-hidden">
@@ -777,7 +783,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Full Content from services_full.json */}
-      {contentHtml && (
+      {contentHtml && slug !== 'insurance-virtual-assistants' && (
         (() => {
           const extraImages = (service.fullContent?.images ?? [])
             .slice(1)
@@ -785,8 +791,8 @@ export default async function ServiceDetailPage({
 
           return (
         <section id="complete-overview" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-          <Reveal>
-            <div className="text-center">
+
+            <Reveal><div className="text-center">
               <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
                 Complete Overview
               </span>
@@ -802,7 +808,7 @@ export default async function ServiceDetailPage({
             </div>
           </Reveal>
 
-          <div className="mt-14">
+          <div className={service.slug === "real-estate-virtual-assistants" ? "mt-0" : "mt-14"}>
             <FullContentCards html={contentHtml} />
 
             {/* Additional Images from full content (skip any already shown above) */}
@@ -924,7 +930,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Pricing Comparison */}
+{/* Pricing Comparison */}
       {/* <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <Reveal>
           <div className="text-center">

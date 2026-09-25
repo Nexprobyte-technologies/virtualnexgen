@@ -39,32 +39,7 @@ export default function CaseStudyDetailPage() {
       <Navbar />
         <main className="pt-10">
         {/* Hero Banner */}
-        <section className="relative overflow-hidden py-6" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)" }}>
-          <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
-          <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
-          <div className="relative mx-auto max-w-7xl px-6 text-center">
-            {/* Breadcrumb */}
-            <nav className="mb-6 flex items-center justify-center gap-2 text-sm text-ink/50">
-              <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <Link href="/casestudy" className="hover:text-brand transition-colors">Case Studies</Link>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <span className="text-ink/70 line-clamp-1 max-w-xs">{study.title}</span>
-            </nav>
 
-            {study.tag && (
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark mb-4">
-                {study.tag}
-              </span>
-            )}
-            {study.tags && (
-              <p className="mb-4 text-sm font-medium text-ink/60">{study.tags}</p>
-            )}
-            <h1 className="text-3xl font-extrabold text-ink sm:text-4xl lg:text-5xl max-w-4xl mx-auto">
-              {study.title}
-            </h1>
-          </div>
-        </section>
 
         {/* Scroll-Expand Cover */}
         {study.image && (
