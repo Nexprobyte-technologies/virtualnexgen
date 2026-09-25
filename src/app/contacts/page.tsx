@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import CalendlyEmbed from "@/components/CalendlyEmbed";
 import {
   ArrowRight,
   Briefcase,
@@ -522,6 +523,27 @@ export default function ContactPage() {
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ================= Book a Meeting (Calendly) ================= */}
+        <section className="bg-cream py-16 sm:py-20">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-10">
+            <SectionHeading
+              eyebrow="Book a Meeting"
+              title="Schedule a Free"
+              highlight="Consultation"
+              description="Pick a slot on our live 30-minute calendar. After booking, the confirmation and calendar invitation land straight in your inbox."
+            />
+            <Reveal delay={0.06}>
+              <div className="mt-10">
+                <CalendlyEmbed />
+              </div>
+            </Reveal>
+            <p className="mt-4 text-center text-xs text-ink/40">
+              Powered by Calendly · 30 min · Google Meet details are shared after
+              scheduling.
+            </p>
           </div>
         </section>
 

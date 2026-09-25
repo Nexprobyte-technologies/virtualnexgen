@@ -8,7 +8,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, date, time, message } = body;
+    const { name, email, phone, company, date, time, message, meetingUrl, source } =
+      body;
 
     if (!name || !email || !date || !time) {
       return Response.json(
@@ -25,6 +26,11 @@ export async function POST(request: Request) {
       date,
       time,
       message: message || "",
+      meetingUrl:
+        typeof meetingUrl === "string" && meetingUrl.startsWith("https://calendly.com/")
+          ? meetingUrl
+          : undefined,
+      source: source === "calendly" ? "calendly" : "internal",
     });
 
     return Response.json({ ok: true, appointment }, { status: 201 });

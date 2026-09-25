@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "import:blog-images": "node scripts/import-blog-images.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

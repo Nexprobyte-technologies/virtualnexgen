@@ -26,7 +26,6 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import { marked } from "marked";
 import type { BlogPost } from "@/lib/types";
 
 interface PostDraft {
@@ -55,6 +54,13 @@ const emptyDraft: PostDraft = {
   preview: "",
 };
 
+async function fetchBlogPosts(): Promise<BlogPost[]> {
+  const response = await fetch("/api/blog");
+  const data = await response.json().catch(() => null);
+  if (!response.ok) throw new Error(data?.error ?? "Failed to load blog posts");
+  return Array.isArray(data?.posts) ? data.posts : [];
+}
+
 export default function AdminBlog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
@@ -71,12 +77,13 @@ export default function AdminBlog() {
   const fileRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const pendingEditorSync = useRef(false);
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch("/api/blog");
-      const data = await res.json();
-      setPosts(data.posts ?? []);
+      const nextPosts = await fetchBlogPosts();
+      setPosts(nextPosts);
+      setLoadError("");
     } catch {
       setLoadError("Failed to load blog posts");
     } finally {
@@ -85,8 +92,21 @@ export default function AdminBlog() {
   }, []);
 
   useEffect(() => {
-    load();
-  }, [load]);
+    let active = true;
+    fetchBlogPosts()
+      .then((nextPosts) => {
+        if (active) setPosts(nextPosts);
+      })
+      .catch(() => {
+        if (active) setLoadError("Failed to load blog posts");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     const open = showForm || Boolean(editingSlug);
@@ -108,32 +128,14 @@ export default function AdminBlog() {
     }));
   }
 
-  function richTextToEditorHtml(text: string): string {
-    try {
-      return marked.parse(text) as string;
-    } catch {
-      return text;
-    }
-  }
-
-  function syncEditorFromDraft() {
-    const el = contentRef.current;
-    if (!el) return;
-    const normalized = draft.content ?? "";
-    const markdownish =
-      /(^|\n)(#{1,6}\s|[-*]\s|\d+\.\s|>\s)/.test(normalized) ||
-      /\*\*[^*]+\*\*|`[^`]+`|__[^_]+__/.test(normalized);
-    if (markdownish) {
-      el.innerHTML = richTextToEditorHtml(normalized);
-    } else if (!el.innerHTML) {
-      el.innerHTML = normalized;
-    }
-  }
-
   useEffect(() => {
-    syncEditorFromDraft();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!pendingEditorSync.current) return;
+    pendingEditorSync.current = false;
+    const frame = window.requestAnimationFrame(() => {
+      if (contentRef.current) contentRef.current.innerHTML = draft.content ?? "";
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [draft.content, editingSlug, showForm]);
 
   function execEdit(
     e: React.MouseEvent<HTMLButtonElement>,
@@ -163,6 +165,7 @@ export default function AdminBlog() {
   }
 
   function resetForm() {
+    pendingEditorSync.current = false;
     setDraft(emptyDraft);
     setEditingSlug(null);
     setFormError("");
@@ -238,6 +241,7 @@ export default function AdminBlog() {
   }
 
   function handleEdit(post: BlogPost) {
+    pendingEditorSync.current = true;
     setEditingSlug(post.slug);
     setDraft({
       title: post.title,
@@ -251,10 +255,6 @@ export default function AdminBlog() {
       file: null,
       preview: post.image,
     });
-    const el = contentRef.current;
-    if (el) {
-      el.innerHTML = richTextToEditorHtml(post.content);
-    }
     setFormError("");
     setSuccess("");
     setShowForm(true);

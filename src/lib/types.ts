@@ -101,6 +101,10 @@ export interface Appointment {
   message: string;
   status: "pending" | "confirmed" | "cancelled";
   createdAt: string;
+  /** Public Calendly invitee/booking URL for meetings booked via the embedded widget. */
+  meetingUrl?: string;
+  /** Where the booking came from: internal booking flow or Calendly embed. */
+  source?: "internal" | "calendly";
 }
 
 export interface AboutSection {

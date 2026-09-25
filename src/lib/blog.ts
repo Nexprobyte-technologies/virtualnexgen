@@ -6,6 +6,7 @@ import { slugify } from "./services";
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "blog.json");
 const FULL_DATA_FILE = path.join(DATA_DIR, "blogs_full.json");
+const SUMMARY_DATA_FILE = path.join(DATA_DIR, "blogs_data.json");
 
 const seed: BlogPost[] = [
   {
@@ -58,20 +59,137 @@ const seed: BlogPost[] = [
   },
 ];
 
-async function loadFullContent(): Promise<Record<string, { contentHtml: string; contentText: string }>> {
+type FullBlogPost = {
+  id: number | string;
+  title: string;
+  slug: string;
+  url: string;
+  date: string | null;
+  image: string;
+  excerpt: string;
+  contentHtml: string;
+  contentText: string;
+  contentLength: number;
+  ok: boolean;
+};
+
+type SummaryBlogPost = {
+  id: number | string;
+  title: string;
+  slug: string;
+  image: string;
+  excerpt: string;
+};
+
+async function loadFullPosts(): Promise<FullBlogPost[]> {
   try {
     const raw = await fs.readFile(FULL_DATA_FILE, "utf-8");
-    const list = JSON.parse(raw) as Array<{ slug: string; contentHtml: string; contentText: string }>;
-    const map: Record<string, { contentHtml: string; contentText: string }> = {};
-    for (const item of list) {
-      if (item.slug && item.contentHtml) {
-        map[item.slug] = { contentHtml: item.contentHtml, contentText: item.contentText };
-      }
-    }
-    return map;
+    const list = JSON.parse(raw) as FullBlogPost[];
+    return Array.isArray(list) ? list : [];
   } catch {
-    return {};
+    return [];
   }
+}
+
+async function loadSummaryPosts(): Promise<SummaryBlogPost[]> {
+  try {
+    const raw = await fs.readFile(SUMMARY_DATA_FILE, "utf-8");
+    const list = JSON.parse(raw) as SummaryBlogPost[];
+    return Array.isArray(list) ? list : [];
+  } catch {
+    return [];
+  }
+}
+
+async function loadFullContent(): Promise<Record<string, { contentHtml: string; contentText: string }>> {
+  const list = await loadFullPosts();
+  const map: Record<string, { contentHtml: string; contentText: string }> = {};
+  for (const item of list) {
+    if (item.slug && item.contentHtml) {
+      map[item.slug] = { contentHtml: item.contentHtml, contentText: item.contentText };
+    }
+  }
+  return map;
+}
+
+function htmlToText(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<li\b[^>]*>/gi, "\n- ")
+    .replace(/<\/(p|h[1-6]|li|blockquote|div|section|article)>/gi, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/[ \t]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function nextNumericId(items: Array<{ id: number | string }>): number {
+  return (
+    items.reduce((maximum, item) => {
+      const id = Number(item.id);
+      return Number.isSafeInteger(id) && id > maximum ? id : maximum;
+    }, 0) + 1
+  );
+}
+
+function upsertBySlug<T extends { slug: string }>(items: T[], record: T): void {
+  const index = items.findIndex((item) => item.slug === record.slug);
+  if (index === -1) items.push(record);
+  else items[index] = { ...items[index], ...record };
+}
+
+function createFullBlogPost(
+  post: BlogPost,
+  fullPosts: FullBlogPost[],
+  existing?: FullBlogPost,
+): FullBlogPost {
+  const contentText = htmlToText(post.content);
+  return {
+    id: existing?.id ?? nextNumericId(fullPosts),
+    title: post.title,
+    slug: post.slug,
+    url: post.link || `https://virtualnexgen.com/blog/${post.slug}`,
+    date: existing?.date ?? null,
+    image: post.image,
+    excerpt: post.excerpt,
+    contentHtml: post.content,
+    contentText,
+    contentLength: contentText.length,
+    ok: true,
+  };
+}
+
+function createSummaryBlogPost(
+  post: BlogPost,
+  summaryPosts: SummaryBlogPost[],
+  existing?: SummaryBlogPost,
+): SummaryBlogPost {
+  return {
+    id: existing?.id ?? nextNumericId(summaryPosts),
+    title: post.title,
+    slug: post.slug,
+    image: post.image,
+    excerpt: post.excerpt,
+  };
+}
+
+async function writeBlogData(
+  posts: BlogPost[],
+  fullPosts: FullBlogPost[],
+  summaryPosts: SummaryBlogPost[],
+): Promise<void> {
+  await Promise.all([
+    fs.writeFile(DATA_FILE, JSON.stringify(posts, null, 2), "utf-8"),
+    fs.writeFile(FULL_DATA_FILE, JSON.stringify(fullPosts, null, 2), "utf-8"),
+    fs.writeFile(SUMMARY_DATA_FILE, JSON.stringify(summaryPosts, null, 2), "utf-8"),
+  ]);
 }
 
 async function ensureFile(): Promise<BlogPost[]> {
@@ -100,12 +218,8 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const [all, fullMap] = await Promise.all([getBlogPosts(), loadFullContent()]);
-  const post = all.find((p) => p.slug === slug) ?? null;
-  if (post && fullMap[slug]) {
-    return { ...post, content: fullMap[slug].contentHtml };
-  }
-  return post;
+  const all = await getBlogPosts();
+  return all.find((post) => post.slug === slug) ?? null;
 }
 
 export type BlogPostInput = {
@@ -121,11 +235,15 @@ export type BlogPostInput = {
 };
 
 export async function addBlogPost(input: BlogPostInput): Promise<BlogPost> {
-  const all = await getBlogPosts();
+  const [all, fullPosts, summaryPosts] = await Promise.all([
+    ensureFile(),
+    loadFullPosts(),
+    loadSummaryPosts(),
+  ]);
   const base = slugify(input.slug ?? input.title) || "post";
   let slug = base;
   let n = 2;
-  while (all.some((p) => p.slug === slug)) {
+  while (all.some((post) => post.slug === slug)) {
     slug = `${base}-${n++}`;
   }
   const post: BlogPost = {
@@ -142,7 +260,9 @@ export async function addBlogPost(input: BlogPostInput): Promise<BlogPost> {
     createdAt: new Date().toISOString(),
   };
   all.unshift(post);
-  await fs.writeFile(DATA_FILE, JSON.stringify(all, null, 2), "utf-8");
+  upsertBySlug(fullPosts, createFullBlogPost(post, fullPosts));
+  upsertBySlug(summaryPosts, createSummaryBlogPost(post, summaryPosts));
+  await writeBlogData(all, fullPosts, summaryPosts);
   return post;
 }
 
@@ -150,8 +270,12 @@ export async function updateBlogPost(
   slug: string,
   input: BlogPostInput,
 ): Promise<BlogPost | null> {
-  const all = await getBlogPosts();
-  const index = all.findIndex((p) => p.slug === slug);
+  const [all, fullPosts, summaryPosts] = await Promise.all([
+    ensureFile(),
+    loadFullPosts(),
+    loadSummaryPosts(),
+  ]);
+  const index = all.findIndex((post) => post.slug === slug);
   if (index === -1) return null;
   const next: BlogPost = {
     ...all[index],
@@ -165,14 +289,38 @@ export async function updateBlogPost(
     tags: input.tags ?? all[index].tags,
   };
   all[index] = next;
-  await fs.writeFile(DATA_FILE, JSON.stringify(all, null, 2), "utf-8");
+  upsertBySlug(
+    fullPosts,
+    createFullBlogPost(
+      next,
+      fullPosts,
+      fullPosts.find((post) => post.slug === slug),
+    ),
+  );
+  upsertBySlug(
+    summaryPosts,
+    createSummaryBlogPost(
+      next,
+      summaryPosts,
+      summaryPosts.find((post) => post.slug === slug),
+    ),
+  );
+  await writeBlogData(all, fullPosts, summaryPosts);
   return next;
 }
 
 export async function deleteBlogPost(slug: string): Promise<boolean> {
-  const all = await getBlogPosts();
-  const next = all.filter((p) => p.slug !== slug);
+  const [all, fullPosts, summaryPosts] = await Promise.all([
+    ensureFile(),
+    loadFullPosts(),
+    loadSummaryPosts(),
+  ]);
+  const next = all.filter((post) => post.slug !== slug);
   if (next.length === all.length) return false;
-  await fs.writeFile(DATA_FILE, JSON.stringify(next, null, 2), "utf-8");
+  await writeBlogData(
+    next,
+    fullPosts.filter((post) => post.slug !== slug),
+    summaryPosts.filter((post) => post.slug !== slug),
+  );
   return true;
 }

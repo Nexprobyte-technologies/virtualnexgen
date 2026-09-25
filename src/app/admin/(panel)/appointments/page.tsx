@@ -14,6 +14,7 @@ import {
   Phone,
   Building2,
   MessageSquare,
+  Video,
 } from "lucide-react";
 import type { Appointment } from "@/lib/types";
 
@@ -199,6 +200,7 @@ export default function AdminAppointments() {
                     Contact
                   </th>
                   <th className="px-5 py-2.5 font-semibold">Date & Time</th>
+                  <th className="px-5 py-2.5 font-semibold">Meeting</th>
                   <th className="px-5 py-2.5 font-semibold">Status</th>
                   <th className="px-5 py-2.5 font-semibold">Actions</th>
                 </tr>
@@ -246,6 +248,33 @@ export default function AdminAppointments() {
                         {apt.date}
                       </p>
                       <p className="text-xs text-slate-500">{apt.time}</p>
+                    </td>
+                    <td className="px-5 py-3">
+                      <div className="flex flex-col items-start gap-1.5">
+                        <span
+                          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                            apt.source === "calendly"
+                              ? "bg-blue-50 text-blue-700 ring-1 ring-blue-200"
+                              : "bg-slate-50 text-slate-600 ring-1 ring-slate-200"
+                          }`}
+                        >
+                          {apt.source === "calendly" ? "Calendly" : "Internal"}
+                        </span>
+                        {apt.meetingUrl ? (
+                          <a
+                            href={apt.meetingUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-brand/10 px-2.5 py-1.5 text-xs font-bold text-brand-dark transition hover:bg-brand/20"
+                            title="Open meeting details on Calendly"
+                          >
+                            <Video className="h-3.5 w-3.5" />
+                            Meeting Link
+                          </a>
+                        ) : (
+                          <span className="text-xs text-slate-400">—</span>
+                        )}
+                      </div>
                     </td>
                     <td className="px-5 py-3">{statusBadge(apt.status)}</td>
                     <td className="px-5 py-3">
