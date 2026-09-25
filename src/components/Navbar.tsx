@@ -59,7 +59,15 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-transparent" : ""}`} style={!scrolled ? { background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(235,249,250,0.9) 50%, rgba(255,255,255,0.95) 100%)" } : {}}>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-transparent"
+            : isSubPage
+            ? "bg-white/95 backdrop-blur-md"
+            : "bg-transparent"
+        }`}
+      >
         <div className="mx-auto w-[80%] mt-3 rounded-full border border-line bg-white/90 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(10,25,47,0.08)]">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">

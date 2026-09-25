@@ -13,9 +13,13 @@ import {
   TrendingUp,
   Zap,
   Award,
+  FolderOpen,
+  ChevronDown,
 } from "lucide-react";
 import { getService, getServices } from "@/lib/services";
 import Reveal from "@/components/Reveal";
+import InfiniteSpiral from "@/components/InfiniteSpiral";
+import ChapterFolder from "@/components/ChapterFolder";
 
 const RICH_HTML_STYLES = [
   "h2", "h3", "h4", "p", "strong", "em", "a", "ul", "ol", "li", "blockquote",
@@ -69,6 +73,9 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
 const RICH_CONTENT_CLASSES =
   "rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-lg [&_h4]:font-bold [&_h4]:text-ink [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-4 [&_img]:mb-6 [&_b]:font-bold [&_i]:italic [&_div]:my-2 [&_span]:inline";
 
+const DARK_WHITE_OVERRIDES =
+  "[&_h2]:text-white! [&_h3]:text-white! [&_h4]:text-white! [&_p]:text-white/80! [&_strong]:text-white! [&_em]:text-white! [&_b]:text-white! [&_i]:text-white! [&_a]:text-white! [&_a]:decoration-white/40! [&_ul]:text-white/80! [&_ol]:text-white/80! [&_li]:text-white/80! [&_li]:marker:text-white/60! [&_blockquote]:text-white/85! [&_blockquote]:border-white/30! [&_code]:bg-white/10! [&_code]:text-white! [&_table]:text-white/80! [&_th]:bg-white/10! [&_th]:text-white! [&_th]:border-white/20! [&_td]:text-white/80! [&_td]:border-white/20! [&_hr]:border-white/15!";
+
 type FullContentCard = {
   headingTag: "h2" | "h3" | "h4" | null;
   heading: string | null;
@@ -106,10 +113,16 @@ function splitFullContentCards(html: string): FullContentCard[] {
 }
 
 function isGridCard(card: FullContentCard): boolean {
+  if (card.headingTag === "h4") return false;
   if (!card.heading) return false;
   const text = card.heading.replace(/<[^>]*>/g, "").trim();
-  if (card.headingTag === "h4") return true;
   return /^\d{1,2}\.\s/.test(text);
+}
+
+function isFaqHeadingCard(card: FullContentCard): boolean {
+  if (!card.heading) return false;
+  const text = card.heading.replace(/<[^>]*>/g, "").trim();
+  return /faq|frequently asked/i.test(text);
 }
 
 function FullContentCards({ html }: { html: string }) {
@@ -117,61 +130,128 @@ function FullContentCards({ html }: { html: string }) {
   const cards = splitFullContentCards(safe);
   if (cards.length === 0) return null;
 
-  function renderHeading(card: FullContentCard) {
+  function renderHeading(card: FullContentCard, tone: "light" | "dark") {
     if (!card.heading) return null;
     const heading = card.heading.replace(/<strong>(.*?)<\/strong>/g, "$1");
+    const cls =
+      tone === "dark"
+        ? "text-lg font-extrabold text-white"
+        : "text-lg font-extrabold text-ink";
     if (card.headingTag === "h2") {
       return (
         <h2
-          className="text-2xl font-extrabold leading-tight text-ink"
+          className={`${cls} text-xl sm:text-2xl`}
           dangerouslySetInnerHTML={{ __html: heading }}
         />
       );
     }
     if (card.headingTag === "h4") {
       return (
-        <h4
-          className="text-lg font-extrabold text-ink"
-          dangerouslySetInnerHTML={{ __html: heading }}
-        />
+        <h4 className={cls} dangerouslySetInnerHTML={{ __html: heading }} />
       );
     }
     return (
       <h3
-        className="text-xl font-extrabold text-ink"
+        className={cls}
         dangerouslySetInnerHTML={{ __html: heading }}
       />
     );
   }
 
+  function cardNumber(card: FullContentCard): string | null {
+    const text = (card.heading || "").replace(/<[^>]*>/g, "").trim();
+    const m = text.match(/^(\d{1,2})\.\s*/);
+    return m ? m[1] : null;
+  }
+
   function isWhyChooseImageCard(card: FullContentCard): boolean {
     const text = (card.heading || "").replace(/<[^>]*>/g, "").toLowerCase();
+    return text.includes("why choose") && /\<img/i.test(card.body);
+  }
+
+  function renderIntroCard(card: FullContentCard, flip: boolean) {
+    const images = card.body.match(/<img[^>]*>/gi) || [];
+    const textBody = card.body.replace(/<img[^>]*>/gi, "");
     return (
-      text.includes("why choose") &&
-      /\<img/i.test(card.body)
+      <article className="group overflow-hidden rounded-3xl border border-line bg-white shadow-[0_4px_28px_rgba(0,0,0,0.05)]">
+        <div className={`grid lg:grid-cols-2 ${flip ? "lg:[direction:rtl]" : ""}`}>
+          <div className="p-8 sm:p-10 lg:[direction:ltr]">
+            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(0,173,181,0.15)]" />
+            {renderHeading(card, "light")}
+            <div
+              className={`${RICH_CONTENT_CLASSES} mt-2 [&_h2]:mt-4`}
+              dangerouslySetInnerHTML={{ __html: textBody }}
+            />
+          </div>
+          <div className="relative min-h-[220px] bg-gradient-to-br from-brand-deep/10 via-brand/10 to-cream">
+            {images.length > 0 ? (
+              <div className="grid h-full grid-cols-1 gap-3 p-6 sm:grid-cols-2 sm:p-8">
+                {images.map((tag, i) => {
+                  const src = (tag.match(/src="([^"]*)"/) || [])[1] || "";
+                  return (
+                    <img
+                      key={i}
+                      src={src}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full rounded-2xl border border-white/60 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition duration-500 group-hover:scale-[1.02]"
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <div className="flex h-28 w-28 rounded-full bg-gradient-to-br from-brand to-brand-deep shadow-[0_18px_44px_rgba(0,173,181,0.35)]">
+                  <FolderOpen className="m-auto h-12 w-12 text-white" />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </article>
     );
   }
 
-  function renderCard(card: FullContentCard) {
-    if (isWhyChooseImageCard(card)) {
-      const images = card.body.match(/<img[^>]*>/gi) || [];
-      const textBody = card.body.replace(/<img[^>]*>/gi, "");
-      return (
-        <article className="h-full rounded-2xl border border-line bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-8">
-          {renderHeading(card)}
-          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start">
-            <div className="min-w-0 flex-1">
-              <div
-                className={RICH_CONTENT_CLASSES}
-                dangerouslySetInnerHTML={{ __html: textBody }}
-              />
+  function indexFromCard(card: FullContentCard): string {
+    const text = (card.heading || "").replace(/<[^>]*>/g, "").trim();
+    const m = text.match(/^(\d{1,2})\.\s*/);
+    return m ? m[1].padStart(2, "0") : "";
+  }
+
+  function renderNumberedCard(card: FullContentCard) {
+    const images = card.body.match(/<img[^>]*>/gi) || [];
+    const textBody = card.body.replace(/<img[^>]*>/gi, "");
+    const heading = (card.heading || "").replace(/<[^>]*>/g, "").trim();
+    const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
+    return (
+      <article className="relative overflow-hidden rounded-3xl border border-line bg-white p-7 shadow-[0_2px_18px_rgba(0,0,0,0.04)] transition duration-300 hover:shadow-[0_14px_44px_rgba(164,189,188,0.16)] sm:p-9">
+        <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
+          {indexFromCard(card)}
+        </span>
+        <div className="relative grid gap-7 lg:grid-cols-[1fr_320px] lg:items-start">
+          <div className="min-w-0">
+            <div className="flex items-start gap-4">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(0,173,181,0.3)]">
+                {indexFromCard(card)}
+              </span>
+              <div className="pt-1">
+                <h4 className="text-lg font-extrabold leading-snug text-ink">
+                  {label}
+                </h4>
+              </div>
             </div>
-            <div className="flex w-full flex-col gap-4 lg:w-[42%] lg:shrink-0">
-              {images.map((tag, i) => {
+            <div
+              className={`${RICH_CONTENT_CLASSES} mt-4`}
+              dangerouslySetInnerHTML={{ __html: textBody }}
+            />
+          </div>
+          {images.length > 0 && (
+            <div className="flex flex-col gap-4">
+              {images.map((tag, idx) => {
                 const src = (tag.match(/src="([^"]*)"/) || [])[1] || "";
                 return (
                   <img
-                    key={i}
+                    key={idx}
                     src={src}
                     alt=""
                     loading="lazy"
@@ -180,51 +260,190 @@ function FullContentCards({ html }: { html: string }) {
                 );
               })}
             </div>
-          </div>
-        </article>
-      );
-    }
-
-    return (
-      <article className="h-full rounded-2xl border border-line bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] sm:p-8">
-        {renderHeading(card)}
-        <div
-          className={`${RICH_CONTENT_CLASSES} [&_img]:mx-auto [&_img]:max-w-2xl`}
-          dangerouslySetInnerHTML={{ __html: card.body }}
-        />
+          )}
+        </div>
+        <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-brand via-brand-accent to-brand-deep" />
       </article>
+    );
+  }
+
+  function renderWideCard(card: FullContentCard, faqMode = false) {
+    const images = card.body.match(/<img[^>]*>/gi) || [];
+    let textBody = card.body.replace(/<img[^>]*>/gi, "");
+    if (faqMode) {
+      textBody = textBody
+        .replace(/<i\b[^>]*>\s*<\/i>/gi, "")
+        .replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, "<strong>$1</strong>")
+        .replace(
+          /<h2\b[^>]*>([\s\S]*?)<\/h2>/gi,
+          (all, inner: string) =>
+            /faq|frequently asked/i.test(inner.replace(/<[^>]*>/g, ""))
+              ? ""
+              : all,
+        )
+        .replace(/<p\b[^>]*>\s*<\/p>/gi, "");
+    }
+    const extra = images.map((tag, idx) => {
+      const src = (tag.match(/src="([^"]*)"/) || [])[1] || "";
+      return (
+        <img key={idx} src={src} alt="" loading="lazy" className="rounded-xl" />
+      );
+    });
+    return (
+      <article className="rounded-3xl border border-line bg-cream/40 p-6 sm:p-10">
+        <div className="flex items-center gap-3">
+          <span className="inline-block h-2 w-2 rounded-full bg-brand" />
+          {renderHeading(card, "light")}
+        </div>
+        <div
+          className={`${RICH_CONTENT_CLASSES} [&_img]:mx-auto [&_img]:max-w-2xl ${faqMode ? "sm:columns-2 sm:[column-gap:3rem]" : ""}`}
+          dangerouslySetInnerHTML={{ __html: textBody }}
+        />
+        {extra.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-4">{extra}</div>
+        )}
+      </article>
+    );
+  }
+
+  function renderFaqCard(card: FullContentCard) {
+    const question = (card.heading || "").replace(
+      /<[^>]*>/g,
+      "",
+    ).trim();
+    return (
+      <div className="border-b border-line py-5 last:border-0 last:pb-2 first:pt-0">
+        <div className="flex items-start gap-4">
+          <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10">
+            <ChevronDown className="h-3.5 w-3.5 text-brand-dark" />
+          </span>
+          <div className="min-w-0">
+            <h4 className="text-base font-extrabold leading-snug text-ink">
+              {question}
+            </h4>
+            <div
+              className={`${RICH_CONTENT_CLASSES} mt-2 [&_p]:my-2 [&_ul]:my-2 [&_h2]:mt-4`}
+              dangerouslySetInnerHTML={{ __html: card.body }}
+            />
+          </div>
+        </div>
+      </div>
     );
   }
 
   const introCards = cards.slice(0, 2);
   const restCards = cards.slice(2);
+  const faqHeadingCard = restCards.find(isFaqHeadingCard);
+  const faqCards = cards.filter((card) => card.headingTag === "h4");
+  const nonFaqCards = restCards.filter((card) => card !== faqHeadingCard);
+  const numberedCards = nonFaqCards.filter(isGridCard);
+  const wideCards = nonFaqCards.filter((card) => !isGridCard(card));
+  const featuredImageCards = nonFaqCards.filter(isWhyChooseImageCard);
 
   return (
-    <div className="mx-auto mt-12 flex max-w-5xl flex-col gap-6">
+    <div className="mt-12 flex flex-col gap-12">
       {introCards.length > 0 && (
-        <div className="flex flex-wrap gap-6">
+        <div className="space-y-8">
           {introCards.map((card, i) => (
-            <div key={i} className="min-w-[280px] flex-1 basis-[320px]">
-              {renderCard(card)}
+            <Reveal key={i}>{renderIntroCard(card, i % 2 === 1)}</Reveal>
+          ))}
+        </div>
+      )}
+
+      {featuredImageCards.length > 0 && (
+        <div className="overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 text-white sm:p-12">
+          {featuredImageCards.map((card, i) => {
+            const images = card.body.match(/<img[^>]*>/gi) || [];
+            const textBody = card.body.replace(/<img[^>]*>/gi, "");
+            return (
+              <div
+                key={i}
+                className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_340px]"
+              >
+                <div>
+                  <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                    {cardNumber(card) ? `0${cardNumber(card)}. ` : ""}
+                    {(card.heading || "").replace(/<[^>]*>/g, "")}
+                  </span>
+                  <div
+                    className={`${RICH_CONTENT_CLASSES} mt-4 ${DARK_WHITE_OVERRIDES}`}
+                    dangerouslySetInnerHTML={{ __html: textBody }}
+                  />
+                </div>
+                <div className="flex flex-col gap-4">
+                  {images.map((tag, idx) => {
+                    const src = (tag.match(/src="([^"]*)"/) || [])[1] || "";
+                    return (
+                      <img
+                        key={idx}
+                        src={src}
+                        alt=""
+                        loading="lazy"
+                        className="h-auto w-full rounded-2xl border border-white/20 object-cover"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {numberedCards.length > 0 && (
+        <div className="grid gap-6 lg:grid-cols-2">
+          {[
+            numberedCards.slice(0, Math.ceil(numberedCards.length / 2)),
+            numberedCards.slice(Math.ceil(numberedCards.length / 2)),
+          ].map((column, colIdx) => (
+            <div
+              key={colIdx}
+              className={`flex flex-col gap-6 ${colIdx === 1 ? "lg:mt-20" : ""}`}
+            >
+              {column.map((card, i) => (
+                <Reveal key={i} delay={(i % 3) * 0.08}>
+                  {renderNumberedCard(card)}
+                </Reveal>
+              ))}
             </div>
           ))}
         </div>
       )}
-      {restCards.length > 0 && (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {restCards.map((card, i) => (
-            <div
-              key={i}
-              className={
-                isGridCard(card)
-                  ? ""
-                  : "sm:col-span-2 lg:col-span-3"
-              }
-            >
-              {renderCard(card)}
-            </div>
+
+      {wideCards.length > 0 && (
+        <div className="grid gap-6 lg:grid-cols-2">
+          {wideCards.map((card, i) => (
+            <Reveal key={i} delay={(i % 3) * 0.08}>
+              {renderWideCard(card)}
+            </Reveal>
           ))}
         </div>
+      )}
+
+      {faqCards.length > 0 && (
+        <div className="scroll-mt-24 rounded-[2rem] border border-line bg-white px-6 py-8 shadow-[0_2px_18px_rgba(0,0,0,0.04)] sm:px-10 sm:py-10">
+          <div className="flex items-center gap-3">
+            <span className="inline-block h-2 w-2 rounded-full bg-brand" />
+            {faqHeadingCard ? (
+              renderHeading(faqHeadingCard, "light")
+            ) : (
+              <h3 className="text-lg font-extrabold text-ink sm:text-xl">
+                Frequently Asked Questions
+              </h3>
+            )}
+          </div>
+          <div className="mt-6">
+            {faqCards.map((card, i) => (
+              <Reveal key={i} delay={(i % 3) * 0.05}>
+                {renderFaqCard(card)}
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {faqHeadingCard && faqCards.length === 0 && (
+        <Reveal>{renderWideCard(faqHeadingCard, true)}</Reveal>
       )}
     </div>
   );
@@ -334,6 +553,27 @@ export default async function ServiceDetailPage({
   const pricing = service.pricing?.length ? service.pricing : defaultPricing;
   const testimonials = service.testimonials?.length ? service.testimonials : defaultTestimonials;
 
+  const spiralImages = Array.from(
+    new Set(
+      [
+        ...(service.fullContent?.images ?? []),
+        service.fullContent?.image,
+        service.image,
+      ].filter((src): src is string => Boolean(src)),
+    ),
+  );
+  while (spiralImages.length > 0 && spiralImages.length < 7) {
+    for (const src of [...spiralImages]) {
+      if (spiralImages.length >= 7) break;
+      spiralImages.push(src);
+    }
+  }
+
+  const contentHtml = service.fullContent?.contentHtml || "";
+  const folderItems = service.fullContent?.headings?.length
+    ? service.fullContent.headings
+    : (service.content?.slice(0, 6) ?? []);
+
   return (
     <main className="min-h-screen bg-white">
       {/* Breadcrumb */}
@@ -389,26 +629,23 @@ export default async function ServiceDetailPage({
             </div>
           </Reveal>
 
-          {/* Stats Cards */}
+          {/* Auto-Moving Gallery */}
           <Reveal delay={0.15}>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: "Tasks Completed", value: "1,200+", icon: CheckCircle2 },
-                { label: "Active Clients", value: "50+", icon: Users },
-                { label: "Avg Turnaround", value: "24h", icon: Clock },
-                { label: "Client Retention", value: "95%", icon: TrendingUp },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-line bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
-                >
-                  <stat.icon className="h-5 w-5 text-brand" />
-                  <p className="mt-3 text-2xl font-extrabold text-ink">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-xs text-ink/50">{stat.label}</p>
-                </div>
-              ))}
+            <div className="relative h-[420px] sm:h-[520px]">
+              <InfiniteSpiral
+                items={spiralImages}
+                animationMode="all"
+                speed={0.6}
+                radius={190}
+                cardWidth={220}
+                cardHeight={160}
+                verticalSpacing={64}
+                cardsPerTurn={7}
+                cardRadius={14}
+                edgeFade={0.32}
+                edgeBlur={4}
+                imageFit="cover"
+              />
             </div>
           </Reveal>
         </div>
@@ -540,15 +777,14 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Full Content from services_full.json */}
-      {service.fullContent?.contentHtml && (
+      {contentHtml && (
         (() => {
-          const contentHtml = service.fullContent?.contentHtml || "";
           const extraImages = (service.fullContent?.images ?? [])
             .slice(1)
             .filter((img) => !contentHtml.includes(img));
 
           return (
-        <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+        <section id="complete-overview" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
           <Reveal>
             <div className="text-center">
               <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
@@ -558,35 +794,99 @@ export default async function ServiceDetailPage({
                 Everything About{" "}
                 <span className="text-brand-dark">{service.name}</span>
               </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-base text-ink/60">
+                A complete guide to {service.name}. Read everything in full
+                below, or jump straight to any chapter from the interactive
+                folder in the next section.
+              </p>
             </div>
           </Reveal>
 
-          <div className="mt-12">
+          <div className="mt-14">
             <FullContentCards html={contentHtml} />
-          </div>
 
-          {/* Additional Images from full content (skip any already shown above) */}
-          {extraImages.length > 0 && (
-            <div className="mt-16 max-w-4xl mx-auto">
-              <Reveal>
-                <div className="grid gap-6 sm:grid-cols-2">
-                  {extraImages.map((img: string, idx: number) => (
-                    <div key={idx} className="overflow-hidden rounded-2xl border border-line shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
-                      <img
-                        src={img}
-                        alt={`${service.name} - Image ${idx + 2}`}
-                        loading="lazy"
-                        className="h-auto w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-            </div>
-          )}
+            {/* Additional Images from full content (skip any already shown above) */}
+            {extraImages.length > 0 && (
+              <div className="mt-16">
+                <Reveal>
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {extraImages.map((img: string, idx: number) => (
+                      <div key={idx} className="overflow-hidden rounded-2xl border border-line shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
+                        <img
+                          src={img}
+                          alt={`${service.name} - Image ${idx + 2}`}
+                          loading="lazy"
+                          className="h-auto w-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </Reveal>
+              </div>
+            )}
+          </div>
         </section>
           );
         })()
+      )}
+
+      {/* Interactive Chapter Folder */}
+      {folderItems.length > 0 && (
+        <section
+          className="relative overflow-hidden py-16 sm:py-24"
+          style={{
+            background:
+              "linear-gradient(160deg, #0A192F 0%, #062c36 55%, #0A192F 100%)",
+          }}
+        >
+          <div className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-brand/15 blur-[130px]" />
+          <div className="pointer-events-none absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-deep/25 blur-[130px]" />
+          <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+            <Reveal>
+              <div className="text-center">
+                <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
+                  Interactive Chapter Index
+                </span>
+                <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                  Every Chapter of{" "}
+                  <span className="text-brand-accent">{service.name}</span> in
+                  One Folder
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-base text-white/65">
+                  Open the folder to float the full {folderItems.length}-chapter
+                  index of this guide. Grab a chapter, give it a toss, or click
+                  one to jump straight to that topic.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="relative mt-8 flex justify-center overflow-x-clip">
+              <div className="relative min-h-[520px] pt-[430px] sm:min-h-[650px] sm:pt-[560px]">
+                <ChapterFolder
+                  items={folderItems}
+                  label={service.name}
+                  sublabel={`${folderItems.length} sections`}
+                />
+              </div>
+            </div>
+
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-3 text-sm">
+              {[
+                "Tap the folder to open",
+                "Drag a chapter to toss it",
+                "Click a chapter to jump",
+              ].map((hint) => (
+                <span
+                  key={hint}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-semibold text-white/75 backdrop-blur"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+                  {hint}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
       {/* How It Works */}

@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollExpand from "@/components/ScrollExpand";
 import { CalendarDays, ChevronRight, Phone } from "lucide-react";
 import type { CaseStudy } from "@/lib/types";
 
@@ -66,22 +66,28 @@ export default function CaseStudyDetailPage() {
           </div>
         </section>
 
+        {/* Scroll-Expand Cover */}
+        {study.image && (
+          <ScrollExpand
+            useWindowScroll
+            src={study.image}
+            alt={study.title}
+            startWidth={56}
+            startHeight={72}
+            startRadius={28}
+            endRadius={0}
+            mediaZoom={1.3}
+            scrollDistance={1.1}
+            holdDistance={0.4}
+            smoothing={0.12}
+            overlayScrim={0.4}
+          />
+        )}
+
         {/* Content */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6">
             <div className="mx-auto w-full max-w-4xl">
-              {study.image && (
-                <div className="relative aspect-video overflow-hidden rounded-2xl">
-                  <Image
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              )}
-
-              {/* Below image: h2 / p / span */}
               <div className="mt-10">
                 {/* Tag pills (span) */}
                 <div className="flex flex-wrap items-center gap-2">
