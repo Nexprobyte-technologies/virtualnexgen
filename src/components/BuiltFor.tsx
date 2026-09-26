@@ -47,12 +47,12 @@ function FeatureCard({
   text: string;
 }) {
   return (
-    <div className="rounded-2xl border border-line bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:border-brand/40 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)]">
+    <div className="rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-brand/40 hover:bg-white/10 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]">
       <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
         <Icon className="h-5 w-5 text-brand" />
       </div>
-      <h3 className="text-base font-semibold text-ink mb-2">{title}</h3>
-      <p className="text-sm text-ink/60 leading-relaxed">{text}</p>
+      <h3 className="text-base font-semibold text-white mb-2">{title}</h3>
+      <p className="text-sm text-white/70 leading-relaxed">{text}</p>
     </div>
   );
 }
@@ -71,9 +71,9 @@ function MarqueeColumn({
   return (
     <div className="relative h-[300px] sm:h-[420px] lg:h-[460px] overflow-hidden">
       {/* Top fade */}
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 z-10 bg-gradient-to-b from-white to-transparent" />
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 z-10 bg-gradient-to-b from-[#132F4A] to-transparent" />
       {/* Bottom fade */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 z-10 bg-gradient-to-t from-white to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 z-10 bg-gradient-to-t from-[#132F4A] to-transparent" />
 
       <div
         className="marquee-track flex flex-col gap-4"
@@ -107,7 +107,7 @@ export default function BuiltFor() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#FFF7ED]">
+      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#132F4A]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
 
@@ -115,16 +115,16 @@ export default function BuiltFor() {
             <div className="flex flex-col justify-between lg:sticky lg:top-28">
               <div>
                 <Reveal y={30}>
-                  <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-ink leading-tight mb-2 sm:mb-3">
+                  <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white leading-tight mb-2 sm:mb-3">
                     Built for{" "}
-                    <span className="text-[#F97316]">Your Business</span>
+                    <span className="text-[#06B6D4]">Your Business</span>
                     <br />
                     Powered by{" "}
-                    <span className="text-[#0B2A4A]">People</span>
+                    <span className="text-white">People</span>
                   </h2>
                 </Reveal>
                 <Reveal y={20} delay={0.1}>
-                  <p className="text-sm sm:text-base lg:text-lg text-ink/70 mb-6 sm:mb-8 max-w-md">
+                  <p className="text-sm sm:text-base lg:text-lg text-white/70 mb-6 sm:mb-8 max-w-md">
                     We&apos;re not a general VA company, we&apos;re built for your
                     industry. Our team handles the work so yours can focus on growth.
                   </p>
@@ -134,19 +134,19 @@ export default function BuiltFor() {
               <Reveal y={20} delay={0.3}>
                 <div className="bg-brand/5 border border-brand/35 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 mt-6">
                   <div className="text-left w-full sm:w-auto">
-                    <p className="text-sm sm:text-base font-bold text-ink leading-snug">
+                    <p className="text-sm sm:text-base font-bold text-white leading-snug">
                       Ready to extend your team&apos;s capacity?
                     </p>
-                    <p className="text-xs sm:text-sm text-ink/60">
+                    <p className="text-xs sm:text-sm text-white/60">
                       See how dedicated support fits your workflow.
                     </p>
                   </div>
                   <a href="#contact" className="w-full sm:w-auto flex-shrink-0">
-                    <button className="group btn-brand-hover pr-2 pl-5 py-2 border border-ink rounded-full flex items-center justify-between sm:justify-start gap-2.5 font-semibold transition-all duration-300 w-full sm:w-auto shadow-xs cursor-pointer">
-                      <span className="text-sm font-bold text-ink whitespace-nowrap">
-                        Book a Demo
-                      </span>
-                      <span className="bg-icon-circle w-6 h-6 flex items-center justify-center rounded-full bg-ink text-white flex-shrink-0">
+<button className="group pr-2 pl-5 py-2 border border-white/20 rounded-full flex items-center justify-between sm:justify-start gap-2.5 font-semibold w-full sm:w-auto cursor-pointer">
+                  <span className="text-sm font-bold text-white whitespace-nowrap">
+                    Book a Demo
+                  </span>
+                  <span className="bg-icon-circle w-6 h-6 flex items-center justify-center rounded-full bg-white/20 text-[#132F4A] flex-shrink-0">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="13"
@@ -157,7 +157,7 @@ export default function BuiltFor() {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="transition-transform duration-300 ease-in-out group-hover:rotate-45"
+                          className=""
                         >
                           <path d="M7 7h10v10" />
                           <path d="M7 17 17 7" />

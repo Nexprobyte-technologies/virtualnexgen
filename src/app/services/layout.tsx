@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
-import ClientLogos from "@/components/ClientLogos";
 import FAQ9 from "@/components/FAQ9";
 
 export default function ServicesLayout({
@@ -14,7 +13,6 @@ export default function ServicesLayout({
       <ScrollProgress />
       <Navbar />
       {children}
-      <ClientLogos />
       <FAQ9 />
       <Footer />
     </>

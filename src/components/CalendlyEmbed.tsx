@@ -79,13 +79,31 @@ export default function CalendlyEmbed({
     return () => window.removeEventListener("message", handleCalendlyMessage);
   }, [handleCalendlyMessage]);
 
+  // Inject styles to hide iframe scrollbars
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `
+      .calendly-inline-widget iframe {
+        overflow: hidden !important;
+      }
+      .calendly-inline-widget iframe::-webkit-scrollbar {
+        display: none !important;
+      }
+      .calendly-inline-widget iframe {
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   return (
-    <div
-      className="relative w-full overflow-hidden rounded-2xl border border-line bg-white shadow-[0_18px_50px_rgba(15,42,61,0.10)]"
-      style={{ minHeight: height }}
-    >
+    <div className="relative w-full overflow-hidden" style={{ minHeight: height, overflow: 'hidden' }}>
       {!ready && (
-        <div className="absolute inset-0 grid place-items-center bg-white">
+        <div className="absolute inset-0 grid place-items-center">
           <div className="flex flex-col items-center gap-2">
             <Loader2 className="h-6 w-6 animate-spin text-brand" />
             <p className="text-xs font-medium text-ink/50">
@@ -96,8 +114,8 @@ export default function CalendlyEmbed({
       )}
       {/* Calendly injects its responsive iframe into this container. */}
       <div
-        className="calendly-inline-widget w-full"
-        style={{ minWidth: "280px", height }}
+        className="calendly-inline-widget w-full overflow-hidden"
+        style={{ minWidth: "100%", height, transform: "none" }}
         data-url={url}
       />
     </div>

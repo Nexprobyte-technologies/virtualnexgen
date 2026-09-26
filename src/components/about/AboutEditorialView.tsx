@@ -342,21 +342,21 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
         ];
 
   return (
-    <div className="bg-[#FFF7ED] text-[#0B2A4A] selection:bg-[#F97316] selection:text-white">
+    <div className="bg-[#132F4A] text-white selection:bg-[#06B6D4] selection:text-white">
       {/* ========================================================================= */}
       {/* 1. EDITORIAL HERO SECTION */}
       {/* ========================================================================= */}
       <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 border-b border-[#0B2A4A]/10">
         {/* Soft background ambient glow */}
-        <div className="pointer-events-none absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-[#ECFDE5] blur-[140px] opacity-80" />
-        <div className="pointer-events-none absolute top-1/2 -left-40 h-[400px] w-[400px] rounded-full bg-[#F97316]/10 blur-[130px]" />
+        <div className="pointer-events-none absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-[#06B6D4]/10 blur-[140px] opacity-80" />
+        <div className="pointer-events-none absolute top-1/2 -left-40 h-[400px] w-[400px] rounded-full bg-[#06B6D4]/10 blur-[130px]" />
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           {/* Top Editorial Eyebrow */}
           <Reveal y={20}>
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#0B2A4A]/15 pb-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full bg-[#ECFDE5] px-4 py-1.5 text-xs font-bold tracking-widest text-[#0B2A4A] uppercase border border-[#0B2A4A]/10 shadow-sm">
-                <span className="h-2 w-2 rounded-full bg-[#F97316] animate-pulse" />
+              <div className="inline-flex items-center gap-2.5 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/30 shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-[#06B6D4] animate-pulse" />
                 VIRTUAL NEXGEN CHRONICLE • ESTABLISHED 2016
               </div>
 
@@ -374,11 +374,11 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <Reveal y={25} delay={0.1}>
-                <h1 className="text-4xl font-extrabold tracking-tight text-[#0B2A4A] sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
-                  Bridging Human <span className="text-[#F97316]">Ingenuity</span> with Intelligent{" "}
+                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
+                  Bridging Human <span className="text-[#06B6D4]">Ingenuity</span> with Intelligent{" "}
                   <span className="relative inline-block">
-                    <span className="relative z-10 text-[#0B2A4A]">Automation</span>
-                    <span className="absolute bottom-2 left-0 h-3.5 w-full bg-[#ECFDE5] -z-0 rounded-sm" />
+                    <span className="relative z-10 text-white">Automation</span>
+                    <span className="absolute bottom-2 left-0 h-3.5 w-full bg-[#06B6D4]/20 -z-0 rounded-sm" />
                   </span>
                 </h1>
               </Reveal>
@@ -396,20 +396,20 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 rounded-full bg-[#F97316] px-7 py-3.5 text-sm sm:text-base font-bold text-black shadow-[0_4px_24px_rgba(249,115,22,0.35)] transition-all duration-300 hover:bg-[#0B2A4A] hover:text-white"
+                    className="group inline-flex items-center gap-3 rounded-full bg-[#06B6D4] px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300 hover:bg-[#132F4A] hover:text-white"
                   >
                     <span>Schedule Consultation</span>
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-[#F97316] transition-transform duration-300 group-hover:bg-[#F97316] group-hover:text-black group-hover:rotate-45">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#132F4A] text-white transition-transform duration-300 group-hover:bg-[#06B6D4] group-hover:text-white group-hover:rotate-45">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </a>
 
                   <a
                     href="#timeline"
-                    className="inline-flex items-center gap-2.5 rounded-full border border-[#0B2A4A]/30 bg-white/70 px-6 py-3.5 text-sm sm:text-base font-bold text-[#0B2A4A] backdrop-blur-sm transition-all duration-300 hover:bg-[#0B2A4A] hover:text-white hover:border-[#0B2A4A]"
+                    className="inline-flex items-center gap-2.5 rounded-full border border-[#132F4A]/30 bg-white/10 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-[#132F4A] hover:text-white hover:border-[#132F4A]"
                   >
                     <span>Explore Our Journey</span>
-                    <ArrowRight className="h-4 w-4 text-[#F97316]" />
+                    <ArrowRight className="h-4 w-4 text-[#06B6D4]" />
                   </a>
                 </div>
               </Reveal>
@@ -418,40 +418,40 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
             {/* Quick Stats Column */}
             <div className="lg:col-span-4">
               <Reveal y={25} delay={0.35}>
-                <div className="rounded-2xl border border-[#0B2A4A]/15 bg-white/80 p-6 backdrop-blur-md shadow-[0_12px_32px_rgba(11,42,74,0.06)]">
-                  <div className="text-xs font-bold uppercase tracking-widest text-[#F97316]">
-                    Impact at a Glance
+                <div className="rounded-2xl border border-white/20 bg-[#132F4A]/80 p-6 backdrop-blur-md shadow-[0_12px_32px_rgba(19,47,74,0.06)]">
+<div className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
+                      Impact at a Glance
+                    </div>
+                    <div className="mt-4 grid grid-cols-2 gap-4">
+                      <div className="border-r border-white/10 pr-3">
+                        <div className="text-3xl font-extrabold text-white">10+</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Years in Business</div>
+                      </div>
+                      <div>
+                        <div className="text-3xl font-extrabold text-white">320+</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Global Clients</div>
+                      </div>
+                      <div className="border-r border-white/10 pr-3 pt-3 border-t">
+                        <div className="text-3xl font-extrabold text-[#06B6D4]">40%</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Workload Saved</div>
+                      </div>
+                      <div className="pt-3 border-t border-white/10">
+                        <div className="text-3xl font-extrabold text-white">24/7</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Live Coverage</div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-4 grid grid-cols-2 gap-4">
-                    <div className="border-r border-[#0B2A4A]/10 pr-3">
-                      <div className="text-3xl font-extrabold text-[#0B2A4A]">10+</div>
-                      <div className="text-xs text-[#0B2A4A]/70 mt-1 font-medium">Years in Business</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-extrabold text-[#0B2A4A]">320+</div>
-                      <div className="text-xs text-[#0B2A4A]/70 mt-1 font-medium">Global Clients</div>
-                    </div>
-                    <div className="border-r border-[#0B2A4A]/10 pr-3 pt-3 border-t">
-                      <div className="text-3xl font-extrabold text-[#F97316]">40%</div>
-                      <div className="text-xs text-[#0B2A4A]/70 mt-1 font-medium">Workload Saved</div>
-                    </div>
-                    <div className="pt-3 border-t border-[#0B2A4A]/10">
-                      <div className="text-3xl font-extrabold text-[#0B2A4A]">24/7</div>
-                      <div className="text-xs text-[#0B2A4A]/70 mt-1 font-medium">Live Coverage</div>
-                    </div>
-                  </div>
-                  <div className="mt-5 rounded-xl bg-[#ECFDE5] px-3.5 py-2.5 text-xs text-[#0B2A4A] font-semibold flex items-center gap-2">
-                    <ShieldCheck className="h-4 w-4 text-[#0B2A4A] flex-shrink-0" />
-                    <span>100% In-House Staff • No Unvetted Freelancers</span>
-                  </div>
-                </div>
-              </Reveal>
+<div className="mt-5 rounded-xl bg-[#132F4A] px-3.5 py-2.5 text-xs text-white font-semibold flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
+              <span>100% In-House Staff • No Unvetted Freelancers</span>
+            </div>
+          </Reveal>
             </div>
           </div>
 
           {/* Hero Feature Visual with Editorial Caption */}
           <Reveal y={30} delay={0.4}>
-            <div className="mt-14 relative overflow-hidden rounded-3xl border border-[#0B2A4A]/15 bg-white p-3 shadow-[0_20px_60px_rgba(11,42,74,0.12)]">
+            <div className="mt-14 relative overflow-hidden rounded-3xl border border-white/20 bg-[#132F4A] p-3 shadow-[0_20px_60px_rgba(19,47,74,0.12)]">
               <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl bg-[#0B2A4A]">
                 <Image
                   src={data.heroImage || "/uploads/about-who-we-are.png"}
@@ -469,9 +469,9 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                       &ldquo;Efficiency is not about running faster on a broken treadmill. It is about
                       eliminating friction so brilliant minds can focus purely on growth.&rdquo;
                     </p>
-                    <div className="mt-3 flex items-center justify-between text-xs text-[#ECFDE5] font-semibold uppercase tracking-wider">
+                    <div className="mt-3 flex items-center justify-between text-xs text-white/50 font-semibold uppercase tracking-wider">
                       <span>Virtual Nexgen Solutions Leadership</span>
-                      <span className="text-[#F97316]">Chennai, India</span>
+                      <span className="text-[#06B6D4]">Chennai, India</span>
                     </div>
                   </div>
                 </div>
@@ -484,18 +484,18 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 2. THE INTERACTIVE TIMELINE JOURNEY (2016 -> PRESENT) */}
       {/* ========================================================================= */}
-      <section id="timeline" className="relative py-20 md:py-32 overflow-hidden bg-white">
+      <section id="timeline" className="relative py-20 md:py-32 overflow-hidden bg-[#132F4A]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDE5] px-4 py-1.5 text-xs font-bold tracking-widest text-[#0B2A4A] uppercase border border-[#0B2A4A]/10">
-                <Calendar className="h-3.5 w-3.5 text-[#F97316]" />
-                OUR DECADE-LONG JOURNEY
+<span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/10">
+                  <Calendar className="h-3.5 w-3.5 text-[#06B6D4]" />
+                  OUR DECADE-LONG JOURNEY
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0B2A4A] sm:text-4xl md:text-5xl">
-                From a 10-Person Team to an <span className="text-[#F97316]">AI-Powered</span> Global Agency
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                From a 10-Person Team to an <span className="text-[#06B6D4]">AI-Powered</span> Global Agency
               </h2>
-              <p className="mt-4 text-base sm:text-lg text-[#0B2A4A]/70 leading-relaxed">
+              <p className="mt-4 text-base sm:text-lg text-white/70 leading-relaxed">
                 Click through each chapter of our evolution to see how we transformed from a specialized
                 virtual assistant provider into an international workforce powerhouse.
               </p>
@@ -511,23 +511,23 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                   <button
                     key={chapter.year}
                     onClick={() => setActiveTimeline(idx)}
-                    className={`group relative flex flex-col items-start p-4 rounded-2xl text-left transition-all duration-300 ${
+className={`group relative flex flex-col items-start p-4 rounded-2xl text-left transition-all duration-300 ${
                       isActive
-                        ? "bg-[#0B2A4A] text-white shadow-lg"
-                        : "bg-[#FFF7ED] text-[#0B2A4A] hover:bg-[#ECFDE5]"
-                    }`}
+                        ? "bg-[#132F4A] text-white shadow-lg"
+                        : "bg-[#132F4A] text-white hover:bg-[#132F4A]/80"
+                  }`}
                   >
                     <div className="flex items-center justify-between w-full">
                       <span
                         className={`text-2xl font-black ${
-                          isActive ? "text-[#F97316]" : "text-[#0B2A4A]"
+                          isActive ? "text-[#06B6D4]" : "text-white"
                         }`}
                       >
                         {chapter.year}
                       </span>
                       <span
                         className={`h-2.5 w-2.5 rounded-full ${
-                          isActive ? "bg-[#ECFDE5]" : "bg-[#0B2A4A]/20"
+                          isActive ? "bg-white/10" : "bg-[#132F4A]/20"
                         }`}
                       />
                     </div>
@@ -552,34 +552,34 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.3 }}
-                  className="rounded-3xl border border-[#0B2A4A]/15 bg-[#FFF7ED] p-6 sm:p-10 lg:p-12 shadow-sm"
+                  className="rounded-3xl border border-white/20 bg-[#132F4A] p-6 sm:p-10 lg:p-12 shadow-sm"
                 >
                   <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                     <div className="lg:col-span-7">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-[#ECFDE5] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0B2A4A]">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#06B6D4]">
                         Chapter {activeTimeline + 1} of 4 • {TIMELINE_CHAPTERS[activeTimeline].year}
                       </div>
 
-                      <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-[#0B2A4A]">
+                      <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-white">
                         {TIMELINE_CHAPTERS[activeTimeline].title}
                       </h3>
 
-                      <p className="mt-2 text-base font-semibold text-[#F97316]">
+                      <p className="mt-2 text-base font-semibold text-[#06B6D4]">
                         {TIMELINE_CHAPTERS[activeTimeline].subtitle}
                       </p>
 
-                      <p className="mt-4 text-base leading-relaxed text-[#0B2A4A]/80">
+                      <p className="mt-4 text-base leading-relaxed text-white/80">
                         {TIMELINE_CHAPTERS[activeTimeline].description}
                       </p>
 
-                      <div className="mt-6 border-t border-[#0B2A4A]/10 pt-5">
-                        <div className="text-xs font-bold uppercase tracking-widest text-[#0B2A4A]/60 mb-3">
+                      <div className="mt-6 border-t border-white/20 pt-5">
+                        <div className="text-xs font-bold uppercase tracking-widest text-white/50 mb-3">
                           Key Milestone Breakthroughs
                         </div>
                         <div className="grid sm:grid-cols-2 gap-2.5">
                           {TIMELINE_CHAPTERS[activeTimeline].deliverables.map((item, i) => (
-                            <div key={i} className="flex items-center gap-2.5 text-sm font-semibold text-[#0B2A4A]">
-                              <CheckCircle2 className="h-4 w-4 text-[#F97316] flex-shrink-0" />
+                            <div key={i} className="flex items-center gap-2.5 text-sm font-semibold text-white/90">
+                              <CheckCircle2 className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
                               <span>{item}</span>
                             </div>
                           ))}
@@ -588,19 +588,19 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                     </div>
 
                     <div className="lg:col-span-5">
-                      <div className="rounded-2xl border border-[#0B2A4A]/15 bg-white p-6 shadow-[0_10px_30px_rgba(11,42,74,0.06)]">
-                        <div className="text-xs font-bold uppercase tracking-widest text-[#0B2A4A]/50">
+                      <div className="rounded-2xl border border-white/20 bg-[#132F4A] p-6 shadow-[0_10px_30px_rgba(19,47,74,0.06)]">
+                        <div className="text-xs font-bold uppercase tracking-widest text-white/50">
                           Historical Impact
                         </div>
-                        <div className="mt-3 text-4xl sm:text-5xl font-black text-[#0B2A4A]">
+                        <div className="mt-3 text-4xl sm:text-5xl font-black text-white">
                           {TIMELINE_CHAPTERS[activeTimeline].stats}
                         </div>
-                        <div className="text-sm font-semibold text-[#F97316] mt-1">
+                        <div className="text-sm font-semibold text-[#06B6D4] mt-1">
                           {TIMELINE_CHAPTERS[activeTimeline].statLabel}
                         </div>
 
-                        <div className="mt-6 rounded-xl bg-[#ECFDE5] p-4 text-xs font-medium leading-relaxed text-[#0B2A4A]">
-                          <span className="font-bold text-[#0B2A4A] block mb-1">Archived Note:</span>
+                        <div className="mt-6 rounded-xl bg-[#132F4A] p-4 text-xs font-medium leading-relaxed text-white/70">
+                          <span className="font-bold text-white block mb-1">Archived Note:</span>
                           {TIMELINE_CHAPTERS[activeTimeline].highlight}
                         </div>
                       </div>
@@ -618,14 +618,14 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       <section className="relative py-20 md:py-28 bg-[#0B2A4A] text-white overflow-hidden">
         {/* Subtle decorative glow */}
-        <div className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-[#F97316]/20 blur-[130px]" />
-        <div className="pointer-events-none absolute -top-32 left-0 h-96 w-96 rounded-full bg-[#ECFDE5]/10 blur-[130px]" />
+        <div className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-[#06B6D4]/20 blur-[130px]" />
+        <div className="pointer-events-none absolute -top-32 left-0 h-96 w-96 rounded-full bg-[#06B6D4]/10 blur-[130px]" />
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#ECFDE5] uppercase border border-white/20">
-                <Sparkles className="h-3.5 w-3.5 text-[#F97316]" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#132F4A]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#132F4A]/20">
+                <Sparkles className="h-3.5 w-3.5 text-[#06B6D4]" />
                 THE NEXGEN MANIFESTO
               </span>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl text-white">
@@ -638,13 +638,13 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             {/* Mission Card */}
             <Reveal y={25} delay={0.1}>
-              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-white/20 bg-white/5 p-8 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#F97316]/50">
+              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-white/20 bg-[#132F4A] p-8 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#06B6D4]/50">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F97316] text-black font-bold">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#06B6D4] text-white font-bold">
                       <Target className="h-6 w-6" />
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#ECFDE5]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]/50">
                       PURPOSE & MISSION
                     </span>
                   </div>
@@ -658,15 +658,15 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                 <div className="mt-8 border-t border-white/10 pt-6">
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-3 text-sm text-white/90">
-                      <Check className="h-4 w-4 text-[#F97316] flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
                       <span>Eliminate redundant administrative busywork</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/90">
-                      <Check className="h-4 w-4 text-[#F97316] flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
                       <span>Empower enterprise growth through custom AI pipelines</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/90">
-                      <Check className="h-4 w-4 text-[#F97316] flex-shrink-0" />
+                      <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
                       <span>Provide high-trust, continuous operational leverage</span>
                     </div>
                   </div>
@@ -676,13 +676,13 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 
             {/* Vision Card */}
             <Reveal y={25} delay={0.2}>
-              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[#F97316]/40 bg-gradient-to-br from-white/10 to-transparent p-8 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#F97316]">
+              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-white/20 bg-[#132F4A] p-8 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#06B6D4]/50">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ECFDE5] text-[#0B2A4A] font-bold">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#132F4A] text-white font-bold">
                       <Globe2 className="h-6 w-6 text-[#0B2A4A]" />
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#F97316]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
                       FUTURE HORIZON
                     </span>
                   </div>
@@ -694,19 +694,19 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                 </div>
 
                 <div className="mt-8 border-t border-white/10 pt-6">
-                  <div className="space-y-2.5">
-                    <div className="flex items-center gap-3 text-sm text-white/90">
-                      <Check className="h-4 w-4 text-[#ECFDE5] flex-shrink-0" />
-                      <span>Global leader in AI-augmented talent delivery</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-white/90">
-                      <Check className="h-4 w-4 text-[#ECFDE5] flex-shrink-0" />
-                      <span>Setting the benchmark for remote operational security</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-white/90">
-                      <Check className="h-4 w-4 text-[#ECFDE5] flex-shrink-0" />
-                      <span>Human-centric ethics meeting cutting-edge automation</span>
-                    </div>
+<div className="space-y-2.5">
+                      <div className="flex items-center gap-3 text-sm text-white/90">
+                        <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
+                        <span>Global leader in AI-augmented talent delivery</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-white/90">
+                        <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
+                        <span>Setting the benchmark for remote operational security</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-white/90">
+                        <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
+                        <span>Human-centric ethics meeting cutting-edge automation</span>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -718,19 +718,19 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 4. INTERACTIVE DEPARTMENT SPOTLIGHTS */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#FFF7ED]">
+      <section className="relative py-20 md:py-28 bg-[#132F4A]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-2xl">
-                <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDE5] px-4 py-1.5 text-xs font-bold tracking-widest text-[#0B2A4A] uppercase border border-[#0B2A4A]/10">
-                  <Briefcase className="h-3.5 w-3.5 text-[#F97316]" />
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/30">
+                  <Briefcase className="h-3.5 w-3.5 text-[#06B6D4]" />
                   SPECIALIZED SQUADS
                 </span>
-                <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0B2A4A] sm:text-4xl md:text-5xl">
-                  Trained for Your Specific <span className="text-[#F97316]">Industry Vertical</span>
+                <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                  Trained for Your Specific <span className="text-[#06B6D4]">Industry Vertical</span>
                 </h2>
-                <p className="mt-4 text-base sm:text-lg text-[#0B2A4A]/70">
+<p className="mt-4 text-base sm:text-lg text-white/70">
                   We don't supply generic data entry clerks. Our assistants are organized into dedicated
                   verticals certified in your industry's exact toolsets and regulations.
                 </p>
@@ -738,7 +738,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#F97316] hover:text-[#0B2A4A] transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#06B6D4] hover:text-white transition-colors"
               >
                 <span>View All 9+ Practice Areas</span>
                 <ArrowRight className="h-4 w-4" />
@@ -758,10 +758,10 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                   className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
                     isActive
                       ? "bg-[#0B2A4A] text-white shadow-md"
-                      : "bg-white text-[#0B2A4A] hover:bg-[#ECFDE5] border border-[#0B2A4A]/10"
+                      : "bg-white text-[#0B2A4A] hover:bg-[#132F4A]/80 border border-[#0B2A4A]/10"
                   }`}
                 >
-                  <Icon className={`h-4 w-4 ${isActive ? "text-[#F97316]" : "text-[#0B2A4A]"}`} />
+                  <Icon className={`h-4 w-4 ${isActive ? "text-[#06B6D4]" : "text-white"}`} />
                   <span>{dept.name}</span>
                 </button>
               );
@@ -776,24 +776,24 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-3xl border border-[#0B2A4A]/15 bg-white p-6 sm:p-10 lg:p-12 shadow-[0_12px_40px_rgba(11,42,74,0.06)]"
+                className="rounded-3xl border border-white/20 bg-[#132F4A] p-6 sm:p-10 lg:p-12 shadow-[0_12px_40px_rgba(19,47,74,0.06)]"
               >
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                   <div className="lg:col-span-8">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#F97316]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
                       PRACTICE EXCELLENCE
                     </span>
-                    <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-[#0B2A4A]">
+                    <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-white">
                       {dept.tagline}
                     </h3>
-                    <p className="mt-4 text-base text-[#0B2A4A]/80 leading-relaxed">
+                    <p className="mt-4 text-base text-white/80 leading-relaxed">
                       {dept.overview}
                     </p>
 
                     <div className="mt-6 grid sm:grid-cols-2 gap-3.5">
-                      {dept.bullets.map((b, i) => (
-                        <div key={i} className="flex items-start gap-3 text-sm font-medium text-[#0B2A4A]">
-                          <CheckCircle2 className="h-4 w-4 text-[#F97316] flex-shrink-0 mt-0.5" />
+{dept.bullets.map((b, i) => (
+                        <div key={i} className="flex items-start gap-3 text-sm font-medium text-white/90">
+                          <CheckCircle2 className="h-4 w-4 text-[#06B6D4] flex-shrink-0 mt-0.5" />
                           <span>{b}</span>
                         </div>
                       ))}
@@ -801,21 +801,21 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                   </div>
 
                   <div className="lg:col-span-4">
-                    <div className="rounded-2xl border border-[#0B2A4A]/10 bg-[#ECFDE5]/70 p-6 sm:p-8 text-center">
+                    <div className="rounded-2xl border border-[#0B2A4A]/10 bg-[#132F4A]/70 p-6 sm:p-8 text-center">
                       <div className="text-xs font-bold uppercase tracking-widest text-[#0B2A4A]/60">
                         Operational Velocity
                       </div>
-                      <div className="mt-3 text-4xl sm:text-5xl font-black text-[#0B2A4A]">
+<div className="mt-3 text-4xl sm:text-5xl font-black text-white">
                         {dept.metric}
                       </div>
-                      <div className="mt-2 text-sm font-bold text-[#F97316]">
-                        {dept.metricLabel}
+                      <div className="mt-2 text-sm font-bold text-[#06B6D4]">
+                          {dept.metricLabel}
                       </div>
 
                       <div className="mt-6">
                         <Link
                           href="/book-consultation"
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0B2A4A] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all hover:bg-[#F97316] hover:text-black"
+                          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#132F4A] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all hover:bg-[#06B6D4] hover:text-white"
                         >
                           <span>Request Staffing Profile</span>
                           <ArrowRight className="h-3.5 w-3.5" />
@@ -833,18 +833,18 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 5. 6 CORE ADVANTAGES (FEATURES FROM CMS) */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-white border-y border-[#0B2A4A]/10">
+      <section className="relative py-20 md:py-28 bg-[#132F4A] border-y border-white/10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-3xl mx-auto">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDE5] px-4 py-1.5 text-xs font-bold tracking-widest text-[#0B2A4A] uppercase border border-[#0B2A4A]/10">
-                <BadgeCheck className="h-3.5 w-3.5 text-[#F97316]" />
-                THE NEXGEN STANDARD
+<span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/10">
+                  <BadgeCheck className="h-3.5 w-3.5 text-[#06B6D4]" />
+                  THE NEXGEN STANDARD
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0B2A4A] sm:text-4xl md:text-5xl">
-                Why Industry Leaders Choose <span className="text-[#F97316]">Virtual Nexgen</span>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                Why Industry Leaders Choose <span className="text-[#06B6D4]">Virtual Nexgen</span>
               </h2>
-              <p className="mt-4 text-base sm:text-lg text-[#0B2A4A]/70">
+              <p className="mt-4 text-base sm:text-lg text-white/70">
                 Engineered to eliminate the traditional risks of outsourcing while magnifying speed and savings.
               </p>
             </div>
@@ -856,26 +856,26 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
               const Icon = getFeatureIcon(feat.icon);
               return (
                 <Reveal key={feat.id || i} y={25} delay={i * 0.08}>
-                  <div className="group relative h-full flex flex-col justify-between overflow-hidden rounded-2xl border border-[#0B2A4A]/15 bg-[#FFF7ED] p-7 transition-all duration-300 hover:border-[#F97316] hover:bg-[#ECFDE5]/40 hover:-translate-y-1 hover:shadow-lg">
+                  <div className="group relative h-full flex flex-col justify-between overflow-hidden rounded-2xl border border-white/30 bg-[#132F4A] p-7 transition-all duration-300 hover:border-white/60 hover:bg-transparent hover:shadow-lg">
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0B2A4A] text-white transition-colors duration-300 group-hover:bg-[#F97316] group-hover:text-black">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#06B6D4] text-white transition-colors duration-300 group-hover:bg-white/20 group-hover:text-[#06B6D4]">
                           <Icon className="h-6 w-6" />
                         </span>
                         <span className="text-xs font-black text-[#0B2A4A]/30">0{i + 1}</span>
                       </div>
 
-                      <h3 className="mt-6 text-xl font-bold text-[#0B2A4A]">
+                      <h3 className="mt-6 text-xl font-bold text-white">
                         {feat.title}
                       </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-[#0B2A4A]/75 font-normal">
+                      <p className="mt-3 text-sm leading-relaxed text-white/75 font-normal">
                         {feat.text}
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-[#0B2A4A]/10 flex items-center justify-between text-xs font-bold text-[#F97316] uppercase tracking-wider">
+                    <div className="mt-6 pt-4 border-t border-[#0B2A4A]/10 flex items-center justify-between text-xs font-bold text-white uppercase tracking-wider">
                       <span>Enterprise Guaranteed</span>
-                      <Check className="h-4 w-4" />
+                      <Check className="h-4 w-4 text-[#06B6D4]" />
                     </div>
                   </div>
                 </Reveal>
@@ -888,51 +888,51 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 6. SIDE-BY-SIDE COMPARISON: THE PARADIGM SHIFT */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#FFF7ED]">
+      <section className="relative py-20 md:py-28 bg-[#132F4A]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-3xl mx-auto">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDE5] px-4 py-1.5 text-xs font-bold tracking-widest text-[#0B2A4A] uppercase border border-[#0B2A4A]/10">
-                <SlidersHorizontal className="h-3.5 w-3.5 text-[#F97316]" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/10">
+                <SlidersHorizontal className="h-3.5 w-3.5 text-[#06B6D4]" />
                 THE PARADIGM SHIFT
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0B2A4A] sm:text-4xl md:text-5xl">
-                Standard Outsourcing vs. <span className="text-[#F97316]">Virtual Nexgen</span>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                Standard Outsourcing vs. <span className="text-[#06B6D4]">Virtual Nexgen</span>
               </h2>
-              <p className="mt-4 text-base sm:text-lg text-[#0B2A4A]/70">
+              <p className="mt-4 text-base sm:text-lg text-white/70">
                 See why forward-thinking companies leave chaotic freelance platforms behind.
               </p>
             </div>
           </Reveal>
 
           {/* Comparison Table / Matrix */}
-          <div className="mt-14 overflow-hidden rounded-3xl border border-[#0B2A4A]/15 bg-white shadow-sm">
-            <div className="grid grid-cols-1 md:grid-cols-12 border-b border-[#0B2A4A]/15 bg-[#0B2A4A] text-white p-5 sm:p-6 text-sm font-bold uppercase tracking-wider">
+          <div className="mt-14 overflow-hidden rounded-3xl border-2 border-[#0B2A4A] bg-white shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-[#0B2A4A] bg-[#0B2A4A] text-white p-5 sm:p-6 text-sm font-bold uppercase tracking-wider">
               <div className="hidden md:block md:col-span-4">Evaluation Criteria</div>
               <div className="hidden md:block md:col-span-4 text-red-300">Typical Freelancer / Basic Agency</div>
-              <div className="hidden md:block md:col-span-4 text-[#ECFDE5]">Virtual Nexgen Dedicated Model</div>
+              <div className="hidden md:block md:col-span-4 text-[#06B6D4]">Virtual Nexgen Dedicated Model</div>
             </div>
 
-            <div className="divide-y divide-[#0B2A4A]/10">
+            <div className="divide-y divide-[#0B2A4A]/15">
               {COMPARISON_ROWS.map((row, idx) => (
                 <div
                   key={idx}
-                  className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 sm:gap-4 items-center hover:bg-[#FFF7ED]/50 transition-colors"
+                  className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 sm:gap-4 items-center hover:bg-[#0B2A4A]/5 transition-colors"
                 >
                   <div className="md:col-span-4">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#F97316] md:hidden block mb-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#0B2A4A]/60 md:hidden block mb-1">
                       Criteria
                     </span>
-                    <span className="font-bold text-base text-[#0B2A4A]">{row.feature}</span>
+                    <span className="font-bold text-base text-black">{row.feature}</span>
                   </div>
 
-                  <div className="md:col-span-4 flex items-start gap-2.5 text-sm text-[#0B2A4A]/70">
-                    <XCircle className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
+                  <div className="md:col-span-4 flex items-start gap-2.5 text-sm text-black/70">
+                    <XCircle className="h-4 w-4 text-red-600 flex-shrink-0 mt-0.5" />
                     <span>{row.traditional}</span>
                   </div>
 
-                  <div className="md:col-span-4 flex items-start gap-2.5 text-sm font-semibold text-[#0B2A4A] rounded-xl bg-[#ECFDE5]/60 p-3 border border-[#0B2A4A]/10">
-                    <CheckCircle2 className="h-4 w-4 text-[#F97316] flex-shrink-0 mt-0.5" />
+                  <div className="md:col-span-4 flex items-start gap-2.5 text-sm font-semibold text-[#0B2A4A] rounded-xl bg-[#0B2A4A]/5 p-3 border border-[#0B2A4A]/25">
+                    <CheckCircle2 className="h-4 w-4 text-[#06B6D4] flex-shrink-0 mt-0.5" />
                     <span>{row.nexgen}</span>
                   </div>
                 </div>
@@ -950,12 +950,12 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
               <Reveal y={20}>
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#ECFDE5] uppercase border border-white/20">
-                  <Lock className="h-3.5 w-3.5 text-[#F97316]" />
+<span className="inline-flex items-center gap-2 rounded-full bg-[#132F4A]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#132F4A]/20">
+                  <Lock className="h-3.5 w-3.5 text-[#06B6D4]" />
                   BANK-LEVEL SECURITY PROTOCOLS
                 </span>
                 <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl text-white">
-                  Zero-Tolerance Security & <span className="text-[#F97316]">Confidentiality</span>
+                  Zero-Tolerance Security & <span className="text-[#06B6D4]">Confidentiality</span>
                 </h2>
                 <p className="mt-4 text-base sm:text-lg text-white/80 leading-relaxed">
                   Your business data, customer records, and trade secrets remain protected under our
@@ -966,7 +966,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
               <div className="mt-8 space-y-4">
                 <Reveal y={20} delay={0.1}>
                   <div className="flex items-start gap-4 rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F97316] text-black font-bold flex-shrink-0">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#06B6D4] text-white font-bold flex-shrink-0">
                       <Users className="h-5 w-5" />
                     </span>
                     <div>
@@ -980,7 +980,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 
                 <Reveal y={20} delay={0.15}>
                   <div className="flex items-start gap-4 rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ECFDE5] text-[#0B2A4A] font-bold flex-shrink-0">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#132F4A] text-white font-bold flex-shrink-0">
                       <Lock className="h-5 w-5" />
                     </span>
                     <div>
@@ -994,7 +994,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 
                 <Reveal y={20} delay={0.2}>
                   <div className="flex items-start gap-4 rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F97316] text-black font-bold flex-shrink-0">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#06B6D4] text-white font-bold flex-shrink-0">
                       <ShieldCheck className="h-5 w-5" />
                     </span>
                     <div>
@@ -1022,8 +1022,8 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                     
                     <div className="absolute bottom-6 left-6 right-6">
                       <div className="rounded-xl border border-white/20 bg-[#0B2A4A]/90 p-4 backdrop-blur-md">
-                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#ECFDE5]">
-                          <ShieldCheck className="h-4 w-4 text-[#F97316]" />
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/50">
+                          <ShieldCheck className="h-4 w-4 text-[#06B6D4]" />
                           Enterprise Compliance Badge
                         </div>
                         <div className="text-sm font-semibold text-white mt-1">
@@ -1042,18 +1042,18 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 8. 4-STEP PARTNERSHIP PROCESS FRAMEWORK */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#FFF7ED]">
+      <section className="relative py-20 md:py-28 bg-[#132F4A]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-3xl mx-auto">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDE5] px-4 py-1.5 text-xs font-bold tracking-widest text-[#0B2A4A] uppercase border border-[#0B2A4A]/10">
-                <SlidersHorizontal className="h-3.5 w-3.5 text-[#F97316]" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/10">
+                <SlidersHorizontal className="h-3.5 w-3.5 text-[#06B6D4]" />
                 THE ONBOARDING BLUEPRINT
               </span>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0B2A4A] sm:text-4xl md:text-5xl">
-                Up and Running in <span className="text-[#F97316]">48 Hours</span>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                Up and Running in <span className="text-[#06B6D4]">48 Hours</span>
               </h2>
-              <p className="mt-4 text-base sm:text-lg text-[#0B2A4A]/70">
+              <p className="mt-4 text-base sm:text-lg text-white/70">
                 A frictionless 4-step framework engineered for zero disruption to your daily operations.
               </p>
             </div>
@@ -1084,13 +1084,13 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
               },
             ].map((step, idx) => (
               <Reveal key={step.step} y={25} delay={idx * 0.1}>
-                <div className="relative h-full flex flex-col justify-between rounded-2xl border border-[#0B2A4A]/15 bg-white p-7 shadow-sm transition-all duration-300 hover:border-[#F97316] hover:shadow-md">
+                <div className="relative h-full flex flex-col justify-between rounded-2xl border border-white/20 bg-[#132F4A] p-7 shadow-sm transition-all duration-300 hover:border-[#06B6D4]/40 hover:shadow-md">
                   <div>
-                    <span className="text-3xl font-black text-[#F97316]">{step.step}</span>
-                    <h3 className="mt-4 text-xl font-bold text-[#0B2A4A]">{step.title}</h3>
-                    <p className="mt-3 text-sm text-[#0B2A4A]/75 leading-relaxed font-normal">{step.desc}</p>
+                    <span className="text-3xl font-black text-[#06B6D4]">{step.step}</span>
+                    <h3 className="mt-4 text-xl font-bold text-white">{step.title}</h3>
+                    <p className="mt-3 text-sm text-white/75 leading-relaxed font-normal">{step.desc}</p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-[#0B2A4A]/10 text-xs font-bold text-[#0B2A4A]/60 uppercase tracking-wider">
+                  <div className="mt-6 pt-4 border-t border-white/20 text-xs font-bold text-white/50 uppercase tracking-wider">
                     Phase {idx + 1}
                   </div>
                 </div>

@@ -123,7 +123,7 @@ export default function FAQ9() {
                 <h3 className="text-xl sm:text-2xl font-bold mb-6">
                   Still have questions?
                 </h3>
-                <p className="text-ink/60 mb-6">
+                <p className="text-white mb-6">
                   Can't find the answer you're looking for? Our team is here to help.
                 </p>
                 <div className="space-y-4">
@@ -144,8 +144,8 @@ export default function FAQ9() {
                 </div>
               </div>
 
-              <div className="bg-cream-2 rounded-2xl p-6 sm:p-8 border border-soft">
-                <h3 className="text-xl sm:text-2xl font-bold text-ink mb-6">
+              <div className="bg-ink rounded-2xl p-6 sm:p-8 text-white">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
                   Trusted by Businesses Worldwide
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -159,7 +159,7 @@ export default function FAQ9() {
                       <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
                         {stat.value}
                       </div>
-                      <div className="text-sm text-ink/60">{stat.label}</div>
+                      <div className="text-sm text-white/80">{stat.label}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -173,7 +173,7 @@ export default function FAQ9() {
             <h3 className="text-xl sm:text-2xl font-bold">
               Still have questions?
             </h3>
-            <p className="text-ink/60">
+            <p className="text-white">
               Can't find the answer you're looking for? Our team is here to help.
             </p>
             <div className="space-y-4">
@@ -207,7 +207,7 @@ export default function FAQ9() {
                     <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-ink/60">{stat.label}</div>
+                    <div className="text-sm text-white/80">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>

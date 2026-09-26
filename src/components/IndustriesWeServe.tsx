@@ -64,13 +64,13 @@ export default function IndustriesWeServe() {
   );
 
   return (
-    <section ref={rootRef} className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-white">
+    <section ref={rootRef} className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-[#132F4A]">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 text-center">
         <Reveal>
-          <span className="text-sm font-semibold uppercase tracking-wider text-brand">
+          <span className="text-sm font-semibold uppercase tracking-wider text-white/80">
             Industries We Serve
           </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ink leading-tight">
+          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
             Empowering Businesses Across Various Sectors
             <br className="hidden md:block" />
             with AI and Virtual Assistance Solutions
@@ -78,7 +78,7 @@ export default function IndustriesWeServe() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#0B2A4A] via-[#0B2A4A] to-[#000000] border border-[#F97316]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(11,42,74,0.3)]">
+          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#132F4A] via-[#132F4A] to-[#000000] border border-[#06B6D4]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(19,47,74,0.3)]">
             <div data-industry-grid className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {industries.map((industry) => {
                 const Icon = industry.icon;
@@ -87,10 +87,10 @@ export default function IndustriesWeServe() {
                     key={industry.name}
                     data-animate
                     data-industry-card
-                    className="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 transition-all duration-300 hover:bg-[#F97316]/15 hover:border-[#F97316]/50 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(249,115,22,0.2)] cursor-default"
+                    className="group relative flex items-center gap-3 bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 transition-all duration-300 hover:bg-[#06B6D4]/15 hover:border-[#06B6D4]/50 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(6,182,212,0.2)] cursor-default before:absolute before:inset-0 before:rounded-xl before:border-2 before:border-white/10 before:opacity-0 group-hover:before:opacity-100 before:transition-opacity duration-300"
                   >
-                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#F97316]/15 flex-shrink-0 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#F97316]">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#F97316] group-hover:text-black transition-colors duration-300" strokeWidth={1.75} />
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#06B6D4]/15 flex-shrink-0 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#06B6D4]">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#06B6D4] group-hover:text-black transition-colors duration-300" strokeWidth={1.75} />
                     </div>
                     <span className="text-xs sm:text-sm md:text-base font-semibold text-white leading-tight">
                       {industry.name}

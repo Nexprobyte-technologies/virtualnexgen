@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import CalendlyEmbed from "@/components/CalendlyEmbed";
+
 import {
   ArrowRight,
   Briefcase,
@@ -158,52 +158,48 @@ export default function ContactPage() {
   }
 
   const inputBase =
-    "w-full rounded-full border border-line bg-white px-5 py-3 text-sm text-ink placeholder:text-ink/40 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/25";
+    "w-full rounded-[5px] border border-line bg-white px-5 py-3 text-sm text-ink placeholder:text-ink/40 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/25";
 
   return (
     <>
-      <Navbar />
-      <main className="bg-cream">
+<Navbar />
+      <main className="bg-[#132F4A] overflow-x-hidden">
         {/* ================= Hero ================= */}
         <section
-          className="relative overflow-hidden pb-10 pt-28 sm:pt-32"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)",
-          }}
+          className="relative overflow-hidden pb-10 pt-28 sm:pt-32 bg-[#132F4A]"
         >
           <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand/10 blur-[120px]" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             {/* Breadcrumb */}
             <Reveal>
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-ink/50">
-                <Link href="/" className="transition hover:text-brand-dark">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-white/50">
+                <Link href="/" className="transition hover:text-white">
                   Home
                 </Link>
-                <span className="text-ink/30">›</span>
-                <span className="font-medium text-ink/70">Contact</span>
+                <span className="text-white/30">›</span>
+                <span className="font-medium text-white/70">Contact</span>
               </nav>
             </Reveal>
 
             {/* Trust pill */}
             <Reveal delay={0.05}>
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-4 py-2 text-xs text-ink/60 shadow-sm backdrop-blur">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs text-white/60 shadow-sm backdrop-blur">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-dark opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-dark" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#06B6D4] opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#06B6D4]" />
                 </span>
-                Trusted by <span className="font-semibold text-ink">100+ businesses</span> nationwide.
+                Trusted by <span className="font-semibold text-white">100+ businesses</span> nationwide.
               </div>
             </Reveal>
 
             <div className="mt-6 max-w-3xl">
               <Reveal delay={0.1}>
-                <h1 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">
-                  Contact Virtual <span className="text-gradient">Nexgen</span>
+                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                  Contact Virtual <span className="text-[#06B6D4]">Nexgen</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg">
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
                   Tell us about your business and the operational support you're looking for. Our
                   team will guide you through the next steps with clarity and structure.
                 </p>
@@ -216,20 +212,20 @@ export default function ContactPage() {
                 const Icon = c.icon;
                 return (
                   <Reveal key={c.title} delay={0.08 * i}>
-                    <div className="card h-full p-6 sm:p-7">
-                      <div className="icon-tile h-12 w-12">
-                        <Icon className="h-5 w-5" />
+                    <div className="h-full rounded-2xl border border-white/20 bg-white/5 p-6 sm:p-7 backdrop-blur-sm">
+                      <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#06B6D4]/10">
+                        <Icon className="h-5 w-5 text-[#06B6D4]" />
                       </div>
-                      <h2 className="mt-5 text-lg font-bold text-ink">{c.title}</h2>
-                      <p className="mt-2 text-sm leading-relaxed text-ink/60">{c.text}</p>
+                      <h2 className="mt-5 text-lg font-bold text-white">{c.title}</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-white/60">{c.text}</p>
                       <a
                         href={`mailto:${c.email}`}
-                        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-ink-soft hover:shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
+                        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#06B6D4] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0891b2]"
                       >
                         <Mail className="h-4 w-4" />
                         {c.email}
                       </a>
-                      <p className="mt-3 text-center text-xs text-ink/40">{c.note}</p>
+                      <p className="mt-3 text-center text-xs text-white/40">{c.note}</p>
                     </div>
                   </Reveal>
                 );
@@ -242,69 +238,22 @@ export default function ContactPage() {
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <SectionHeading
-                  align="left"
-                  eyebrow="Get In Touch"
-                  title="Tell Us About Your"
-                  highlight="Requirements"
-                  description="Answer a few quick questions and we'll route you to the right team."
-                />
-
-                <Reveal delay={0.15}>
-                  <ul className="mt-8 space-y-4">
-                    {[
-                      { icon: ShieldCheck, text: "Response within one business day" },
-                      { icon: Lock, text: "Your information is 100% secure — never shared" },
-                      { icon: CheckCircle2, text: "No obligation, cancel anytime" },
-                    ].map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <li key={item.text} className="flex items-center gap-3 text-sm text-ink/70">
-                          <span className="grid h-8 w-8 place-items-center rounded-full bg-cream-2 text-brand-dark">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          {item.text}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </Reveal>
-
-                {info?.phoneUS && (
-                  <Reveal delay={0.2}>
-                    <a
-                      href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
-                      className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition hover:border-brand hover:shadow-[0_8px_30px_rgba(249,115,22,0.25)]"
-                    >
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-cream-2 text-brand-dark">
-                        <Phone className="h-4 w-4" />
-                      </span>
-                      <span>
-                        <span className="block text-xs text-ink/40">Prefer to talk?</span>
-                        <span className="block text-sm font-bold text-ink">{info.phoneUS}</span>
-                      </span>
-                    </a>
-                  </Reveal>
-                )}
-              </div>
-
-              <Reveal delay={0.1}>
-                <div className="rounded-[2rem] border border-line bg-cream-2/60 p-6 sm:p-8">
+              <Reveal delay={0.1} className="lg:col-start-2">
+                <div className="rounded-[2rem] border border-white/20 bg-white/5 p-6 sm:p-8 backdrop-blur-sm">
                   {status === "sent" ? (
                     <div className="flex flex-col items-center justify-center py-14 text-center">
-                      <span className="grid h-16 w-16 place-items-center rounded-full bg-brand/20">
-                        <CheckCircle2 className="h-8 w-8 text-brand-dark" />
+                      <span className="grid h-16 w-16 place-items-center rounded-full bg-[#06B6D4]/20">
+                        <CheckCircle2 className="h-8 w-8 text-[#06B6D4]" />
                       </span>
-                      <h3 className="mt-5 text-xl font-extrabold text-ink">Message Sent!</h3>
-                      <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink/60">
+                      <h3 className="mt-5 text-xl font-extrabold text-white">Message Sent!</h3>
+                      <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/60">
                         Thanks{form.name ? ` ${form.name.split(" ")[0]}` : ""}! Our team will get
                         back to you within one business day.
                       </p>
                       <button
                         type="button"
                         onClick={() => setStatus("idle")}
-                        className="mt-7 rounded-full border border-line bg-white px-6 py-2.5 text-sm font-semibold text-ink/70 transition hover:border-brand hover:text-brand-dark"
+                        className="mt-7 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white/70 transition hover:border-[#06B6D4] hover:text-[#06B6D4]"
                       >
                         Send Another Message
                       </button>
@@ -357,21 +306,21 @@ export default function ContactPage() {
                         placeholder="Tell us more (optional)"
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className={`${inputBase} resize-none rounded-3xl`}
+                        className={`${inputBase} resize-none rounded-[2px]`}
                       />
 
-                      <label className="flex cursor-pointer items-start gap-3 pt-1 text-xs leading-relaxed text-ink/60">
+                      <label className="flex cursor-pointer items-start gap-3 pt-1 text-xs leading-relaxed text-white/60">
                         <input
                           type="checkbox"
                           required
                           checked={agree}
                           onChange={(e) => setAgree(e.target.checked)}
-                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#F97316]"
+                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#06B6D4]"
                         />
                         <span>
                           I agree to be contacted by Virtual Nexgen Solutions regarding my inquiry
                           and accept the{" "}
-                          <Link href="/" className="font-medium text-brand-dark underline">
+                          <Link href="/" className="font-medium text-[#06B6D4] underline">
                             Privacy Policy
                           </Link>
                           .
@@ -379,7 +328,7 @@ export default function ContactPage() {
                       </label>
 
                       {status === "error" && (
-                        <p className="rounded-xl bg-red-50 px-4 py-2.5 text-xs font-medium text-red-600">
+                        <p className="rounded-xl bg-red-900/30 px-4 py-2.5 text-xs font-medium text-red-400">
                           Something went wrong. Please try again or email us directly.
                         </p>
                       )}
@@ -387,7 +336,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={status === "sending"}
-                        className="shine flex w-full items-center justify-center gap-2 rounded-full bg-ink px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-ink-soft hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="flex w-full items-center justify-center gap-2 rounded-full bg-[#06B6D4] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#0891b2] disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {status === "sending" ? (
                           <>
@@ -398,7 +347,7 @@ export default function ContactPage() {
                         )}
                       </button>
 
-                      <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-[11px] text-ink/40">
+                      <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-[11px] text-white/40">
                         <Lock className="h-3 w-3" />
                         Your information is 100% secure. We never share your data with third
                         parties.
@@ -406,14 +355,61 @@ export default function ContactPage() {
                     </form>
                   )}
                 </div>
-              </Reveal>
+            </Reveal>
+
+              <div className="lg:col-start-1">
+                <SectionHeading
+                  align="left"
+                  eyebrow="Get In Touch"
+                  title="Tell Us About Your"
+                  highlight="Requirements"
+                  description="Answer a few quick questions and we'll route you to the right team."
+                />
+
+                <Reveal delay={0.15}>
+                  <ul className="mt-8 space-y-4">
+                    {[
+                      { icon: ShieldCheck, text: "Response within one business day" },
+                      { icon: Lock, text: "Your information is 100% secure — never shared" },
+                      { icon: CheckCircle2, text: "No obligation, cancel anytime" },
+                    ].map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <li key={item.text} className="flex items-center gap-3 text-sm text-white/70">
+                          <span className="grid h-8 w-8 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          {item.text}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Reveal>
+
+                {info?.phoneUS && (
+                  <Reveal delay={0.2}>
+                    <a
+                      href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
+                      className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition hover:border-brand hover:shadow-[0_8px_30px_rgba(249,115,22,0.25)]"
+                    >
+                      <span className="grid h-10 w-10 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
+                        <Phone className="h-4 w-4" />
+                      </span>
+                      <span>
+                        <span className="block text-xs text-white/40">Prefer to talk?</span>
+                        <span className="block text-sm font-bold text-white">{info.phoneUS}</span>
+                      </span>
+                    </a>
+                  </Reveal>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
         {/* ================= Global Presence ================= */}
         {locations.length > 0 && (
-          <section className="bg-white py-16 sm:py-20">
+          <section className="bg-white/5 py-16 sm:py-20 border-y border-white/10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
               <SectionHeading
                 eyebrow="Our Global Presence"
@@ -426,7 +422,7 @@ export default function ContactPage() {
                 {locations.map((loc, i) => (
                   <Reveal key={loc.country} delay={0.08 * i}>
                     <div className="overflow-hidden rounded-[2rem] bg-[#0B2A4A] text-white shadow-[0_24px_60px_rgba(11, 42, 74,0.25)]">
-                      <div className="p-7 sm:p-8">
+                      <div className="p-7 sm:p-8 h-full">
                         <div className="flex items-start justify-between gap-4">
                           <div>
                             <h3 className="text-2xl font-bold">{loc.country}</h3>
@@ -443,15 +439,6 @@ export default function ContactPage() {
                           <p className="text-sm leading-relaxed text-white/85">{loc.address}</p>
                         </div>
                       </div>
-                      <div className="h-56 w-full">
-                        <iframe
-                          title={`Map - ${loc.country}`}
-                          src={loc.map}
-                          className="h-full w-full border-0"
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        />
-                      </div>
                     </div>
                   </Reveal>
                 ))}
@@ -463,28 +450,28 @@ export default function ContactPage() {
                   {info?.phoneUS && (
                     <a
                       href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
-                      className="flex items-center gap-4 rounded-2xl border border-line bg-cream px-5 py-4 transition hover:border-brand hover:shadow-md"
+                      className="flex items-center gap-4 rounded-2xl border border-white/20 bg-white/5 px-5 py-4 transition hover:border-[#06B6D4]"
                     >
-                      <span className="icon-tile h-10 w-10">
-                        <Phone className="h-4 w-4" />
+                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#06B6D4]/10">
+                        <Phone className="h-4 w-4 text-[#06B6D4]" />
                       </span>
                       <span>
-                        <span className="block text-xs text-ink/40">United States</span>
-                        <span className="block text-sm font-bold text-ink">{info.phoneUS}</span>
+                        <span className="block text-xs text-white/40">United States</span>
+                        <span className="block text-sm font-bold text-white">{info.phoneUS}</span>
                       </span>
                     </a>
                   )}
                   {info?.phoneIndia && (
                     <a
                       href={`tel:${info.phoneIndia.replace(/[^+\d]/g, "")}`}
-                      className="flex items-center gap-4 rounded-2xl border border-line bg-cream px-5 py-4 transition hover:border-brand hover:shadow-md"
+                      className="flex items-center gap-4 rounded-2xl border border-white/20 bg-white/5 px-5 py-4 transition hover:border-[#06B6D4]"
                     >
-                      <span className="icon-tile h-10 w-10">
-                        <Phone className="h-4 w-4" />
+                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#06B6D4]/10">
+                        <Phone className="h-4 w-4 text-[#06B6D4]" />
                       </span>
                       <span>
-                        <span className="block text-xs text-ink/40">India</span>
-                        <span className="block text-sm font-bold text-ink">{info.phoneIndia}</span>
+                        <span className="block text-xs text-white/40">India</span>
+                        <span className="block text-sm font-bold text-white">{info.phoneIndia}</span>
                       </span>
                     </a>
                   )}
@@ -523,27 +510,6 @@ export default function ContactPage() {
                 </Reveal>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ================= Book a Meeting (Calendly) ================= */}
-        <section className="bg-cream py-16 sm:py-20">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-10">
-            <SectionHeading
-              eyebrow="Book a Meeting"
-              title="Schedule a Free"
-              highlight="Consultation"
-              description="Pick a slot on our live 30-minute calendar. After booking, the confirmation and calendar invitation land straight in your inbox."
-            />
-            <Reveal delay={0.06}>
-              <div className="mt-10">
-                <CalendlyEmbed />
-              </div>
-            </Reveal>
-            <p className="mt-4 text-center text-xs text-ink/40">
-              Powered by Calendly · 30 min · Google Meet details are shared after
-              scheduling.
-            </p>
           </div>
         </section>
 

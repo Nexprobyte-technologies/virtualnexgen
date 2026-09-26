@@ -88,6 +88,21 @@ export interface BlogPost {
   date: string;
   tags: string[];
   createdAt: string;
+  status?: "draft" | "published";
+  previewImage?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: string;
+  twitterCard?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  robots?: string;
 }
 
 export interface Appointment {

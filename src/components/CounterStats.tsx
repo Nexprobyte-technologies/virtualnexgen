@@ -56,22 +56,22 @@ export default function CounterStats() {
   );
 
   return (
-    <section className="relative bg-white py-4 sm:py-6">
+    <section className="relative bg-[#132F4A] py-4 sm:py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div
           ref={rootRef}
-          className="relative grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden rounded-xl sm:rounded-[2rem] bg-gradient-to-r from-[#000000] via-[#0B2A4A] to-[#000000] border border-[#F97316]/30 px-4 sm:px-6 py-5 sm:py-7 shadow-[0_20px_50px_rgba(11,42,74,0.25)] lg:grid-cols-4"
+          className="relative grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden rounded-xl sm:rounded-[2rem] bg-gradient-to-r from-[#000000] via-[#132F4A] to-[#000000] border border-[#06B6D4]/30 px-4 sm:px-6 py-5 sm:py-7 shadow-[0_20px_50px_rgba(19,47,74,0.25)] lg:grid-cols-4"
         >
           {stats.map((stat) => (
             <div key={stat.label} data-animate data-stat-item className="text-center">
               <p
                 data-counter={stat.end}
                 data-suffix={stat.suffix}
-                className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#F97316]"
+                className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#06B6D4]"
               >
                 0{stat.suffix}
               </p>
-              <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-slate-300">
+              <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-white/60">
                 {stat.label}
               </p>
             </div>

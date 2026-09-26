@@ -20,6 +20,7 @@ import { getService, getServices } from "@/lib/services";
 import Reveal from "@/components/Reveal";
 import InfiniteSpiral from "@/components/InfiniteSpiral";
 import ChapterFolder from "@/components/ChapterFolder";
+import ClientLogos from "@/components/ClientLogos";
 
 const RICH_HTML_STYLES = [
   "h2", "h3", "h4", "p", "strong", "em", "a", "ul", "ol", "li", "blockquote",
@@ -130,13 +131,10 @@ function FullContentCards({ html }: { html: string }) {
   const cards = splitFullContentCards(safe);
   if (cards.length === 0) return null;
 
-  function renderHeading(card: FullContentCard, tone: "light" | "dark") {
+  function renderHeading(card: FullContentCard) {
     if (!card.heading) return null;
     const heading = card.heading.replace(/<strong>(.*?)<\/strong>/g, "$1");
-    const cls =
-      tone === "dark"
-        ? "text-lg font-extrabold text-white"
-        : "text-lg font-extrabold text-ink";
+    const cls = "text-lg font-extrabold text-white";
     if (card.headingTag === "h2") {
       return (
         <h2
@@ -173,35 +171,35 @@ function FullContentCards({ html }: { html: string }) {
     const images = card.body.match(/<img[^>]*>/gi) || [];
     const textBody = card.body.replace(/<img[^>]*>/gi, "");
     return (
-      <article className="group overflow-hidden rounded-3xl border border-line bg-white shadow-[0_4px_28px_rgba(0,0,0,0.05)]">
+      <article className="group overflow-hidden rounded-3xl border border-white/20 bg-white/5 backdrop-blur-sm">
         <div className={`grid lg:grid-cols-2 ${flip ? "lg:[direction:rtl]" : ""}`}>
           <div className="p-8 sm:p-10 lg:[direction:ltr]">
-            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(249,115,22,0.15)]" />
-            {renderHeading(card, "light")}
+            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(6,182,212,0.15)]" />
+            {renderHeading(card)}
             <div
-              className={`${RICH_CONTENT_CLASSES} mt-2 [&_h2]:mt-4`}
+              className={`${RICH_CONTENT_CLASSES} mt-2 [&_h2]:mt-4 ${DARK_WHITE_OVERRIDES}`}
               dangerouslySetInnerHTML={{ __html: textBody }}
             />
           </div>
-          <div className="relative min-h-[220px] bg-gradient-to-br from-brand-deep/10 via-brand/10 to-cream">
+          <div className="relative min-h-[220px] bg-gradient-to-br from-brand-deep/20 via-brand/10 to-white/5">
             {images.length > 0 ? (
               <div className="grid h-full grid-cols-1 gap-3 p-6 sm:grid-cols-2 sm:p-8">
-                {images.map((tag, i) => {
+                {images.map((tag) => {
                   const src = (tag.match(/src="([^"]*)"/) || [])[1] || "";
                   return (
                     <img
-                      key={i}
+                      key={src}
                       src={src}
                       alt=""
                       loading="lazy"
-                      className="h-full w-full rounded-2xl border border-white/60 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition duration-500 group-hover:scale-[1.02]"
+                      className="h-full w-full rounded-2xl border border-white/20 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition duration-500 group-hover:scale-[1.02]"
                     />
                   );
                 })}
               </div>
             ) : (
               <div className="flex h-full items-center justify-center">
-                <div className="flex h-28 w-28 rounded-full bg-gradient-to-br from-brand to-brand-deep shadow-[0_18px_44px_rgba(249,115,22,0.35)]">
+                <div className="flex h-28 w-28 rounded-full bg-gradient-to-br from-brand to-brand-deep shadow-[0_18px_44px_rgba(6,182,212,0.35)]">
                   <FolderOpen className="m-auto h-12 w-12 text-white" />
                 </div>
               </div>
@@ -224,24 +222,24 @@ function FullContentCards({ html }: { html: string }) {
     const heading = (card.heading || "").replace(/<[^>]*>/g, "").trim();
     const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
     return (
-      <article className="relative overflow-hidden rounded-3xl border border-line bg-white p-7 shadow-[0_2px_18px_rgba(0,0,0,0.04)] transition duration-300 hover:shadow-[0_14px_44px_rgba(249,115,22,0.16)] sm:p-9">
+      <article className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
         <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
           {indexFromCard(card)}
         </span>
         <div className="relative grid gap-7 lg:grid-cols-[1fr_320px] lg:items-start">
           <div className="min-w-0">
             <div className="flex items-start gap-4">
-              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(249,115,22,0.3)]">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(6,182,212,0.3)]">
                 {indexFromCard(card)}
               </span>
               <div className="pt-1">
-                <h4 className="text-lg font-extrabold leading-snug text-ink">
+                <h4 className="text-lg font-extrabold leading-snug text-white">
                   {label}
                 </h4>
               </div>
             </div>
             <div
-              className={`${RICH_CONTENT_CLASSES} mt-4`}
+              className={`${RICH_CONTENT_CLASSES} mt-4 ${DARK_WHITE_OVERRIDES}`}
               dangerouslySetInnerHTML={{ __html: textBody }}
             />
           </div>
@@ -290,13 +288,13 @@ function FullContentCards({ html }: { html: string }) {
       );
     });
     return (
-      <article className="rounded-3xl border border-line bg-cream/40 p-6 sm:p-10">
+      <article className="rounded-3xl border border-white/20 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-10">
         <div className="flex items-center gap-3">
           <span className="inline-block h-2 w-2 rounded-full bg-brand" />
-          {renderHeading(card, "light")}
+          {renderHeading(card)}
         </div>
         <div
-          className={`${RICH_CONTENT_CLASSES} [&_img]:mx-auto [&_img]:max-w-2xl ${faqMode ? "sm:columns-2 sm:[column-gap:3rem]" : ""}`}
+          className={`${RICH_CONTENT_CLASSES} [&_img]:mx-auto [&_img]:max-w-2xl ${DARK_WHITE_OVERRIDES} ${faqMode ? "sm:columns-2 sm:[column-gap:3rem]" : ""}`}
           dangerouslySetInnerHTML={{ __html: textBody }}
         />
         {extra.length > 0 && (
@@ -312,17 +310,17 @@ function FullContentCards({ html }: { html: string }) {
       "",
     ).trim();
     return (
-      <div className="border-b border-line py-5 last:border-0 last:pb-2 first:pt-0">
+      <div className="border-b border-white/15 py-5 last:border-0 last:pb-2 first:pt-0">
         <div className="flex items-start gap-4">
           <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10">
-            <ChevronDown className="h-3.5 w-3.5 text-brand-dark" />
+            <ChevronDown className="h-3.5 w-3.5 text-brand" />
           </span>
           <div className="min-w-0">
-            <h4 className="text-base font-extrabold leading-snug text-ink">
+            <h4 className="text-base font-extrabold leading-snug text-white">
               {question}
             </h4>
             <div
-              className={`${RICH_CONTENT_CLASSES} mt-2 [&_p]:my-2 [&_ul]:my-2 [&_h2]:mt-4`}
+              className={`${RICH_CONTENT_CLASSES} mt-2 [&_p]:my-2 [&_ul]:my-2 [&_h2]:mt-4 ${DARK_WHITE_OVERRIDES}`}
               dangerouslySetInnerHTML={{ __html: card.body }}
             />
           </div>
@@ -351,7 +349,7 @@ function FullContentCards({ html }: { html: string }) {
       )}
 
       {featuredImageCards.length > 0 && (
-        <div className="overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 text-white sm:p-12">
+        <div className="overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-brand-dark to-brand-deep p-8 text-white sm:p-12">
           {featuredImageCards.map((card, i) => {
             const images = card.body.match(/<img[^>]*>/gi) || [];
             const textBody = card.body.replace(/<img[^>]*>/gi, "");
@@ -421,13 +419,13 @@ function FullContentCards({ html }: { html: string }) {
       )}
 
       {faqCards.length > 0 && (
-        <div className="scroll-mt-24 rounded-[2rem] border border-line bg-white px-6 py-8 shadow-[0_2px_18px_rgba(0,0,0,0.04)] sm:px-10 sm:py-10">
+        <div className="scroll-mt-24 rounded-[2rem] border border-white/20 bg-white/5 px-6 py-8 backdrop-blur-sm sm:px-10 sm:py-10">
           <div className="flex items-center gap-3">
             <span className="inline-block h-2 w-2 rounded-full bg-brand" />
             {faqHeadingCard ? (
-              renderHeading(faqHeadingCard, "light")
+              renderHeading(faqHeadingCard)
             ) : (
-              <h3 className="text-lg font-extrabold text-ink sm:text-xl">
+              <h3 className="text-lg font-extrabold text-white sm:text-xl">
                 Frequently Asked Questions
               </h3>
             )}
@@ -575,22 +573,22 @@ export default async function ServiceDetailPage({
     : (service.content?.slice(0, 6) ?? []);
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#132F4A]">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-5" style={{ background: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,253,229,1) 50%, rgba(255,255,255,1) 100%)" }}>
+      <div className="relative overflow-hidden py-5 bg-[#132F4A]">
         <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-ink/50">
-            <Link href="/" className="flex items-center gap-1.5 transition hover:text-ink">
+          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/50">
+            <Link href="/" className="flex items-center gap-1.5 transition hover:text-white">
               <Home className="h-3.5 w-3.5" /> Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
-            <Link href="/services" className="transition hover:text-ink">
+            <ChevronRight className="h-3.5 w-3.5 text-white/30" />
+            <Link href="/services" className="transition hover:text-white">
               Services
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
-            <span className="text-ink/80">{service.name}</span>
+            <ChevronRight className="h-3.5 w-3.5 text-white/30" />
+            <span className="text-white/80">{service.name}</span>
           </nav>
         </div>
       </div>
@@ -600,13 +598,13 @@ export default async function ServiceDetailPage({
         <div className="grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
           <Reveal>
             <div>
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
+              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
                 {service.eyebrow || service.name}
               </span>
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-5xl">
+              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">
                 {service.name}
               </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/65 sm:text-lg">
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
                 {service.short}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
@@ -614,7 +612,7 @@ export default async function ServiceDetailPage({
                   href="https://calendly.com/virtualnexgen-info/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(249,115,22,0.35)] transition hover:shadow-[0_16px_60px_rgba(249,115,22,0.5)]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-7 py-3.5 text-sm font-semibold text-white transition"
                 >
                   Book Your Demo
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -658,14 +656,14 @@ export default async function ServiceDetailPage({
 )}
 
       {/* Trust Badges Marquee */}
-      <section className="border-y border-line bg-cream/30 py-6 overflow-hidden">
+      <section className="border-y border-white/10 bg-white/[0.02] py-6 overflow-hidden">
         <div className="flex gap-8 animate-[marquee-x_25s_linear_infinite] whitespace-nowrap">
           {[...trustBadges, ...trustBadges].map((b, i) => (
             <div key={i} className="flex items-center gap-2.5 shrink-0">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/10">
-                <b.icon className="h-4 w-4 text-brand-dark" />
+                <b.icon className="h-4 w-4 text-brand" />
               </div>
-              <span className="text-sm font-semibold text-ink/70">
+              <span className="text-sm font-semibold text-white/75">
                 {b.label}
               </span>
             </div>
@@ -678,14 +676,14 @@ export default async function ServiceDetailPage({
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div>
-              <span className="inline-block rounded-full bg-cream-2 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
+              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
                 The Problem
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
                 Most Businesses Aren&apos;t Struggling to Grow —
-                <span className="text-brand-dark"> They&apos;re Buried in Operations</span>
+                <span className="text-brand"> They&apos;re Buried in Operations</span>
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-ink/65">
+              <p className="mt-5 text-base leading-relaxed text-white/65">
                 Repetitive tasks quietly consume the time your team should spend
                 growing the business.
               </p>
@@ -697,7 +695,7 @@ export default async function ServiceDetailPage({
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand" />
-                    <span className="text-sm text-ink/70">{item}</span>
+                    <span className="text-sm text-white/70">{item}</span>
                   </div>
                 ))}
               </div>
@@ -726,10 +724,10 @@ export default async function ServiceDetailPage({
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-line bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+                  className="rounded-2xl border border-white/20 bg-white/5 p-5 backdrop-blur-sm"
                 >
-                  <h4 className="text-sm font-bold text-ink">{item.title}</h4>
-                  <p className="mt-2 text-xs leading-relaxed text-ink/55">
+                  <h4 className="text-sm font-bold text-white">{item.title}</h4>
+                  <p className="mt-2 text-xs leading-relaxed text-white/60">
                     {item.desc}
                   </p>
                 </div>
@@ -744,14 +742,14 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
+              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
                 Why Choose Us
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Built for{" "}
-                <span className="text-brand-dark">Your Industry</span>
+                <span className="text-brand">Your Industry</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base text-ink/60">
+              <p className="mx-auto mt-4 max-w-2xl text-base text-white/60">
                 Trained virtual assistants integrated into your daily workflows,
                 servicing, and operations.
               </p>
@@ -764,14 +762,14 @@ export default async function ServiceDetailPage({
               const Icon = iconMap[item.icon] || Zap;
               return (
                 <Reveal key={i} delay={i * 0.08}>
-                  <div className="group rounded-2xl border border-line bg-white p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(249,115,22,0.1)]">
+                  <div className="group rounded-2xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-[0_12px_40px_rgba(6,182,212,0.15)]">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 transition-colors group-hover:bg-brand/20">
-                      <Icon className="h-5 w-5 text-brand-dark" />
+                      <Icon className="h-5 w-5 text-brand" />
                     </div>
-                    <h3 className="mt-5 text-lg font-extrabold text-ink">
+                    <h3 className="mt-5 text-lg font-extrabold text-white">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-ink/60">
+                    <p className="mt-2.5 text-sm leading-relaxed text-white/60">
                       {item.desc}
                     </p>
                   </div>
@@ -839,11 +837,7 @@ export default async function ServiceDetailPage({
       {/* Interactive Chapter Folder */}
       {folderItems.length > 0 && (
         <section
-          className="relative overflow-hidden py-16 sm:py-24"
-          style={{
-            background:
-              "linear-gradient(160deg, #0B2A4A 0%, #0B2A4A 55%, #0B2A4A 100%)",
-          }}
+          className="relative overflow-hidden py-16 sm:py-24 bg-[#132F4A]"
         >
           <div className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-brand/15 blur-[130px]" />
           <div className="pointer-events-none absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-deep/25 blur-[130px]" />
@@ -895,17 +889,20 @@ export default async function ServiceDetailPage({
         </section>
       )}
 
+      {/* Client Logos */}
+      <ClientLogos />
+
       {/* How It Works */}
       <section className="bg-cream/30 py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
+              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
                 How It Works
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Get Started in{" "}
-                <span className="text-brand-dark">{steps.length} Simple Steps</span>
+                <span className="text-brand">{steps.length} Simple Steps</span>
               </h2>
             </div>
           </Reveal>
@@ -913,14 +910,14 @@ export default async function ServiceDetailPage({
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="rounded-2xl border border-line bg-white p-6 text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-lg font-extrabold text-brand-dark">
+                <div className="rounded-2xl border border-white/20 bg-white/5 p-6 text-center backdrop-blur-sm">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-lg font-extrabold text-brand">
                     {step.num}
                   </div>
-                  <h4 className="mt-4 text-base font-extrabold text-ink">
+                  <h4 className="mt-4 text-base font-extrabold text-white">
                     {step.title}
                   </h4>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/60">
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">
                     {step.desc}
                   </p>
                 </div>
@@ -975,14 +972,14 @@ export default async function ServiceDetailPage({
       </section> */}
 
       {/* Testimonials */}
-      <section className="border-y border-line bg-cream/30 py-20 overflow-hidden">
+      <section className="border-y border-white/10 bg-white/[0.02] py-20 overflow-hidden">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
+              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
                 Testimonials
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 What Our Clients Say
               </h2>
             </div>
@@ -992,18 +989,18 @@ export default async function ServiceDetailPage({
             {[...testimonials, ...testimonials].map((t, i) => (
               <div
                 key={i}
-                className="w-[380px] shrink-0 rounded-2xl border border-line bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+                className="w-[380px] shrink-0 rounded-2xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
               >
-                <p className="text-sm leading-relaxed text-ink/70 italic">
+                <p className="text-sm leading-relaxed text-white/75 italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <div className="mt-5 flex items-center gap-3 border-t border-line pt-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand-dark">
+                <div className="mt-5 flex items-center gap-3 border-t border-white/15 pt-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/20 text-sm font-bold text-white">
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-ink">{t.name}</p>
-                    <p className="text-xs text-ink/50">{t.role}</p>
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-xs text-white/55">{t.role}</p>
                   </div>
                 </div>
               </div>
@@ -1061,44 +1058,46 @@ export default async function ServiceDetailPage({
 
       {/* Related Services */}
       {related.length > 0 && (
-        <section className="border-t border-line bg-cream/30 py-20">
+        <section className="border-t border-white/10 bg-white/[0.02] py-20">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
-              <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">
-                Related Services
-              </h2>
+              <div className="rounded-[2rem] border border-white/15 bg-white/5 p-6 backdrop-blur-sm sm:p-10">
+                <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
+                  Related Services
+                </h2>
+                <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {related.map((s, i) => (
+                    <Reveal key={s.slug} delay={i * 0.1}>
+                      <Link
+                        href={`/services/${s.slug}`}
+                        className="group block overflow-hidden rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50"
+                      >
+                        {s.image && (
+                          <div className="relative aspect-[16/9] overflow-hidden">
+                            <img
+                              src={s.image}
+                              alt={s.name}
+                              className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div className="p-6">
+                          <h3 className="text-lg font-extrabold text-white transition group-hover:text-brand-accent">
+                            {s.name}
+                          </h3>
+                          <p className="mt-2 line-clamp-2 text-sm text-white/60">
+                            {s.short}
+                          </p>
+                          <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent transition group-hover:gap-2.5">
+                            Learn More <ArrowUpRight className="h-4 w-4" />
+                          </span>
+                        </div>
+                      </Link>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
             </Reveal>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((s, i) => (
-                <Reveal key={s.slug} delay={i * 0.1}>
-                  <Link
-                    href={`/services/${s.slug}`}
-                    className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(249,115,22,0.1)]"
-                  >
-                    {s.image && (
-                      <div className="relative aspect-[16/9] overflow-hidden">
-                        <img
-                          src={s.image}
-                          alt={s.name}
-                          className="h-full w-full object-cover mix-blend-multiply transition duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <h3 className="text-lg font-extrabold text-ink transition group-hover:text-brand-dark">
-                        {s.name}
-                      </h3>
-                      <p className="mt-2 line-clamp-2 text-sm text-ink/60">
-                        {s.short}
-                      </p>
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark transition group-hover:gap-2.5">
-                        Learn More <ArrowUpRight className="h-4 w-4" />
-                      </span>
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </section>
       )}

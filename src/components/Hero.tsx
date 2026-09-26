@@ -171,25 +171,25 @@ export default function Hero() {
       id="home"
       ref={rootRef}
       className="relative overflow-hidden py-6 sm:py-8 md:py-10 lg:py-16"
-      style={{ background: "#ffffff", backgroundImage: "linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(236,253,229,0.85) 50%, rgba(255,247,237,1) 100%)" }}
+      style={{ background: "#132F4A" }}
     >
-      <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#F97316]/12 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#0B2A4A]/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#06B6D4]/12 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#06B6D4]/10 blur-[120px]" />
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
         <div className="grid lg:grid-cols-[1.2fr_0.8fr] xl:grid-cols-[1.3fr_0.7fr] gap-6 lg:gap-2 items-center">
           {/* Left: Text Content */}
           <div className="max-w-[720px] mx-auto lg:mx-0 text-left order-1">
             <div ref={badgeRef}>
-              <span className="inline-flex items-center gap-2 bg-white border border-[#F97316]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-ink">
-                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#F97316] rounded-full animate-pulse flex-shrink-0" />
+              <span className="inline-flex items-center gap-2 bg-white/10 border border-[#06B6D4]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-white">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#06B6D4] rounded-full animate-pulse flex-shrink-0" />
                 <span>Virtual Assistants for Your Business</span>
               </span>
             </div>
 
             <h1
               ref={headingRef}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ink mb-3 sm:mb-4 lg:mb-6 leading-[1.1]"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]"
             >
               Scale Your Business
               <br />
@@ -197,17 +197,17 @@ export default function Hero() {
             </h1>
 
             <div ref={typewriterRef}>
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-ink mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
                 Powered By Trained VAs in <br />
-                <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#F97316] font-semibold relative">
-                  <TypewriterText words={typewriterWords} className="text-[#F97316]" onWordChange={handleWordChange} />
+                <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#06B6D4] font-semibold relative">
+                  <TypewriterText words={typewriterWords} className="text-[#06B6D4]" onWordChange={handleWordChange} />
                 </span>
               </p>
             </div>
 
             <p
               ref={descRef}
-              className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-ink/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xl"
+              className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-white/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xl"
             >
               Our operations specialists handle quotes, renewals, COIs, and admin work
               &mdash; so your agents can focus on selling and serving clients.
@@ -223,7 +223,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     aria-label={ai.name}
                     title={ai.name}
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-line bg-white text-ink/60 transition-all duration-300 hover:bg-[#F97316] hover:text-white hover:border-[#F97316] hover:shadow-[0_4px_16px_rgba(249,115,22,0.4)] hover:-translate-y-0.5"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-line bg-white/10 text-white/60 transition-all duration-300 hover:bg-[#06B6D4] hover:text-white hover:border-[#06B6D4] hover:shadow-[0_4px_16px_rgba(6,182,212,0.4)] hover:-translate-y-0.5"
                   >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                       <path d={ai.icon} />
@@ -238,16 +238,16 @@ export default function Hero() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full border border-ink/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-[#F97316] hover:shadow-md w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-[#06B6D4] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto justify-center"
               >
-                <span className="text-sm sm:text-base font-bold text-ink whitespace-nowrap">Book a Demo</span>
-                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-ink text-white flex-shrink-0 transition-all duration-300 group-hover:bg-[#F97316] group-hover:shadow-[0_4px_16px_rgba(249,115,22,0.35)]">
+                <span className="text-sm sm:text-base font-bold text-white whitespace-nowrap">Book a Demo</span>
+                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/20 text-white flex-shrink-0 transition-all duration-300 group-hover:bg-[#06B6D4] group-hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)]">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </a>
               <a
                 href="#services"
-                className="group inline-flex items-center justify-center sm:justify-start gap-2 text-ink/75 hover:text-[#F97316] font-semibold text-sm sm:text-base transition-colors py-2"
+                className="group inline-flex items-center justify-center sm:justify-start gap-2 text-white/75 hover:text-[#06B6D4] font-semibold text-sm sm:text-base transition-colors py-2"
               >
                 <span>See Your Savings Estimate</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -262,30 +262,30 @@ export default function Hero() {
           >
             <div
               ref={cardInnerRef}
-              className={`w-full sm:w-[380px] lg:w-[420px] rounded-xl lg:rounded-2xl border transition-colors duration-500 flex flex-col gap-2 sm:gap-3 lg:gap-4 p-3 sm:p-4 lg:p-6 ${
+              className={`w-full sm:w-[380px] lg:w-[420px] rounded-xl lg:rounded-2xl border border-white transition-colors duration-500 flex flex-col gap-2 sm:gap-3 lg:gap-4 p-3 sm:p-4 lg:p-6 ${
                 slide.glass
-                  ? "bg-white/60 backdrop-blur-md border-white/40"
-                  : "bg-white shadow-2xl border-white"
+                  ? "bg-[#132F4A]/80 backdrop-blur-md"
+                  : "bg-[#132F4A] shadow-2xl"
               }`}
             >
               <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-                <slide.icon className="w-8 h-8 sm:w-9 sm:h-9 lg:w-12 lg:h-12 text-brand stroke-[1.5]" />
+                <slide.icon className="w-8 h-8 sm:w-9 sm:h-9 lg:w-12 lg:h-12 text-[#06B6D4] stroke-[1.5]" />
                 <div>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-lg font-bold text-ink tracking-tight">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-lg font-bold text-white tracking-tight">
                     {slide.title}
                   </p>
-                  <p className="text-xs sm:text-sm md:text-base lg:text-base font-medium text-ink/60">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-base font-medium text-white/60">
                     {slide.subtitle}
                   </p>
                 </div>
               </div>
 
-              <div className="w-full h-1 sm:h-1.5 lg:h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div className="w-full h-1 sm:h-1.5 lg:h-2 bg-white/20 rounded-full overflow-hidden">
                 <div
                   ref={progressRef}
                   className="h-full rounded-full"
                   style={{
-                    background: "linear-gradient(90deg, #0B2A4A 0%, #F97316 50%, #ECFDE5 100%)",
+                    background: "linear-gradient(90deg, #132F4A 0%, #06B6D4 50%, #000080 100%)",
                     backgroundSize: "200% 100%",
                     width: `${slide.percent}%`,
                   }}
@@ -293,10 +293,10 @@ export default function Hero() {
               </div>
 
               <div className="flex justify-between items-center">
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-2 sm:px-3 lg:px-4 py-1 lg:py-1.5 bg-[#0B2A4A] rounded-full">
+                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-2 sm:px-3 lg:px-4 py-1 lg:py-1.5 bg-[#132F4A] rounded-full">
                   {slide.tag}
                 </p>
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-3 sm:px-4 lg:px-6 py-1 lg:py-1.5 bg-[#0B2A4A] rounded-full">
+                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-3 sm:px-4 lg:px-6 py-1 lg:py-1.5 bg-[#132F4A] rounded-full">
                   {slide.percent}%
                 </p>
               </div>
@@ -311,8 +311,8 @@ export default function Hero() {
                   aria-label={`Go to card ${i + 1}`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === cardIndex
-                      ? "w-6 sm:w-8 bg-[#F97316]"
-                      : "w-2 sm:w-3 bg-[#F97316]/30 hover:bg-[#F97316]/60"
+                      ? "w-6 sm:w-8 bg-[#06B6D4]"
+                      : "w-2 sm:w-3 bg-[#06B6D4]/30 hover:bg-[#06B6D4]/60"
                   }`}
                 />
               ))}

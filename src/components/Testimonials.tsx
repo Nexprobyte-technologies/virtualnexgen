@@ -70,13 +70,13 @@ function splitColumns(items: typeof testimonials) {
 function GlassCard({ testimonial }: { testimonial: (typeof testimonials)[number] }) {
   return (
     <div className="break-inside-avoid mb-4">
-      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg transition-all duration-300 hover:border-brand/40 hover:bg-white/15 hover:shadow-[0_8px_40px_rgba(245,166,35,0.08)]">
+      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg transition-all duration-300 hover:border-[#06B6D4]/40 hover:bg-white/15 hover:shadow-[0_8px_40px_rgba(6,182,212,0.08)]">
         <div className="mb-3 flex gap-0.5">
           {Array.from({ length: 5 }).map((_, s) => (
-            <Star key={s} className="h-3.5 w-3.5 fill-brand text-brand" />
+            <Star key={s} className="h-3.5 w-3.5 fill-[#06B6D4] text-[#06B6D4]" />
           ))}
         </div>
-        <blockquote className="text-sm leading-relaxed text-ink/70">
+        <blockquote className="text-sm leading-relaxed text-white/70">
           &ldquo;{testimonial.text}&rdquo;
         </blockquote>
         <div className="mt-5 flex items-center gap-3">
@@ -86,11 +86,11 @@ function GlassCard({ testimonial }: { testimonial: (typeof testimonials)[number]
             width={36}
             height={36}
             loading="lazy"
-            className="h-9 w-9 rounded-full object-cover ring-2 ring-brand/30"
+            className="h-9 w-9 rounded-full object-cover ring-2 ring-[#06B6D4]/30"
           />
           <div>
-            <p className="text-sm font-semibold text-ink">{testimonial.name}</p>
-            <p className="text-xs text-ink/40">{testimonial.role}</p>
+            <p className="text-sm font-semibold text-white">{testimonial.name}</p>
+            <p className="text-xs text-white/40">{testimonial.role}</p>
           </div>
         </div>
       </div>
@@ -144,25 +144,25 @@ export default function Testimonials() {
 
       <section
         id="testimonials"
-        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#FFF7ED]"
+        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#132F4A]"
       >
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal y={20}>
-              <span className="inline-block rounded-full bg-cream-2 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
+              <span className="inline-block rounded-full bg-[#06B6D4]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#06B6D4] ring-1 ring-[#06B6D4]/30">
                 Client Testimonials
               </span>
             </Reveal>
             <Reveal y={30} delay={0.12}>
-              <h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-ink">
-                Hear How Our Solutions{" "}
-                <span className="text-[#F97316]">
-                  Made a Difference
-                </span>
-              </h2>
+<h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white">
+              Hear How Our Solutions{" "}
+              <span className="text-[#06B6D4]">
+                Made a Difference
+              </span>
+            </h2>
             </Reveal>
             <Reveal y={20} delay={0.24}>
-              <p className="mx-auto mt-3 sm:mt-5 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-ink/50">
+              <p className="mx-auto mt-3 sm:mt-5 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-white/60">
                 Real feedback from businesses that trust Virtual Nexgen Solutions.
               </p>
             </Reveal>

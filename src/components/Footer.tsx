@@ -66,7 +66,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative bg-[#FFF7ED] overflow-hidden shadow-[0_-4px_30px_rgba(11,42,74,0.05)]">
+    <footer id="contact" className="relative bg-[#132F4A] overflow-hidden shadow-[0_-4px_30px_rgba(0,0,0,0.05)]">
       <div className="divider-gradient" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 lg:px-10">
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-4">
@@ -80,18 +80,18 @@ export default function Footer() {
                 loading="lazy"
                 className="h-12 w-auto object-contain"
               />
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink/60">
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
                 Since 2016, Virtual Nexgen Solutions has been delivering
                 high-quality virtual assistant and AI automation services across
                 all industries, helping businesses streamline their operations
                 and achieve greater efficiency.
               </p>
-              <h4 className="mt-8 mb-3 text-sm font-semibold uppercase tracking-wider text-ink/80">
+              <h4 className="mt-8 mb-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                 Talk to Our Support
               </h4>
               <a
                 href="tel:+13418886504"
-                className="inline-flex items-center gap-2 text-base font-semibold text-[#0B2A4A] transition hover:text-[#F97316]"
+                className="inline-flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#06B6D4]"
               >
                 <Phone className="h-4 w-4" />
                 +1 341 888 6504
@@ -106,7 +106,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-cream-2 text-ink/60 transition hover:bg-[#F97316] hover:text-white"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-[#132F4A] text-white/60 transition hover:bg-[#06B6D4] hover:text-white"
                     >
                       <Icon className="h-4 w-4" />
                     </a>
@@ -114,7 +114,7 @@ export default function Footer() {
                 })}
               </div>
 
-              <h4 className="mt-8 mb-3 text-sm font-semibold uppercase tracking-wider text-ink/80">
+              <h4 className="mt-8 mb-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                 Ask AI about Us
               </h4>
               <div className="flex flex-wrap gap-4">
@@ -150,7 +150,7 @@ export default function Footer() {
                     href={ai.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-9 h-9 rounded-full border border-line bg-white text-ink/60 transition hover:bg-brand hover:text-ink hover:border-brand"
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-line bg-white/10 text-white/60 transition hover:bg-[#06B6D4] hover:text-white hover:border-[#06B6D4]"
                     title={ai.name}
                   >
                     <svg
@@ -168,7 +168,7 @@ export default function Footer() {
 
           <Reveal delay={0.08}>
             <div>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink/80">
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
                 Our Services
               </h4>
               <ul className="space-y-3">
@@ -176,7 +176,7 @@ export default function Footer() {
                   <li key={link}>
                     <a
                       href="#services"
-                      className="text-sm text-ink/60 transition hover:text-brand-dark"
+                      className="text-sm text-white/60 transition hover:text-white"
                     >
                       {link}
                     </a>
@@ -188,7 +188,7 @@ export default function Footer() {
 
           <Reveal delay={0.16} className="lg:col-span-2">
             <div id="blog">
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink/80">
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
                 Our Blog
               </h4>
               <div className="grid gap-5">
@@ -208,7 +208,7 @@ export default function Footer() {
                       loading="lazy"
                       className="h-16 w-20 shrink-0 rounded-xl object-cover"
                     />
-                    <span className="text-sm font-medium leading-snug text-ink/70 transition group-hover:text-brand-dark">
+                    <span className="text-sm font-medium leading-snug text-white/70 transition group-hover:text-white">
                       {post.title}
                     </span>
                   </a>
@@ -220,23 +220,23 @@ export default function Footer() {
 
         <Reveal delay={0.1}>
           <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-line pt-8 sm:flex-row">
-            <p className="text-xs text-ink/40">
+            <p className="text-xs text-white/40">
               © {new Date().getFullYear()} Virtual Nexgen Solutions. All rights
               reserved.
             </p>
-            <div className="flex gap-6 text-xs text-ink/40">
-              <a href="#" className="transition hover:text-brand-dark">
+            <div className="flex gap-6 text-xs text-white/40">
+              <a href="#" className="transition hover:text-white">
                 Privacy Policy
               </a>
-              <a href="#" className="transition hover:text-brand-dark">
+              <a href="#" className="transition hover:text-white">
                 Terms of Service
               </a>
-              <a href="#" className="transition hover:text-brand-dark">
+              <a href="#" className="transition hover:text-white">
                 Refund Policy
               </a>
               <a
                 href="/admin"
-                className="transition hover:text-brand-dark"
+                className="transition hover:text-white"
               >
                 Admin
               </a>

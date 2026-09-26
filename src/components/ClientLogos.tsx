@@ -12,16 +12,16 @@ const logos = [
 
 export default function ClientLogos() {
   return (
-    <section className="relative overflow-hidden bg-white py-8 sm:py-12 lg:py-16">
+    <section className="relative overflow-hidden bg-[#132F4A] py-8 sm:py-12 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-cream-2 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#132F4A] px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#06B6D4] border border-[#06B6D4]/30">
               Trusted Partners
             </span>
-            <h2 className="mt-3 sm:mt-5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-ink">
+            <h2 className="mt-3 sm:mt-5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
               Our VAs Are Experts in All Major{" "}
-              <span className="text-[#F97316]">Insurance Software</span>
+              <span className="text-[#06B6D4]">Insurance Software</span>
             </h2>
           </div>
         </Reveal>
@@ -62,14 +62,14 @@ export default function ClientLogos() {
             })}
           </div>
 
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-deep via-brand to-brand-accent text-center text-[10px] font-extrabold uppercase tracking-wider text-white shadow-[0_12px_36px_rgba(249,115,22,0.4)] ring-8 ring-brand/10 sm:h-24 sm:w-24 sm:text-xs">
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#132F4A] via-[#06B6D4] to-[#06B6D4] text-center text-[10px] font-extrabold uppercase tracking-wider text-white shadow-[0_12px_36px_rgba(6,182,212,0.4)] ring-8 ring-[#06B6D4]/10 sm:h-24 sm:w-24 sm:text-xs">
             AMS
             <br />
             Experts
           </div>
         </div>
 
-        <p className="mt-6 text-center text-xs font-semibold uppercase tracking-widest text-ink/40">
+        <p className="mt-6 text-white text-center text-xs font-semibold uppercase tracking-widest text-ink/40">
           Hover to pause &middot; {logos.length} AMS platforms we support
         </p>
       </Reveal>

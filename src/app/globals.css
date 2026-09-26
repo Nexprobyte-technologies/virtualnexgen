@@ -6,43 +6,43 @@ html {
 }
 
 :root {
-  --background: #FFF7ED;
-  --foreground: #0B2A4A;
-  --night: #0B2A4A;
+  --background: #132F4A;
+  --foreground: #FFFFFF;
+  --night: #132F4A;
 
-  /* Theme: navy, mint, orange, cream */
-  --navy: #0B2A4A;
-  --navy-deep: #0B2A4A;
-  --navy-royal: #0B2A4A;
-  --navy-light: #0B2A4A;
+  /* 4-color Theme: Navy Blue, Tarkis Blue, Black, White */
+  --navy: #132F4A;
+  --navy-deep: #0d1f3a;
+  --navy-royal: #002b5c;
+  --navy-light: #1a4a7a;
 
-  --turkish: #F97316;
-  --turkish-glow: #F97316;
-  --turkish-deep: #0B2A4A;
-  --turkish-light: #ECFDE5;
+  --tarkisblue: #06B6D4;
+  --tarkisblue-glow: #22d3ee;
+  --tarkisblue-deep: #0891b2;
+  --tarkisblue-light: #cffafe;
 
   --black: #000000;
   --white: #FFFFFF;
 
-  --brand: #F97316;
-  --secondary: #0B2A4A;
-  --brand-deep: #0B2A4A;
-  --brand-dark: #0B2A4A;
-  --brand-accent: #F97316;
-  --brand-accent-light: #ECFDE5;
-  --ink: #0B2A4A;
-  --ink-soft: #0B2A4A;
-  --accent-blue: #F97316;
-  --cream: #FFF7ED;
-  --cream-1: #ECFDE5;
-  --cream-2: #ECFDE5;
-  --line: #E8D5C4;
+  --brand: #06B6D4;
+  --secondary: #132F4A;
+  --brand-deep: #0891b2;
+  --brand-dark: #132F4A;
+  --brand-accent: #06B6D4;
+  --brand-accent-light: #06B6D4;
+  --ink: #000000;
+  --ink-soft: #000000;
+  --accent-blue: #06B6D4;
+  --cream: #132F4A;
+  --cream-1: #132F4A;
+  --cream-2: #132F4A;
+  --line: #06B6D4;
 
   --violet: var(--navy);
   --indigo: var(--brand-deep);
-  --cyan: var(--turkish);
-  --fuchsia: var(--navy-royal);
-  --emerald: var(--turkish-glow);
+  --cyan: var(--tarkisblue);
+  --fuchsia: var(--navy);
+  --emerald: var(--tarkisblue-glow);
 }
 
 @theme inline {
@@ -127,26 +127,23 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.25);
-  color: #0B2A4A;
+  background: #06B6D4;
+  color: #132F4A;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #0B2A4A 0%, #F97316 60%, #ECFDE5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: #F97316;
+  color: #06B6D4;
 }
 
 .glass {
   background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(11, 42, 74, 0.08);
+  border: 1px solid #132F4A;
   backdrop-filter: blur(14px);
 }
 
 .grid-bg {
-  background-image: linear-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(249, 115, 22, 0.08) 1px, transparent 1px);
+  background-image: linear-gradient(#06B6D4 1px, transparent 1px),
+    linear-gradient(90deg, #06B6D4 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -304,19 +301,15 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #0B2A4A;
-  background: linear-gradient(
-    120deg,
-    rgba(249, 115, 22, 0.15),
-    rgba(11, 42, 74, 0.08)
-  );
-  border: 1px solid rgba(249, 115, 22, 0.35);
+  color: #FFFFFF;
+  background: #06B6D4;
+  border: 1px solid #06B6D4;
 }
 
 .card {
   border-radius: 1.75rem;
-  background: #ffffff;
-  border: 1px solid var(--line);
+  background: #132F4A;
+  border: 1px solid #06B6D4;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
@@ -326,12 +319,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 
 .card:hover {
   transform: translateY(-8px);
-  border-color: rgba(249, 115, 22, 0.5);
-  box-shadow: 0 24px 60px rgba(11, 42, 74, 0.12);
+  border-color: #06B6D4;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
 }
 
 .card-soft {
-  background: linear-gradient(180deg, #ffffff, #FFF7ED);
+  background: #132F4A;
 }
 
 .icon-tile {
@@ -339,62 +332,21 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   place-items: center;
   border-radius: 1.1rem;
   color: #ffffff;
-  background: linear-gradient(135deg, #0B2A4A, #F97316);
-  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.35);
+  background: #132F4A;
+  box-shadow: 0 12px 28px rgba(6, 182, 212, 0.35);
 }
 
 .bg-aurora {
-  background:
-    radial-gradient(
-      circle at 12% 18%,
-      rgba(249, 115, 22, 0.12),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 88% 12%,
-      rgba(11, 42, 74, 0.08),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(236, 253, 229, 0.55),
-      transparent 55%
-    ),
-    var(--cream);
+  background: #132F4A;
 }
 
 .divider-gradient {
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(249, 115, 22, 0.5),
-    transparent
-  );
-}
-
-@keyframes gradient-pan {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background: #06B6D4;
 }
 
 .animated-gradient {
-  background-image: linear-gradient(
-    120deg,
-    #0B2A4A,
-    #0B2A4A,
-    #F97316,
-    #ECFDE5
-  );
-  background-size: 300% 300%;
-  animation: gradient-pan 10s ease infinite;
+  background: #132F4A;
 }
 
 @keyframes ring-pulse {
@@ -422,12 +374,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: absolute;
   inset: 0;
   transform: translateX(-130%);
-  background: linear-gradient(
-    105deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 80%
-  );
+  background: #06B6D4;
+  opacity: 0.35;
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
@@ -436,20 +384,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   transform: translateX(130%);
 }
 
-@keyframes border-orbit {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .bento-border-glow {
-  background: linear-gradient(90deg, transparent 0%, transparent 40%, #F97316 50%, transparent 60%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, transparent 40%, white 50%, transparent 60%, transparent 100%);
   background-size: 200% 100%;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
@@ -458,38 +394,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 .deck-border {
-  background-image: linear-gradient(
-    115deg,
-    #ECFDE5,
-    #F97316,
-    #0B2A4A,
-    #F97316,
-    #ECFDE5
-  );
-  background-size: 300% 300%;
-  animation: border-orbit 6s linear infinite;
-}
-
-.motion-wrapper section {
-  will-change: transform, opacity;
-}
-
-.motion-wrapper img {
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .motion-wrapper section {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .motion-wrapper img {
-    transform: none !important;
-  }
-  .custom-cursor,
-  .custom-cursor-dot {
-    display: none !important;
-  }
+  background: #132F4A;
+  border: 1px solid #06B6D4;
 }
 
 /* Custom Cursor */
@@ -497,7 +403,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 40px;
   height: 40px;
-  border: 2px solid #F97316;
+  border: 2px solid #06B6D4;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -510,7 +416,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 6px;
   height: 6px;
-  background: #F97316;
+  background: #06B6D4;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -522,19 +428,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .custom-cursor.cursor-hover {
   width: 60px;
   height: 60px;
-  border-color: #ECFDE5;
-  background: rgba(249, 115, 22, 0.15);
+  border-color: #22d3ee;
+  background: rgba(6, 182, 212, 0.15);
 }
 
 .custom-cursor-dot.cursor-dot-hover {
   width: 10px;
   height: 10px;
-  background: #F97316;
-}
-
-@media (max-width: 1024px) {
-  .custom-cursor,
-  .custom-cursor-dot {
-    display: none !important;
-  }
+  background: #06B6D4;
 }

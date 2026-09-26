@@ -47,32 +47,29 @@ function BentoCard({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl border border-line bg-cream transition-all duration-500 hover:shadow-[0_8px_40px_rgba(249,115,22,0.15)] ${className}`}
-      style={{ perspective: "800px" }}
+      className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-[#132F4A] transition-all duration-500 ${className}`}
+      style={{ perspective: "1000px" }}
     >
-      {/* Animated border glow */}
-      <div className="pointer-events-none absolute -inset-[1px] z-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 bento-border-glow" />
-
-      {/* Spotlight glow */}
+      {/* Spotlight effect following cursor */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
-          background:
-            "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249,115,22,0.08), transparent 40%)",
+          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08), transparent 40%)`,
         }}
       />
-      {/* Border glow */}
+      
+      {/* Border glow effect following cursor */}
       <div
-        className="pointer-events-none absolute -inset-px z-0 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249,115,22,0.3), transparent 40%)",
-          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          maskComposite: "exclude",
-          padding: "1px",
-        }}
+        className="pointer-events-none absolute -inset-[1px] z-0 rounded-2xl opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:ring-4 group-hover:ring-white/60"
       />
-      <div className="relative z-10">{children}</div>
+      
+      {/* Inner border ring - expands on hover */}
+      <div className="pointer-events-none absolute -inset-[2px] z-0 rounded-2xl opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:ring-4 group-hover:ring-white/70" />
+      
+      {/* Subtle tilt effect on hover */}
+      <div className="relative z-10 transition-transform duration-300 group-hover:rotate-x-[2deg] group-hover:rotate-y-[-2deg] group-hover:scale-[1.02] group-hover:shadow-[0_20px_40px_rgba(6,182,212,0.15)]" style={{ transformOrigin: "var(--mouse-x) var(--mouse-y)" }}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -155,16 +152,16 @@ export default function WhyChoose() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 bg-white">
+      <section className="py-12 sm:py-16 lg:py-28 bg-[#132F4A]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
 
           {/* Header */}
           <Reveal y={30}>
             <div className="mb-8 sm:mb-12 lg:mb-16 max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-ink mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
                 Why Choose Virtual Nexgen Solutions?
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-ink/70 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
                 Built specifically for businesses that need reliable operations,
                 secure workflows, and scalable support.
               </p>
@@ -178,15 +175,15 @@ export default function WhyChoose() {
             <Reveal y={40} className="lg:col-span-7">
               <BentoCard className="h-full">
                 <div className="p-5 sm:p-6 md:p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
-                      <Users className="h-5 w-5 text-brand" />
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-ink">
-                      Industry-Focused Expertise
-                    </h3>
+<div className="flex items-center gap-3 mb-4">
+                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
+                    <Users className="h-5 w-5 text-white" />
                   </div>
-                  <p className="text-sm sm:text-base text-ink/70 mb-4">
+                  <h3 className="text-lg sm:text-xl font-bold text-white">
+                    Industry-Focused Expertise
+                  </h3>
+                </div>
+              <p className="text-sm sm:text-base text-white/70 mb-4">
                     Our assistants are trained in industry-specific workflows, policy servicing,
                     renewals, endorsements, and management systems &mdash; so tasks are handled
                     accurately and efficiently.
@@ -194,7 +191,7 @@ export default function WhyChoose() {
 
                   <TeamMarquee />
 
-                  <p className="text-sm sm:text-base text-ink/70 mt-4">
+                  <p className="text-sm sm:text-base text-white/70 mt-4">
                     Faster onboarding. Fewer errors. Seamless collaboration with your internal team.
                   </p>
                 </div>
@@ -206,14 +203,14 @@ export default function WhyChoose() {
               <BentoCard className="h-full">
                 <div className="p-5 sm:p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
-                      <Shield className="h-5 w-5 text-brand" />
+                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
+                      <Shield className="h-5 w-5 text-white" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-ink">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
                       Security & Compliance
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-ink/70 mb-2">
+                  <p className="text-sm sm:text-base text-white/70 mb-2">
                     Operations require strict data protection. Our structured workflows ensure
                     secure handling of client and business data at every stage.
                   </p>
@@ -232,24 +229,24 @@ export default function WhyChoose() {
               <BentoCard className="h-full">
                 <div className="p-5 sm:p-6 md:p-8 flex flex-col h-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
-                      <ClipboardCheck className="h-5 w-5 text-brand" />
+                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
+                      <ClipboardCheck className="h-5 w-5 text-white" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-ink">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
                       Structured Quality Control
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-ink/70 mb-5">
+                  <p className="text-sm sm:text-base text-white/70 mb-5">
                     We rely on consistent, process-driven execution.
                   </p>
 
                   <ul className="space-y-3">
                     {qualityChecks.map((item) => (
                       <li key={item} className="flex items-center gap-3">
-                        <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand">
+                        <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-white/10">
                           <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
                         </div>
-                        <span className="text-sm sm:text-base font-medium text-ink">
+                        <span className="text-sm sm:text-base font-medium text-white">
                           {item}
                         </span>
                       </li>
@@ -264,14 +261,14 @@ export default function WhyChoose() {
               <BentoCard className="h-full">
                 <div className="p-5 sm:p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
-                      <TrendingUp className="h-5 w-5 text-brand" />
+                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
+                      <TrendingUp className="h-5 w-5 text-white" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-ink">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
                       Real Operational Results
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-ink/70 mb-8">
+                  <p className="text-sm sm:text-base text-white/70 mb-8">
                     We work exclusively with businesses that need dedicated support, so our team
                     understands your systems and workflows. Supporting operations, documentation,
                     and back-office tasks every day.
@@ -281,12 +278,12 @@ export default function WhyChoose() {
                     {stats.map((stat) => (
                       <div
                         key={stat.label}
-                        className="flex flex-col items-center sm:items-start text-center sm:text-left bg-white border border-black/10 rounded-2xl p-4 shadow-sm"
+                        className="flex flex-col items-center sm:items-start text-center sm:text-left bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm"
                       >
-                        <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-brand mb-2">
+                        <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">
                           {stat.value}
                         </p>
-                        <p className="text-xs sm:text-sm text-ink/70 leading-tight">
+                        <p className="text-xs sm:text-sm text-white/70 leading-tight">
                           {stat.label}
                         </p>
                       </div>
