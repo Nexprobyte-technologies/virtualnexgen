@@ -68,7 +68,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto w-[80%] mt-3 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-6 py-2 shadow-[0_4px_24px_rgba(19,47,74,0.08)]">
+      <div className="mx-auto w-[80%] rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-6 py-2">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
