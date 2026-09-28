@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "import:blog-images": "node scripts/import-blog-images.mjs"
+    "import:blog-images": "node scripts/import-blog-images.mjs",
+    "postinstall": "prisma skills sync || exit 0"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -15,6 +16,7 @@
     "@gsap/react": "^2.1.2",
     "@mui/icons-material": "^9.4.0",
     "@mui/material": "^9.4.0",
+    "@prisma/client": "^5.22.0",
     "@studio-freight/lenis": "^1.0.42",
     "@types/three": "^0.186.0",
     "date-fns": "^4.4.0",
@@ -25,6 +27,8 @@
     "matter-js": "^0.20.0",
     "next": "16.3.5",
     "ogl": "^1.0.11",
+    "pg": "^8.11.5",
+    "prisma": "^5.22.0",
     "react": "19.2.8",
     "react-day-picker": "^10.0.1",
     "react-dom": "19.2.8",
