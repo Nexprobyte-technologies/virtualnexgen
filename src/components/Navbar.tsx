@@ -60,13 +60,7 @@ export default function Navbar() {
   return (
     <>
 <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#132F4A]/90 backdrop-blur-xl border-b border-white/10"
-          : isSubPage
-          ? "bg-[#132F4A]/95 backdrop-blur-md border-b border-white/10"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 mt-[20px]`}
     >
       <div className="mx-auto w-[80%] rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-6 py-2">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">

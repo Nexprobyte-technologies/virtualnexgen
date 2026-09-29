@@ -170,7 +170,7 @@ export default function Hero() {
     <section
       id="home"
       ref={rootRef}
-      className="relative overflow-hidden py-6 sm:py-8 md:py-10 lg:py-16"
+      className="relative overflow-hidden py-10 sm:py-14 md:py-18 lg:py-28"
       style={{ background: "#132F4A" }}
     >
       <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#06B6D4]/12 blur-[120px]" />
