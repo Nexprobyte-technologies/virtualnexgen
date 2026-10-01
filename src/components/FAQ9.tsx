@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Mail, Phone, CheckCircle } from "lucide-react";
+import { ChevronDown, Mail, Phone } from "lucide-react";
 import Reveal from "./Reveal";
 import { motion, AnimatePresence } from "framer-motion";
 
-const faqs = [
+const defaultFaqs = [
   {
     question: "What services do your virtual assistants provide?",
     answer: "Our virtual assistants offer a wide range of services including administrative support, insurance processing, real estate assistance, legal support, healthcare management, bookkeeping, marketing, and AI automation. Each VA is trained to handle industry-specific tasks efficiently.",
@@ -55,31 +55,49 @@ const stats = [
   { value: "50+", label: "Industries Served" },
 ];
 
-export default function FAQ9() {
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQ9Props {
+  faqs?: FaqItem[];
+  eyebrow?: string;
+  heading?: string;
+  text?: string;
+}
+
+export default function FAQ9({
+  faqs,
+  eyebrow = "FAQ",
+  heading = "Frequently Asked Questions",
+  text = "Get answers to common queries about our virtual assistant services and solutions.",
+}: FAQ9Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const items = faqs?.length ? faqs : defaultFaqs;
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-white">
+    <section className="relative bg-white py-16 sm:py-20 md:py-24">
       <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-12">
           <div className="flex-1 min-w-0">
             <Reveal>
               <div className="mb-8 sm:mb-10">
                 <span className="text-sm font-semibold uppercase tracking-wider text-brand">
-                  FAQ
+                  {eyebrow}
                 </span>
                 <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-ink leading-tight">
-                  Frequently Asked Questions
+                  {heading}
                 </h2>
                 <p className="mt-4 text-base sm:text-lg text-ink/70 max-w-xl">
-                  Get answers to common queries about our virtual assistant services and solutions.
+                  {text}
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.1}>
 <div className="flex flex-col gap-4">
-                {faqs.map((faq, index) => (
+                {items.map((faq, index) => (
                   <motion.div
                     key={index}
                     className="group border border-soft rounded-xl overflow-hidden transition-all duration-300 hover:border-brand/30 bg-white"
@@ -117,55 +135,59 @@ export default function FAQ9() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.2} className="hidden w-[380px] shrink-0 lg:block">
+          <div className="hidden w-[380px] shrink-0 self-stretch lg:block">
             <div className="sticky top-24 space-y-6">
-              <div className="bg-ink rounded-2xl p-6 sm:p-8 text-white">
-                <h3 className="text-xl sm:text-2xl font-bold mb-6">
-                  Still have questions?
-                </h3>
-                <p className="text-white mb-6">
-                  Can't find the answer you're looking for? Our team is here to help.
-                </p>
-                <div className="space-y-4">
-                  <a
-                    href="mailto:hello@nexprobyte.com"
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
-                  >
-                    <Mail className="w-5 h-5 text-brand" />
-                    <span className="font-medium">hello@nexprobyte.com</span>
-                  </a>
-                  <a
-                    href="tel:+1234567890"
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
-                  >
-                    <Phone className="w-5 h-5 text-brand" />
-                    <span className="font-medium">+1 (234) 567-890</span>
-                  </a>
-                </div>
-              </div>
-
-              <div className="bg-ink rounded-2xl p-6 sm:p-8 text-white">
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
-                  Trusted by Businesses Worldwide
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {stats.map((stat, index) => (
-                    <motion.div
-                      key={index}
-                      className="text-center"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
+              <Reveal delay={0.2}>
+                <div className="bg-ink rounded-2xl p-6 sm:p-8 text-white">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-6">
+                    Still have questions?
+                  </h3>
+                  <p className="text-white mb-6">
+                    Can&apos;t find the answer you&apos;re looking for? Our team is here to help.
+                  </p>
+                  <div className="space-y-4">
+                    <a
+                      href="mailto:hello@nexprobyte.com"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
                     >
-                      <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
-                        {stat.value}
-                      </div>
-                      <div className="text-sm text-white/80">{stat.label}</div>
-                    </motion.div>
-                  ))}
+                      <Mail className="w-5 h-5 text-brand" />
+                      <span className="font-medium">hello@nexprobyte.com</span>
+                    </a>
+                    <a
+                      href="tel:+1234567890"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+                    >
+                      <Phone className="w-5 h-5 text-brand" />
+                      <span className="font-medium">+1 (234) 567-890</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
+
+              <Reveal delay={0.3}>
+                <div className="bg-ink rounded-2xl p-6 sm:p-8 text-white">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
+                    Trusted by Businesses Worldwide
+                  </h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {stats.map((stat, index) => (
+                      <motion.div
+                        key={index}
+                        className="text-center"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
+                          {stat.value}
+                        </div>
+                        <div className="text-sm text-white/80">{stat.label}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         </div>
 
         <Reveal delay={0.3} className="lg:hidden mt-10">
@@ -173,9 +195,9 @@ export default function FAQ9() {
             <h3 className="text-xl sm:text-2xl font-bold">
               Still have questions?
             </h3>
-            <p className="text-white">
-              Can't find the answer you're looking for? Our team is here to help.
-            </p>
+<p className="text-white">
+                Can&apos;t find the answer you&apos;re looking for? Our team is here to help.
+              </p>
             <div className="space-y-4">
               <a
                 href="mailto:hello@nexprobyte.com"

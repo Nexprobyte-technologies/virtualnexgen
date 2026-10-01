@@ -25,18 +25,21 @@ export interface ParsedServiceInput {
   eyebrow: string;
   short: string;
   content: string[];
-  imageUrl: string;
+  imageUrl?: string;
   sections: ServiceSection[];
   ctaTitle: string;
   ctaText: string;
   ctaButton: string;
   ctaPhone: string;
   ctaPoints: string[];
-  benefits: ServiceBenefit[];
-  steps: ServiceStep[];
-  pricing: ServicePricing[];
-  testimonials: ServiceTestimonial[];
-  faqs: ServiceFaq[];
+  benefits?: ServiceBenefit[];
+  steps?: ServiceStep[];
+  pricing?: ServicePricing[];
+  testimonials?: ServiceTestimonial[];
+  faqs?: ServiceFaq[];
+  carouselImages?: string[];
+  folderPopItems: string[];
+  sectionCopy: Record<string, unknown>;
 }
 
 export const CTA_POINT_FIELDS = [
@@ -55,18 +58,21 @@ export async function parseServiceRequest(
   let eyebrow = "";
   let short = "";
   let content = "";
-  let imageUrl = "";
+  let imageUrl: string | undefined;
   let sections: ServiceSection[] = [];
   let ctaTitle = "";
   let ctaText = "";
   let ctaButton = "";
   let ctaPhone = "";
   let ctaPoints: string[] = [];
-  let benefits: ServiceBenefit[] = [];
-  let steps: ServiceStep[] = [];
-  let pricingArr: ServicePricing[] = [];
-  let testimonialsArr: ServiceTestimonial[] = [];
-  let faqsArr: ServiceFaq[] = [];
+  let benefits: ServiceBenefit[] | undefined;
+  let steps: ServiceStep[] | undefined;
+  let pricingArr: ServicePricing[] | undefined;
+  let testimonialsArr: ServiceTestimonial[] | undefined;
+  let faqsArr: ServiceFaq[] | undefined;
+  let carouselImages: string[] | undefined;
+  let folderPopItemsArr: string[] = [];
+  const sectionCopy: Record<string, unknown> = {};
 
   if (contentType.includes("multipart/form-data")) {
     const form = await request.formData();
@@ -74,7 +80,10 @@ export async function parseServiceRequest(
     eyebrow = String(form.get("eyebrow") ?? "").trim();
     short = String(form.get("short") ?? "").trim();
     content = String(form.get("content") ?? "").trim();
-    imageUrl = String(form.get("imageUrl") ?? "").trim();
+    const submittedImage = form.get("imageUrl");
+    if (typeof submittedImage === "string" && submittedImage.trim()) {
+      imageUrl = submittedImage.trim();
+    }
     ctaTitle = String(form.get("ctaTitle") ?? "").trim();
     ctaText = String(form.get("ctaText") ?? "").trim();
     ctaButton = String(form.get("ctaButton") ?? "").trim();
@@ -83,26 +92,68 @@ export async function parseServiceRequest(
       String(form.get(field) ?? "").trim(),
     ).filter(Boolean);
 
+    for (const key of [
+      "benefits",
+      "steps",
+      "pricing",
+      "testimonials",
+      "faqs",
+    ] as const) {
+      const raw = form.get(key);
+      if (typeof raw !== "string" || !raw.trim()) continue;
+      try {
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed) || parsed.length === 0) continue;
+        if (key === "benefits") benefits = parsed;
+        else if (key === "steps") steps = parsed;
+        else if (key === "pricing") pricingArr = parsed;
+        else if (key === "testimonials") testimonialsArr = parsed;
+        else faqsArr = parsed;
+      } catch {}
+    }
     try {
-      const b = form.get("benefits");
-      if (b && typeof b === "string") benefits = JSON.parse(b);
+      const ci = form.get("carouselImages");
+      if (ci && typeof ci === "string") {
+        const parsed = JSON.parse(ci);
+        if (Array.isArray(parsed)) {
+          carouselImages = parsed
+            .map((v) => String(v ?? "").trim())
+            .filter(Boolean);
+        }
+      }
     } catch {}
     try {
-      const s = form.get("steps");
-      if (s && typeof s === "string") steps = JSON.parse(s);
+      const fpi = form.get("folderPopItems");
+      if (fpi && typeof fpi === "string") folderPopItemsArr = JSON.parse(fpi);
     } catch {}
     try {
-      const p = form.get("pricing");
-      if (p && typeof p === "string") pricingArr = JSON.parse(p);
+      const sc = form.get("sectionCopy");
+      if (sc && typeof sc === "string") Object.assign(sectionCopy, JSON.parse(sc));
     } catch {}
-    try {
-      const t = form.get("testimonials");
-      if (t && typeof t === "string") testimonialsArr = JSON.parse(t);
-    } catch {}
-    try {
-      const f = form.get("faqs");
-      if (f && typeof f === "string") faqsArr = JSON.parse(f);
-    } catch {}
+
+    const logoFiles = form.getAll("logoImage");
+    if (logoFiles.length > 0) {
+      const existing =
+        sectionCopy.logosSection &&
+        typeof sectionCopy.logosSection === "object" &&
+        !Array.isArray(sectionCopy.logosSection)
+          ? (sectionCopy.logosSection as Record<string, unknown>)
+          : {};
+      const current = Array.isArray(existing.logos)
+        ? (existing.logos as Array<Record<string, unknown>>).map((logo) => ({
+            ...logo,
+          }))
+        : [];
+      for (let i = 0; i < logoFiles.length; i++) {
+        const entry = logoFiles[i];
+        if (!entry || typeof entry === "string" || entry.size === 0) continue;
+        const uploaded = await saveUpload(entry);
+        if (!uploaded) continue;
+        if (!current[i]) current[i] = {};
+        current[i].src = uploaded;
+      }
+      sectionCopy.logosSection = { ...existing, logos: current };
+    }
 
     const file = form.get("image");
     if (file && typeof file !== "string" && file.size > 0) {
@@ -160,6 +211,50 @@ export async function parseServiceRequest(
           image: String(s?.image ?? "").trim(),
         }));
     }
+    const extras = body as unknown as Record<string, unknown> | null;
+    if (extras) {
+      for (const key of [
+        "problem",
+        "benefitsSection",
+        "folderSection",
+        "logosSection",
+        "stepsSection",
+        "pricingSection",
+        "testimonialsSection",
+        "faqSection",
+        "heroButtons",
+        "trustBadges",
+        "ctaUrl",
+        "relatedTitle",
+        "folderPopItems",
+        "benefits",
+        "steps",
+        "pricing",
+        "testimonials",
+        "faqs",
+      ]) {
+        if (extras[key] !== undefined) sectionCopy[key] = extras[key];
+      }
+      if (extras.folderPopItems !== undefined) {
+        folderPopItemsArr = (extras.folderPopItems as unknown[])
+          .map((v) => String(v ?? "").trim())
+          .filter(Boolean);
+      }
+      for (const key of ["benefits", "steps", "pricing", "testimonials", "faqs"]) {
+        const value = extras[key];
+        if (!Array.isArray(value) || value.length === 0) continue;
+        if (key === "benefits") benefits = value as ServiceBenefit[];
+        else if (key === "steps") steps = value as ServiceStep[];
+        else if (key === "pricing") pricingArr = value as ServicePricing[];
+        else if (key === "testimonials") testimonialsArr = value as ServiceTestimonial[];
+        else faqsArr = value as ServiceFaq[];
+      }
+      if (Array.isArray(extras.carouselImages)) {
+        carouselImages = (extras.carouselImages as unknown[])
+          .map((v) => String(v ?? "").trim())
+          .filter(Boolean);
+      }
+    }
   }
 
   return {
@@ -182,5 +277,8 @@ export async function parseServiceRequest(
     pricing: pricingArr,
     testimonials: testimonialsArr,
     faqs: faqsArr,
+    carouselImages,
+    folderPopItems: folderPopItemsArr,
+    sectionCopy,
   };
 }

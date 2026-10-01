@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight, Home, ArrowUpRight } from "lucide-react";
 import { getServices } from "@/lib/services";
 import Reveal from "@/components/Reveal";
+import FAQ9 from "@/components/FAQ9";
 
 export const dynamic = "force-dynamic";
 
@@ -87,6 +88,7 @@ export default async function ServicesListPage() {
           </div>
         )}
       </section>
+      <FAQ9 />
     </main>
   );
 }

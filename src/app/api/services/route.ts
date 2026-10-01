@@ -25,6 +25,7 @@ export async function POST(request: Request) {
     }
 
     const service = await addService({
+      ...(input.sectionCopy as Record<string, never>),
       name: input.name,
       eyebrow: input.eyebrow || input.name.toUpperCase(),
       image: input.imageUrl,
@@ -40,7 +41,9 @@ export async function POST(request: Request) {
       steps: input.steps,
       pricing: input.pricing,
       testimonials: input.testimonials,
-      faqs: input.faqs,
+faqs: input.faqs,
+    carouselImages: input.carouselImages,
+    folderPopItems: input.folderPopItems,
     });
 
     return Response.json({ ok: true, service }, { status: 201 });

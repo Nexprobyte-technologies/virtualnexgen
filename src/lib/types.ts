@@ -34,6 +34,34 @@ export interface ServiceFaq {
   a: string;
 }
 
+export interface ServiceTrustBadge {
+  icon: string;
+  label: string;
+}
+
+export interface ServiceProblemCard {
+  title: string;
+  desc: string;
+}
+
+export interface ServiceLogo {
+  name: string;
+  src: string;
+}
+
+export interface ServiceSectionHeading {
+  eyebrow?: string;
+  heading?: string;
+  highlight?: string;
+  text?: string;
+}
+
+export interface ServiceHeroButtons {
+  primaryLabel?: string;
+  primaryUrl?: string;
+  secondaryLabel?: string;
+}
+
 export interface Service {
   id: string;
   slug: string;
@@ -49,11 +77,30 @@ export interface Service {
   ctaButton?: string;
   ctaPhone?: string;
   ctaPoints?: string[];
+  carouselImages?: string[];
   benefits?: ServiceBenefit[];
   steps?: ServiceStep[];
   pricing?: ServicePricing[];
   testimonials?: ServiceTestimonial[];
   faqs?: ServiceFaq[];
+  trustBadges?: ServiceTrustBadge[];
+  problem?: ServiceSectionHeading & {
+    points?: string[];
+    cards?: ServiceProblemCard[];
+  };
+  benefitsSection?: ServiceSectionHeading;
+  folderSection?: ServiceSectionHeading;
+  logosSection?: ServiceSectionHeading & {
+    centerText?: string;
+    logos?: ServiceLogo[];
+  };
+  stepsSection?: ServiceSectionHeading;
+  pricingSection?: ServiceSectionHeading;
+  testimonialsSection?: ServiceSectionHeading;
+  faqSection?: ServiceSectionHeading;
+  heroButtons?: ServiceHeroButtons;
+  ctaUrl?: string;
+  relatedTitle?: string;
   fullContent?: {
     contentHtml?: string;
     contentText?: string;
@@ -65,6 +112,7 @@ export interface Service {
     url?: string;
     title?: string;
     image?: string;
+    folderPopItems?: string[];
   };
 }
 

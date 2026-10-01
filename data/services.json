@@ -158,6 +158,83 @@
       "Onboarding within days",
       "No long-term lock-in",
       "Data & compliance aware"
+    ],
+    "testimonials": [
+      {
+        "quote": "Our team was spending too much time on renewals and routine policy updates. Having dedicated support has helped us keep everything organized and give our clients more attention.",
+        "name": "Mark Reynolds",
+        "role": "Independent Insurance Agency Owner"
+      },
+      {
+        "quote": "The assistance with certificates of insurance, document requests, and follow-ups has made a real difference to our daily workflow. Our account managers can focus more on serving clients.",
+        "name": "Jennifer Walsh",
+        "role": "Commercial Lines Account Manager"
+      },
+      {
+        "quote": "We needed help keeping up with quote requests and prospect follow-ups. The additional support helps us respond more consistently without adding more work to our producers.",
+        "name": "Daniel Brooks",
+        "role": "Agency Principal"
+      },
+      {
+        "quote": "Renewal preparation used to create a backlog for our team. With help tracking upcoming renewals and gathering information, the process feels much more manageable.",
+        "name": "Melissa Carter",
+        "role": "Personal Lines Manager"
+      },
+      {
+        "quote": "The support with application paperwork, client reminders, and document collection has helped us keep cases moving. It gives our team more time to work directly with clients.",
+        "name": "Robert Mitchell",
+        "role": "Life Insurance Broker"
+      },
+      {
+        "quote": "Our inbox gets busy, especially during enrollment periods. Having help with routine inquiries, appointment coordination, and follow-ups has made it easier to stay on top of requests.",
+        "name": "Angela Foster",
+        "role": "Health Insurance Agency Owner"
+      },
+      {
+        "quote": "The team picked up our processes quickly and follows the workflows we use. We spend less time explaining routine tasks and more time managing our book of business.",
+        "name": "Brian Cooper",
+        "role": "Commercial Insurance Producer"
+      },
+      {
+        "quote": "Keeping client records current across our systems takes consistent effort. The administrative support has helped us maintain better organization and follow through on outstanding items.",
+        "name": "Stephanie Price",
+        "role": "Agency Operations Manager"
+      },
+      {
+        "quote": "We needed dependable help with claims-related documentation and status follow-ups. Having someone manage those administrative steps helps us keep clients informed.",
+        "name": "Thomas Bennett",
+        "role": "Claims and Service Manager"
+      },
+      {
+        "quote": "From scheduling client reviews to updating CRM records, the extra support helps our advisors stay organized. It has become a useful part of our day-to-day operations.",
+        "name": "Rebecca Hughes",
+        "role": "Life and Health Insurance Agency Principal"
+      },
+      {
+        "quote": "Our service team handles a steady stream of policy changes and customer requests. The additional administrative capacity helps us keep tasks moving and avoid unnecessary delays.",
+        "name": "Kevin Murphy",
+        "role": "P&C Agency Manager"
+      },
+      {
+        "quote": "The support with lead tracking, appointment setting, and prospect follow-ups gives our producers more time to focus on conversations that can turn into business.",
+        "name": "Amanda Lewis",
+        "role": "Insurance Sales Manager"
+      },
+      {
+        "quote": "We appreciate having consistent help with policy documentation, renewal lists, and routine account servicing. The work is organized around our procedures rather than a generic task list.",
+        "name": "Scott Turner",
+        "role": "Commercial Lines Agency Owner"
+      },
+      {
+        "quote": "During busy periods, it's difficult to balance client communication with the paperwork behind each case. The added support helps us stay on top of both.",
+        "name": "Nicole Edwards",
+        "role": "Health Insurance Broker"
+      },
+      {
+        "quote": "Having dependable assistance with data entry, carrier follow-ups, and account documentation has taken pressure off our internal team. It's a practical way to create more room for growth.",
+        "name": "Andrew Collins",
+        "role": "Independent Insurance Agency Owner"
+      }
     ]
   },
   {

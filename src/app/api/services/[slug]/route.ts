@@ -41,6 +41,7 @@ export async function PUT(
     }
 
     const service = await updateService(slug, {
+      ...(input.sectionCopy as Record<string, never>),
       name: input.name,
       eyebrow: input.eyebrow || input.name.toUpperCase(),
       image: input.imageUrl,
@@ -57,6 +58,8 @@ export async function PUT(
       pricing: input.pricing,
       testimonials: input.testimonials,
       faqs: input.faqs,
+      carouselImages: input.carouselImages,
+      folderPopItems: input.folderPopItems,
     });
 
     if (!service) {

@@ -191,21 +191,18 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   animation: logos-scroll 20s linear infinite;
 }
 
-@keyframes logos-orbit {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@property --logos-spin {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
 }
 
-@keyframes logos-orbit-reverse {
+@keyframes logos-spin {
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    --logos-spin: 0deg;
   }
   to {
-    transform: translate(-50%, -50%) rotate(-360deg);
+    --logos-spin: 360deg;
   }
 }
 

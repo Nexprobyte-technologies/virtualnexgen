@@ -15,12 +15,26 @@ import {
   Award,
   FolderOpen,
   ChevronDown,
+  List,
 } from "lucide-react";
+import TestimonialsMarquee from "../TestimonialsMarquee";
 import { getService, getServices } from "@/lib/services";
+import {
+  clientLogos as defaultClientLogos,
+  defaultBenefits,
+  defaultSteps,
+  defaultTestimonials,
+  defaultTrustBadges,
+  folderHints,
+  problemCards,
+  problemPoints,
+  relatedTitle,
+} from "@/lib/service-defaults";
 import Reveal from "@/components/Reveal";
 import InfiniteSpiral from "@/components/InfiniteSpiral";
 import ChapterFolder from "@/components/ChapterFolder";
 import ClientLogos from "@/components/ClientLogos";
+import FAQ9 from "@/components/FAQ9";
 
 const RICH_HTML_STYLES = [
   "h2", "h3", "h4", "p", "strong", "em", "a", "ul", "ol", "li", "blockquote",
@@ -304,13 +318,13 @@ function FullContentCards({ html }: { html: string }) {
     );
   }
 
-  function renderFaqCard(card: FullContentCard) {
+  function renderFaqCard(card: FullContentCard, index: number) {
     const question = (card.heading || "").replace(
       /<[^>]*>/g,
       "",
     ).trim();
     return (
-      <div className="border-b border-white/15 py-5 last:border-0 last:pb-2 first:pt-0">
+      <div id={`faq-${index}`} className="border-b border-white/15 py-5 last:border-0 last:pb-2 first:pt-0">
         <div className="flex items-start gap-4">
           <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10">
             <ChevronDown className="h-3.5 w-3.5 text-brand" />
@@ -419,23 +433,59 @@ function FullContentCards({ html }: { html: string }) {
       )}
 
       {faqCards.length > 0 && (
-        <div className="scroll-mt-24 rounded-[2rem] border border-white/20 bg-white/5 px-6 py-8 backdrop-blur-sm sm:px-10 sm:py-10">
-          <div className="flex items-center gap-3">
-            <span className="inline-block h-2 w-2 rounded-full bg-brand" />
-            {faqHeadingCard ? (
-              renderHeading(faqHeadingCard)
-            ) : (
-              <h3 className="text-lg font-extrabold text-white sm:text-xl">
-                Frequently Asked Questions
-              </h3>
-            )}
-          </div>
-          <div className="mt-6">
-            {faqCards.map((card, i) => (
-              <Reveal key={i} delay={(i % 3) * 0.05}>
-                {renderFaqCard(card)}
-              </Reveal>
-            ))}
+        <div className="scroll-mt-24">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+            {/* Left Column: FAQ Answers */}
+            <div className="min-w-0 max-w-4xl">
+              <div className="rounded-[2rem] border border-white/20 bg-white/5 px-6 py-8 backdrop-blur-sm sm:px-10 sm:py-10">
+                <div className="flex items-center gap-3">
+                  <span className="inline-block h-2 w-2 rounded-full bg-brand" />
+                  {faqHeadingCard ? (
+                    renderHeading(faqHeadingCard)
+                  ) : (
+                    <h3 className="text-lg font-extrabold text-white sm:text-xl">
+                      Frequently Asked Questions
+                    </h3>
+                  )}
+                </div>
+                <div className="mt-6 space-y-4">
+                  {faqCards.map((card, i) => (
+                    <Reveal key={i} delay={(i % 3) * 0.05}>
+                      {renderFaqCard(card, i)}
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Sidebar: FAQ Questions (Sticky) */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-32">
+                <div className="rounded-2xl border border-white/20 bg-white/5 p-6">
+                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-white">
+                    <List className="h-4 w-4 text-[#06B6D4]" /> On This Page
+                  </h3>
+                  <nav className="mt-4">
+                    <ul className="space-y-2.5">
+                      {faqCards.map((card, i) => {
+                        const question = (card.heading || "").replace(/<[^>]*>/g, "").trim();
+                        return (
+                          <li key={i}>
+                            <a
+                              href={`#faq-${i}`}
+                              className="group flex items-start gap-2 text-sm leading-snug text-white/70 transition hover:text-white"
+                            >
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#06B6D4]/50 transition group-hover:bg-[#06B6D4]" />
+                              {question}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       )}
@@ -449,79 +499,19 @@ function FullContentCards({ html }: { html: string }) {
 
 export const dynamic = "force-dynamic";
 
-const trustBadges = [
-  { icon: Award, label: "Industry Expertise" },
-  { icon: Users, label: "Dedicated VAs" },
-  { icon: Clock, label: "Fast Onboarding" },
-  { icon: Shield, label: "Secure & Compliant" },
-  { icon: TrendingUp, label: "Up to 60% Cost Savings" },
-  { icon: Zap, label: "Workflow Ready" },
-];
+const ICONS: Record<string, typeof Zap> = {
+  Zap,
+  Shield,
+  TrendingUp,
+  Users,
+  Clock,
+  Award,
+};
 
-const defaultSteps = [
-  {
-    num: "01",
-    title: "Operations Review",
-    desc: "We assess your workflows, tools setup, and operational gaps.",
-  },
-  {
-    num: "02",
-    title: "VA Matching",
-    desc: "Matched with a trained VA aligned to your workflows and systems.",
-  },
-  {
-    num: "03",
-    title: "Systems Integration",
-    desc: "Access, SOPs, and workflows configured for seamless handoff.",
-  },
-  {
-    num: "04",
-    title: "Scale Operations",
-    desc: "Your VA handles daily tasks so your team focuses on growth.",
-  },
-];
-
-const defaultTestimonials = [
-  {
-    quote:
-      "They've taken a lot of routine work off our team's plate, which gives us more time to focus on clients and growth.",
-    name: "Dan F.",
-    role: "Director of Sales",
-  },
-  {
-    quote:
-      "We started with a few basic tasks and, over time, became comfortable giving the team more. It's worked out really well.",
-    name: "Michael S.",
-    role: "Agency Owner",
-  },
-  {
-    quote:
-      "They took the time to learn how we work, which means a lot less back-and-forth for our team.",
-    name: "Charis P.",
-    role: "President",
-  },
-  {
-    quote:
-      "They've become a real support for our account managers. They handle a lot of the work our team doesn't need to spend time on.",
-    name: "Eric K.",
-    role: "President",
-  },
-];
-
-const defaultBenefits = [
-  { icon: "Zap", title: "Ready from Day One", desc: "Trained on your industry workflows, tools, and communication standards." },
-  { icon: "Shield", title: "Expert Specialists", desc: "Proficient in your specific platforms and management systems." },
-  { icon: "TrendingUp", title: "Built to Scale", desc: "Add operational capacity without increasing internal overhead." },
-  { icon: "Users", title: "Dedicated Resources", desc: "Consistent team that learns your business inside out." },
-  { icon: "Clock", title: "Fast Turnaround", desc: "Quick response times that keep your operations moving." },
-  { icon: "Award", title: "Quality Focused", desc: "Accuracy-driven support with clear process execution." },
-];
-
-const defaultPricing = [
-  { label: "Local In-House Staff", price: "$55,000+", desc: "Salary + Taxes + Benefits + Training", highlighted: false },
-  { label: "Our Specialist", price: "$19,500", desc: "Flat Monthly Rate • Enterprise Infrastructure", highlighted: true },
-  { label: "Annual Savings", price: "$35,000+", desc: "Reclaimed capital for growth", highlighted: false },
-];
+function textOr(value: string | undefined, fallback: string): string {
+  const trimmed = (value ?? "").trim();
+  return trimmed || fallback;
+}
 
 export default async function ServiceDetailPage({
   params,
@@ -548,16 +538,48 @@ export default async function ServiceDetailPage({
 
   const benefits = service.benefits?.length ? service.benefits : defaultBenefits;
   const steps = service.steps?.length ? service.steps : defaultSteps;
-  const pricing = service.pricing?.length ? service.pricing : defaultPricing;
-  const testimonials = service.testimonials?.length ? service.testimonials : defaultTestimonials;
+  const testimonials = service.testimonials?.length
+    ? service.testimonials
+    : defaultTestimonials;
+  const serviceFaqs = service.faqs?.filter((faq) => faq.q?.trim()) ?? [];
 
+  const trustBadges = (
+    service.trustBadges?.length ? service.trustBadges : defaultTrustBadges
+  ).map((badge) => ({
+    icon: ICONS[badge.icon] ?? Award,
+    label: badge.label,
+  }));
+
+  const problemPointsList =
+    service.problem?.points?.length ? service.problem.points : problemPoints;
+  const problemCardsList =
+    service.problem?.cards?.length ? service.problem.cards : problemCards;
+
+  const logosSection = service.logosSection;
+  const logoItems = logosSection?.logos?.length
+    ? logosSection.logos.filter((logo) => logo.name || logo.src)
+    : defaultClientLogos;
+  const logoCenter = logosSection?.centerText?.trim() || "AMS\nExperts";
+
+  const heroPrimaryUrl =
+    service.heroButtons?.primaryUrl?.trim() || "https://calendly.com/virtualnexgen-info/30min";
+  const heroPrimaryLabel =
+    service.heroButtons?.primaryLabel?.trim() || "Book Your Demo";
+  const heroSecondaryLabel =
+    service.heroButtons?.secondaryLabel?.trim() || "Learn More";
+  const ctaUrl = service.ctaUrl?.trim() || heroPrimaryUrl;
+  const relatedHeading = service.relatedTitle?.trim() || relatedTitle;
+
+  const authoredCarousel = service.carouselImages?.filter(Boolean) ?? [];
   const spiralImages = Array.from(
     new Set(
-      [
-        ...(service.fullContent?.images ?? []),
-        service.fullContent?.image,
-        service.image,
-      ].filter((src): src is string => Boolean(src)),
+      authoredCarousel.length > 0
+        ? authoredCarousel
+        : [
+            ...(service.fullContent?.images ?? []),
+            service.fullContent?.image,
+            service.image,
+          ].filter((src): src is string => Boolean(src)),
     ),
   );
   while (spiralImages.length > 0 && spiralImages.length < 7) {
@@ -568,9 +590,14 @@ export default async function ServiceDetailPage({
   }
 
   const contentHtml = service.fullContent?.contentHtml || "";
-  const folderItems = service.fullContent?.headings?.length
-    ? service.fullContent.headings
-    : (service.content?.slice(0, 6) ?? []);
+  const folderPopItems = service.fullContent?.folderPopItems?.length
+    ? service.fullContent.folderPopItems
+    : [];
+  const folderItems = folderPopItems.length
+    ? folderPopItems
+    : (service.fullContent?.headings?.length
+        ? service.fullContent.headings
+        : (service.content?.slice(0, 6) ?? []));
 
   return (
     <main className="min-h-screen bg-[#132F4A]">
@@ -609,19 +636,19 @@ export default async function ServiceDetailPage({
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="https://calendly.com/virtualnexgen-info/30min"
+                  href={heroPrimaryUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-7 py-3.5 text-sm font-semibold text-white transition"
                 >
-                  Book Your Demo
+                  {heroPrimaryLabel}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
                 <a
                   href="#get-started"
                   className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-7 py-3.5 text-sm font-semibold text-ink/80 transition hover:border-brand hover:text-brand-dark"
                 >
-                  Learn More
+                  {heroSecondaryLabel}
                 </a>
               </div>
             </div>
@@ -648,12 +675,6 @@ export default async function ServiceDetailPage({
           </Reveal>
         </div>
       </section>
-{/* Content Image */}
-{service.fullContent?.image && (
-  <section className="mx-auto max-w-7xl px-5 sm:px-8 py-8">
-    <img src={service.fullContent.image} alt={`${service.name} image`} className="w-full rounded-2xl" />
-  </section>
-)}
 
       {/* Trust Badges Marquee */}
       <section className="border-y border-white/10 bg-white/[0.02] py-6 overflow-hidden">
@@ -677,22 +698,28 @@ export default async function ServiceDetailPage({
           <Reveal>
             <div>
               <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-                The Problem
+                {textOr(service.problem?.eyebrow, "The Problem")}
               </span>
               <h2 className="mt-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-                Most Businesses Aren&apos;t Struggling to Grow —
-                <span className="text-brand"> They&apos;re Buried in Operations</span>
+                {textOr(
+                  service.problem?.heading,
+                  "Most Businesses Aren't Struggling to Grow —",
+                )}
+                {service.problem?.highlight?.trim() || service.problem?.heading?.trim() ? null : (
+                  <span className="text-brand">
+                    {" "}
+                    They&rsquo;re Buried in Operations
+                  </span>
+                )}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-white/65">
-                Repetitive tasks quietly consume the time your team should spend
-                growing the business.
+                {textOr(
+                  service.problem?.text,
+                  "Repetitive tasks quietly consume the time your team should spend growing the business.",
+                )}
               </p>
               <div className="mt-8 space-y-4">
-                {[
-                  "Workflow backlogs impacting delivery",
-                  "High local staffing overhead",
-                  "Burnout from repetitive admin work",
-                ].map((item) => (
+                {problemPointsList.map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand" />
                     <span className="text-sm text-white/70">{item}</span>
@@ -704,24 +731,7 @@ export default async function ServiceDetailPage({
 
           <Reveal delay={0.15}>
             <div className="grid grid-cols-2 gap-4">
-              {[
-                {
-                  title: "Workflow Bottlenecks",
-                  desc: "Tasks pile up when processes start too late.",
-                },
-                {
-                  title: "Slow Turnaround",
-                  desc: "Delayed responses create client friction.",
-                },
-                {
-                  title: "Data Gaps",
-                  desc: "Incomplete updates lead to reporting issues.",
-                },
-                {
-                  title: "Rising Overhead",
-                  desc: "Local staffing costs keep increasing.",
-                },
-              ].map((item) => (
+              {problemCardsList.map((item) => (
                 <div
                   key={item.title}
                   className="rounded-2xl border border-white/20 bg-white/5 p-5 backdrop-blur-sm"
@@ -743,23 +753,27 @@ export default async function ServiceDetailPage({
           <Reveal>
             <div className="text-center">
               <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-                Why Choose Us
+                {textOr(service.benefitsSection?.eyebrow, "Why Choose Us")}
               </span>
               <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Built for{" "}
-                <span className="text-brand">Your Industry</span>
+                {textOr(service.benefitsSection?.heading, "Built for")}
+                <span className="text-brand">
+                  {" "}
+                  {textOr(service.benefitsSection?.highlight, "Your Industry")}
+                </span>
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-base text-white/60">
-                Trained virtual assistants integrated into your daily workflows,
-                servicing, and operations.
+                {textOr(
+                  service.benefitsSection?.text,
+                  "Specialised support that plugs directly into your workflow, from day one.",
+                )}
               </p>
             </div>
           </Reveal>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((item, i) => {
-              const iconMap: Record<string, typeof Zap> = { Zap, Shield, TrendingUp, Users, Clock, Award };
-              const Icon = iconMap[item.icon] || Zap;
+              const Icon = ICONS[item.icon] || Zap;
               return (
                 <Reveal key={i} delay={i * 0.08}>
                   <div className="group rounded-2xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-[0_12px_40px_rgba(6,182,212,0.15)]">
@@ -780,88 +794,43 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Full Content from services_full.json */}
-      {contentHtml && slug !== 'insurance-virtual-assistants' && (
-        (() => {
-          const extraImages = (service.fullContent?.images ?? [])
-            .slice(1)
-            .filter((img) => !contentHtml.includes(img));
-
-          return (
-        <section id="complete-overview" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-
-            <Reveal><div className="text-center">
-              <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
-                Complete Overview
-              </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Everything About{" "}
-                <span className="text-brand-accent">{service.name}</span>
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base text-white/65">
-                A complete guide to {service.name}. Read everything in full
-                below, or jump straight to any chapter from the interactive
-                folder in the next section.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className={service.slug === "real-estate-virtual-assistants" ? "mt-0" : "mt-14"}>
-            <FullContentCards html={contentHtml} />
-
-            {/* Additional Images from full content (skip any already shown above) */}
-            {extraImages.length > 0 && (
-              <div className="mt-16">
-                <Reveal>
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    {extraImages.map((img: string, idx: number) => (
-                      <div key={idx} className="overflow-hidden rounded-2xl border border-line shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
-                        <img
-                          src={img}
-                          alt={`${service.name} - Image ${idx + 2}`}
-                          loading="lazy"
-                          className="h-auto w-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </Reveal>
-              </div>
-            )}
-          </div>
-        </section>
-          );
-        })()
-      )}
-
       {/* Interactive Chapter Folder */}
       {folderItems.length > 0 && (
         <section
-          className="relative overflow-hidden py-16 sm:py-24 bg-[#132F4A]"
+          className="relative overflow-hidden py-10 sm:py-16 bg-[#132F4A]"
         >
           <div className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-brand/15 blur-[130px]" />
           <div className="pointer-events-none absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-deep/25 blur-[130px]" />
           <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="text-center">
-                <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
-                  Interactive Chapter Index
-                </span>
-                <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                  Every Chapter of{" "}
-                  <span className="text-brand-accent">{service.name}</span> in
-                  One Folder
-                </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-base text-white/65">
-                  Open the folder to float the full {folderItems.length}-chapter
-                  index of this guide. Grab a chapter, give it a toss, or click
-                  one to jump straight to that topic.
-                </p>
+<span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
+                   {textOr(service.folderSection?.eyebrow, "INSURANCE VA PLAYBOOK")}
+                 </span>
+                 <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+{textOr(
+                      service.folderSection?.heading,
+                      `${folderItems.length} Essential Tasks an`,
+                    )}
+                    <span className="text-brand-accent">
+                      {" "}
+                      {textOr(service.folderSection?.highlight, service.name)}
+                    </span>
+                    {service.folderSection?.highlight?.trim() ? null : (
+                      <span> Can Handle</span>
+                    )}
+                  </h2>
+                  <p className="mx-auto mt-3 max-w-2xl text-sm text-white/65 sm:text-base">
+                    {textOr(
+                      service.folderSection?.text,
+                      "Tap any folder to explore the exact workflows our virtual assistants take off your plate.",
+                    )}
+                  </p>
               </div>
             </Reveal>
 
-            <div className="relative mt-8 flex justify-center overflow-x-clip">
-              <div className="relative min-h-[520px] pt-[430px] sm:min-h-[650px] sm:pt-[560px]">
+            <div className="relative mt-4 flex justify-center overflow-x-clip">
+              <div className="relative min-h-[640px] pt-[520px] sm:min-h-[680px] sm:pt-[560px]">
                 <ChapterFolder
                   items={folderItems}
                   label={service.name}
@@ -870,12 +839,8 @@ export default async function ServiceDetailPage({
               </div>
             </div>
 
-            <div className="mt-14 flex flex-wrap items-center justify-center gap-3 text-sm">
-              {[
-                "Tap the folder to open",
-                "Drag a chapter to toss it",
-                "Click a chapter to jump",
-              ].map((hint) => (
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm">
+              {folderHints.map((hint) => (
                 <span
                   key={hint}
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-semibold text-white/75 backdrop-blur"
@@ -890,7 +855,13 @@ export default async function ServiceDetailPage({
       )}
 
       {/* Client Logos */}
-      <ClientLogos />
+      <ClientLogos
+        logos={logoItems}
+        eyebrow={logosSection?.eyebrow}
+        heading={logosSection?.heading}
+        highlight={logosSection?.highlight}
+        centerText={logoCenter}
+      />
 
       {/* How It Works */}
       <section className="bg-cream/30 py-20">
@@ -898,12 +869,21 @@ export default async function ServiceDetailPage({
           <Reveal>
             <div className="text-center">
               <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-                How It Works
+                {textOr(service.stepsSection?.eyebrow, "How It Works")}
               </span>
               <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Get Started in{" "}
-                <span className="text-brand">{steps.length} Simple Steps</span>
+                {textOr(service.stepsSection?.heading, "Get Started in")}
+                {service.stepsSection?.highlight ? (
+                  <span className="text-brand"> {service.stepsSection.highlight}</span>
+                ) : (
+                  <span className="text-brand"> {steps.length} Simple Steps</span>
+                )}
               </h2>
+              {service.stepsSection?.text?.trim() && (
+                <p className="mx-auto mt-4 max-w-2xl text-base text-white/60">
+                  {service.stepsSection.text}
+                </p>
+              )}
             </div>
           </Reveal>
 
@@ -927,87 +907,13 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-{/* Pricing Comparison */}
-      {/* <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-        <Reveal>
-          <div className="text-center">
-            <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
-              Pricing
-            </span>
-            <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-              Stop Overpaying for{" "}
-              <span className="text-brand-dark">Admin Work</span>
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {pricing.map((item, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <div className={`relative rounded-2xl border p-8 shadow-[0_2px_16px_rgba(0,0,0,0.04)] ${
-                item.highlighted
-                  ? "border-2 border-brand bg-gradient-to-br from-brand/5 to-white shadow-[0_8px_40px_rgba(249,115,22,0.12)]"
-                  : "border-line bg-white"
-              }`}>
-                {item.highlighted && (
-                  <span className="absolute -top-3 right-6 rounded-full bg-brand px-3 py-1 text-xs font-bold text-ink">
-                    Recommended
-                  </span>
-                )}
-                <h4 className={`text-sm font-bold uppercase tracking-wider ${
-                  item.highlighted ? "text-brand-dark" : "text-ink/50"
-                }`}>
-                  {item.label}
-                </h4>
-                <p className={`mt-4 text-4xl font-extrabold ${
-                  item.label.includes("Savings") ? "text-green-600" : "text-ink"
-                }`}>
-                  {item.price}
-                </p>
-                <p className="mt-2 text-sm text-ink/50">{item.desc}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section> */}
-
-      {/* Testimonials */}
-      <section className="border-y border-white/10 bg-white/[0.02] py-20 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <Reveal>
-            <div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-                Testimonials
-              </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                What Our Clients Say
-              </h2>
-            </div>
-          </Reveal>
-
-          <div className="mt-14 flex gap-6 animate-[marquee-x_30s_linear_infinite]">
-            {[...testimonials, ...testimonials].map((t, i) => (
-              <div
-                key={i}
-                className="w-[380px] shrink-0 rounded-2xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
-              >
-                <p className="text-sm leading-relaxed text-white/75 italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="mt-5 flex items-center gap-3 border-t border-white/15 pt-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/20 text-sm font-bold text-white">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-white">{t.name}</p>
-                    <p className="text-xs text-white/55">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+<TestimonialsMarquee
+        testimonials={testimonials}
+        eyebrow={service.testimonialsSection?.eyebrow}
+        heading={service.testimonialsSection?.heading}
+        highlight={service.testimonialsSection?.highlight}
+        text={service.testimonialsSection?.text}
+      />
 
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
@@ -1026,7 +932,7 @@ export default async function ServiceDetailPage({
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="https://calendly.com/virtualnexgen-info/30min"
+                  href={ctaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-deep px-7 py-3.5 text-sm font-bold text-ink transition hover:brightness-110"
@@ -1056,6 +962,17 @@ export default async function ServiceDetailPage({
         </Reveal>
       </section>
 
+      {/* FAQ */}
+      <FAQ9
+        faqs={serviceFaqs.map((faq) => ({
+          question: faq.q,
+          answer: faq.a,
+        }))}
+        eyebrow={service.faqSection?.eyebrow?.trim() || undefined}
+        heading={service.faqSection?.heading?.trim() || undefined}
+        text={service.faqSection?.text?.trim() || undefined}
+      />
+
       {/* Related Services */}
       {related.length > 0 && (
         <section className="border-t border-white/10 bg-white/[0.02] py-20">
@@ -1063,7 +980,7 @@ export default async function ServiceDetailPage({
             <Reveal>
               <div className="rounded-[2rem] border border-white/15 bg-white/5 p-6 backdrop-blur-sm sm:p-10">
                 <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
-                  Related Services
+                  {relatedHeading}
                 </h2>
                 <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {related.map((s, i) => (

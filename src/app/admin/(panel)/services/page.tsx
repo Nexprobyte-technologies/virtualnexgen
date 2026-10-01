@@ -5,7 +5,6 @@ import {
   Plus,
   Trash2,
   Upload,
-  Link2,
   Loader2,
   Search,
   X,
@@ -14,7 +13,6 @@ import {
   Layers,
   Server,
   Sparkles,
-  Zap,
   Users,
   ChevronLeft,
   ChevronRight,
@@ -93,6 +91,9 @@ export default function AdminServices() {
     { quote: "", name: "", role: "" },
   ]);
   const [faqs, setFaqs] = useState<ServiceFaq[]>([{ q: "", a: "" }]);
+  const [folderPopItems, setFolderPopItems] = useState<string[]>([
+    "",
+  ]);
   const [sections, setSections] = useState<SectionDraft[]>(() => [
     makeSection(),
   ]);
@@ -139,10 +140,15 @@ export default function AdminServices() {
 
   useEffect(() => {
     const open = showForm || Boolean(editingSlug);
-    const prev = document.body.style.overflow;
-    if (open) document.body.style.overflow = "hidden";
+    const prevBody = document.body.style.overflow;
+    const prevHtml = document.documentElement.style.overflow;
+    if (open) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    }
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevBody;
+      document.documentElement.style.overflow = prevHtml;
     };
   }, [showForm, editingSlug]);
 
@@ -201,6 +207,7 @@ export default function AdminServices() {
     setPricing([{ label: "", price: "", desc: "" }]);
     setTestimonials([{ quote: "", name: "", role: "" }]);
     setFaqs([{ q: "", a: "" }]);
+    setFolderPopItems([""]);
     if (fileRef.current) fileRef.current.value = "";
     clearSections();
     setFormError("");
@@ -285,6 +292,11 @@ export default function AdminServices() {
         form.append("faqs", JSON.stringify(filteredFaqs));
       }
 
+      const filteredFolderPopItems = folderPopItems.filter((item) => item.trim());
+      if (filteredFolderPopItems.length > 0) {
+        form.append("folderPopItems", JSON.stringify(filteredFolderPopItems));
+      }
+
       sections.forEach((section, i) => {
         form.append(`sectionHeading_${i}`, section.heading);
         form.append(`sectionText_${i}`, section.text);
@@ -357,6 +369,11 @@ export default function AdminServices() {
     setFaqs(
       service.faqs?.length ? service.faqs : [{ q: "", a: "" }],
     );
+    setFolderPopItems(
+      service.fullContent?.folderPopItems?.length
+        ? service.fullContent.folderPopItems
+        : [""],
+    );
     setSections(
       serviceToSections(service).length > 0
         ? serviceToSections(service)
@@ -407,8 +424,13 @@ export default function AdminServices() {
         <div
           className="fixed inset-0 z-40 animate-[fade-in_0.2s_ease] bg-ink/40 backdrop-blur-[2px]"
           onClick={() => { setShowForm(false); resetForm(); }}
+          onWheel={(e) => e.preventDefault()}
+          onTouchMove={(e) => e.preventDefault()}
         />
-        <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-2xl animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl">
+        <div
+          className="fixed inset-y-0 right-0 z-50 flex w-full animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl"
+          onWheel={(e) => e.stopPropagation()}
+        >
           <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
             <div className="min-w-0">
               <h3 className="text-base font-extrabold text-slate-900">
@@ -433,9 +455,9 @@ export default function AdminServices() {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex-1 overflow-y-auto px-5 py-4"
+            className="flex-1 overflow-y-auto overscroll-contain px-5 py-4"
           >
-            <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold text-slate-600">
               Heading Name *
@@ -474,389 +496,116 @@ export default function AdminServices() {
               className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20"
             />
           </label>
+        </div>
 
-          <div>
-            <span className="mb-1 block text-xs font-semibold text-slate-600">
-              Main Image
-            </span>
-            <div className="flex flex-col gap-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3">
-              <button
-                type="button"
-                onClick={() => fileRef.current?.click()}
-                className="flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-brand hover:text-brand-dark"
-              >
-                <Upload className="h-4 w-4" /> Upload Image
-              </button>
-              <input
-                ref={fileRef}
-                type="file"
-                accept="image/*"
-                onChange={handleMainFile}
-                className="hidden"
-              />
-              <div className="flex items-center gap-2 text-xs text-slate-500">
-                <Link2 className="h-3.5 w-3.5 shrink-0" />
-                <input
-                  value={imageUrl}
-                  onChange={(e) => {
-                    setImageUrl(e.target.value);
-                    setPreview("");
-                    setFile(null);
-                  }}
-                  placeholder="or paste image URL"
-                  className="w-full bg-transparent outline-none placeholder:text-slate-400"
-                />
-              </div>
-              {preview && (
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="mt-1 h-24 w-full rounded-lg object-cover"
-                />
-              )}
-            </div>
-          </div>
+          <div className="grid grid-cols-2 gap-3 items-start">
 
-          <div className="pt-1">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
               <Layers className="h-4 w-4 text-brand-dark" />
-              Page Sections (Content + Image)
+              Page Sections
               <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
                 {sections.length} / {MAX_SECTIONS}
               </span>
             </p>
-
             <div className="space-y-2.5">
               {sections.map((section, i) => (
-                <div
-                  key={section.id}
-                  className="rounded-xl border border-slate-200 bg-slate-50 p-2.5"
-                >
+                <div key={section.id} className="rounded-xl border border-slate-200 bg-white p-2.5">
                   <p className="mb-2 flex items-center justify-between text-xs font-bold text-slate-900">
                     Section {i + 1}
                     {sections.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeSection(i)}
-                        className="grid h-6 w-6 place-items-center rounded-md bg-white text-slate-400 shadow-sm transition hover:text-red-500"
-                        aria-label={`Remove section ${i + 1}`}
-                      >
+                      <button type="button" onClick={() => removeSection(i)} className="grid h-6 w-6 place-items-center rounded-md bg-slate-100 text-slate-400 shadow-sm transition hover:text-red-500" aria-label={`Remove section ${i + 1}`}>
                         <X className="h-3.5 w-3.5" />
                       </button>
                     )}
                   </p>
                   <input
                     value={section.heading ?? ""}
-                    onChange={(e) =>
-                      updateSection(i, { heading: e.target.value })
-                    }
+                    onChange={(e) => updateSection(i, { heading: e.target.value })}
                     placeholder="Section heading"
-                    className="mb-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
+                    className="mb-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
                   />
                   <textarea
                     value={section.text ?? ""}
-                    onChange={(e) =>
-                      updateSection(i, { text: e.target.value })
-                    }
+                    onChange={(e) => updateSection(i, { text: e.target.value })}
                     rows={2}
                     placeholder="Section content text"
-                    className="mb-2 w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
+                    className="mb-2 w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
                   />
                   <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => sectionFileRefs.current[i]?.click()}
-                      className="flex shrink-0 items-center gap-1.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-sm transition hover:text-brand-dark"
-                    >
+                    <button type="button" onClick={() => sectionFileRefs.current[i]?.click()} className="flex shrink-0 items-center gap-1.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-sm transition hover:text-brand-dark">
                       <Upload className="h-3.5 w-3.5" /> Image
                     </button>
-                    <input
-                      ref={(el) => {
-                        sectionFileRefs.current[i] = el;
-                      }}
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleSectionFile(i, e)}
-                      className="hidden"
-                    />
+                    <input ref={(el) => { sectionFileRefs.current[i] = el; }} type="file" accept="image/*" onChange={(e) => handleSectionFile(i, e)} className="hidden" />
                     <input
                       value={section.imageUrl ?? ""}
-                      onChange={(e) =>
-                        updateSection(i, {
-                          imageUrl: e.target.value,
-                          file: null,
-                          preview: "",
-                        })
-                      }
+                      onChange={(e) => updateSection(i, { imageUrl: e.target.value, file: null, preview: "" })}
                       placeholder="or image URL"
                       className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 outline-none transition focus:border-brand"
                     />
                   </div>
                   {section.preview && (
-                    <img
-                      src={section.preview}
-                      alt={`Section ${i + 1} preview`}
-                      className="mt-2 h-16 w-full rounded-lg object-cover"
-                    />
+                    <img src={section.preview} alt={`Section ${i + 1} preview`} className="mt-2 h-16 w-full rounded-lg object-cover" />
                   )}
                 </div>
               ))}
             </div>
-
             {sections.length < MAX_SECTIONS && (
-              <button
-                type="button"
-                onClick={() => setSections((prev) => [...prev, makeSection()])}
-                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark"
-              >
+              <button type="button" onClick={() => setSections((prev) => [...prev, makeSection()])} className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark">
                 <Plus className="h-3.5 w-3.5" /> Add Section
               </button>
             )}
           </div>
 
-          <div className="pt-1">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
               <Sparkles className="h-4 w-4 text-brand-dark" />
-              Get Started (CTA) Section
+              Get Started (CTA)
             </p>
-            <div className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <div className="space-y-3">
               <label className="block">
-                <span className="mb-1 block text-xs font-semibold text-slate-600">
-                  Heading
-                </span>
-                <input
-                  value={ctaTitle}
-                  onChange={(e) => setCtaTitle(e.target.value)}
-                  placeholder="e.g. Ready to get started with Insurance VS?"
-                  className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                />
+                <span className="mb-1 block text-xs font-semibold text-slate-600">Heading</span>
+                <input value={ctaTitle} onChange={(e) => setCtaTitle(e.target.value)} placeholder="e.g. Ready to get started with Insurance VS?" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
               </label>
               <label className="block">
-                <span className="mb-1 block text-xs font-semibold text-slate-600">
-                  Description
-                </span>
-                <textarea
-                  value={ctaText}
-                  onChange={(e) => setCtaText(e.target.value)}
-                  rows={2}
-                  placeholder="Short paragraph shown under the heading."
-                  className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                />
+                <span className="mb-1 block text-xs font-semibold text-slate-600">Description</span>
+                <textarea value={ctaText} onChange={(e) => setCtaText(e.target.value)} rows={2} placeholder="Short paragraph shown under the heading." className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
               </label>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-2 gap-2">
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold text-slate-600">
-                    Button Label
-                  </span>
-                  <input
-                    value={ctaButton}
-                    onChange={(e) => setCtaButton(e.target.value)}
-                    placeholder="e.g. Book a Free Consultation"
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                  />
+                  <span className="mb-1 block text-xs font-semibold text-slate-600">Button Label</span>
+                  <input value={ctaButton} onChange={(e) => setCtaButton(e.target.value)} placeholder="e.g. Book a Free Consultation" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
                 </label>
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold text-slate-600">
-                    Phone Number
-                  </span>
-                  <input
-                    value={ctaPhone}
-                    onChange={(e) => setCtaPhone(e.target.value)}
-                    placeholder="e.g. +1 341 888 6504"
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                  />
+                  <span className="mb-1 block text-xs font-semibold text-slate-600">Phone Number</span>
+                  <input value={ctaPhone} onChange={(e) => setCtaPhone(e.target.value)} placeholder="e.g. +1 341 888 6504" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
                 </label>
               </div>
               <div>
-                <span className="mb-1 block text-xs font-semibold text-slate-600">
-                  Checklist Points (max 5)
-                </span>
+                <span className="mb-1 block text-xs font-semibold text-slate-600">Checklist Points (max 5)</span>
                 {ctaPoints.map((point, i) => (
                   <div key={i} className="mb-2 flex items-center gap-2">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-white text-[11px] font-bold text-brand-dark shadow-sm">
-                      {i + 1}
-                    </span>
-                    <input
-                      value={point}
-                      onChange={(e) =>
-                        setCtaPoints((prev) =>
-                          prev.map((p, idx) =>
-                            idx === i ? e.target.value : p,
-                          ),
-                        )
-                      }
-                      placeholder={`Checklist point ${i + 1}`}
-                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                    />
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-white text-[11px] font-bold text-brand-dark shadow-sm">{i + 1}</span>
+                    <input value={point} onChange={(e) => setCtaPoints((prev) => prev.map((p, idx) => idx === i ? e.target.value : p))} placeholder={`Checklist point ${i + 1}`} className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Benefits */}
-          <div className="pt-1">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Zap className="h-4 w-4 text-brand-dark" />
-              Benefits Section
-            </p>
-            <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-              {benefits.map((b, i) => (
-                <div key={i} className="flex items-start gap-2 rounded-lg bg-white p-2 shadow-sm">
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-brand/10 text-xs font-bold text-brand-dark">
-                    {i + 1}
-                  </span>
-                  <div className="flex-1 space-y-1.5">
-                    <input
-                      value={b.title}
-                      onChange={(e) => setBenefits((prev) => prev.map((x, idx) => idx === i ? { ...x, title: e.target.value } : x))}
-                      placeholder="Benefit title"
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                    />
-                    <input
-                      value={b.desc}
-                      onChange={(e) => setBenefits((prev) => prev.map((x, idx) => idx === i ? { ...x, desc: e.target.value } : x))}
-                      placeholder="Benefit description"
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand"
-                    />
-                  </div>
-                  {benefits.length > 1 && (
-                    <button type="button" onClick={() => setBenefits((prev) => prev.filter((_, idx) => idx !== i))} className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 hover:text-red-500">
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button type="button" onClick={() => setBenefits((prev) => [...prev, { icon: "Zap", title: "", desc: "" }])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add Benefit
-              </button>
-            </div>
-          </div>
-
-          {/* Steps */}
-          <div className="pt-1">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <CheckCircle2 className="h-4 w-4 text-brand-dark" />
-              How It Works (Steps)
-            </p>
-            <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-              {steps.map((s, i) => (
-                <div key={i} className="flex items-start gap-2 rounded-lg bg-white p-2 shadow-sm">
-                  <input
-                    value={s.num}
-                    onChange={(e) => setSteps((prev) => prev.map((x, idx) => idx === i ? { ...x, num: e.target.value } : x))}
-                    placeholder="01"
-                    className="h-8 w-12 shrink-0 rounded-lg border border-slate-200 bg-slate-50 px-2 text-center text-xs font-bold text-slate-800 outline-none focus:border-brand"
-                  />
-                  <div className="flex-1 space-y-1.5">
-                    <input
-                      value={s.title}
-                      onChange={(e) => setSteps((prev) => prev.map((x, idx) => idx === i ? { ...x, title: e.target.value } : x))}
-                      placeholder="Step title"
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                    />
-                    <input
-                      value={s.desc}
-                      onChange={(e) => setSteps((prev) => prev.map((x, idx) => idx === i ? { ...x, desc: e.target.value } : x))}
-                      placeholder="Step description"
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand"
-                    />
-                  </div>
-                  {steps.length > 1 && (
-                    <button type="button" onClick={() => setSteps((prev) => prev.filter((_, idx) => idx !== i))} className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 hover:text-red-500">
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button type="button" onClick={() => setSteps((prev) => [...prev, { num: String(prev.length + 1).padStart(2, "0"), title: "", desc: "" }])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add Step
-              </button>
-            </div>
-          </div>
-
-          {/* Pricing */}
-          <div className="pt-1">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Server className="h-4 w-4 text-brand-dark" />
-              Pricing Comparison
-            </p>
-            <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-              {pricing.map((p, i) => (
-                <div key={i} className="flex items-start gap-2 rounded-lg bg-white p-2 shadow-sm">
-                  <div className="flex-1 space-y-1.5">
-                    <div className="grid grid-cols-2 gap-1.5">
-                      <input
-                        value={p.label}
-                        onChange={(e) => setPricing((prev) => prev.map((x, idx) => idx === i ? { ...x, label: e.target.value } : x))}
-                        placeholder="Label (e.g. In-House Staff)"
-                        className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                      />
-                      <input
-                        value={p.price}
-                        onChange={(e) => setPricing((prev) => prev.map((x, idx) => idx === i ? { ...x, price: e.target.value } : x))}
-                        placeholder="Price (e.g. $55,000+)"
-                        className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                      />
-                    </div>
-                    <input
-                      value={p.desc}
-                      onChange={(e) => setPricing((prev) => prev.map((x, idx) => idx === i ? { ...x, desc: e.target.value } : x))}
-                      placeholder="Description"
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand"
-                    />
-                  </div>
-                  <label className="flex items-center gap-1 text-[11px] text-slate-500">
-                    <input
-                      type="checkbox"
-                      checked={p.highlighted || false}
-                      onChange={(e) => setPricing((prev) => prev.map((x, idx) => idx === i ? { ...x, highlighted: e.target.checked } : x))}
-                      className="rounded"
-                    />
-                    Highlight
-                  </label>
-                  {pricing.length > 1 && (
-                    <button type="button" onClick={() => setPricing((prev) => prev.filter((_, idx) => idx !== i))} className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 hover:text-red-500">
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button type="button" onClick={() => setPricing((prev) => [...prev, { label: "", price: "", desc: "" }])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add Pricing Tier
-              </button>
-            </div>
-          </div>
-
           {/* Testimonials */}
-          <div className="pt-1">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
               <Users className="h-4 w-4 text-brand-dark" />
               Testimonials
             </p>
-            <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <div className="space-y-2">
               {testimonials.map((t, i) => (
                 <div key={i} className="rounded-lg bg-white p-2 shadow-sm space-y-1.5">
-                  <textarea
-                    value={t.quote}
-                    onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, quote: e.target.value } : x))}
-                    rows={2}
-                    placeholder="Client quote"
-                    className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                  />
+                  <textarea value={t.quote} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, quote: e.target.value } : x))} rows={2} placeholder="Client quote" className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand" />
                   <div className="grid grid-cols-2 gap-1.5">
-                    <input
-                      value={t.name}
-                      onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, name: e.target.value } : x))}
-                      placeholder="Name"
-                      className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand"
-                    />
-                    <input
-                      value={t.role}
-                      onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, role: e.target.value } : x))}
-                      placeholder="Role"
-                      className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand"
-                    />
+                    <input value={t.name} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, name: e.target.value } : x))} placeholder="Name" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
+                    <input value={t.role} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, role: e.target.value } : x))} placeholder="Role" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
                   </div>
                   {testimonials.length > 1 && (
                     <button type="button" onClick={() => setTestimonials((prev) => prev.filter((_, idx) => idx !== i))} className="text-[11px] text-red-500 hover:underline">Remove</button>
@@ -869,40 +618,35 @@ export default function AdminServices() {
             </div>
           </div>
 
-          {/* FAQs */}
-          <div className="pt-1">
+          {/* Folder Pop Items */}
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Sparkles className="h-4 w-4 text-brand-dark" />
-              FAQs
+              <Layers className="h-4 w-4 text-brand-dark" />
+              Folder Pop Items
+              <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">{folderPopItems.length}</span>
             </p>
-            <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-              {faqs.map((f, i) => (
-                <div key={i} className="rounded-lg bg-white p-2 shadow-sm space-y-1.5">
-                  <input
-                    value={f.q}
-                    onChange={(e) => setFaqs((prev) => prev.map((x, idx) => idx === i ? { ...x, q: e.target.value } : x))}
-                    placeholder="Question"
-                    className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                  />
-                  <textarea
-                    value={f.a}
-                    onChange={(e) => setFaqs((prev) => prev.map((x, idx) => idx === i ? { ...x, a: e.target.value } : x))}
-                    rows={2}
-                    placeholder="Answer"
-                    className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand"
-                  />
-                  {faqs.length > 1 && (
-                    <button type="button" onClick={() => setFaqs((prev) => prev.filter((_, idx) => idx !== i))} className="text-[11px] text-red-500 hover:underline">Remove</button>
+            <p className="mb-3 text-xs text-slate-500">Each item becomes a clickable chapter in the interactive folder.</p>
+            <div className="space-y-2">
+              {folderPopItems.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 rounded-lg bg-white p-2 shadow-sm">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-brand/10 text-xs font-bold text-brand-dark">{i + 1}</span>
+                  <input value={item} onChange={(e) => setFolderPopItems((prev) => prev.map((x, idx) => idx === i ? e.target.value : x))} placeholder="e.g., Insurance Quote & Application Processing" className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none focus:border-brand" />
+                  {folderPopItems.length > 1 && (
+                    <button type="button" onClick={() => setFolderPopItems((prev) => prev.filter((_, idx) => idx !== i))} className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 hover:text-red-500">
+                      <X className="h-3.5 w-3.5" />
+                    </button>
                   )}
                 </div>
               ))}
-              <button type="button" onClick={() => setFaqs((prev) => [...prev, { q: "", a: "" }])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add FAQ
+              <button type="button" onClick={() => setFolderPopItems((prev) => [...prev, ""])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
+                <Plus className="h-3.5 w-3.5" /> Add Folder Pop Item
               </button>
             </div>
           </div>
 
-          {formError && (
+          </div>
+
+           {formError && (
             <p className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm font-medium text-red-600">
               {formError}
             </p>
@@ -934,7 +678,6 @@ export default function AdminServices() {
               </>
             )}
           </button>
-        </div>
         </form>
         </div>
       </>

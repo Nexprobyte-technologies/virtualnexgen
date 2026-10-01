@@ -77,13 +77,13 @@ const seed: Array<Omit<Service, "sections">> = [
   },
 ];
 
-async function loadFullContent(): Promise<Record<string, any>> {
+async function loadFullContent(): Promise<Record<string, unknown>> {
   try {
     const raw = await fs.readFile(FULL_DATA_FILE, "utf-8");
-    const list = JSON.parse(raw) as any[];
-    const map: Record<string, any> = {};
+    const list = JSON.parse(raw) as Array<{ slug?: string }>;
+    const map: Record<string, unknown> = {};
     for (const item of list) {
-      if (item.slug) {
+      if (item?.slug) {
         map[item.slug.toLowerCase().replace(/[^a-z0-9]+/g, '-')] = item;
       }
     }
@@ -107,18 +107,23 @@ async function ensureFile(): Promise<void> {
 }
 
 function normalizeSections(
-  service: Omit<Service, "sections"> & { sections?: ServiceSection[]; fullContent?: any },
+  service: Omit<Service, "sections"> & {
+    sections?: ServiceSection[];
+    fullContent?: Record<string, unknown>;
+  },
 ): Service {
   let sections: ServiceSection[];
   if (Array.isArray(service.sections) && service.sections.length > 0) {
     sections = service.sections;
   } else if (service.fullContent?.tasks && Array.isArray(service.fullContent.tasks)) {
     // Use tasks from full content to create sections
-    sections = service.fullContent.tasks
+    sections = (
+      service.fullContent.tasks as Array<{ title?: string; description?: string }>
+    )
       .slice(0, 5)
-      .map((task: any) => ({
-        heading: task.title,
-        text: task.description,
+      .map((task) => ({
+        heading: task.title ?? "",
+        text: task.description ?? "",
         image: "",
       }));
   } else if (service.fullContent?.headings && Array.isArray(service.fullContent.headings)) {
@@ -157,14 +162,39 @@ function normalizeSections(
   };
 }
 
-export async function getServices(): Promise<Service[]> {
+/** Reads services.json verbatim. Use for writes so scraped content is never persisted. */
+async function loadRawServices(): Promise<Service[]> {
   await ensureFile();
-  const [raw, fullMap] = await Promise.all([
-    fs.readFile(DATA_FILE, "utf-8"),
+  const raw = await fs.readFile(DATA_FILE, "utf-8");
+  const list = JSON.parse(raw) as Service[];
+  return Array.isArray(list) ? list : [];
+}
+
+/** Scraped content as the base, admin-authored fullContent keys layered on top. */
+function mergeFullContent(
+  scraped: unknown,
+  authored: Service["fullContent"],
+): Service["fullContent"] {
+  const base = scraped && typeof scraped === "object" ? scraped : {};
+  const override = authored && typeof authored === "object" ? authored : {};
+  const merged: Record<string, unknown> = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    if (value !== undefined) merged[key] = value;
+  }
+  return merged as Service["fullContent"];
+}
+
+export async function getServices(): Promise<Service[]> {
+  const [list, fullMap] = await Promise.all([
+    loadRawServices(),
     loadFullContent(),
   ]);
-  const list = JSON.parse(raw) as Service[];
-  return list.map((s) => normalizeSections({ ...s, fullContent: fullMap[s.slug] }));
+  return list.map((s) =>
+    normalizeSections({
+      ...s,
+      fullContent: mergeFullContent(fullMap[s.slug], s.fullContent),
+    }),
+  );
 }
 
 export async function getService(
@@ -172,10 +202,11 @@ export async function getService(
 ): Promise<Service | null> {
   const [all, fullMap] = await Promise.all([getServices(), loadFullContent()]);
   const service = all.find((s) => s.slug === slug) ?? null;
-  if (service && fullMap[slug]) {
-    return { ...service, fullContent: fullMap[slug] };
-  }
-  return service;
+  if (!service) return null;
+  return {
+    ...service,
+    fullContent: mergeFullContent(fullMap[slug], service.fullContent),
+  };
 }
 
 export function slugify(text: string): string {
@@ -199,15 +230,64 @@ export interface ServiceInput {
   ctaButton?: string;
   ctaPhone?: string;
   ctaPoints?: string[];
+  carouselImages?: string[];
   benefits?: import("./types").ServiceBenefit[];
   steps?: import("./types").ServiceStep[];
   pricing?: import("./types").ServicePricing[];
   testimonials?: import("./types").ServiceTestimonial[];
   faqs?: import("./types").ServiceFaq[];
+  folderPopItems?: string[];
+  trustBadges?: import("./types").ServiceTrustBadge[];
+  problem?: import("./types").Service["problem"];
+  benefitsSection?: import("./types").ServiceSectionHeading;
+  folderSection?: import("./types").ServiceSectionHeading;
+  logosSection?: import("./types").Service["logosSection"];
+  stepsSection?: import("./types").ServiceSectionHeading;
+  pricingSection?: import("./types").ServiceSectionHeading;
+  testimonialsSection?: import("./types").ServiceSectionHeading;
+  faqSection?: import("./types").ServiceSectionHeading;
+  heroButtons?: import("./types").ServiceHeroButtons;
+  ctaUrl?: string;
+  relatedTitle?: string;
+}
+
+/** Section copy keys that are persisted as a group on the service record. */
+const SECTION_COPY_KEYS = [
+  "problem",
+  "benefitsSection",
+  "folderSection",
+  "logosSection",
+  "stepsSection",
+  "pricingSection",
+  "testimonialsSection",
+  "faqSection",
+  "heroButtons",
+  "trustBadges",
+  "ctaUrl",
+  "relatedTitle",
+] as const;
+
+function pickSectionCopy(
+  input: ServiceInput,
+  prev?: Service,
+): Partial<Service> {
+  const out: Record<string, unknown> = {};
+  const source = input as unknown as Record<string, unknown>;
+  const previous = prev as unknown as Record<string, unknown> | undefined;
+  for (const key of SECTION_COPY_KEYS) {
+    const value = source[key];
+    if (value === undefined) {
+      const fallback = previous?.[key];
+      if (fallback !== undefined) out[key] = fallback;
+      continue;
+    }
+    out[key] = value;
+  }
+  return out as Partial<Service>;
 }
 
 export async function addService(input: ServiceInput): Promise<Service> {
-  const all = await getServices();
+  const all = await loadRawServices();
   const base = slugify(input.slug ?? input.name) || "service";
   let slug = base;
   let n = 2;
@@ -237,11 +317,16 @@ export async function addService(input: ServiceInput): Promise<Service> {
     ctaButton: input.ctaButton,
     ctaPhone: input.ctaPhone,
     ctaPoints: input.ctaPoints,
+    carouselImages: input.carouselImages,
     benefits: input.benefits,
     steps: input.steps,
     pricing: input.pricing,
     testimonials: input.testimonials,
     faqs: input.faqs,
+    ...pickSectionCopy(input),
+    fullContent: {
+      folderPopItems: input.folderPopItems,
+    },
   };
   all.unshift(record);
   await fs.writeFile(DATA_FILE, JSON.stringify(all, null, 2), "utf-8");
@@ -249,7 +334,7 @@ export async function addService(input: ServiceInput): Promise<Service> {
 }
 
 export async function deleteService(slug: string): Promise<boolean> {
-  const all = await getServices();
+  const all = await loadRawServices();
   const next = all.filter((s) => s.slug !== slug);
   if (next.length === all.length) return false;
   await fs.writeFile(DATA_FILE, JSON.stringify(next, null, 2), "utf-8");
@@ -260,10 +345,16 @@ export async function updateService(
   slug: string,
   input: ServiceInput,
 ): Promise<Service | null> {
-  const all = await getServices();
+  const [all, fullMap] = await Promise.all([
+    loadRawServices(),
+    loadFullContent(),
+  ]);
   const index = all.findIndex((s) => s.slug === slug);
   if (index === -1) return null;
-  const prev = all[index];
+  const prev: Service = normalizeSections({
+    ...all[index],
+    fullContent: mergeFullContent(fullMap[slug], all[index].fullContent),
+  });
   const next: Service = {
     ...prev,
     name: input.name,
@@ -281,15 +372,81 @@ export async function updateService(
     ctaButton: input.ctaButton ?? prev.ctaButton,
     ctaPhone: input.ctaPhone ?? prev.ctaPhone,
     ctaPoints: input.ctaPoints ?? prev.ctaPoints,
+    carouselImages: input.carouselImages ?? prev.carouselImages,
     benefits: input.benefits ?? prev.benefits,
     steps: input.steps ?? prev.steps,
     pricing: input.pricing ?? prev.pricing,
     testimonials: input.testimonials ?? prev.testimonials,
     faqs: input.faqs ?? prev.faqs,
+    ...pickSectionCopy(input, prev),
+    fullContent: {
+      ...prev.fullContent,
+      folderPopItems: input.folderPopItems ?? prev.fullContent?.folderPopItems,
+    },
   };
-  all[index] = next;
+  // Persist only admin-authored fullContent overrides; scraped payload stays in
+// services_full.json and is merged in on read.
+const SCRAPED_KEYS = new Set([
+  "id",
+  "name",
+  "slug",
+  "url",
+  "title",
+  "metaDescription",
+  "image",
+  "images",
+  "intro",
+  "headings",
+  "tasks",
+  "contentHtml",
+  "contentText",
+  "contentLength",
+  "ok",
+]);
+
+function authoredFullContent(
+  record: Service,
+  folderPopItems: string[] | undefined,
+): Service["fullContent"] {
+  const source = record.fullContent ?? {};
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(source)) {
+    if (!SCRAPED_KEYS.has(key) && value !== undefined) out[key] = value;
+  }
+  const items = folderPopItems ?? out.folderPopItems;
+  if (items !== undefined) out.folderPopItems = items;
+  return out as Service["fullContent"];
+}
+
+const stored: Service = {
+  ...next,
+  fullContent: authoredFullContent(all[index], input.folderPopItems),
+};
+all[index] = stored;
   await fs.writeFile(DATA_FILE, JSON.stringify(all, null, 2), "utf-8");
   return next;
 }
 
 export const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+
+export {
+  trustBadges,
+  problemPoints,
+  problemCards,
+  defaultBenefits,
+  defaultSteps,
+  defaultPricing,
+  defaultTestimonials,
+  defaultTrustBadges,
+  clientLogos,
+  folderHints,
+  relatedTitle,
+} from "./service-defaults";
+
+export type {
+  ServiceTrustBadge,
+  ServiceProblemCard,
+  ServiceLogo,
+  ServiceSectionHeading,
+  ServiceHeroButtons,
+} from "./types";
