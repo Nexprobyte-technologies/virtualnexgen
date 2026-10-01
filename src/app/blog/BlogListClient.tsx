@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { ChevronRight, Home, Loader2 } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
+import { getCardDescription, getCardTitle } from "@/lib/blog-seo";
+import type { BlogPost } from "@/lib/types";
 
 const POSTS_PER_PAGE = 9;
 
@@ -15,16 +17,6 @@ function formatDate(date: string): string {
     day: "numeric",
     year: "numeric",
   });
-}
-
-interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  image?: string;
-  date: string;
-  tags?: string[];
 }
 
 interface BlogListClientProps {
@@ -106,14 +98,14 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                         {post.image ? (
                           <img
                             src={post.image}
-                            alt={post.title}
+                            alt={getCardTitle(post)}
                             loading="lazy"
                             className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                           />
                         ) : (
                           <div className="grid h-full w-full place-items-center bg-[#132F4A]">
                             <span className="text-5xl font-extrabold text-brand/20">
-                              {post.title.charAt(0)}
+                              {getCardTitle(post).charAt(0)}
                             </span>
                           </div>
                         )}
@@ -128,10 +120,10 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                           </span>
                         </div>
                         <h3 className="mt-3 text-xl font-extrabold leading-snug text-ink transition">
-                          {post.title}
+                          {getCardTitle(post)}
                         </h3>
                         <p className="mt-2.5 line-clamp-2 text-sm leading-relaxed text-ink/60">
-                          {post.excerpt}
+                          {getCardDescription(post)}
                         </p>
                         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink/70 transition group-hover:gap-2.5">
                           Read More <ArrowUpRight className="h-4 w-4" />
@@ -174,14 +166,14 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                       {post.image ? (
                         <img
                           src={post.image}
-                          alt={post.title}
+                          alt={getCardTitle(post)}
                           loading="lazy"
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                         />
                       ) : (
                         <div className="grid h-full w-full place-items-center bg-[#132F4A]">
                           <span className="text-4xl font-extrabold text-white/20">
-                            {post.title.charAt(0)}
+                            {getCardTitle(post).charAt(0)}
                           </span>
                         </div>
                       )}
@@ -196,10 +188,10 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                         </span>
                       </div>
                       <h3 className="mt-3 line-clamp-2 text-lg font-extrabold leading-snug text-white transition group-hover:text-[#06B6D4]">
-                        {post.title}
+                        {getCardTitle(post)}
                       </h3>
                       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/60">
-                        {post.excerpt}
+                        {getCardDescription(post)}
                       </p>
                       <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/70 transition group-hover:gap-2.5">
                         Read More <ArrowUpRight className="h-4 w-4" />

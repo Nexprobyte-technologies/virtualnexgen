@@ -3,7 +3,8 @@ import { requireAdmin } from "@/lib/auth";
 
 export async function GET() {
   const posts = await getBlogPosts();
-  return Response.json({ posts });
+  const list = posts.map(({ content, ...rest }) => rest);
+  return Response.json({ posts: list });
 }
 
 export async function POST(request: Request) {
@@ -19,9 +20,13 @@ export async function POST(request: Request) {
       excerpt?: string;
       content?: string;
       image?: string;
+      previewImage?: string;
       link?: string;
       author?: string;
       date?: string;
+      status?: string;
+      metaTitle?: string;
+      metaDescription?: string;
       tags?: string[];
     } | null;
     const title = String(body?.title ?? "").trim();
@@ -36,9 +41,13 @@ export async function POST(request: Request) {
       excerpt: String(body?.excerpt ?? "").trim(),
       content: String(body?.content ?? "").trim(),
       image: String(body?.image ?? "").trim(),
+      previewImage: String(body?.previewImage ?? "").trim(),
       link: String(body?.link ?? "").trim(),
       author: String(body?.author ?? "").trim() || "Virtual Nexgen Team",
       date: String(body?.date ?? "").trim(),
+      status: body?.status === "draft" ? "draft" : "published",
+      metaTitle: String(body?.metaTitle ?? "").trim(),
+      metaDescription: String(body?.metaDescription ?? "").trim(),
       tags,
     });
     return Response.json({ ok: true, post }, { status: 201 });

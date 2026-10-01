@@ -154,6 +154,7 @@ export default function Features() {
             eyebrow="Our Services"
             title="Our Comprehensive"
             highlight="Service Offerings"
+            align="center"
             typewriterPrefix="Explore"
             typewriterWords={[
               "Insurance Virtual Assistants",

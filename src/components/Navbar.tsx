@@ -66,12 +66,12 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
-                src="https://virtualnexgen.com/assets/uploads/logo/11590.png"
+                src="/uploads/11590.webp"
                 alt="Virtual Nexgen Solutions"
                 width={200}
                 height={52}
                 loading="eager"
-                className="h-12 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
             </a>
 
@@ -185,9 +185,9 @@ export default function Navbar() {
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-[#132F4A] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 shadow-[0_4px_16px_rgba(6,182,212,0.35)] hover:shadow-[0_6px_22px_rgba(6,182,212,0.5)] hover:scale-105 whitespace-nowrap"
+                    className="rounded-full border border-white bg-white px-5 py-2 text-sm font-semibold text-[#132F4A] transition-all duration-300 shadow-[0_4px_16px_rgba(6,182,212,0.35)] hover:shadow-[0_6px_22px_rgba(6,182,212,0.5)] whitespace-nowrap"
                   >
-                    Appointment
+                    <span>Appointment</span>
                   </a>
                 </li>
               </ul>
@@ -197,7 +197,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between gap-3 lg:hidden py-3">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0">
               <Image
-                src="https://virtualnexgen.com/assets/uploads/logo/11590.png"
+                src="/uploads/11590.webp"
                 alt="Virtual Nexgen Solutions"
                 width={180}
                 height={48}
@@ -288,9 +288,9 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
-                    className="mt-2 w-full rounded-full bg-[#132F4A] px-5 py-3 text-sm font-semibold text-white text-center shadow-[0_4px_16px_rgba(6,182,212,0.35)] block"
+                    className="mt-2 w-full rounded-full border border-white bg-white px-5 py-3 text-sm font-semibold text-[#132F4A] transition-all duration-300 text-center shadow-[0_4px_16px_rgba(6,182,212,0.35)] block"
                   >
-                    Book Appointment
+                    <span>Book Appointment</span>
                   </a>
                 </div>
 

@@ -253,6 +253,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .typewriter-caret {
   display: inline-block;
   width: 0.08em;
+  height: 1em;
   margin-left: 0.06em;
   background: currentColor;
   animation: caret-blink 1s steps(1) infinite;

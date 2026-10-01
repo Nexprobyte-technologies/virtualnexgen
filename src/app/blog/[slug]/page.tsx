@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -14,6 +15,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import sanitizeHtml from "sanitize-html";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
+import { buildBlogPostMetadata } from "@/lib/blog-seo";
 import AskAboutUs from "@/components/AskAboutUs";
 
 export const dynamic = "force-dynamic";
@@ -232,16 +234,29 @@ const MARKDOWN_COMPONENTS = {
   ),
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getBlogPost(slug, { publishedOnly: true });
+  if (!post) {
+    return { title: "Blog | Virtual Nexgen Solutions", robots: "noindex, follow" };
+  }
+  return buildBlogPostMetadata(post);
+}
+
 export default async function BlogDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, { publishedOnly: true });
   if (!post) notFound();
 
-  const allPosts = await getBlogPosts();
+  const allPosts = await getBlogPosts({ publishedOnly: true });
   const related = allPosts.filter((p) => p.slug !== slug).slice(0, 2);
   const category = post.tags?.[0] ?? "General";
   const readTime = estimateReadTime(post.content);

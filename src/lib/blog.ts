@@ -206,19 +206,31 @@ async function ensureFile(): Promise<BlogPost[]> {
   }
 }
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export function isBlogPostPublished(post: BlogPost): boolean {
+  return (post.status ?? "published") === "published";
+}
+
+export async function getBlogPosts(options?: {
+  publishedOnly?: boolean;
+}): Promise<BlogPost[]> {
   const [posts, fullMap] = await Promise.all([ensureFile(), loadFullContent()]);
-  return posts.map((post) => {
+  const merged = posts.map((post) => {
     const full = fullMap[post.slug];
     if (full) {
       return { ...post, content: full.contentHtml };
     }
     return post;
   });
+  return options?.publishedOnly
+    ? merged.filter(isBlogPostPublished)
+    : merged;
 }
 
-export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const all = await getBlogPosts();
+export async function getBlogPost(
+  slug: string,
+  options?: { publishedOnly?: boolean },
+): Promise<BlogPost | null> {
+  const all = await getBlogPosts(options);
   return all.find((post) => post.slug === slug) ?? null;
 }
 
@@ -232,6 +244,10 @@ export type BlogPostInput = {
   date: string;
   tags?: string[];
   slug?: string;
+  status?: "draft" | "published";
+  previewImage?: string;
+  metaTitle?: string;
+  metaDescription?: string;
 };
 
 export async function addBlogPost(input: BlogPostInput): Promise<BlogPost> {
@@ -258,6 +274,10 @@ export async function addBlogPost(input: BlogPostInput): Promise<BlogPost> {
     date: input.date || new Date().toISOString().slice(0, 10),
     tags: input.tags ?? [],
     createdAt: new Date().toISOString(),
+    status: input.status ?? "published",
+    previewImage: input.previewImage ?? "",
+    metaTitle: input.metaTitle ?? "",
+    metaDescription: input.metaDescription ?? "",
   };
   all.unshift(post);
   upsertBySlug(fullPosts, createFullBlogPost(post, fullPosts));
@@ -281,12 +301,16 @@ export async function updateBlogPost(
     ...all[index],
     title: input.title,
     excerpt: input.excerpt,
-    content: input.content,
+    content: input.content || all[index].content,
     image: input.image,
     link: input.link,
     author: input.author,
     date: input.date || all[index].date,
     tags: input.tags ?? all[index].tags,
+    status: input.status ?? all[index].status ?? "published",
+    previewImage: input.previewImage ?? all[index].previewImage ?? "",
+    metaTitle: input.metaTitle ?? all[index].metaTitle ?? "",
+    metaDescription: input.metaDescription ?? all[index].metaDescription ?? "",
   };
   all[index] = next;
   upsertBySlug(

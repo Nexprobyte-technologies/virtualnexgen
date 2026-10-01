@@ -27,17 +27,17 @@ export default function InternationalClients() {
               Serving businesses across the United States, Canada, United Kingdom, Australia, and beyond — our virtual assistants work across time zones to keep your operations running 24/7.
             </p>
             <div className="mt-5 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:justify-start">
-              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-white px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-line shadow-sm">
-                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-brand" />
-                <span className="text-xs sm:text-sm font-medium text-white/70">50+ States</span>
+              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
+                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
+                <span className="text-xs sm:text-sm font-medium text-white">50+ States</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-white px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-line shadow-sm">
-                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-brand" />
-                <span className="text-xs sm:text-sm font-medium text-white/70">10+ Countries</span>
+              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
+                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
+                <span className="text-xs sm:text-sm font-medium text-white">10+ Countries</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-white px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-line shadow-sm">
-                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-brand" />
-                <span className="text-xs sm:text-sm font-medium text-white/70">24/7 Support</span>
+              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
+                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
+                <span className="text-xs sm:text-sm font-medium text-white">24/7 Support</span>
               </div>
             </div>
           </Reveal>

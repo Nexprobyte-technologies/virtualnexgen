@@ -237,8 +237,59 @@ export default function ContactPage() {
         {/* ================= Form ================= */}
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              <Reveal delay={0.1} className="lg:col-start-2">
+            <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+              <div className="lg:col-start-1 lg:row-start-1">
+                <SectionHeading
+                  align="left"
+                  eyebrow="Get In Touch"
+                  title="Tell Us About Your"
+                  highlight="Requirements"
+                  description="Answer a few quick questions and we'll route you to the right team."
+                />
+
+                <Reveal delay={0.15}>
+                  <ul className="mt-8 space-y-4">
+                    {[
+                      { icon: ShieldCheck, text: "Response within one business day" },
+                      { icon: Lock, text: "Your information is 100% secure — never shared" },
+                      { icon: CheckCircle2, text: "No obligation, cancel anytime" },
+                    ].map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <li key={item.text} className="flex items-center gap-3 text-sm text-white/70">
+                          <span className="grid h-8 w-8 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          {item.text}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Reveal>
+
+                {info && (
+                  <Reveal delay={0.25}>
+                    <div className="mt-8 space-y-4">
+                      {info.email && (
+                        <a
+                          href={`mailto:${info.email}`}
+                          className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 transition hover:border-brand"
+                        >
+                          <span className="grid h-10 w-10 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
+                            <Mail className="h-4 w-4" />
+                          </span>
+                          <span>
+                            <span className="block text-xs text-white/40">Email Us</span>
+                            <span className="block text-sm font-bold text-white">{info.email}</span>
+                          </span>
+                        </a>
+                      )}
+                    </div>
+                  </Reveal>
+                )}
+              </div>
+
+              <Reveal delay={0.1} className="lg:col-start-2 lg:row-start-1">
                 <div className="rounded-[2rem] border border-white/20 bg-white/5 p-6 sm:p-8 backdrop-blur-sm">
                   {status === "sent" ? (
                     <div className="flex flex-col items-center justify-center py-14 text-center">
@@ -355,54 +406,7 @@ export default function ContactPage() {
                     </form>
                   )}
                 </div>
-            </Reveal>
-
-              <div className="lg:col-start-1">
-                <SectionHeading
-                  align="left"
-                  eyebrow="Get In Touch"
-                  title="Tell Us About Your"
-                  highlight="Requirements"
-                  description="Answer a few quick questions and we'll route you to the right team."
-                />
-
-                <Reveal delay={0.15}>
-                  <ul className="mt-8 space-y-4">
-                    {[
-                      { icon: ShieldCheck, text: "Response within one business day" },
-                      { icon: Lock, text: "Your information is 100% secure — never shared" },
-                      { icon: CheckCircle2, text: "No obligation, cancel anytime" },
-                    ].map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <li key={item.text} className="flex items-center gap-3 text-sm text-white/70">
-                          <span className="grid h-8 w-8 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          {item.text}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </Reveal>
-
-                {info?.phoneUS && (
-                  <Reveal delay={0.2}>
-                    <a
-                      href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
-                      className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-5 py-4 transition hover:border-brand hover:shadow-[0_8px_30px_rgba(249,115,22,0.25)]"
-                    >
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
-                        <Phone className="h-4 w-4" />
-                      </span>
-                      <span>
-                        <span className="block text-xs text-white/40">Prefer to talk?</span>
-                        <span className="block text-sm font-bold text-white">{info.phoneUS}</span>
-                      </span>
-                    </a>
-                  </Reveal>
-                )}
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -493,17 +497,17 @@ export default function ContactPage() {
             <div className="mt-12 grid gap-5 md:grid-cols-2">
               {testimonials.map((t, i) => (
                 <Reveal key={t.name} delay={0.06 * i}>
-                  <figure className="card h-full p-6 sm:p-7">
-                    <blockquote className="text-sm leading-relaxed text-ink/70">
+                  <figure className="card h-full p-6 sm:p-7 bg-white/5 border border-white/10">
+                    <blockquote className="text-sm leading-relaxed text-white/80">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
                     <figcaption className="mt-5 flex items-center gap-3">
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-cream-2 text-ink/50">
+                      <span className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white/50">
                         <ArrowRight className="h-4 w-4" />
                       </span>
                       <span>
-                        <span className="block text-sm font-bold text-ink">{t.name}</span>
-                        <span className="block text-xs text-ink/40">{t.role}</span>
+                        <span className="block text-sm font-bold text-white">{t.name}</span>
+                        <span className="block text-xs text-white/40">{t.role}</span>
                       </span>
                     </figcaption>
                   </figure>
@@ -514,7 +518,7 @@ export default function ContactPage() {
         </section>
 
         {/* ================= FAQ ================= */}
-        <section className="bg-white py-16 sm:py-20">
+        <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-10">
             <SectionHeading
               eyebrow="Contact FAQs"
@@ -527,18 +531,18 @@ export default function ContactPage() {
                 const open = openFaq === i;
                 return (
                   <Reveal key={faq.q} delay={0.04 * i}>
-                    <div className="overflow-hidden rounded-2xl border border-line bg-cream/60 transition hover:border-brand/40">
+                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#132F4A] transition hover:border-brand/40">
                       <button
                         type="button"
                         onClick={() => setOpenFaq(open ? null : i)}
                         aria-expanded={open}
                         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
                       >
-                        <span className="text-sm font-semibold text-ink sm:text-base">
+                        <span className="text-sm font-semibold text-white sm:text-base">
                           {faq.q}
                         </span>
                         <ChevronDown
-                          className={`h-5 w-5 shrink-0 text-ink/40 transition-transform duration-300 ${
+                          className={`h-5 w-5 shrink-0 text-white/40 transition-transform duration-300 ${
                             open ? "rotate-180" : ""
                           }`}
                         />
@@ -552,7 +556,7 @@ export default function ContactPage() {
                             transition={{ duration: 0.3 }}
                             className="overflow-hidden"
                           >
-                            <p className="border-t border-line px-5 pb-5 pt-4 text-sm leading-relaxed text-ink/60 sm:px-6">
+                            <p className="border-t border-white/10 px-5 pb-5 pt-4 text-sm leading-relaxed text-white/60 sm:px-6">
                               {faq.a}
                             </p>
                           </motion.div>
@@ -570,7 +574,7 @@ export default function ContactPage() {
         <section className="pb-20 pt-4">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <Reveal>
-              <div className="animated-gradient relative overflow-hidden rounded-[2.5rem] px-6 py-14 text-center sm:px-12 sm:py-16">
+              <div className="animated-gradient relative overflow-hidden rounded-[2.5rem] border border-white px-6 py-14 text-center sm:px-12 sm:py-16">
                 <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
                 <div className="relative">
                   <h2 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl">

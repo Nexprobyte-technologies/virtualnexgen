@@ -791,14 +791,14 @@ export default async function ServiceDetailPage({
         <section id="complete-overview" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
 
             <Reveal><div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-dark">
+              <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
                 Complete Overview
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Everything About{" "}
-                <span className="text-brand-dark">{service.name}</span>
+                <span className="text-brand-accent">{service.name}</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base text-ink/60">
+              <p className="mx-auto mt-4 max-w-2xl text-base text-white/65">
                 A complete guide to {service.name}. Read everything in full
                 below, or jump straight to any chapter from the interactive
                 folder in the next section.

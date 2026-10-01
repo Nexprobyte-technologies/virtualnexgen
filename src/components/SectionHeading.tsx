@@ -37,8 +37,10 @@ export default function SectionHeading({
       </Reveal>
       {typewriterWords && typewriterWords.length > 0 && (
         <Reveal delay={0.15}>
-          <p className="mt-4 text-lg font-semibold text-white/95 sm:text-xl flex items-center gap-2">
-            <span className="whitespace-nowrap shrink-0">{typewriterPrefix}</span>
+          <p className="mt-4 text-lg font-semibold text-white/95 sm:text-xl">
+            {typewriterPrefix && (
+              <span className="whitespace-nowrap">{typewriterPrefix} </span>
+            )}
             <TypewriterText
               words={typewriterWords}
               className="text-white"
