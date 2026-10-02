@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { motion } from "framer-motion";
 import type { Service } from "@/lib/types";
 import ChatBot from "@/components/ChatBot";
 
@@ -21,6 +22,13 @@ export default function Navbar() {
   const pathname = usePathname();
   const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/services") || pathname.startsWith("/about") || pathname.startsWith("/casestudy") || pathname.startsWith("/contacts");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState(() => {
+    if (pathname.startsWith("/blog")) return "Blog";
+    if (pathname.startsWith("/contacts")) return "Contact Us";
+    if (pathname.startsWith("/services")) return "Services";
+    if (pathname.startsWith("/about") || pathname.startsWith("/casestudy")) return "About Us";
+    return "Home";
+  });
   const [services, setServices] = useState<Service[]>([]);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -60,9 +68,9 @@ export default function Navbar() {
   return (
     <>
 <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 mt-[20px]`}
+      className="fixed top-0 left-0 right-0 z-50 mt-[20px] animate-[navbar-drop_700ms_cubic-bezier(0.22,1,0.36,1)_both]"
     >
-      <div className="mx-auto w-[80%] rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-6 py-2">
+      <div className="mx-auto w-[80%] rounded-full border border-slate-200 bg-white/95 shadow-[0_10px_35px_rgba(15,23,42,0.12)] backdrop-blur-xl px-6 py-2 transition-shadow duration-300 hover:shadow-[0_14px_42px_rgba(15,23,42,0.18)]">
           <div className="hidden lg:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
@@ -78,20 +86,24 @@ export default function Navbar() {
             <nav>
               <ul className="flex items-center gap-1">
 {isSubPage ? (
-                    <li>
+                    <li className="relative">
+                      {activeNav === "Home" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                       <Link
                         href="/"
-                        className="relative px-4 py-2 text-sm font-medium text-white hover:text-white transition-colors whitespace-nowrap rounded-full hover:bg-white/5"
+                        onClick={() => setActiveNav("Home")}
+                        className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
                       >
                         Home
                       </Link>
                     </li>
                   ) : (
                   staticLinks.map((link) => (
-                    <li key={link.href}>
+                    <li key={link.href} className="relative">
+                      {activeNav === link.label && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                       <a
                         href={link.href}
-                        className="relative px-4 py-2 text-sm font-medium text-white hover:text-white transition-colors whitespace-nowrap rounded-full hover:bg-white/5"
+                        onClick={() => setActiveNav(link.label)}
+                        className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
                       >
                         {link.label}
                       </a>
@@ -100,12 +112,14 @@ export default function Navbar() {
                 )}
 
                 <li ref={aboutDropdownRef} className="relative">
+                  {activeNav === "About Us" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <button
                     onClick={() => {
+                      setActiveNav("About Us");
                       setAboutOpen(!aboutOpen);
                       setServicesOpen(false);
                     }}
-                    className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-white hover:text-white transition-colors whitespace-nowrap rounded-full hover:bg-white/5"
+                    className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
                   >
                     About Us
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${aboutOpen ? "rotate-180" : ""}`} />
@@ -128,9 +142,13 @@ export default function Navbar() {
                 </li>
 
                 <li ref={dropdownRef} className="relative">
+                  {activeNav === "Services" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <button
-                    onClick={() => setServicesOpen(!servicesOpen)}
-                    className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-white hover:text-white transition-colors whitespace-nowrap rounded-full hover:bg-white/5"
+                    onClick={() => {
+                      setActiveNav("Services");
+                      setServicesOpen(!servicesOpen);
+                    }}
+                    className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
                   >
                     Services
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
@@ -162,30 +180,34 @@ export default function Navbar() {
                   )}
                 </li>
 
-                <li>
+                <li className="relative">
+                  {activeNav === "Blog" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <Link
                     href="/blog"
-                    className="relative px-4 py-2 text-sm font-medium text-white hover:text-white transition-colors whitespace-nowrap rounded-full hover:bg-white/5"
+                    onClick={() => setActiveNav("Blog")}
+                    className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
                   >
                     Blog
                   </Link>
-                </li>
+                  </li>
 
-                <li>
+                <li className="relative">
+                  {activeNav === "Contact Us" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <Link
                     href="/contacts"
-                    className="relative px-4 py-2 text-sm font-medium text-white hover:text-white transition-colors whitespace-nowrap rounded-full hover:bg-white/5"
+                    onClick={() => setActiveNav("Contact Us")}
+                    className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
                   >
                     Contact Us
                   </Link>
-                </li>
+                  </li>
 
                 <li>
                   <a
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-white bg-white px-5 py-2 text-sm font-semibold text-[#132F4A] transition-all duration-300 shadow-[0_4px_16px_rgba(6,182,212,0.35)] hover:shadow-[0_6px_22px_rgba(6,182,212,0.5)] whitespace-nowrap"
+                    className="rounded-full border border-[#132F4A] bg-[#132F4A] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#06B6D4] hover:border-[#06B6D4] whitespace-nowrap"
                   >
                     <span>Appointment</span>
                   </a>
@@ -207,7 +229,7 @@ export default function Navbar() {
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 text-white hover:text-[#06B6D4] transition-colors"
+              className="p-2 text-[#132F4A] hover:text-[#06B6D4] transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -216,14 +238,14 @@ export default function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="lg:hidden border-t border-line bg-[#132F4A]">
+          <div className="lg:hidden mt-2 rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.15)] animate-[navbar-drop_350ms_cubic-bezier(0.22,1,0.36,1)_both]">
             <div className="mx-auto max-w-[1280px] px-6 py-4">
               <nav className="flex flex-col gap-1">
 {isSubPage ? (
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
-                      className="rounded-xl px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 hover:text-white"
+                      className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
                     >
                       Home
                     </Link>
@@ -233,35 +255,35 @@ export default function Navbar() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 hover:text-white"
+                        className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
                       >
                         {link.label}
                       </a>
                     ))
                   )}
 
-                  <div className="border-t border-white/20 mt-2 pt-2">
-                    <p className="px-4 py-2 text-xs font-semibold text-white/40 uppercase tracking-wider">About Us</p>
+                  <div className="border-t border-slate-200 mt-2 pt-2">
+                    <p className="px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">About Us</p>
                     {aboutLinks.map((link) => (
                       <Link
                         key={link.label}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-2.5 text-sm text-white transition hover:bg-white/10 hover:text-[#06B6D4] block"
+                        className="rounded-xl px-4 py-2.5 text-sm text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4] block"
                       >
                         {link.label}
                       </Link>
                     ))}
                   </div>
 
-                  <div className="border-t border-white/20 mt-2 pt-2">
-                    <p className="px-4 py-2 text-xs font-semibold text-white/40 uppercase tracking-wider">Services</p>
+                  <div className="border-t border-slate-200 mt-2 pt-2">
+                    <p className="px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Services</p>
                     {services.map((s) => (
                       <Link
                         key={s.slug}
                         href={`/services/${s.slug}`}
                         onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-2.5 text-sm text-white transition hover:bg-white/10 hover:text-[#06B6D4] block"
+                        className="rounded-xl px-4 py-2.5 text-sm text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4] block"
                       >
                         {s.name}
                       </Link>
@@ -269,16 +291,16 @@ export default function Navbar() {
                     <Link
                       href="/services"
                       onClick={() => setMobileOpen(false)}
-                      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#06B6D4] transition hover:bg-white/10 block"
+                      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#06B6D4] transition hover:bg-slate-100 block"
                     >
                       View All Services
                     </Link>
                   </div>
 
-                  <div className="mt-3 border-t border-white/20 pt-3">
+                  <div className="mt-3 border-t border-slate-200 pt-3">
                     <a
                       href="tel:+13418886504"
-                      className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-white"
+                      className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#132F4A]"
                     >
                       <Phone className="h-4 w-4" />
                       +1 341 888 6504
@@ -288,24 +310,24 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
-                    className="mt-2 w-full rounded-full border border-white bg-white px-5 py-3 text-sm font-semibold text-[#132F4A] transition-all duration-300 text-center shadow-[0_4px_16px_rgba(6,182,212,0.35)] block"
+                    className="mt-2 w-full rounded-full border border-[#132F4A] bg-[#132F4A] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 text-center hover:bg-[#06B6D4] hover:border-[#06B6D4] block"
                   >
                     <span>Book Appointment</span>
                   </a>
                 </div>
 
-                <div className="mt-3 border-t border-white/20 pt-3 flex flex-col gap-1">
+                <div className="mt-3 border-t border-slate-200 pt-3 flex flex-col gap-1">
                   <Link
                     href="/blog"
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 hover:text-white"
+                    className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
                   >
                     Blog
                   </Link>
                   <Link
                     href="/contacts"
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 hover:text-white"
+                    className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
                   >
                     Contact Us
                   </Link>

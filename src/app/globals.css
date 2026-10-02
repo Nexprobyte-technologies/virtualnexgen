@@ -396,6 +396,11 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   border: 1px solid #06B6D4;
 }
 
+@keyframes navbar-drop {
+  from { opacity: 0; transform: translateY(-14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @keyframes hero-industry-enter {
   from { opacity: 0; transform: translateY(14px) scale(0.82); }
   to { opacity: 1; transform: translateY(0) scale(1); }
@@ -417,7 +422,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 
 @media (prefers-reduced-motion: reduce) {
   .hero-industry-card,
-  .hero-industry-fill {
+  .hero-industry-fill,
+  header[class*="navbar-drop"] {
     animation: none;
   }
 
