@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, CheckCircle, FileText, RefreshCcw, Home, Building2, Scale, Calculator, MapPin, FileSearch, ClipboardCheck } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, CheckCircle2, Building2, Scale, Calculator, Home, FileText, Truck, ShoppingCart, Shield, Wrench, HardHat, Landmark, Stethoscope, House } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import TypewriterText from "./TypewriterText";
 
@@ -40,32 +40,26 @@ const aiTools = [
   },
 ];
 
-const industryCards: Record<string, { icon: typeof FileText; title: string; subtitle: string; tag: string; percent: number; glass: boolean }[]> = {
-  "Insurance": [
-    { icon: FileText, title: "COI Processing & Endorsements", subtitle: "52 Requests Completed", tag: "Quality Verified", percent: 92, glass: true },
-    { icon: RefreshCcw, title: "Policy Renewals Managed", subtitle: "48 Policies Updated", tag: "On Schedule", percent: 87, glass: false },
-    { icon: CheckCircle, title: "New Business Quotes Processed", subtitle: "36 Quotes Submitted", tag: "Turnaround Optimized", percent: 78, glass: true },
-  ],
-  "Real Estate": [
-    { icon: Home, title: "Property Listings Managed", subtitle: "34 Listings Updated", tag: "MLS Synced", percent: 94, glass: true },
-    { icon: MapPin, title: "Lead Follow-ups Completed", subtitle: "28 Leads Contacted", tag: "Response < 1hr", percent: 90, glass: false },
-    { icon: FileSearch, title: "Transaction Coordination", subtitle: "18 Closings Tracked", tag: "On Track", percent: 85, glass: true },
-  ],
-  "Legal": [
-    { icon: Scale, title: "Case File Preparation", subtitle: "42 Files Reviewed", tag: "Compliance OK", percent: 93, glass: true },
-    { icon: Calculator, title: "Billing & Time Entries", subtitle: "56 Entries Logged", tag: "No Missed Hours", percent: 89, glass: false },
-    { icon: Building2, title: "Court Filing Support", subtitle: "24 Filings Processed", tag: "Deadline Met", percent: 96, glass: true },
-  ],
-  "Healthcare": [
-    { icon: ClipboardCheck, title: "Medical Records Management", subtitle: "68 Records Updated", tag: "HIPAA Compliant", percent: 95, glass: true },
-    { icon: FileText, title: "Insurance Verification", subtitle: "41 Claims Verified", tag: "Accuracy 99.5%", percent: 91, glass: false },
-    { icon: RefreshCcw, title: "Appointment Scheduling", subtitle: "73 Appointments Set", tag: "On Schedule", percent: 88, glass: true },
-  ],
-};
+const industryCards = [
+  { icon: Shield, title: "Insurance Agencies", tasks: ["Policy servicing", "Renewals & quotes", "COIs"], outcome: "So your agents can focus on clients." },
+  { icon: Wrench, title: "HVAC Companies", tasks: ["Service calls", "Scheduling & dispatch", "Follow-ups"], outcome: "So your team can keep customers comfortable." },
+  { icon: Home, title: "Real Estate Agencies", tasks: ["Listings", "Lead follow-ups", "Transaction coordination"], outcome: "So you can focus on closing deals." },
+  { icon: Landmark, title: "Wealth Management Firms (RIAs)", tasks: ["Client onboarding", "Paperwork & scheduling", "CRM updates"], outcome: "So advisors can focus on building relationships." },
+  { icon: HardHat, title: "Construction Companies", tasks: ["Project documentation", "Invoicing", "Coordination"], outcome: "So your team can focus on getting the job done." },
+  { icon: Wrench, title: "Plumbing Companies", tasks: ["Incoming calls", "Appointments & dispatch", "Customer follow-ups"], outcome: "So your technicians can focus on the job." },
+  { icon: Building2, title: "Restoration Companies", tasks: ["Emergency calls", "Job documentation", "Claims communication"], outcome: "So your team can focus on restoring properties." },
+  { icon: Truck, title: "Freight and Trucking Companies", tasks: ["Dispatch support", "Load tracking", "Invoicing & PODs"], outcome: "So your team can keep freight moving." },
+  { icon: House, title: "Property Management Companies", tasks: ["Tenant inquiries", "Maintenance requests", "Lease administration"], outcome: "So you can focus on your properties." },
+  { icon: HardHat, title: "Roofing Companies", tasks: ["Lead follow-ups", "Inspection scheduling", "Estimates"], outcome: "So your team can focus on winning more projects." },
+  { icon: Calculator, title: "CPA and Accounting Firms", tasks: ["Bookkeeping support", "Document collection", "Client follow-ups"], outcome: "So you can focus on your clients’ finances." },
+  { icon: Scale, title: "Law Firms", tasks: ["Client intake", "Appointment scheduling", "Case file organization"], outcome: "So your team can focus on legal work." },
+  { icon: FileText, title: "Mortgage Companies", tasks: ["Loan documents", "Application follow-ups", "Client communication"], outcome: "So your team can keep loans moving." },
+  { icon: Stethoscope, title: "Medical Practices", tasks: ["Appointment scheduling", "Patient inquiries", "Administrative tasks"], outcome: "So your staff can focus on patient care." },
+  { icon: ShoppingCart, title: "E-commerce Businesses", tasks: ["Order management", "Customer inquiries", "Product updates"], outcome: "So you can focus on growing your online store." },
+];
 
 export default function Hero() {
   const [industryIndex, setIndustryIndex] = useState(0);
-  const [cardIndex, setCardIndex] = useState(0);
   const rootRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -73,26 +67,15 @@ export default function Hero() {
   const askAiRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const typewriterRef = useRef<HTMLDivElement>(null);
-  const cardWrapRef = useRef<HTMLDivElement>(null);
-  const cardInnerRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const isFirst = useRef(true);
-
-  const currentIndustry = typewriterWords[industryIndex];
-  const cards = industryCards[currentIndustry];
-
-  const handleWordChange = useCallback((index: number) => {
-    setIndustryIndex(index);
-    setCardIndex(0);
-    isFirst.current = true;
-  }, []);
+  const industryPanelRef = useRef<HTMLDivElement>(null);
+  const currentIndustry = industryCards[industryIndex];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCardIndex((prev) => (prev + 1) % cards.length);
-    }, 4000);
+      setIndustryIndex((prev) => (prev + 1) % industryCards.length);
+    }, 9000);
     return () => clearInterval(timer);
-  }, [cards.length]);
+  }, []);
 
   // Entrance animation
   useGSAP(
@@ -105,66 +88,10 @@ export default function Hero() {
       tl.fromTo(descRef.current, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6 }, 0.45);
       tl.fromTo(ctaRef.current, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6 }, 0.55);
       tl.fromTo(askAiRef.current, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6 }, 0.6);
-      tl.fromTo(
-        cardWrapRef.current,
-        { autoAlpha: 0, y: 200, scale: 0.8 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "back.out(1.4)" },
-        0.5,
-      );
+      tl.fromTo(industryPanelRef.current, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.5);
     },
     { scope: rootRef },
   );
-
-  // Card slide transition on industry change
-  useEffect(() => {
-    if (isFirst.current) {
-      isFirst.current = false;
-      if (progressRef.current) {
-        gsap.fromTo(
-          progressRef.current,
-          { width: "0%" },
-          { width: `${cards[0].percent}%`, duration: 1.2, ease: "power2.out", delay: 1 },
-        );
-      }
-      return;
-    }
-
-    if (!cardInnerRef.current) return;
-
-    const tl = gsap.timeline();
-
-    tl.to(cardInnerRef.current, {
-      x: 80,
-      autoAlpha: 0,
-      scale: 0.9,
-      duration: 0.3,
-      ease: "power2.in",
-    });
-
-    tl.fromTo(
-      cardInnerRef.current,
-      { x: -80, autoAlpha: 0, scale: 0.9 },
-      {
-        x: 0,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        clearProps: "all",
-      },
-    );
-
-    if (progressRef.current) {
-      tl.fromTo(
-        progressRef.current,
-        { width: "0%" },
-        { width: `${cards[cardIndex].percent}%`, duration: 1, ease: "power2.out" },
-        "-=0.2",
-      );
-    }
-  }, [industryIndex, cardIndex, cards]);
-
-  const slide = cards[cardIndex];
 
   return (
     <section
@@ -200,7 +127,7 @@ export default function Hero() {
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
                 Powered By Trained VAs in <br />
                 <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#06B6D4] font-semibold relative">
-                  <TypewriterText words={typewriterWords} className="text-[#06B6D4]" onWordChange={handleWordChange} />
+                  <TypewriterText words={typewriterWords} className="text-[#06B6D4]" />
                 </span>
               </p>
             </div>
@@ -255,68 +182,43 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Auto-Cycling Card */}
+          {/* Right: Auto-cycling industry support cards */}
           <div
-            ref={cardWrapRef}
-            className="relative min-h-[160px] sm:min-h-[180px] md:min-h-[200px] lg:min-h-[260px] flex mt-4 sm:mt-6 lg:mt-8 items-start justify-center order-2"
+            ref={industryPanelRef}
+            className="mt-4 sm:mt-6 lg:mt-8 order-2"
           >
-            <div
-              ref={cardInnerRef}
-              className={`w-full sm:w-[380px] lg:w-[420px] rounded-xl lg:rounded-2xl border border-white transition-colors duration-500 flex flex-col gap-2 sm:gap-3 lg:gap-4 p-3 sm:p-4 lg:p-6 ${
-                slide.glass
-                  ? "bg-[#132F4A]/80 backdrop-blur-md"
-                  : "bg-[#132F4A] shadow-2xl"
-              }`}
-            >
-              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-                <slide.icon className="w-8 h-8 sm:w-9 sm:h-9 lg:w-12 lg:h-12 text-[#06B6D4] stroke-[1.5]" />
-                <div>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-lg font-bold text-white tracking-tight">
-                    {slide.title}
-                  </p>
-                  <p className="text-xs sm:text-sm md:text-base lg:text-base font-medium text-white/60">
-                    {slide.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <div className="w-full h-1 sm:h-1.5 lg:h-2 bg-white/20 rounded-full overflow-hidden">
-                <div
-                  ref={progressRef}
-                  className="h-full rounded-full"
-                  style={{
-                    background: "linear-gradient(90deg, #132F4A 0%, #06B6D4 50%, #000080 100%)",
-                    backgroundSize: "200% 100%",
-                    width: `${slide.percent}%`,
-                  }}
-                />
-              </div>
-
-              <div className="flex justify-between items-center">
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-2 sm:px-3 lg:px-4 py-1 lg:py-1.5 bg-[#132F4A] rounded-full">
-                  {slide.tag}
-                </p>
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm font-medium text-white px-3 sm:px-4 lg:px-6 py-1 lg:py-1.5 bg-[#132F4A] rounded-full">
-                  {slide.percent}%
-                </p>
-              </div>
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#06B6D4]">Industry-focused support</span>
+              <span className="text-xs font-medium text-white/50">{String(industryIndex + 1).padStart(2, "0")} / 15</span>
             </div>
-
-            {/* Dot indicators */}
-            <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2">
-              {cards.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCardIndex(i)}
-                  aria-label={`Go to card ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === cardIndex
-                      ? "w-6 sm:w-8 bg-[#06B6D4]"
-                      : "w-2 sm:w-3 bg-[#06B6D4]/30 hover:bg-[#06B6D4]/60"
-                  }`}
-                />
+            <div className="mb-3 flex items-center gap-2 text-white">
+              <currentIndustry.icon className="h-5 w-5 text-[#06B6D4]" />
+              <h2 className="text-base font-bold sm:text-lg">{currentIndustry.title}</h2>
+            </div>
+            <div className="flex flex-col gap-2.5 sm:gap-3">
+              {currentIndustry.tasks.map((task, taskIndex) => (
+                  <article
+                    key={`${currentIndustry.title}-${task}-${industryIndex}`}
+                    className="hero-industry-card relative overflow-hidden rounded-xl border border-white/15 bg-white/[0.06] p-3 sm:p-4 backdrop-blur-sm"
+                    style={{ animationDelay: `${taskIndex * 140}ms` }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#06B6D4]/15 text-[#06B6D4]">
+                        <CheckCircle2 className="h-4 w-4" />
+                      </span>
+                      <span className="text-sm font-semibold text-white sm:text-base">{task}</span>
+                    </div>
+                    <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
+                      <div
+                        key={`${currentIndustry.title}-fill-${task}-${industryIndex}`}
+                        className="hero-industry-fill h-full rounded-full bg-[#06B6D4]"
+                        style={{ animationDelay: `${taskIndex * 2400}ms` }}
+                      />
+                    </div>
+                  </article>
               ))}
             </div>
+            <p className="mt-3 text-xs leading-relaxed text-white/60">{currentIndustry.outcome}</p>
           </div>
         </div>
       </div>

@@ -8,48 +8,48 @@ import { gsap, useGSAP } from "@/lib/gsap";
 const steps = [
   {
     num: "01",
-    label: "Strategy",
-    phase: "Discovery & Workflow Assessment",
+    label: "Understand",
+    phase: "PHASE 01 · Business Discovery & Needs Assessment",
     icon: FaSearch,
-    title: "Strategy",
-    desc: "We assess your workflow, service gaps, and operational bottlenecks to build a tailored support plan that aligns with your agency goals.",
-    features: ["Workflow & bottleneck audit", "Service gap analysis", "SLA benchmark definition"],
+    title: "Identify Where Support Creates Value",
+    desc: "We learn how your business operates, identify time-consuming responsibilities, and determine where a dedicated Virtual Assistant can make the greatest contribution.",
+    features: ["Business Needs Assessment", "Administrative Workload Review", "Support Requirements Planning"],
   },
   {
     num: "02",
-    label: "Workflow Mapping",
-    phase: "Process Design & SOP Creation",
+    label: "Build Workflow",
+    phase: "PHASE 02 · Process Design & Documentation",
     icon: FaLayerGroup,
-    title: "Workflow Mapping",
-    desc: "We design clear SOPs and map every task flow so your virtual assistant can execute consistently from day one.",
-    features: ["Custom SOP development", "Task flow documentation", "Tool integration setup"],
+    title: "Turn Daily Tasks Into Clear Processes",
+    desc: "We organize your recurring responsibilities into structured workflows, document essential procedures, and establish clear guidelines for task ownership and communication.",
+    features: ["Standard Operating Procedures", "Task & Responsibility Planning", "Workflow Documentation"],
   },
   {
     num: "03",
-    label: "Execution",
-    phase: "Deployment & Task Management",
+    label: "Put in Motion",
+    phase: "PHASE 03 · Onboarding & Implementation",
     icon: FaRocket,
-    title: "Execution",
-    desc: "Your trained VA begins handling real tasks under structured workflows, with daily tracking and seamless handoffs.",
-    features: ["Dedicated VA assignment", "Daily task management", "Real-time status updates"],
+    title: "Bring Your Dedicated VA Into the Team",
+    desc: "We prepare your Virtual Assistant to work with your systems, understand your processes, and take on assigned responsibilities through a structured onboarding process.",
+    features: ["Dedicated VA Onboarding", "Software & Systems Familiarization", "Task Handover & Implementation"],
   },
   {
     num: "04",
-    label: "Quality Control",
-    phase: "Review & Accuracy Assurance",
+    label: "Maintain Standards",
+    phase: "PHASE 04 · Quality Assurance & Monitoring",
     icon: FaShieldAlt,
-    title: "Quality Control",
-    desc: "Every output is reviewed through a multi-layer QA process to ensure accuracy, compliance, and consistency.",
-    features: ["Multi-step QA reviews", "Accuracy tracking", "Compliance checks"],
+    title: "Keep Work Accurate and On Track",
+    desc: "We review task completion, reinforce established procedures, and monitor performance to help ensure work remains consistent with your business expectations.",
+    features: ["Work Accuracy Reviews", "Process Compliance Checks", "Performance Tracking"],
   },
   {
     num: "05",
-    label: "Scale & Optimize",
-    phase: "Growth & Continuous Improvement",
+    label: "Grow with Confidence",
+    phase: "PHASE 05 · Continuous Improvement & Expansion",
     icon: FaChartLine,
-    title: "Scale & Optimize",
-    desc: "As your agency grows, we scale support seamlessly and continuously refine processes for maximum efficiency.",
-    features: ["Flexible team scaling", "Process optimization", "Performance reporting"],
+    title: "Adapt Your Support as You Grow",
+    desc: "As your workload and priorities change, we help refine existing processes and adjust your Virtual Assistant support to meet evolving business needs.",
+    features: ["Workflow Improvements", "Changing Workload Management", "Flexible Support Expansion"],
   },
 ];
 
@@ -111,10 +111,10 @@ export default function HowWeSupport() {
           <div ref={titleRef} className="flex items-start sm:items-end justify-between gap-3 sm:gap-4 pb-1 sm:pb-2">
             <div className="text-left max-w-2xl">
               <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-                How Our Virtual Assistants Support
+                How We Turn Your Workload Into a Workflow
               </h2>
               <p className="text-sm sm:text-sm md:text-base lg:text-base font-normal text-white/70 mt-0.5 sm:mt-1">
-                Designed to save time, reduce workload, and scale with your agency.
+                From understanding your business to managing everyday tasks, we build a support process around the way your team operates.
               </p>
             </div>
             <div className="flex-shrink-0 self-center sm:self-end">
@@ -183,9 +183,6 @@ export default function HowWeSupport() {
               <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-4 sm:gap-6 lg:gap-8 items-center">
                 <div className="text-left">
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-[30px] mb-2 sm:mb-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-transparent border border-white/50 text-white">
-                      Phase {step.num}
-                    </span>
                     <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-white/60">
                       {step.phase}
                     </span>

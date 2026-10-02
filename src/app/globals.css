@@ -396,6 +396,36 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   border: 1px solid #06B6D4;
 }
 
+@keyframes hero-industry-enter {
+  from { opacity: 0; transform: translateY(14px) scale(0.82); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes hero-industry-fill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.hero-industry-card {
+  animation: hero-industry-enter 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-industry-fill {
+  width: 0;
+  animation: hero-industry-fill 2400ms linear both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-industry-card,
+  .hero-industry-fill {
+    animation: none;
+  }
+
+  .hero-industry-fill {
+    width: 100%;
+  }
+}
+
 /* Custom Cursor */
 .custom-cursor {
   position: fixed;
