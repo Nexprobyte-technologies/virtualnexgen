@@ -300,11 +300,11 @@ export default async function BlogDetailPage({
       {/* Featured Image */}
       {post.image && (
         <div className="mx-auto max-w-7xl px-5 sm:px-8 mt-[50px]">
-          <div className="overflow-hidden rounded-2xl border border-line shadow-[0_8px_40px_rgba(0,0,0,0.1)]">
+          <div className="mx-auto flex w-fit max-w-full justify-center overflow-hidden rounded-2xl border border-line shadow-[0_8px_40px_rgba(0,0,0,0.1)]">
             <img
               src={post.image}
               alt={post.title}
-              className="h-auto w-full object-cover"
+              className="h-[400px] w-auto max-w-full object-cover"
             />
           </div>
         </div>

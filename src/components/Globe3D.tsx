@@ -17,12 +17,10 @@ const markers = [
 ];
 
 const arcs = [
-  { startLat: 39.9, startLng: -82.9, endLat: 51.5, endLng: -0.1 },
-  { startLat: 39.9, startLng: -82.9, endLat: 43.6, endLng: -79.3 },
-  { startLat: 39.9, startLng: -82.9, endLat: -33.8, endLng: 151.2 },
-  { startLat: 39.9, startLng: -82.9, endLat: 20.5, endLng: 78.9 },
-  { startLat: 51.5, startLng: -0.1, endLat: 1.3, endLng: 103.8 },
-  { startLat: 43.6, startLng: -79.3, endLat: -1.2, endLng: 36.8 },
+  { startLat: 20.5, startLng: 78.9, endLat: 39.9, endLng: -82.9 },
+  { startLat: 20.5, startLng: 78.9, endLat: 43.6, endLng: -79.3 },
+  { startLat: 20.5, startLng: 78.9, endLat: 51.5, endLng: -0.1 },
+  { startLat: 20.5, startLng: 78.9, endLat: -33.8, endLng: 151.2 },
 ];
 
 export default function Globe3D() {
