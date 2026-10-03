@@ -31,9 +31,9 @@ export default function ChapterFolder({
       autoCycleOpenMs={20000}
       autoCycleCloseMs={1200}
       drift={1}
-      width={320}
+      width={280}
       height={180}
-      spread={320}
+      spread={280}
       lift={34}
       radius={22}
       tilt={7}

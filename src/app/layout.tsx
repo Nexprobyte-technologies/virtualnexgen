@@ -45,7 +45,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className="min-h-full flex flex-col bg-background text-foreground"
+        className="min-h-screen min-h-[100dvh] flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
         <noscript>

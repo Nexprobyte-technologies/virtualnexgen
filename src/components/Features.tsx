@@ -92,52 +92,58 @@ export default function Features() {
       const root = rootRef.current;
       if (!track || !root) return;
 
-      const getDistance = () =>
-        Math.max(track.scrollWidth - window.innerWidth, 0);
+      const media = gsap.matchMedia();
 
-      gsap.fromTo(
-        "[data-service-card]",
-        { autoAlpha: 0, y: 60 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.06,
-          ease: "power3.out",
-          scrollTrigger: { trigger: root, start: "top 65%" },
-        },
-      );
+      media.add("(min-width: 1280px) and (min-height: 850px)", () => {
+        const getDistance = () => Math.max(track.scrollWidth - window.innerWidth, 0);
 
-      const tween = gsap.to(track, {
-        x: () => -getDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: () => `+=${getDistance()}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          refreshPriority: 1,
-          onUpdate: (self) => {
-            if (progressRef.current) {
-              gsap.set(progressRef.current, { scaleX: self.progress });
-            }
+        gsap.fromTo(
+          "[data-service-card]",
+          { autoAlpha: 0, y: 60 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.06,
+            ease: "power3.out",
+            scrollTrigger: { trigger: root, start: "top 65%" },
           },
-        },
+        );
+
+        const tween = gsap.to(track, {
+          x: () => -getDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: () => `+=${getDistance()}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            refreshPriority: 1,
+            onUpdate: (self) => {
+              if (progressRef.current) gsap.set(progressRef.current, { scaleX: self.progress });
+            },
+          },
+        });
+
+        const refreshId = requestAnimationFrame(() => ScrollTrigger.refresh());
+        return () => {
+          cancelAnimationFrame(refreshId);
+          tween.scrollTrigger?.kill();
+          tween.kill();
+        };
       });
 
-      const refreshId = requestAnimationFrame(() =>
-        ScrollTrigger.refresh(),
-      );
+      media.add("(max-width: 1279px), (max-height: 849px)", () => {
+        gsap.set("[data-service-card]", { autoAlpha: 1, y: 0 });
+        gsap.set(track, { clearProps: "transform" });
+        if (progressRef.current) gsap.set(progressRef.current, { scaleX: 1 });
+      });
 
-      return () => {
-        cancelAnimationFrame(refreshId);
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      };
+      return () => media.revert();
     },
     { scope: rootRef },
   );
@@ -146,9 +152,9 @@ export default function Features() {
     <section
       id="services"
       ref={rootRef}
-      className="relative h-screen overflow-hidden bg-cream pb-10 sm:pb-16 lg:pb-20"
+      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-cream pb-24 sm:pb-32 xl:pb-40"
     >
-      <div className="flex h-full flex-col justify-center pt-20 sm:pt-28 lg:pt-36 mt-[10px]">
+      <div className="flex min-h-[100svh] flex-col justify-center pt-20 sm:pt-28 xl:pt-36 mt-[10px] xl:h-full">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
           <SectionHeading
             eyebrow="Our Services"
@@ -170,7 +176,7 @@ export default function Features() {
 
         <div
           ref={trackRef}
-          className="mt-6 sm:mt-8 lg:mt-10 flex w-max gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10"
+          className="services-track mt-6 sm:mt-8 xl:mt-10 flex w-max max-w-full gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-6 xl:px-10 xl:max-w-none xl:overflow-visible"
         >
           {services.map((service) => (
             <a
@@ -180,7 +186,7 @@ export default function Features() {
               rel="noopener noreferrer"
               data-animate
               data-service-card
-              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] lg:w-[370px] border border-line rounded-3xl bg-[#132F4A] transition-all duration-300 hover:border-[#06B6D4]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
+              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#132F4A] transition-all duration-300 hover:border-[#06B6D4]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -210,7 +216,7 @@ export default function Features() {
           ))}
         </div>
 
-        <div className="mx-auto mt-10 w-full max-w-7xl px-6 lg:px-10">
+        <div className="services-scroll-cue mx-auto mt-10 hidden w-full max-w-7xl px-6 xl:block xl:px-10">
           <div className="flex items-center gap-4">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
               Scroll

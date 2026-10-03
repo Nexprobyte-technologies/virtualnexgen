@@ -113,7 +113,93 @@ body {
   color: var(--foreground);
   font-family: "DM Sans", var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   overflow-x: clip;
+  min-height: 100dvh;
   overscroll-behavior: none;
+}
+
+.site-navbar {
+  margin-top: max(0.5rem, env(safe-area-inset-top));
+}
+
+.services-showcase-section {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+@media (min-width: 1280px) and (min-height: 850px) {
+  .services-showcase-section {
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1279px), (max-height: 849px) {
+  .services-showcase-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .services-track {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .services-scroll-cue {
+    display: none;
+  }
+
+  .services-track::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.client-logo-orbit {
+  --orbit: clamp(64px, calc(50vw - 64px), 115px);
+}
+
+@media (min-width: 640px) {
+  .client-logo-orbit {
+    --orbit: 190px;
+  }
+}
+
+@media (max-width: 639px) {
+  .client-logo-orbit {
+    width: min(23rem, calc(100vw - 2rem));
+    height: min(23rem, calc(100vw - 2rem));
+  }
+}
+
+.chat-widget-toggle {
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.chat-widget-panel {
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: calc(6rem + env(safe-area-inset-bottom));
+  max-height: calc(100dvh - 7rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+@media (max-width: 640px) {
+  .chat-widget-panel {
+    right: max(0.5rem, env(safe-area-inset-right));
+    bottom: calc(5.25rem + env(safe-area-inset-bottom));
+    width: min(24rem, calc(100vw - 1rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
+    max-height: calc(100dvh - 6.25rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    border-radius: 1.25rem;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 *,

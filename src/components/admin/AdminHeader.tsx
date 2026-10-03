@@ -8,8 +8,10 @@ import {
   ChevronDown,
   ExternalLink,
   LogOut,
+  Menu,
   Search,
   Settings,
+  X,
 } from "lucide-react";
 import type { Service } from "@/lib/types";
 
@@ -26,6 +28,7 @@ export default function AdminHeader() {
   const [userOpen, setUserOpen] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
   const [queryOpen, setQueryOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
   const queryRef = useRef<HTMLDivElement>(null);
@@ -67,12 +70,32 @@ export default function AdminHeader() {
       )
     : services.slice(0, 5);
 
+  const mobileLinks = [
+    ["Dashboard", "/admin/dashboard"],
+    ["Services", "/admin/services"],
+    ["Blog", "/admin/blog"],
+    ["About Page", "/admin/about"],
+    ["Case Studies", "/admin/casestudy"],
+    ["Contact Page", "/admin/contacts"],
+    ["Appointments", "/admin/appointments"],
+  ];
+
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="flex items-center gap-3 px-4 py-3 lg:px-5">
         <div className="min-w-0 lg:hidden">
           <p className="truncate text-sm font-bold text-ink">VNX Admin</p>
         </div>
+
+        <button
+          type="button"
+          onClick={() => setMobileNavOpen((open) => !open)}
+          className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-700 lg:hidden"
+          aria-label={mobileNavOpen ? "Close admin navigation" : "Open admin navigation"}
+          aria-expanded={mobileNavOpen}
+        >
+          {mobileNavOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+        </button>
 
         <div className="hidden min-w-0 lg:block">
           <h1 className="truncate text-base font-bold text-slate-900">
@@ -136,7 +159,7 @@ export default function AdminHeader() {
               </span>
             </button>
             {notifOpen && (
-              <div className="absolute right-0 top-full z-30 mt-2 w-80 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
+              <div className="absolute right-0 top-full z-30 mt-2 w-80 max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
                 <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
                   <p className="text-sm font-bold text-slate-900">Notifications</p>
                   <span className="rounded-full bg-brand/15 px-2 py-0.5 text-xs font-semibold text-brand-dark">
@@ -227,6 +250,22 @@ export default function AdminHeader() {
           </div>
         </div>
       </div>
+      {mobileNavOpen && (
+        <nav className="border-t border-slate-200 bg-white px-3 py-2 shadow-lg lg:hidden">
+          <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
+            {mobileLinks.map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setMobileNavOpen(false)}
+                className={`rounded-lg px-3 py-2.5 text-sm font-medium transition ${pathname.startsWith(href) ? "bg-brand/10 text-brand-dark" : "text-slate-700 hover:bg-slate-50"}`}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

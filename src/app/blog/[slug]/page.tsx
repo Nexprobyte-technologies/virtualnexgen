@@ -304,7 +304,7 @@ export default async function BlogDetailPage({
             <img
               src={post.image}
               alt={post.title}
-              className="h-[400px] w-auto max-w-full object-cover"
+              className="h-auto max-h-[400px] w-full object-contain sm:h-[400px] sm:w-auto"
             />
           </div>
         </div>

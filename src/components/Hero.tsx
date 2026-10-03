@@ -97,16 +97,16 @@ export default function Hero() {
     <section
       id="home"
       ref={rootRef}
-      className="relative overflow-hidden py-10 sm:py-14 md:py-18 lg:py-28"
+      className="relative overflow-hidden py-10 sm:py-14 md:py-18 xl:py-28"
       style={{ background: "#132F4A" }}
     >
       <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#06B6D4]/12 blur-[120px]" />
       <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#06B6D4]/10 blur-[120px]" />
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] xl:grid-cols-[1.3fr_0.7fr] gap-6 lg:gap-2 items-center">
+        <div className="grid gap-6 items-center xl:grid-cols-[1.2fr_0.8fr] xl:gap-2 2xl:grid-cols-[1.3fr_0.7fr]">
           {/* Left: Text Content */}
-          <div className="max-w-[720px] mx-auto lg:mx-0 text-left order-1">
+          <div className="max-w-[720px] mx-auto xl:mx-0 text-left order-1">
             <div ref={badgeRef}>
               <span className="inline-flex items-center gap-2 bg-white/10 border border-[#06B6D4]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-white">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#06B6D4] rounded-full animate-pulse flex-shrink-0" />
@@ -118,9 +118,9 @@ export default function Hero() {
               ref={headingRef}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]"
             >
-              Scale Your Business
+              You Lead the Business.
               <br />
-              Without Hiring More Staff
+              We Handle the Busywork.
             </h1>
 
             <div ref={typewriterRef}>
@@ -136,8 +136,8 @@ export default function Hero() {
               ref={descRef}
               className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-white/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xl"
             >
-              Our operations specialists handle quotes, renewals, COIs, and admin work
-              &mdash; so your agents can focus on selling and serving clients.
+              Dedicated Virtual Assistants to Streamline Operations, Reduce Administrative Work,
+              &mdash; and Help Your Business Grow.
             </p>
 
             <div ref={askAiRef} className="mt-4 sm:mt-5">

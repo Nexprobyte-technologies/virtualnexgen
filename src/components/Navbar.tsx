@@ -68,10 +68,10 @@ export default function Navbar() {
   return (
     <>
 <header
-      className="fixed top-0 left-0 right-0 z-50 mt-[20px] animate-[navbar-drop_700ms_cubic-bezier(0.22,1,0.36,1)_both]"
+      className="site-navbar fixed top-0 left-0 right-0 z-50 mt-2 sm:mt-5 animate-[navbar-drop_700ms_cubic-bezier(0.22,1,0.36,1)_both]"
     >
-      <div className="mx-auto w-[80%] rounded-full border border-slate-200 bg-white/95 shadow-[0_10px_35px_rgba(15,23,42,0.12)] backdrop-blur-xl px-6 py-2 transition-shadow duration-300 hover:shadow-[0_14px_42px_rgba(15,23,42,0.18)]">
-          <div className="hidden lg:flex items-center justify-between py-1 px-2">
+      <div className="mx-auto w-[calc(100%-1rem)] sm:w-[80%] rounded-full border border-slate-200 bg-white/95 shadow-[0_10px_35px_rgba(15,23,42,0.12)] backdrop-blur-xl px-3 sm:px-6 py-1 sm:py-2 transition-shadow duration-300 hover:shadow-[0_14px_42px_rgba(15,23,42,0.18)]">
+          <div className="hidden xl:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image
                 src="/uploads/11590.webp"
@@ -216,7 +216,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <div className="flex items-center justify-between gap-3 lg:hidden py-3">
+          <div className="flex items-center justify-between gap-3 xl:hidden py-3">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0">
               <Image
                 src="/uploads/11590.webp"
@@ -238,7 +238,7 @@ export default function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="lg:hidden mt-2 rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.15)] animate-[navbar-drop_350ms_cubic-bezier(0.22,1,0.36,1)_both]">
+          <div className="xl:hidden mt-2 max-h-[calc(100dvh-6rem-env(safe-area-inset-top))] overflow-y-auto overscroll-contain rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.15)] animate-[navbar-drop_350ms_cubic-bezier(0.22,1,0.36,1)_both]">
             <div className="mx-auto max-w-[1280px] px-6 py-4">
               <nav className="flex flex-col gap-1">
 {isSubPage ? (

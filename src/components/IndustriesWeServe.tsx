@@ -79,7 +79,7 @@ export default function IndustriesWeServe() {
 
         <Reveal delay={0.15}>
           <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#132F4A] via-[#132F4A] to-[#000000] border border-[#06B6D4]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(19,47,74,0.3)]">
-            <div data-industry-grid className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+            <div data-industry-grid className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {industries.map((industry) => {
                 const Icon = industry.icon;
                 return (

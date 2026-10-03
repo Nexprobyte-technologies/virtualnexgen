@@ -830,7 +830,7 @@ export default async function ServiceDetailPage({
             </Reveal>
 
             <div className="relative mt-4 flex justify-center overflow-x-clip">
-              <div className="relative min-h-[640px] pt-[520px] sm:min-h-[680px] sm:pt-[560px]">
+              <div className="relative min-h-[500px] pt-[380px] sm:min-h-[680px] sm:pt-[560px]">
                 <ChapterFolder
                   items={folderItems}
                   label={service.name}

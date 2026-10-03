@@ -108,7 +108,7 @@ export default function HowWeSupport() {
         <div className="w-full flex flex-col">
 
           {/* Title row */}
-          <div ref={titleRef} className="flex items-start sm:items-end justify-between gap-3 sm:gap-4 pb-1 sm:pb-2">
+          <div ref={titleRef} className="flex flex-col items-start justify-between gap-3 pb-1 sm:flex-row sm:items-end sm:gap-4 sm:pb-2">
             <div className="text-left max-w-2xl">
               <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
                 How We Turn Your Workload Into a Workflow
@@ -117,7 +117,7 @@ export default function HowWeSupport() {
                 From understanding your business to managing everyday tasks, we build a support process around the way your team operates.
               </p>
             </div>
-            <div className="flex-shrink-0 self-center sm:self-end">
+            <div className="flex-shrink-0 self-start sm:self-end">
               <a href="#services">
                 <button className="group text-white cursor-pointer font-bold px-3.5 sm:px-5 py-1.5 sm:py-2 border border-white/20 rounded-full inline-flex items-center gap-1.5 sm:gap-2 shadow-xs text-xs sm:text-sm hover:shadow-md transition-all whitespace-nowrap">
                   <span className="text-white font-bold">Discover More</span>
@@ -182,7 +182,7 @@ export default function HowWeSupport() {
 
               <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-4 sm:gap-6 lg:gap-8 items-center">
                 <div className="text-left">
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-[30px] mb-2 sm:mb-2.5">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-[30px] mb-2 sm:mb-2.5">
                     <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-white/60">
                       {step.phase}
                     </span>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import type { GlobeMethods } from "react-globe.gl";
 
 const ReactGlobe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
@@ -24,7 +25,20 @@ const arcs = [
 ];
 
 export default function Globe3D() {
-  const globeRef = useRef<any>(null);
+  const globeRef = useRef<GlobeMethods | undefined>(undefined);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState(420);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setSize(Math.max(1, Math.floor(entry.contentRect.width)));
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (globeRef.current) {
@@ -38,7 +52,7 @@ export default function Globe3D() {
   const arcData = useMemo(() => arcs, []);
 
   return (
-    <div className="relative h-[350px] w-full md:h-[420px]">
+    <div ref={containerRef} className="relative mx-auto aspect-square w-full max-w-[420px]">
       <ReactGlobe
         ref={globeRef}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
@@ -58,8 +72,8 @@ export default function Globe3D() {
         arcStroke={0.5}
         atmosphereColor="#06B6D4"
         atmosphereAltitude={0.15}
-        width={420}
-        height={420}
+        width={size}
+        height={size}
       />
     </div>
   );

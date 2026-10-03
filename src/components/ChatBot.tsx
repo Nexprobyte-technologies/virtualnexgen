@@ -305,7 +305,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
         type="button"
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-white shadow-[0_16px_44px_rgba(249,115,22,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(249,115,22,0.6)]"
+        className="chat-widget-toggle fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-white shadow-[0_16px_44px_rgba(249,115,22,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(249,115,22,0.6)]"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
         {!open && (
@@ -314,7 +314,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-5 z-50 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_30px_90px_rgba(0,0,0,0.25)]">
+        <div className="chat-widget-panel fixed bottom-24 right-5 z-50 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_30px_90px_rgba(0,0,0,0.25)]">
           <div className="flex items-center gap-3 bg-gradient-to-r from-brand-deep to-brand px-4 py-3.5">
             <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
               <Bot className="h-5 w-5 text-ink" />

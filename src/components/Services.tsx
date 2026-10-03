@@ -84,7 +84,7 @@ export default function Services() {
 
           <div
             data-process-grid
-            className="relative grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4"
+            className="relative grid gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-4"
           >
             {steps.map((step) => {
               const Icon = step.icon;
