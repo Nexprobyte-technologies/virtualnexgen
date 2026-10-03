@@ -2,7 +2,6 @@
 
 import {
   Brain,
-  Check,
   CircleCheck,
   Clock,
   GraduationCap,
@@ -10,160 +9,115 @@ import {
   Sliders,
   TrendingUp,
   UserCheck,
-  X,
 } from "lucide-react";
 import ContainerScroll from "./ContainerScroll";
 
 const features = [
   {
     icon: UserCheck,
-    label: "Dedicated Assistant",
-    typical: "Shared or rotating assistants",
-    ours: "One dedicated VA focused on your business",
+    label: "Dedicated, One-on-One Support",
+    description:
+      "Work with a VA focused on your business, rather than sharing assistance across multiple clients.",
   },
   {
     icon: Clock,
-    label: "Long-Term Consistency",
-    typical: "Assistants may change frequently",
-    ours: "The same VA supports you long term",
+    label: "Consistent Long-Term Partnership",
+    description:
+      "Build a lasting working relationship with the same assistant who understands your day to day operations.",
   },
   {
     icon: Brain,
-    label: "Business Knowledge",
-    typical: "Processes often need to be re-explained",
-    ours: "Your VA learns your business, systems, and priorities",
+    label: "A VA Who Knows Your Business",
+    description:
+      "Reduce repeated explanations as your assistant becomes familiar with your systems, processes, and priorities.",
   },
   {
     icon: Sliders,
-    label: "Personalized Support",
-    typical: "Generic, task-based assistance",
-    ours: "Support tailored to your exact workflow",
+    label: "Support Built Around Your Workflow",
+    description:
+      "Get assistance tailored to your specific tasks, procedures, and business requirements.",
   },
   {
     icon: MessageSquare,
-    label: "Communication",
-    typical: "Limited or inconsistent updates",
-    ours: "Clear, direct, and reliable communication",
+    label: "Clear, Reliable Communication",
+    description:
+      "Stay informed through regular updates, direct communication, and clear task coordination.",
   },
   {
     icon: Clock,
-    label: "Availability",
-    typical: "Depends on platform or freelancer schedules",
-    ours: "Dependable support aligned with your requirements",
+    label: "Availability That Fits Your Business",
+    description:
+      "Arrange dedicated support around your agreed working hours and operational needs.",
   },
   {
     icon: GraduationCap,
-    label: "Training & Onboarding",
-    typical: "Minimal onboarding assistance",
-    ours: "Structured onboarding and process training",
+    label: "Structured Onboarding & Training",
+    description:
+      "Help your VA get familiar with your tools, responsibilities, and standard operating procedures.",
   },
   {
     icon: TrendingUp,
-    label: "Scalability",
-    typical: "Difficult to expand support quickly",
-    ours: "Scale your support as your workload grows",
+    label: "Flexible, Scalable Support",
+    description:
+      "Expand your virtual assistant support as your workload and business needs increase.",
   },
   {
     icon: TrendingUp,
-    label: "Quality Control",
-    typical: "Quality varies between assistants",
-    ours: "Managed quality and performance standards",
+    label: "Consistent Quality Standards",
+    description:
+      "Use defined workflows, quality checks, and performance monitoring to support reliable execution.",
   },
   {
     icon: CircleCheck,
-    label: "Accountability",
-    typical: "Limited supervision or oversight",
-    ours: "Dedicated management and clear accountability",
+    label: "Clear Accountability",
+    description:
+      "Maintain defined responsibilities, ongoing oversight, and a clear point of contact for your support.",
   },
 ];
 
 export default function DedicatedVADifference() {
   return (
-    <section className="bg-navyblue from-white via-[#132F4A] to-white relative overflow-hidden py-10 sm:py-16 md:py-20">
+    <section className="bg-navyblue from-white via-[#132F4A] to-white relative overflow-hidden pt-[200px] pb-0 sm:pb-2 md:pb-4">
       <ContainerScroll
         titleComponent={
-          <div className="text-center max-w-3xl mx-auto px-4">
-            <div className="inline-flex items-center justify-center gap-2 sm:gap-3 mb-3">
-              <span className="w-5 sm:w-8 h-[2px] bg-white rounded-full" />
-              <span className="text-[10px] sm:text-xs lg:text-sm font-bold uppercase tracking-widest text-white">
+          <div className="mx-auto max-w-3xl px-4 text-center">
+            <div className="mb-3 inline-flex items-center justify-center gap-2 sm:gap-3">
+              <span className="h-[2px] w-5 rounded-full bg-white sm:w-8" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white sm:text-xs lg:text-sm">
                 THE DEDICATED VA DIFFERENCE
               </span>
-              <span className="w-5 sm:w-8 h-[2px] bg-white rounded-full" />
+              <span className="h-[2px] w-5 rounded-full bg-white sm:w-8" />
             </div>
-            <h2 className="text-2xl text-white sm:text-4xl md:text-5xl lg:text-6xl font-bold text-ink mb-3 sm:mb-4 leading-tight tracking-tight">
+            <h2 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
               Why Choose a Dedicated VA?
             </h2>
-            <p className="text-xs text-white sm:text-sm md:text-base lg:text-lg font-normal text-ink/75 leading-relaxed max-w-[700px] mx-auto">
+            <p className="mx-auto max-w-[700px] text-xs font-normal leading-relaxed text-white sm:text-sm md:text-base lg:text-lg">
               See why businesses choose us for reliable, personalized support
               &mdash; without the inconsistency of shared assistants or freelance platforms.
             </p>
           </div>
         }
       >
-        <div className="h-full w-full overflow-y-auto rounded-[20px] bg-white shadow-xl border border-ink/10">
-          {/* Desktop Header */}
-          <div className="hidden md:grid grid-cols-[1.05fr_1fr_1.15fr] items-stretch text-white text-sm lg:text-base font-bold select-none border-b border-ink/20 sticky top-0 z-20">
-            <div className="bg-[#000000] px-6 lg:px-8 py-5 flex items-center">
-              <span>Feature</span>
-            </div>
-            <div className="bg-[#0B2A4A] px-6 lg:px-8 py-5 flex items-center justify-center text-center border-l border-white/10">
-              <span>Typical VA Companies</span>
-            </div>
-            <div className="bg-gradient-to-r from-[#132F4A] via-[#132F4A] to-white px-6 lg:px-8 py-4 flex flex-col items-center justify-center text-center border-l border-white/15 relative">
-              <div className="absolute top-0 inset-x-0 h-1 bg-white" />
-              <span className="inline-flex items-center gap-1 bg-white text-black text-[10px] lg:text-[11px] font-extrabold uppercase px-3 py-0.5 rounded-full tracking-wider shadow-sm mb-1">
-                PREFERRED CHOICE
-              </span>
-              <span className="text-white text-sm lg:text-base">Our Dedicated VAs</span>
-            </div>
-          </div>
-
-          {/* Table Body */}
-          <div className="divide-y divide-soft">
-            {features.map((f) => (
-              <div
-                key={f.label}
-                className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr_1.15fr] items-stretch transition-colors duration-150 group bg-white hover:bg-white/[0.04]"
+        <div className="h-full w-full overflow-y-auto rounded-[20px] border border-ink/10 bg-white p-3 shadow-xl sm:p-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map(({ icon: Icon, label, description }, index) => (
+              <article
+                key={label}
+                className={`flex min-h-24 items-start gap-3 rounded-xl border border-[#132F4A]/10 bg-[#132F4A]/[0.03] p-3 transition-colors hover:border-[#06B6D4]/40 hover:bg-[#06B6D4]/[0.05] sm:p-4 ${index === features.length - 1 ? "lg:col-start-2" : ""}`}
               >
-                {/* Feature */}
-                <div className="flex items-center gap-3 px-4 sm:px-6 lg:px-8 py-3.5 md:py-4">
-                  <div className="w-8 h-8 rounded-xl bg-ink/5 text-ink flex items-center justify-center shrink-0 border border-ink/10 transition-transform group-hover:scale-105">
-                    <f.icon className="w-4 h-4" />
-                  </div>
-                  <span className="font-semibold text-ink text-xs sm:text-sm">{f.label}</span>
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#06B6D4]/10 text-[#132F4A]">
+                  <Icon className="h-4 w-4" />
                 </div>
-
-                {/* Typical VA */}
-                <div className="flex items-center gap-3 px-4 sm:px-6 lg:px-8 py-3.5 md:py-4 md:border-l md:border-ink/10 bg-[#132F4A]">
-                  <span className="w-5 h-5 rounded-full bg-white/20 text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <X className="w-3 h-3" />
-                  </span>
-                  <span className="text-white/70 text-xs sm:text-sm">{f.typical}</span>
+                <div>
+                  <h3 className="text-sm font-bold leading-snug text-[#132F4A] sm:text-base">
+                    {label}
+                  </h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-[#132F4A]/70 sm:text-sm">
+                    {description}
+                  </p>
                 </div>
-
-                {/* Our VA */}
-                <div className="flex items-center gap-3 px-4 sm:px-6 lg:px-8 py-3.5 md:py-4 md:border-l md:border-ink/10 bg-white group-hover:bg-white/10 transition-colors">
-                  <span className="w-5 h-5 rounded-full bg-white text-[#132F4A] flex items-center justify-center shrink-0 shadow-xs">
-                    <Check className="w-3 h-3" />
-                  </span>
-                  <span className="text-[#132F4A] font-medium text-xs sm:text-sm">{f.ours}</span>
-                </div>
-              </div>
+              </article>
             ))}
-          </div>
-
-          {/* Mobile Header (shown on mobile) */}
-          <div className="md:hidden grid grid-cols-3 items-stretch text-white text-xs font-bold select-none border-b border-ink/20 sticky top-0 z-20">
-            <div className="bg-[#000000] px-3 py-3 flex items-center">
-              <span>Feature</span>
-            </div>
-            <div className="bg-[#0B2A4A] px-3 py-3 flex items-center justify-center text-center border-l border-white/10">
-              <span>Typical</span>
-            </div>
-            <div className="bg-gradient-to-r from-[#132F4A] to-white px-3 py-3 flex items-center justify-center text-center border-l border-white/15 relative">
-              <div className="absolute top-0 inset-x-0 h-0.5 bg-white" />
-              <span className="text-white">Ours</span>
-            </div>
           </div>
         </div>
       </ContainerScroll>

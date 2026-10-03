@@ -4,16 +4,21 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const items = [
-  "Virtual Assistant",
-  "AI Automation",
-  "Administrative Support",
-  "Real Estate",
-  "Insurance",
-  "Legal Support",
-  "Healthcare",
-  "Marketing",
-  "Bookkeeping",
-  "Business Growth",
+  "Insurance Agencies",
+  "HVAC Companies",
+  "Real Estate Agencies",
+  "Wealth Management Firms (RIAs)",
+  "Construction Companies",
+  "Plumbing Companies",
+  "Restoration Companies",
+  "Freight and Trucking Companies",
+  "Property Management Companies",
+  "Roofing Companies",
+  "CPA and Accounting Firms",
+  "Law Firms",
+  "Mortgage Companies",
+  "Medical Practices",
+  "E-commerce Businesses"
 ];
 
 export default function Marquee() {

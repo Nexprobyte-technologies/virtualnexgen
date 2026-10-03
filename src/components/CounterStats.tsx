@@ -4,10 +4,10 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const stats = [
-  { end: 10, suffix: "+", label: "Years of Experience" },
-  { end: 9, suffix: "+", label: "Service Offerings" },
+  { end: 2016, label: "Established" },
+  { end: 15, suffix: "+", label: "Industries Served" },
   { end: 24, suffix: "/7", label: "Support Availability" },
-  { end: 320, suffix: "+", label: "Businesses Supported" },
+  { end: 350, suffix: "+", label: "Businesses Supported" },
 ];
 
 export default function CounterStats() {
@@ -24,17 +24,14 @@ export default function CounterStats() {
 
           gsap.to(counter, {
             value: end,
-            duration: 2,
+            duration: 2.5,
             ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-              onUpdate: (self) => {
-                const progress = self.progress;
-                el.textContent = `${Math.floor(progress * end)}${suffix}`;
-              },
+            onUpdate: () => {
+              el.textContent = `${Math.floor(counter.value)}${suffix}`;
+            },
+            onComplete: () => {
+              // Ensure the final value is visible after the count-up finishes.
+              el.textContent = `${end}${suffix}`;
             },
           });
         });
@@ -48,7 +45,7 @@ export default function CounterStats() {
           duration: 0.7,
           stagger: 0.12,
           ease: "power3.out",
-          scrollTrigger: { trigger: rootRef.current, start: "top 85%" },
+          scrollTrigger: { trigger: rootRef.current, start: "top 85%", once: true },
         },
       );
     },
@@ -58,24 +55,26 @@ export default function CounterStats() {
   return (
     <section className="relative bg-[#132F4A] py-4 sm:py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div
-          ref={rootRef}
-          className="relative grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden rounded-xl sm:rounded-[2rem] bg-gradient-to-r from-[#000000] via-[#132F4A] to-[#000000] border border-[#06B6D4]/30 px-4 sm:px-6 py-5 sm:py-7 shadow-[0_20px_50px_rgba(19,47,74,0.25)] lg:grid-cols-4"
-        >
-          {stats.map((stat) => (
-            <div key={stat.label} data-animate data-stat-item className="text-center">
-              <p
-                data-counter={stat.end}
-                data-suffix={stat.suffix}
-                className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#06B6D4]"
-              >
-                0{stat.suffix}
-              </p>
-              <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-white/60">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+        <div className="stats-border-glow rounded-xl sm:rounded-[2rem] p-[1.5px] shadow-[0_20px_50px_rgba(19,47,74,0.25)]">
+          <div
+            ref={rootRef}
+            className="relative z-[1] grid grid-cols-2 gap-3 sm:gap-4 overflow-hidden rounded-[inherit] bg-gradient-to-r from-[#000000] via-[#132F4A] to-[#000000] px-4 sm:px-6 py-5 sm:py-7 lg:grid-cols-4"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} data-animate data-stat-item className="text-center">
+                <p
+                  data-counter={stat.end}
+                  data-suffix={stat.suffix}
+                  className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#06B6D4]"
+                >
+                  0{stat.suffix}
+                </p>
+                <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-white/60">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

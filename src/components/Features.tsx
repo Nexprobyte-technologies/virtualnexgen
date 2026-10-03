@@ -94,8 +94,8 @@ export default function Features() {
 
       const media = gsap.matchMedia();
 
-      media.add("(min-width: 1280px) and (min-height: 850px)", () => {
-        const getDistance = () => Math.max(track.scrollWidth - window.innerWidth, 0);
+      media.add("(min-width: 1024px) and (min-height: 720px)", () => {
+        const getDistance = () => Math.max(track.scrollWidth - root.clientWidth, 0);
 
         gsap.fromTo(
           "[data-service-card]",
@@ -137,7 +137,7 @@ export default function Features() {
         };
       });
 
-      media.add("(max-width: 1279px), (max-height: 849px)", () => {
+      media.add("(max-width: 1023px), (max-height: 719px)", () => {
         gsap.set("[data-service-card]", { autoAlpha: 1, y: 0 });
         gsap.set(track, { clearProps: "transform" });
         if (progressRef.current) gsap.set(progressRef.current, { scaleX: 1 });

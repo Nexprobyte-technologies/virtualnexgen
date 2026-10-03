@@ -80,7 +80,7 @@ export default function About() {
 
   return (
     <>
-      <section id="about" ref={aboutRef} className="relative overflow-hidden bg-[#132F4A] py-14 sm:py-20 lg:py-28">
+      <section id="about" ref={aboutRef} className="relative overflow-hidden bg-[#132F4A] pt-0 pb-14 sm:pb-20 lg:pb-28">
         <div className="pointer-events-none absolute left-0 top-1/3 h-80 w-80 rounded-full bg-brand-deep/10 blur-[120px]" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-12 lg:gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-10">

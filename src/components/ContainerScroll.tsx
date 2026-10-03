@@ -35,11 +35,11 @@ export function ContainerScroll({
 
   return (
     <div
-      className="h-[55rem] md:h-[75rem] flex items-center justify-center relative p-2 md:p-20"
+      className="h-[55rem] md:h-[75rem] flex items-start justify-center relative px-2 md:px-20"
       ref={containerRef}
     >
       <div
-        className="py-10 md:py-20 w-full relative"
+        className="pb-10 md:pb-20 w-full relative"
         style={{
           perspective: "1000px",
         }}
@@ -90,7 +90,7 @@ export function Card({
         boxShadow:
           "0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
       }}
-      className="max-w-5xl -mt-12 mx-auto h-[32rem] md:h-[44rem] w-full border-4 border-[#0B2A4A]/20 bg-[#0B2A4A] p-2 md:p-4 rounded-[30px] shadow-2xl"
+      className="max-w-6xl mt-20 mx-auto h-[28rem] md:h-[36rem] w-full border-4 border-[#0B2A4A]/20 bg-[#0B2A4A] p-2 md:p-4 rounded-[30px] shadow-2xl"
     >
       <div className="h-full w-full overflow-hidden rounded-2xl bg-white p-2 md:p-4">
         {children}

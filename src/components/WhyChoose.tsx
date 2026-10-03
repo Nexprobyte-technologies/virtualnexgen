@@ -1,27 +1,28 @@
 "use client";
 
 import { useRef, useCallback } from "react";
+import Image from "next/image";
 import { Check, Shield, ClipboardCheck, TrendingUp, Users } from "lucide-react";
 import Reveal from "./Reveal";
 
 const complianceItems = [
-  "Ongoing Compliance Training",
-  "Data Privacy First Approach",
-  "NDA-Protected Assistants",
-  "Secure Remote Access",
+  "Continuous Compliance Training",
+  "Privacy-First Workflows",
+  "NDA-Backed Confidentiality",
+  "Controlled & Secure Access",
 ];
 
 const qualityChecks = [
-  "Reliable Execution",
-  "Monitored Workflows",
-  "Performance Tracked",
-  "Enterprise Ready",
+  "Consistent Task Execution — Work completed according to established procedures.",
+  "Workflow Monitoring — Tasks tracked to maintain quality and accountability",
+  "Performance Tracking — Progress and outcomes monitored against expectations.",
+  "Scalable Support — Flexible assistance as your business grows.",
 ];
 
 const stats = [
   { value: "40%", label: "Lower operational workload" },
-  { value: "60%", label: "Less time spent on admin tasks" },
-  { value: "3x", label: "Operational capacity without hiring" },
+  { value: "60%", label: "Less Time on Admin Tasks" },
+  { value: "3x", label: "Potential Operational Capacity" },
 ];
 
 function BentoCard({
@@ -74,37 +75,50 @@ function BentoCard({
   );
 }
 
-function TeamMarquee() {
-  const images = [
-    "https://randomuser.me/api/portraits/women/44.jpg",
-    "https://randomuser.me/api/portraits/men/32.jpg",
-    "https://randomuser.me/api/portraits/women/68.jpg",
-    "https://randomuser.me/api/portraits/men/75.jpg",
-  ];
-  const doubled = [...images, ...images, ...images];
+function IndustryImageCarousel() {
+  const images = Array.from(
+    { length: 20 },
+    (_, index) =>
+      `/Ind_images/WhatsApp%20Image%202026-10-03%20at%2010.42.47%20AM_${index + 1}.jpg`,
+  );
 
-  return (
-    <div className="relative my-6 overflow-hidden">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-cream to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-cream to-transparent" />
+  const renderTrack = (trackImages: string[], reverse = false) => (
+    <div className="industry-carousel-window relative overflow-hidden">
       <div
-        className="flex gap-4 w-max"
-        style={{ animation: "scrollX 20s linear infinite" }}
+        className={`industry-carousel-track flex w-max ${reverse ? "industry-carousel-track-reverse" : ""}`}
       >
-        {doubled.map((src, i) => (
+        {[0, 1].map((copy) => (
           <div
-            key={i}
-            className="relative h-20 w-20 flex-shrink-0 sm:h-24 sm:w-24 md:h-28 md:w-28"
+            key={copy}
+            aria-hidden={copy === 1}
+            className="flex shrink-0 items-center gap-3 pr-3"
           >
-            <img
-              src={src}
-              alt="Team member"
-              loading="lazy"
-              className="h-full w-full rounded-full border-2 border-brand/20 object-cover"
-            />
+            {trackImages.map((src, index) => (
+              <div
+                key={src}
+                className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-white/20 bg-white/5 shadow-lg sm:h-20 sm:w-20 md:h-24 md:w-24"
+              >
+                <Image
+                  src={src}
+                  alt={`Industry expertise example ${index + 1}`}
+                  fill
+                  sizes="(max-width: 639px) 64px, (max-width: 767px) 80px, 96px"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+            ))}
           </div>
         ))}
       </div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#132F4A] to-transparent sm:w-14" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#132F4A] to-transparent sm:w-14" />
+    </div>
+  );
+
+  return (
+    <div className="my-6 space-y-3 overflow-hidden">
+      {renderTrack(images.slice(0, 10))}
+      {renderTrack(images.slice(10), true)}
     </div>
   );
 }
@@ -137,16 +151,12 @@ export default function WhyChoose() {
   return (
     <>
       <style>{`
-        @keyframes scrollX {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
-        }
         @keyframes scrollY {
           0% { transform: translateY(0); }
           100% { transform: translateY(-50%); }
         }
         @media (prefers-reduced-motion: reduce) {
-          [style*="scrollX"], [style*="scrollY"] {
+          [style*="scrollY"] {
             animation: none !important;
           }
         }
@@ -189,7 +199,7 @@ export default function WhyChoose() {
                     accurately and efficiently.
                   </p>
 
-                  <TeamMarquee />
+                  <IndustryImageCarousel />
 
                   <p className="text-sm sm:text-base text-white/70 mt-4">
                     Faster onboarding. Fewer errors. Seamless collaboration with your internal team.
@@ -211,8 +221,8 @@ export default function WhyChoose() {
                     </h3>
                   </div>
                   <p className="text-sm sm:text-base text-white/70 mb-2">
-                    Operations require strict data protection. Our structured workflows ensure
-                    secure handling of client and business data at every stage.
+                    Protecting your business information is our priority.
+                    We follow structured security practices and privacy-focused workflows to help safeguard sensitive client data throughout daily operations.
                   </p>
 
                   <ComplianceMarquee />
@@ -233,11 +243,11 @@ export default function WhyChoose() {
                       <ClipboardCheck className="h-5 w-5 text-white" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white">
-                      Structured Quality Control
+                      Quality You Can Count On
                     </h3>
                   </div>
                   <p className="text-sm sm:text-base text-white/70 mb-5">
-                    We rely on consistent, process-driven execution.
+                    Our structured workflows, performance monitoring, and quality checks help ensure tasks are completed accurately and consistently.
                   </p>
 
                   <ul className="space-y-3">
@@ -265,13 +275,11 @@ export default function WhyChoose() {
                       <TrendingUp className="h-5 w-5 text-white" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold text-white">
-                      Real Operational Results
+                      More Capacity. Less Administrative Work.
                     </h3>
                   </div>
                   <p className="text-sm sm:text-base text-white/70 mb-8">
-                    We work exclusively with businesses that need dedicated support, so our team
-                    understands your systems and workflows. Supporting operations, documentation,
-                    and back-office tasks every day.
+                    Our dedicated Virtual Assistants integrate into your existing operations, helping your team manage recurring tasks, maintain documentation, and keep workflows moving.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
