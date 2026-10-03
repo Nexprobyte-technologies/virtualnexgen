@@ -217,6 +217,8 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
     () => layout(list, spread, lift, tilt, sizes),
     [list, spread, lift, tilt, sizes],
   );
+  const topItemY = pos.length ? Math.min(...pos.map(({ y }) => y)) : 0;
+  const popoutClearance = Math.max(0, 48 - 14 - topItemY);
 
   const labelsKey = list.map((item) => item.label).join("|");
   useLayoutEffect(() => {
@@ -527,6 +529,7 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
       }}
       style={
         {
+          marginTop: `${popoutClearance}px`,
           "--ff-w": `${width}px`,
           "--ff-h": `${height}px`,
           "--ff-r": `${radius}px`,

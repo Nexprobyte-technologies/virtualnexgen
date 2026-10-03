@@ -265,50 +265,55 @@ export default async function BlogDetailPage({
 
   return (
     <main className="min-h-screen bg-[#132F4A]">
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/50">
-            <Link
-              href="/"
-              className="flex items-center gap-1.5 transition hover:text-white"
-            >
-              <Home className="h-3.5 w-3.5" /> Home
-            </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-            <Link href="/blog" className="transition hover:text-white">
-              Blog
-            </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-            <span className="max-w-[30ch] truncate text-white/80">
+      <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
+        <div
+          className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-2" : ""}`}
+        >
+          <div className="min-w-0">
+            <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/50">
+              <Link
+                href="/"
+                className="flex items-center gap-1.5 transition hover:text-white"
+              >
+                <Home className="h-3.5 w-3.5" /> Home
+              </Link>
+              <ChevronRight className="h-3.5 w-3.5 text-white/30" />
+              <Link href="/blog" className="transition hover:text-white">
+                Blog
+              </Link>
+              <ChevronRight className="h-3.5 w-3.5 text-white/30" />
+              <span className="max-w-[30ch] truncate text-white/80">
+                {post.title}
+              </span>
+            </nav>
+
+            <div className="mt-6 flex items-center gap-3">
+              <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-white">
+                {category}
+              </span>
+              <span className="flex items-center gap-1 text-xs text-white/50">
+                <Clock className="h-3 w-3" /> {readTime} min read
+              </span>
+            </div>
+
+            <h1 className="mt-4 max-w-2xl text-2xl font-extrabold leading-[1.2] tracking-tight text-white sm:text-3xl lg:text-4xl">
               {post.title}
-            </span>
-          </nav>
-
-          <div className="mt-3 flex items-center gap-3">
-            <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-white">
-              {category}
-            </span>
-            <span className="flex items-center gap-1 text-xs text-white/50">
-              <Clock className="h-3 w-3" /> {readTime} min read
-            </span>
+            </h1>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-2xl font-extrabold leading-[1.2] tracking-tight text-white sm:text-3xl lg:text-4xl">
-            {post.title}
-          </h1>
+          {post.image && (
+            <div className="mt-8 flex justify-center lg:justify-end">
+              <div className="flex h-[260px] w-full max-w-2xl items-center justify-center overflow-hidden rounded-2xl">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            </div>
+          )}
         </div>
-
-      {/* Featured Image */}
-      {post.image && (
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 mt-[50px]">
-          <div className="mx-auto flex w-fit max-w-full justify-center overflow-hidden rounded-2xl border border-line shadow-[0_8px_40px_rgba(0,0,0,0.1)]">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="h-auto max-h-[400px] w-full object-contain sm:h-[400px] sm:w-auto"
-            />
-          </div>
-        </div>
-      )}
+      </section>
 
       {/* Ask AI */}
       <div className="mx-auto max-w-7xl px-5 sm:px-8 mt-6">

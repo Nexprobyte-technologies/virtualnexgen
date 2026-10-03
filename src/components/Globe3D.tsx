@@ -40,13 +40,15 @@ export default function Globe3D() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (globeRef.current) {
-      globeRef.current.controls().autoRotate = true;
-      globeRef.current.controls().autoRotateSpeed = 0.8;
-      globeRef.current.pointOfView({ altitude: 2.5 }, 0);
-    }
-  }, []);
+  const setIndiaView = () => {
+    const globe = globeRef.current;
+    if (!globe) return;
+
+    const controls = globe.controls();
+    controls.autoRotate = false;
+    controls.autoRotateSpeed = 0;
+    globe.pointOfView({ lat: 20.5, lng: 78.9, altitude: 2.3 }, 0);
+  };
 
   const markerData = useMemo(() => markers, []);
   const arcData = useMemo(() => arcs, []);
@@ -55,6 +57,7 @@ export default function Globe3D() {
     <div ref={containerRef} className="relative mx-auto aspect-square w-full max-w-[420px]">
       <ReactGlobe
         ref={globeRef}
+        onGlobeReady={setIndiaView}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         backgroundColor="rgba(0,0,0,0)"
         pointsData={markerData}

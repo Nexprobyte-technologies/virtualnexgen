@@ -120,13 +120,13 @@ export default function BuiltFor() {
                     <span className="text-[#06B6D4]">Your Business</span>
                     <br />
                     Powered by{" "}
-                    <span className="text-white">People</span>
+                    <span className="text-white">Dedicated People</span>
                   </h2>
                 </Reveal>
                 <Reveal y={20} delay={0.1}>
                   <p className="text-sm sm:text-base lg:text-lg text-white/70 mb-6 sm:mb-8 max-w-md">
-                    We&apos;re not a general VA company, we&apos;re built for your
-                    industry. Our team handles the work so yours can focus on growth.
+                    We&apos;re more than a virtual assistant provider. We deliver dedicated, industry-focused support that fits your workflows,
+                    strengthens daily operations, and gives your team more time to focus on growth.
                   </p>
                 </Reveal>
               </div>

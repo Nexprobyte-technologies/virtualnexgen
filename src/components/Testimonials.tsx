@@ -110,7 +110,7 @@ function MarqueeColumn({
   const doubled = [...items, ...items];
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative h-[280px] overflow-hidden sm:h-[360px] md:h-[420px] lg:h-[460px]">
       <div
         className="flex flex-col"
         style={{
