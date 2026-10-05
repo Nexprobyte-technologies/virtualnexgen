@@ -265,7 +265,7 @@ export default async function BlogDetailPage({
 
   return (
     <main className="min-h-screen bg-[#132F4A]">
-      <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
+      <section className="mx-auto mt-[10px] max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
         <div
           className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-2" : ""}`}
         >
@@ -303,11 +303,11 @@ export default async function BlogDetailPage({
 
           {post.image && (
             <div className="mt-8 flex justify-center lg:justify-end">
-              <div className="flex h-[260px] w-full max-w-2xl items-center justify-center overflow-hidden rounded-2xl">
+              <div className="w-[300px] max-w-full overflow-hidden rounded-[24px]">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="h-full w-full object-contain"
+                  className="block h-auto w-[300px] rounded-[24px] object-contain"
                 />
               </div>
             </div>
