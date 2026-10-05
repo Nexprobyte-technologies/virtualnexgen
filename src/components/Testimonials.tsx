@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Star } from "lucide-react";
 import Reveal from "./Reveal";
 
@@ -8,55 +7,46 @@ const testimonials = [
   {
     name: "John Smith",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/71492.jpg",
     text: "Virtual Nexgen Solutions transformed the way we operate. Their team is responsive and professional, making our workflow seamless.",
   },
   {
     name: "Michael Jones",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/47175.jpg",
     text: "The assistance we received was exceptional! They understood our needs and delivered beyond expectations every time.",
   },
   {
     name: "Sarah Brown",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/80635.jpg",
     text: "I can't recommend Virtual Nexgen Solutions enough! Their support has been a game changer for our business.",
   },
   {
     name: "Emily Davis",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/70384.jpg",
     text: "Outstanding service and professionalism. They truly care about their clients and their success.",
   },
   {
     name: "David Wilson",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/71492.jpg",
     text: "Their attention to detail and commitment to quality is unmatched. We have seen a significant improvement in our operations since partnering with them.",
   },
   {
     name: "Jessica Martinez",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/80635.jpg",
     text: "The team at Virtual Nexgen goes above and beyond. They are not just service providers; they are true partners in our growth.",
   },
   {
     name: "Robert Taylor",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/47175.jpg",
     text: "Efficient, reliable, and incredibly skilled. Virtual Nexgen has become an integral part of our daily operations.",
   },
   {
     name: "Amanda Chen",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/70384.jpg",
     text: "The level of expertise and dedication they bring to every task is remarkable. Our productivity has soared since we started working together.",
   },
   {
     name: "Chris Anderson",
     role: "Client",
-    image: "https://virtualnexgen.com/assets/uploads/about/71492.jpg",
     text: "From day one, the team has been incredibly supportive and proactive. They anticipate our needs and deliver solutions before we even ask.",
   },
 ];
@@ -79,15 +69,7 @@ function GlassCard({ testimonial }: { testimonial: (typeof testimonials)[number]
         <blockquote className="text-sm leading-relaxed text-white/70">
           &ldquo;{testimonial.text}&rdquo;
         </blockquote>
-        <div className="mt-5 flex items-center gap-3">
-          <Image
-            src={testimonial.image}
-            alt={testimonial.name}
-            width={36}
-            height={36}
-            loading="lazy"
-            className="h-9 w-9 rounded-full object-cover ring-2 ring-[#06B6D4]/30"
-          />
+        <div className="mt-5">
           <div>
             <p className="text-sm font-semibold text-white">{testimonial.name}</p>
             <p className="text-xs text-white/40">{testimonial.role}</p>

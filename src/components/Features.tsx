@@ -152,9 +152,9 @@ export default function Features() {
     <section
       id="services"
       ref={rootRef}
-      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-cream pb-24 sm:pb-32 xl:pb-40"
+      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-cream pb-24 sm:pb-32 xl:pb-0"
     >
-      <div className="flex min-h-[100svh] flex-col justify-center pt-20 sm:pt-28 xl:pt-36 mt-[10px] xl:h-full">
+      <div className="flex min-h-[100svh] flex-col justify-center pt-16 sm:pt-20 xl:pt-24 mt-[10px] xl:h-full">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
           <SectionHeading
             eyebrow="Our Services"
@@ -176,7 +176,7 @@ export default function Features() {
 
         <div
           ref={trackRef}
-          className="services-track mt-6 sm:mt-8 xl:mt-10 flex w-max max-w-full gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-6 xl:px-10 xl:max-w-none xl:overflow-visible"
+          className="services-track mt-5 sm:mt-6 xl:mt-7 flex w-max max-w-full gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-6 xl:px-10 xl:max-w-none xl:overflow-visible"
         >
           {services.map((service) => (
             <a
@@ -188,7 +188,7 @@ export default function Features() {
               data-service-card
               className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#132F4A] transition-all duration-300 hover:border-[#06B6D4]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -201,14 +201,14 @@ export default function Features() {
                   {service.category}
                 </span>
               </div>
-              <div className="p-6">
+              <div className="p-5">
                 <h3 className="text-lg font-bold text-white">
                   {service.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/60">
                   {service.description}
                 </p>
-                <span className="mt-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-300 hover:bg-[#06B6D4]">
+                <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-300 hover:bg-[#06B6D4]">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
@@ -216,7 +216,7 @@ export default function Features() {
           ))}
         </div>
 
-        <div className="services-scroll-cue mx-auto mt-10 hidden w-full max-w-7xl px-6 xl:block xl:px-10">
+        <div className="services-scroll-cue mx-auto mt-6 hidden w-full max-w-7xl px-6 xl:block xl:px-10">
           <div className="flex items-center gap-4">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
               Scroll

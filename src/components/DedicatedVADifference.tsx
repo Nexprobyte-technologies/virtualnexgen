@@ -2,6 +2,8 @@
 
 import {
   Brain,
+  ChevronLeft,
+  ChevronRight,
   CircleCheck,
   Clock,
   GraduationCap,
@@ -10,6 +12,7 @@ import {
   TrendingUp,
   UserCheck,
 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ContainerScroll from "./ContainerScroll";
 
 const features = [
@@ -76,6 +79,32 @@ const features = [
 ];
 
 export default function DedicatedVADifference() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentCard, setCurrentCard] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const scrollCards = useCallback((direction: -1 | 1) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const firstCard = carousel.querySelector<HTMLElement>("[data-feature-card]");
+    const gap = 16;
+    const step = (firstCard?.offsetWidth ?? carousel.clientWidth) + gap;
+    const nextScroll = carousel.scrollLeft + direction * step;
+    if (nextScroll > carousel.scrollWidth - carousel.clientWidth + 2) {
+      carousel.scrollTo({ left: 0, behavior: "smooth" });
+    } else if (nextScroll < 0) {
+      carousel.scrollTo({ left: carousel.scrollWidth, behavior: "smooth" });
+    } else {
+      carousel.scrollTo({ left: nextScroll, behavior: "smooth" });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = window.setInterval(() => scrollCards(1), 3000);
+    return () => window.clearInterval(timer);
+  }, [isPaused, scrollCards]);
+
   return (
     <section className="bg-navyblue from-white via-[#132F4A] to-white relative overflow-hidden pt-[200px] pb-0 sm:pb-2 md:pb-4">
       <ContainerScroll
@@ -98,21 +127,58 @@ export default function DedicatedVADifference() {
           </div>
         }
       >
-        <div className="h-full w-full overflow-y-auto rounded-[20px] border border-ink/10 bg-white p-3 shadow-xl sm:p-4">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="h-full w-full overflow-hidden rounded-[20px] border border-ink/10 bg-white p-3 shadow-xl sm:p-5">
+          <div className="mb-3 flex items-center justify-end gap-2 sm:mb-4">
+            <span className="mr-2 text-xs font-semibold tabular-nums text-[#132F4A]/65" aria-live="polite">
+              {String(currentCard + 1).padStart(2, "0")} / {String(features.length).padStart(2, "0")}
+            </span>
+            <button
+              type="button"
+              onClick={() => scrollCards(-1)}
+              aria-label="Show previous benefits"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#132F4A] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollCards(1)}
+              aria-label="Show more benefits"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#132F4A] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+          <div
+            ref={carouselRef}
+            className="flex h-[calc(100%-3.5rem)] snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            aria-label="Dedicated VA benefits"
+            onScroll={(event) => {
+              const carousel = event.currentTarget;
+              const card = carousel.querySelector<HTMLElement>("[data-feature-card]");
+              const step = (card?.offsetWidth ?? carousel.clientWidth) + 16;
+              setCurrentCard(Math.min(features.length - 1, Math.round(carousel.scrollLeft / step)));
+            }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {features.map(({ icon: Icon, label, description }, index) => (
               <article
                 key={label}
-                className={`flex min-h-24 items-start gap-3 rounded-xl border border-[#132F4A]/10 bg-[#132F4A]/[0.03] p-3 transition-colors hover:border-[#06B6D4]/40 hover:bg-[#06B6D4]/[0.05] sm:p-4 ${index === features.length - 1 ? "lg:col-start-2" : ""}`}
+                data-feature-card
+                className="flex h-full basis-full shrink-0 snap-start items-start gap-3 rounded-2xl border border-[#132F4A]/10 bg-gradient-to-br from-white to-[#06B6D4]/[0.04] p-4 shadow-sm transition-[border-color,box-shadow] hover:border-[#06B6D4]/40 hover:shadow-md sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)]"
               >
-                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#06B6D4]/10 text-[#132F4A]">
-                  <Icon className="h-4 w-4" />
+                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#06B6D4]/10 text-[#132F4A]">
+                  <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold leading-snug text-[#132F4A] sm:text-base">
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0891B2]">
+                    Benefit {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="text-base font-bold leading-snug text-[#132F4A] sm:text-lg">
                     {label}
                   </h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-[#132F4A]/70 sm:text-sm">
+                  <p className="mt-2 text-sm leading-relaxed text-[#132F4A]/70">
                     {description}
                   </p>
                 </div>
