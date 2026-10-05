@@ -571,7 +571,7 @@ export default async function ServiceDetailPage({
   const relatedHeading = service.relatedTitle?.trim() || relatedTitle;
 
   const authoredCarousel = service.carouselImages?.filter(Boolean) ?? [];
-  const spiralImages = Array.from(
+  const sourceSpiralImages = Array.from(
     new Set(
       authoredCarousel.length > 0
         ? authoredCarousel
@@ -582,11 +582,11 @@ export default async function ServiceDetailPage({
           ].filter((src): src is string => Boolean(src)),
     ),
   );
-  while (spiralImages.length > 0 && spiralImages.length < 7) {
-    for (const src of [...spiralImages]) {
-      if (spiralImages.length >= 7) break;
-      spiralImages.push(src);
-    }
+  const spiralImages = [...sourceSpiralImages];
+  const repeatableImages = sourceSpiralImages.slice(1);
+  while (repeatableImages.length > 0 && spiralImages.length < 7) {
+    const repeatIndex = (spiralImages.length - sourceSpiralImages.length) % repeatableImages.length;
+    spiralImages.push(repeatableImages[repeatIndex]);
   }
 
   const contentHtml = service.fullContent?.contentHtml || "";
@@ -804,11 +804,11 @@ export default async function ServiceDetailPage({
           <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="text-center">
-<span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
+                 <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
                    {textOr(service.folderSection?.eyebrow, "INSURANCE VA PLAYBOOK")}
                  </span>
                  <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-{textOr(
+                   {textOr(
                       service.folderSection?.heading,
                       `${folderItems.length} Essential Tasks an`,
                     )}
