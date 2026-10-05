@@ -267,6 +267,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   }
 }
 
+@keyframes testimonials-marquee {
+  to {
+    transform: translateX(calc(-50% - 12px));
+  }
+}
+
 @keyframes industry-carousel-left {
   from {
     transform: translateX(0);
