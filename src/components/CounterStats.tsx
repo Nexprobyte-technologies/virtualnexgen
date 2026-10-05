@@ -26,6 +26,11 @@ export default function CounterStats() {
             value: end,
             duration: 2.5,
             ease: "none",
+            scrollTrigger: {
+              trigger: rootRef.current,
+              start: "top 85%",
+              once: true,
+            },
             onUpdate: () => {
               el.textContent = `${Math.floor(counter.value)}${suffix}`;
             },
