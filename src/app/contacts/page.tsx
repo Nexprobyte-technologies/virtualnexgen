@@ -26,25 +26,11 @@ import type { ContactInfo } from "@/lib/contacts";
 
 const contactChannels = [
   {
-    icon: Briefcase,
-    title: "Talk to Sales",
-    text: "Discuss your agency's goals and discover how our Virtual Assistant solutions can improve efficiency and scalability.",
-    email: "sales@virtualnexgen.com",
-    note: "Free consultation • No obligation",
-  },
-  {
     icon: Headset,
     title: "Contact Support",
     text: "Have questions about onboarding, workflows, or existing services? Our support team is ready to assist you.",
     email: "info@virtualnexgen.com",
     note: "Response during business hours",
-  },
-  {
-    icon: ArrowRight,
-    title: "Work With Us",
-    text: "Interested in joining our team or exploring partnership opportunities? We'd love to hear from you.",
-    email: "careers@virtualnexgen.com",
-    note: "Remote opportunities available",
   },
 ];
 
@@ -192,63 +178,25 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            <div className="mt-6 max-w-3xl">
-              <Reveal delay={0.1}>
-                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                  Contact Virtual <span className="text-[#06B6D4]">Nexgen</span>
-                </h1>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
-                  Tell us about your business and the operational support you're looking for. Our
-                  team will guide you through the next steps with clarity and structure.
-                </p>
-              </Reveal>
-            </div>
-
             {/* Channel cards */}
-            <div className="mt-12 grid gap-5 md:grid-cols-3">
-              {contactChannels.map((c, i) => {
-                const Icon = c.icon;
-                return (
-                  <Reveal key={c.title} delay={0.08 * i}>
-                    <div className="h-full rounded-2xl border border-white/20 bg-white/5 p-6 sm:p-7 backdrop-blur-sm">
-                      <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#06B6D4]/10">
-                        <Icon className="h-5 w-5 text-[#06B6D4]" />
-                      </div>
-                      <h2 className="mt-5 text-lg font-bold text-white">{c.title}</h2>
-                      <p className="mt-2 text-sm leading-relaxed text-white/60">{c.text}</p>
-                      <a
-                        href={`mailto:${c.email}`}
-                        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#06B6D4] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0891b2]"
-                      >
-                        <Mail className="h-4 w-4" />
-                        {c.email}
-                      </a>
-                      <p className="mt-3 text-center text-xs text-white/40">{c.note}</p>
-                    </div>
-                  </Reveal>
-                );
-              })}
-            </div>
           </div>
         </section>
 
         {/* ================= Form ================= */}
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-            <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-              <div className="lg:col-start-1 lg:row-start-1">
-                <SectionHeading
-                  align="left"
-                  eyebrow="Get In Touch"
-                  title="Tell Us About Your"
-                  highlight="Requirements"
-                  description="Answer a few quick questions and we'll route you to the right team."
-                />
+            <SectionHeading
+              align="center"
+              eyebrow="Get In Touch"
+              title="Tell Us About Your"
+              highlight="Requirements"
+              description="Answer a few quick questions and we'll route you to the right team."
+            />
 
+            <div className="mt-12 grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+              <div>
                 <Reveal delay={0.15}>
-                  <ul className="mt-8 space-y-4">
+                  <ul className="space-y-4">
                     {[
                       { icon: ShieldCheck, text: "Response within one business day" },
                       { icon: Lock, text: "Your information is 100% secure — never shared" },
@@ -270,26 +218,34 @@ export default function ContactPage() {
                 {info && (
                   <Reveal delay={0.25}>
                     <div className="mt-8 space-y-4">
-                      {info.email && (
-                        <a
-                          href={`mailto:${info.email}`}
-                          className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 transition hover:border-brand"
-                        >
-                          <span className="grid h-10 w-10 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
-                            <Mail className="h-4 w-4" />
-                          </span>
-                          <span>
-                            <span className="block text-xs text-white/40">Email Us</span>
-                            <span className="block text-sm font-bold text-white">{info.email}</span>
-                          </span>
-                        </a>
-                      )}
+                      {contactChannels.map((c, i) => {
+                        const Icon = c.icon;
+                        return (
+                          <Reveal key={c.title} delay={0.08 * i}>
+                            <div className="h-full rounded-2xl border border-white/20 bg-white/5 p-6 sm:p-7 backdrop-blur-sm">
+                              <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#06B6D4]/10">
+                                <Icon className="h-5 w-5 text-[#06B6D4]" />
+                              </div>
+                              <h2 className="mt-5 text-lg font-bold text-white">{c.title}</h2>
+                              <p className="mt-2 text-sm leading-relaxed text-white/60">{c.text}</p>
+                              <a
+                                href={`mailto:${c.email}`}
+                                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#06B6D4] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0891b2]"
+                              >
+                                <Mail className="h-4 w-4" />
+                                {c.email}
+                              </a>
+                              <p className="mt-3 text-center text-xs text-white/40">{c.note}</p>
+                            </div>
+                          </Reveal>
+                        );
+                      })}
                     </div>
                   </Reveal>
                 )}
               </div>
 
-              <Reveal delay={0.1} className="lg:col-start-2 lg:row-start-1">
+              <Reveal delay={0.1}>
                 <div className="rounded-[2rem] border border-white/20 bg-white/5 p-6 sm:p-8 backdrop-blur-sm">
                   {status === "sent" ? (
                     <div className="flex flex-col items-center justify-center py-14 text-center">

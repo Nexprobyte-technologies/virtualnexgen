@@ -31,12 +31,30 @@ interface SectionDraft {
   preview: string;
 }
 
+interface LogoDraft {
+  id: string;
+  name: string;
+  src: string;
+  file: File | null;
+  preview: string;
+}
+
 function makeSection(): SectionDraft {
   return {
     id: crypto.randomUUID(),
     heading: "",
     text: "",
     imageUrl: "",
+    file: null,
+    preview: "",
+  };
+}
+
+function makeLogoDraft(): LogoDraft {
+  return {
+    id: crypto.randomUUID(),
+    name: "",
+    src: "",
     file: null,
     preview: "",
   };
@@ -94,6 +112,12 @@ export default function AdminServices() {
   const [folderPopItems, setFolderPopItems] = useState<string[]>([
     "",
   ]);
+  const [partnerLogos, setPartnerLogos] = useState<LogoDraft[]>(() => [
+    makeLogoDraft(),
+  ]);
+  const [logosSectionMeta, setLogosSectionMeta] = useState<
+    Service["logosSection"]
+  >({});
   const [sections, setSections] = useState<SectionDraft[]>(() => [
     makeSection(),
   ]);
@@ -106,6 +130,7 @@ export default function AdminServices() {
   const [pageSize] = useState(5);
   const fileRef = useRef<HTMLInputElement>(null);
   const sectionFileRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const logoFileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
 
   const load = useCallback(async () => {
@@ -166,6 +191,25 @@ export default function AdminServices() {
     );
   }
 
+  function updatePartnerLogo(index: number, patch: Partial<LogoDraft>) {
+    setPartnerLogos((prev) =>
+      prev.map((logo, i) => (i === index ? { ...logo, ...patch } : logo)),
+    );
+  }
+
+  function handlePartnerLogoFile(
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) {
+    const selected = e.target.files?.[0];
+    if (!selected) return;
+    updatePartnerLogo(index, {
+      file: selected,
+      src: "",
+      preview: URL.createObjectURL(selected),
+    });
+  }
+
   function handleSectionFile(
     index: number,
     e: React.ChangeEvent<HTMLInputElement>,
@@ -208,7 +252,12 @@ export default function AdminServices() {
     setTestimonials([{ quote: "", name: "", role: "" }]);
     setFaqs([{ q: "", a: "" }]);
     setFolderPopItems([""]);
+    setPartnerLogos([makeLogoDraft()]);
+    setLogosSectionMeta({});
     if (fileRef.current) fileRef.current.value = "";
+    logoFileRefs.current.forEach((ref) => {
+      if (ref) ref.value = "";
+    });
     clearSections();
     setFormError("");
     setSuccess("");
@@ -297,6 +346,23 @@ export default function AdminServices() {
         form.append("folderPopItems", JSON.stringify(filteredFolderPopItems));
       }
 
+      const savedPartnerLogos = partnerLogos.filter(
+        (logo) => logo.file || logo.src.trim(),
+      );
+      const logos = savedPartnerLogos.map((logo, i) => ({
+        name: logo.name.trim() || `Partner ${i + 1}`,
+        src: logo.src.trim(),
+      }));
+      form.append(
+        "sectionCopy",
+        JSON.stringify({
+          logosSection: { ...(logosSectionMeta ?? {}), logos },
+        }),
+      );
+      savedPartnerLogos.forEach((logo) => {
+        form.append("logoImage", logo.file ?? "");
+      });
+
       sections.forEach((section, i) => {
         form.append(`sectionHeading_${i}`, section.heading);
         form.append(`sectionText_${i}`, section.text);
@@ -374,12 +440,27 @@ export default function AdminServices() {
         ? service.fullContent.folderPopItems
         : [""],
     );
+    setLogosSectionMeta(service.logosSection ?? {});
+    setPartnerLogos(
+      service.logosSection?.logos?.length
+        ? service.logosSection.logos.map((logo) => ({
+            id: crypto.randomUUID(),
+            name: logo.name ?? "",
+            src: logo.src ?? "",
+            file: null,
+            preview: logo.src ?? "",
+          }))
+        : [makeLogoDraft()],
+    );
     setSections(
       serviceToSections(service).length > 0
         ? serviceToSections(service)
         : [makeSection()],
     );
     sectionFileRefs.current.forEach((ref) => {
+      if (ref) ref.value = "";
+    });
+    logoFileRefs.current.forEach((ref) => {
       if (ref) ref.value = "";
     });
     setFormError("");
@@ -457,7 +538,7 @@ export default function AdminServices() {
             onSubmit={handleSubmit}
             className="flex-1 overflow-y-auto overscroll-contain px-5 py-4"
           >
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold text-slate-600">
               Heading Name *
@@ -484,7 +565,7 @@ export default function AdminServices() {
             />
           </label>
 
-          <label className="block">
+          <label className="block sm:col-span-2">
             <span className="mb-1 block text-xs font-semibold text-slate-600">
               Short Text
             </span>
@@ -498,7 +579,7 @@ export default function AdminServices() {
           </label>
         </div>
 
-          <div className="grid grid-cols-2 gap-3 items-start">
+          <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2">
 
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
@@ -571,7 +652,7 @@ export default function AdminServices() {
                 <span className="mb-1 block text-xs font-semibold text-slate-600">Description</span>
                 <textarea value={ctaText} onChange={(e) => setCtaText(e.target.value)} rows={2} placeholder="Short paragraph shown under the heading." className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <label className="block">
                   <span className="mb-1 block text-xs font-semibold text-slate-600">Button Label</span>
                   <input value={ctaButton} onChange={(e) => setCtaButton(e.target.value)} placeholder="e.g. Book a Free Consultation" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
@@ -603,7 +684,7 @@ export default function AdminServices() {
               {testimonials.map((t, i) => (
                 <div key={i} className="rounded-lg bg-white p-2 shadow-sm space-y-1.5">
                   <textarea value={t.quote} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, quote: e.target.value } : x))} rows={2} placeholder="Client quote" className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand" />
-                  <div className="grid grid-cols-2 gap-1.5">
+                  <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                     <input value={t.name} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, name: e.target.value } : x))} placeholder="Name" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
                     <input value={t.role} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, role: e.target.value } : x))} placeholder="Role" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
                   </div>
@@ -642,6 +723,85 @@ export default function AdminServices() {
                 <Plus className="h-3.5 w-3.5" /> Add Folder Pop Item
               </button>
             </div>
+          </div>
+
+          {/* Trusted Partner Logos */}
+          <div className="col-span-1 rounded-xl border border-slate-200 bg-slate-50 p-3 sm:col-span-2">
+            <p className="mb-1 flex items-center gap-2 text-sm font-bold text-slate-900">
+              <Users className="h-4 w-4 text-brand-dark" />
+              Trusted Partners Logos
+            </p>
+            <p className="mb-3 text-xs text-slate-500">
+              Upload logos to display in this service page&apos;s Trusted Partners section.
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {partnerLogos.map((logo, i) => (
+                <div
+                  key={logo.id}
+                  className="space-y-2 rounded-xl border border-slate-200 bg-white p-2.5"
+                >
+                  <div className="flex items-center gap-2">
+                    <input
+                      value={logo.name}
+                      onChange={(e) =>
+                        updatePartnerLogo(i, { name: e.target.value })
+                      }
+                      placeholder={`Partner or software name ${i + 1}`}
+                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
+                    />
+                    {partnerLogos.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setPartnerLogos((prev) =>
+                            prev.filter((_, index) => index !== i),
+                          )
+                        }
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-400 transition hover:text-red-500"
+                        aria-label={`Remove partner logo ${i + 1}`}
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => logoFileRefs.current[i]?.click()}
+                      className="flex shrink-0 items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:text-brand-dark"
+                    >
+                      <Upload className="h-3.5 w-3.5" /> Upload Logo
+                    </button>
+                    <input
+                      ref={(el) => {
+                        logoFileRefs.current[i] = el;
+                      }}
+                      type="file"
+                      accept=".png,.jpg,.jpeg,.webp,.gif,.svg"
+                      onChange={(e) => handlePartnerLogoFile(i, e)}
+                      className="hidden"
+                    />
+                    <span className="min-w-0 truncate text-xs text-slate-500">
+                      {logo.file?.name || (logo.src ? "Logo saved" : "No logo selected")}
+                    </span>
+                  </div>
+                  {logo.preview && (
+                    <img
+                      src={logo.preview}
+                      alt={`${logo.name || `Partner ${i + 1}`} preview`}
+                      className="h-14 w-full rounded-lg bg-slate-50 p-2 object-contain"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => setPartnerLogos((prev) => [...prev, makeLogoDraft()])}
+              className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark"
+            >
+              <Plus className="h-3.5 w-3.5" /> Add Partner Logo
+            </button>
           </div>
 
           </div>

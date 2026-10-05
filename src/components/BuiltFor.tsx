@@ -71,9 +71,9 @@ function MarqueeColumn({
   return (
     <div className="relative h-[300px] sm:h-[420px] lg:h-[460px] overflow-hidden">
       {/* Top fade */}
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 z-10 bg-gradient-to-b from-[#132F4A] to-transparent" />
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 z-10 bg-gradient-to-b from-[#0B2A40] to-transparent" />
       {/* Bottom fade */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 z-10 bg-gradient-to-t from-[#132F4A] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 z-10 bg-gradient-to-t from-[#0B2A40] to-transparent" />
 
       <div
         className="marquee-track flex flex-col gap-4"
