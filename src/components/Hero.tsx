@@ -5,13 +5,6 @@ import { ArrowUpRight, CheckCircle2, Building2, Scale, Calculator, Home, FileTex
 import { gsap, useGSAP } from "@/lib/gsap";
 import TypewriterText from "./TypewriterText";
 
-const typewriterWords = [
-  "Insurance",
-  "Real Estate",
-  "Legal",
-  "Healthcare",
-];
-
 const aiTools = [
   {
     name: "ChatGPT",
@@ -41,22 +34,24 @@ const aiTools = [
 ];
 
 const industryCards = [
-  { icon: Shield, title: "Insurance Agencies", tasks: ["Policy servicing", "Renewals & quotes", "COIs"], outcome: "So your agents can focus on clients." },
-  { icon: Wrench, title: "HVAC Companies", tasks: ["Service calls", "Scheduling & dispatch", "Follow-ups"], outcome: "So your team can keep customers comfortable." },
-  { icon: Home, title: "Real Estate Agencies", tasks: ["Listings", "Lead follow-ups", "Transaction coordination"], outcome: "So you can focus on closing deals." },
-  { icon: Landmark, title: "Wealth Management Firms (RIAs)", tasks: ["Client onboarding", "Paperwork & scheduling", "CRM updates"], outcome: "So advisors can focus on building relationships." },
-  { icon: HardHat, title: "Construction Companies", tasks: ["Project documentation", "Invoicing", "Coordination"], outcome: "So your team can focus on getting the job done." },
-  { icon: Wrench, title: "Plumbing Companies", tasks: ["Incoming calls", "Appointments & dispatch", "Customer follow-ups"], outcome: "So your technicians can focus on the job." },
-  { icon: Building2, title: "Restoration Companies", tasks: ["Emergency calls", "Job documentation", "Claims communication"], outcome: "So your team can focus on restoring properties." },
-  { icon: Truck, title: "Freight and Trucking Companies", tasks: ["Dispatch support", "Load tracking", "Invoicing & PODs"], outcome: "So your team can keep freight moving." },
-  { icon: House, title: "Property Management Companies", tasks: ["Tenant inquiries", "Maintenance requests", "Lease administration"], outcome: "So you can focus on your properties." },
-  { icon: HardHat, title: "Roofing Companies", tasks: ["Lead follow-ups", "Inspection scheduling", "Estimates"], outcome: "So your team can focus on winning more projects." },
-  { icon: Calculator, title: "CPA and Accounting Firms", tasks: ["Bookkeeping support", "Document collection", "Client follow-ups"], outcome: "So you can focus on your clients’ finances." },
-  { icon: Scale, title: "Law Firms", tasks: ["Client intake", "Appointment scheduling", "Case file organization"], outcome: "So your team can focus on legal work." },
-  { icon: FileText, title: "Mortgage Companies", tasks: ["Loan documents", "Application follow-ups", "Client communication"], outcome: "So your team can keep loans moving." },
-  { icon: Stethoscope, title: "Medical Practices", tasks: ["Appointment scheduling", "Patient inquiries", "Administrative tasks"], outcome: "So your staff can focus on patient care." },
-  { icon: ShoppingCart, title: "E-commerce Businesses", tasks: ["Order management", "Customer inquiries", "Product updates"], outcome: "So you can focus on growing your online store." },
+  { icon: Shield, title: "Insurance Agencies", tasks: ["Policy servicing & Updates", "Renewals & quotes", "COIs"], description: "We handle policy servicing, renewals, quotes, and COIs — so your agents can focus on clients." },
+  { icon: Wrench, title: "HVAC Companies", tasks: ["Service calls", "Scheduling & dispatch", "Follow-ups"], description: "We manage service calls, scheduling, dispatch, and follow-ups — so your team can focus on keeping customers comfortable." },
+  { icon: Home, title: "Real Estate Agencies", tasks: ["Listings", "Lead follow-ups", "Transaction coordination"], description: "We handle listings, lead follow-ups, and transaction coordination — so you can focus on closing deals." },
+  { icon: Landmark, title: "Wealth Management Firms (RIAs)", tasks: ["Client onboarding", "Paperwork & scheduling", "CRM updates"], description: "We manage client onboarding, paperwork, scheduling, and CRM updates — so advisors can focus on building relationships." },
+  { icon: HardHat, title: "Construction Companies", tasks: ["Project documentation", "Invoicing", "Coordination"], description: "We handle project documentation, invoicing, and coordination — so your team can focus on getting the job done." },
+  { icon: Wrench, title: "Plumbing Companies", tasks: ["Incoming calls", "Appointments & dispatch", "Customer follow-ups"], description: "We manage incoming calls, appointments, dispatch, and customer follow-ups — so your technicians can focus on the job." },
+  { icon: Building2, title: "Restoration Companies", tasks: ["Emergency calls", "Job documentation", "Claims communication"], description: "We coordinate emergency calls, job documentation, and claims communication — so your team can focus on restoring properties." },
+  { icon: Truck, title: "Freight and Trucking Companies", tasks: ["Dispatch support", "Load tracking", "Invoicing & PODs"], description: "We handle dispatch support, load tracking, invoicing, and PODs — so your team can keep freight moving." },
+  { icon: House, title: "Property Management Companies", tasks: ["Tenant inquiries", "Maintenance requests", "Lease administration"], description: "We manage tenant inquiries, maintenance requests, and lease administration — so you can focus on your properties." },
+  { icon: HardHat, title: "Roofing Companies", tasks: ["Lead follow-ups", "Inspection scheduling", "Estimates"], description: "We handle lead follow-ups, inspection scheduling, and estimates — so your team can focus on winning more projects." },
+  { icon: Calculator, title: "CPA and Accounting Firms", tasks: ["Bookkeeping support", "Document collection", "Client follow-ups"], description: "We manage bookkeeping support, document collection, and client follow-ups — so you can focus on your clients’ finances." },
+  { icon: Scale, title: "Law Firms", tasks: ["Client intake", "Appointment scheduling", "Case file organization"], description: "We handle client intake, appointment scheduling, and case file organization — so your team can focus on legal work." },
+  { icon: FileText, title: "Mortgage Companies", tasks: ["Loan documents", "Application follow-ups", "Client communication"], description: "We coordinate loan documents, application follow-ups, and client communication — so your team can keep loans moving." },
+  { icon: Stethoscope, title: "Medical Practices", tasks: ["Appointment scheduling", "Patient inquiries", "Administrative tasks"], description: "We manage appointment scheduling, patient inquiries, and administrative tasks — so your staff can focus on patient care." },
+  { icon: ShoppingCart, title: "E-commerce Businesses", tasks: ["Order management", "Customer inquiries", "Product updates"], description: "We handle order management, customer inquiries, and product updates — so you can focus on growing your online store." },
 ];
+
+const typewriterWords = industryCards.map(({ title }) => title);
 
 export default function Hero() {
   const [industryIndex, setIndustryIndex] = useState(0);
@@ -69,13 +64,6 @@ export default function Hero() {
   const typewriterRef = useRef<HTMLDivElement>(null);
   const industryPanelRef = useRef<HTMLDivElement>(null);
   const currentIndustry = industryCards[industryIndex];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndustryIndex((prev) => (prev + 1) % industryCards.length);
-    }, 9000);
-    return () => clearInterval(timer);
-  }, []);
 
   // Entrance animation
   useGSAP(
@@ -127,7 +115,7 @@ export default function Hero() {
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
                 Powered By Trained VAs in <br />
                 <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#06B6D4] font-semibold relative">
-                  <TypewriterText words={typewriterWords} className="text-[#06B6D4]" />
+                  <TypewriterText words={typewriterWords} className="text-[#06B6D4]" onWordChange={setIndustryIndex} />
                 </span>
               </p>
             </div>
@@ -136,8 +124,7 @@ export default function Hero() {
               ref={descRef}
               className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-white/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xl"
             >
-              Dedicated Virtual Assistants to Streamline Operations, Reduce Administrative Work,
-              &mdash; and Help Your Business Grow.
+              {currentIndustry.description}
             </p>
 
             <div ref={askAiRef} className="mt-4 sm:mt-5">
@@ -218,7 +205,6 @@ export default function Hero() {
                   </article>
               ))}
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-white/60">{currentIndustry.outcome}</p>
           </div>
         </div>
       </div>
