@@ -18,26 +18,30 @@ export default function InternationalClients() {
               Global Reach
             </span>
             <h2 className="mt-4 sm:mt-6 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white">
-              We Welcome{" "}
+              Your Business. Our Support.{" "}
               <span className="text-[#06B6D4]">
-                International Clients
+                Anywhere.
               </span>
             </h2>
             <p className="mt-3 sm:mt-5 text-sm sm:text-base lg:text-lg leading-relaxed text-white/60">
-              Serving businesses across the United States, Canada, United Kingdom, Australia, and beyond — our virtual assistants work across time zones to keep your operations running 24/7.
+              We work with businesses across international markets, providing dependable virtual assistant support that fits your workflows, business hours, and operational needs.
             </p>
             <div className="mt-5 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:justify-start">
               <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
                 <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
-                <span className="text-xs sm:text-sm font-medium text-white">50+ States</span>
+                <span className="text-xs sm:text-sm font-medium text-white">United States</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
                 <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
-                <span className="text-xs sm:text-sm font-medium text-white">10+ Countries</span>
+                <span className="text-xs sm:text-sm font-medium text-white">Canada</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
                 <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
-                <span className="text-xs sm:text-sm font-medium text-white">24/7 Support</span>
+                <span className="text-xs sm:text-sm font-medium text-white">United Kingdom</span>
+              </div>
+              <div className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#06B6D4]/10 px-3 sm:px-4 py-1.5 sm:py-2 ring-1 ring-[#06B6D4]/30">
+                <Globe className="h-3 w-3 sm:h-4 sm:w-4 text-[#06B6D4]" />
+                <span className="text-xs sm:text-sm font-medium text-white">Australia</span>
               </div>
             </div>
           </Reveal>
