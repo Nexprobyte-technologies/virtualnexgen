@@ -375,18 +375,23 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
             <div className="lg:col-span-8">
               <Reveal y={25} delay={0.1}>
                 <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
-                  Bridging Human <span className="text-[#06B6D4]">Ingenuity</span> with Intelligent{" "}
+                  Built on Trust <span className="text-[#06B6D4]">Driven</span> by Your{" "}
                   <span className="relative inline-block">
-                    <span className="relative z-10 text-white">Automation</span>
+                    <span className="relative z-10 text-white">Growth.</span>
                     <span className="absolute bottom-2 left-0 h-3.5 w-full bg-[#06B6D4]/20 -z-0 rounded-sm" />
                   </span>
                 </h1>
               </Reveal>
 
               <Reveal y={25} delay={0.2}>
-                <p className="mt-6 text-lg sm:text-xl text-[#0B2A4A]/80 leading-relaxed max-w-3xl font-normal">
-                  {heroSubtitle}
-                </p>
+                <div className="mt-6 max-w-3xl">
+                  <p className="text-xl font-semibold text-white sm:text-2xl">
+                    Your Business Deserves More Than Just Support.
+                  </p>
+                  <p className="mt-3 text-lg font-normal leading-relaxed text-[#fff]/80 sm:text-xl">
+                    {heroSubtitle}
+                  </p>
+                </div>
               </Reveal>
 
               {/* Quick Actions */}
@@ -419,25 +424,25 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
             <div className="lg:col-span-4">
               <Reveal y={25} delay={0.35}>
                 <div className="rounded-2xl border border-white/20 bg-[#132F4A]/80 p-6 backdrop-blur-md shadow-[0_12px_32px_rgba(19,47,74,0.06)]">
-<div className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
+                    <div className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
                       Impact at a Glance
                     </div>
                     <div className="mt-4 grid grid-cols-2 gap-4">
                       <div className="border-r border-white/10 pr-3">
-                        <div className="text-3xl font-extrabold text-white">10+</div>
-                        <div className="text-xs text-white/70 mt-1 font-medium">Years in Business</div>
+                        <div className="text-3xl font-extrabold text-white">2016</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">The Year our journey began</div>
                       </div>
                       <div>
-                        <div className="text-3xl font-extrabold text-white">320+</div>
-                        <div className="text-xs text-white/70 mt-1 font-medium">Global Clients</div>
+                        <div className="text-3xl font-extrabold text-white">15+</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Industries supported</div>
                       </div>
                       <div className="border-r border-white/10 pr-3 pt-3 border-t">
-                        <div className="text-3xl font-extrabold text-[#06B6D4]">40%</div>
-                        <div className="text-xs text-white/70 mt-1 font-medium">Workload Saved</div>
+                        <div className="text-3xl font-extrabold text-[#06B6D4]">350+</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Businesses supported*</div>
                       </div>
                       <div className="pt-3 border-t border-white/10">
                         <div className="text-3xl font-extrabold text-white">24/7</div>
-                        <div className="text-xs text-white/70 mt-1 font-medium">Live Coverage</div>
+                        <div className="text-xs text-white/70 mt-1 font-medium">Support availability*</div>
                       </div>
                     </div>
                   </div>
@@ -466,12 +471,12 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                 <div className="absolute bottom-6 left-6 right-6 md:left-10 md:right-auto md:max-w-xl">
                   <div className="rounded-2xl border border-white/20 bg-[#0B2A4A]/90 p-5 backdrop-blur-md text-white shadow-xl">
                     <p className="text-sm md:text-base font-medium leading-relaxed italic text-white/95">
-                      &ldquo;Efficiency is not about running faster on a broken treadmill. It is about
-                      eliminating friction so brilliant minds can focus purely on growth.&rdquo;
+                      &ldquo;Great work begins with great people. We bring together skilled professionals,
+                      structured processes, and a shared commitment to helping businesses grow.&rdquo;
                     </p>
                     <div className="mt-3 flex items-center justify-between text-xs text-white/50 font-semibold uppercase tracking-wider">
-                      <span>Virtual Nexgen Solutions Leadership</span>
-                      <span className="text-[#06B6D4]">Chennai, India</span>
+                      <span>VIRTUAL NEXGEN SOLUTIONS TEAM</span>
+                      <span className="text-[#06B6D4]">COIMBATORE, INDIA</span>
                     </div>
                   </div>
                 </div>
@@ -493,11 +498,11 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                   OUR DECADE-LONG JOURNEY
               </span>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-                From a 10-Person Team to an <span className="text-[#06B6D4]">AI-Powered</span> Global Agency
+                From a Dedicated Team to Your <span className="text-[#06B6D4]">Global Business Partner</span>
               </h2>
               <p className="mt-4 text-base sm:text-lg text-white/70 leading-relaxed">
-                Click through each chapter of our evolution to see how we transformed from a specialized
-                virtual assistant provider into an international workforce powerhouse.
+                Explore how we’ve grown since 2016, expanding our expertise and building dedicated Virtual
+                Assistant support around the needs of businesses.
               </p>
             </div>
           </Reveal>
