@@ -22,8 +22,8 @@ export default function TestimonialsMarquee({
 
   const showHighlight = highlight !== undefined && highlight.trim() !== "";
 
-  // Duplicate 3x for seamless looping (need enough width to cover full animation cycle)
-  const items = [...testimonials, ...testimonials, ...testimonials];
+  // Two matching sets let the track loop back without a visible jump.
+  const items = [...testimonials, ...testimonials];
 
   return (
     <section className="border-y border-white/10 bg-white/[0.02] py-20 overflow-hidden">
@@ -45,7 +45,7 @@ export default function TestimonialsMarquee({
           )}
         </div>
 
-        <div className="mt-14 flex gap-6 animate-[marquee-x_40s_linear_infinite]">
+        <div className="mt-14 flex gap-6 animate-[testimonials-marquee_9s_linear_infinite]">
           {items.map((t, i) => (
             <div
               key={i}
