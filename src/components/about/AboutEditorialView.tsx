@@ -69,15 +69,17 @@ const TIMELINE_CHAPTERS = [
     title: "Breaking the Freelancer Volatility Cycle",
     subtitle: "A radical promise: full-time, vetted dedicated talent with strict NDAs.",
     description:
-      "Virtual Nexgen Solutions was founded with a singular conviction: growing companies shouldn't gamble their operations on unvetted, transient freelancers. We built an in-house delivery infrastructure where professionals are direct, full-time employees trained in rigorous corporate SOPs.",
-    stats: "50+ Pioneer Clients",
-    statLabel: "Zero Client Attrition in Year 1",
+      "Virtual Nexgen Solutions has focused on helping businesses manage their day-to-day operations with dedicated Virtual Assistants. Our approach combines industry-specific training, clearly defined workflows, and a commitment to protecting client information.",
+    stats: "Since 2016",
+    statLabel: "A decade of dedicated business support",
     deliverables: [
-      "100% In-House Staff Model",
-      "Legally Binding Client NDAs",
-      "Executive Administrative Mastery",
+      "Dedicated Virtual Assistant Support",
+      "Structured Training & SOPs",
+      "Confidentiality-Focused Workflows",
+      "Industry-Specific Expertise",
     ],
-    highlight: "Founded in 2016 with 10 dedicated professionals in Chennai.",
+    highlight:
+      "Established in Coimbatore, India, with a commitment to dependable Virtual Assistant services and long-term client partnerships.",
   },
   {
     year: "2019",
@@ -133,16 +135,16 @@ const TIMELINE_CHAPTERS = [
 const DEPARTMENTS = [
   {
     id: "legal",
-    name: "Legal Back-Office",
+    name: "Legal & Professional Services",
     icon: Scale,
-    tagline: "Precision Case Management & Litigation Support",
+    tagline: "Reliable Legal Administrative Support",
     overview:
-      "Our legal virtual assistants seamlessly integrate into your firm's existing practice management systems, managing intensive back-office procedures with absolute confidentiality.",
+      "Our assistants help law firms stay organized by managing client intake, maintaining case records, coordinating appointments, and supporting routine administrative workflows.",
     bullets: [
-      "Legal research & case brief drafting",
-      "Court document preparation & e-filing support",
-      "Client intake & discovery document indexing",
-      "Billing entry & retainer tracking (Clio, MyCase, Filevine)",
+      "Client intake & follow-ups",
+      "Case file organization",
+      "Calendar & appointment management",
+      "Document preparation & tracking",
     ],
     metric: "18+ hrs",
     metricLabel: "Reclaimed weekly per attorney",
@@ -165,7 +167,7 @@ const DEPARTMENTS = [
   },
   {
     id: "realestate",
-    name: "Real Estate & Property",
+    name: "Real Estate",
     icon: Building,
     tagline: "Contract-to-Close & MLS Pipeline Coordination",
     overview:
@@ -181,7 +183,7 @@ const DEPARTMENTS = [
   },
   {
     id: "administrative",
-    name: "Executive & Finance",
+    name: "Finance & Accounting",
     icon: Briefcase,
     tagline: "C-Suite Leverage & Daily Bookkeeping",
     overview:
@@ -197,7 +199,7 @@ const DEPARTMENTS = [
   },
   {
     id: "ai-automation",
-    name: "AI & Workflow Ops",
+    name: "Operations & AI Support",
     icon: Zap,
     tagline: "Autonomous Agentic Pipelines & CRM Syncing",
     overview:
@@ -504,6 +506,17 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                 Explore how we’ve grown since 2016, expanding our expertise and building dedicated Virtual
                 Assistant support around the needs of businesses.
               </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <div className="w-fit rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">Dedicated professionals</h3>
+                </div>
+                <div className="w-fit rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">Structured processes</h3>
+                </div>
+                <div className="w-fit rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">Reliable support</h3>
+                </div>
+              </div>
             </div>
           </Reveal>
 
@@ -565,13 +578,17 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                         Chapter {activeTimeline + 1} of 4 • {TIMELINE_CHAPTERS[activeTimeline].year}
                       </div>
 
-                      <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-white">
-                        {TIMELINE_CHAPTERS[activeTimeline].title}
-                      </h3>
+                      {activeTimeline !== 0 && (
+                        <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-white">
+                          {TIMELINE_CHAPTERS[activeTimeline].title}
+                        </h3>
+                      )}
 
-                      <p className="mt-2 text-base font-semibold text-[#06B6D4]">
-                        {TIMELINE_CHAPTERS[activeTimeline].subtitle}
-                      </p>
+                      {activeTimeline !== 0 && (
+                        <p className="mt-2 text-base font-semibold text-[#06B6D4]">
+                          {TIMELINE_CHAPTERS[activeTimeline].subtitle}
+                        </p>
+                      )}
 
                       <p className="mt-4 text-base leading-relaxed text-white/80">
                         {TIMELINE_CHAPTERS[activeTimeline].description}
@@ -579,7 +596,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
 
                       <div className="mt-6 border-t border-white/20 pt-5">
                         <div className="text-xs font-bold uppercase tracking-widest text-white/50 mb-3">
-                          Key Milestone Breakthroughs
+                          Key Milestones
                         </div>
                         <div className="grid sm:grid-cols-2 gap-2.5">
                           {TIMELINE_CHAPTERS[activeTimeline].deliverables.map((item, i) => (
@@ -595,7 +612,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                     <div className="lg:col-span-5">
                       <div className="rounded-2xl border border-white/20 bg-[#132F4A] p-6 shadow-[0_10px_30px_rgba(19,47,74,0.06)]">
                         <div className="text-xs font-bold uppercase tracking-widest text-white/50">
-                          Historical Impact
+                          {activeTimeline === 0 ? "OUR FOUNDATION" : "Historical Impact"}
                         </div>
                         <div className="mt-3 text-4xl sm:text-5xl font-black text-white">
                           {TIMELINE_CHAPTERS[activeTimeline].stats}
@@ -605,7 +622,9 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                         </div>
 
                         <div className="mt-6 rounded-xl bg-[#132F4A] p-4 text-xs font-medium leading-relaxed text-white/70">
-                          <span className="font-bold text-white block mb-1">Archived Note:</span>
+                          <span className="font-bold text-white block mb-1">
+                            {activeTimeline === 0 ? "Our Story" : "Archived Note:"}
+                          </span>
                           {TIMELINE_CHAPTERS[activeTimeline].highlight}
                         </div>
                       </div>
@@ -631,10 +650,10 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
             <div className="text-center max-w-2xl mx-auto">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#132F4A]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#132F4A]/20">
                 <Sparkles className="h-3.5 w-3.5 text-[#06B6D4]" />
-                THE NEXGEN MANIFESTO
+                THE VIRTUAL NEXGEN DIFFERENCE
               </span>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl text-white">
-                What We Stand For Every Day
+                More Than Support. A Partner in Your Growth.
               </h2>
             </div>
           </Reveal>
@@ -650,29 +669,31 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                       <Target className="h-6 w-6" />
                     </span>
                     <span className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]/50">
-                      PURPOSE & MISSION
+                      PURPOSE & COMMITMENT
                     </span>
                   </div>
 
                   <h3 className="mt-6 text-2xl sm:text-3xl font-bold text-white">Our Mission</h3>
+                  <h4 className="mt-3 text-lg font-semibold text-[#06B6D4]">Making Business Growth Easier</h4>
                   <p className="mt-4 text-base sm:text-lg leading-relaxed text-white/80 font-normal">
-                    {missionText}
+                    We help businesses work smarter by combining dedicated Virtual Assistants, industry-specific expertise, and practical AI solutions. Our mission is to simplify daily operations, reduce administrative pressure, and give business owners more time to focus on growth.
                   </p>
                 </div>
 
                 <div className="mt-8 border-t border-white/10 pt-6">
+                  <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#06B6D4]">Our Commitment</h4>
                   <div className="space-y-2.5">
                     <div className="flex items-center gap-3 text-sm text-white/90">
                       <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
-                      <span>Eliminate redundant administrative busywork</span>
+                      <span>Simplify complex day-to-day operations</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/90">
                       <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
-                      <span>Empower enterprise growth through custom AI pipelines</span>
+                      <span>Deliver dependable, industry-focused support</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/90">
                       <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
-                      <span>Provide high-trust, continuous operational leverage</span>
+                      <span>Help businesses create capacity for growth</span>
                     </div>
                   </div>
                 </div>
@@ -688,29 +709,31 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                       <Globe2 className="h-6 w-6 text-[#0B2A4A]" />
                     </span>
                     <span className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
-                      FUTURE HORIZON
+                      THE FUTURE WE’RE BUILDING
                     </span>
                   </div>
 
                   <h3 className="mt-6 text-2xl sm:text-3xl font-bold text-white">Our Vision</h3>
+                  <h4 className="mt-3 text-lg font-semibold text-[#06B6D4]">Redefining How Businesses Get Work Done</h4>
                   <p className="mt-4 text-base sm:text-lg leading-relaxed text-white/80 font-normal">
-                    {visionText}
+                    We envision a future where every growing business has access to the right people, processes, and technology to operate efficiently. By bringing together human expertise and intelligent automation, we aim to make high-quality operational support more accessible and scalable.
                   </p>
                 </div>
 
                 <div className="mt-8 border-t border-white/10 pt-6">
+                  <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#06B6D4]">Our Ambition</h4>
 <div className="space-y-2.5">
                       <div className="flex items-center gap-3 text-sm text-white/90">
                         <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
-                        <span>Global leader in AI-augmented talent delivery</span>
+                        <span>Make specialized business support accessible</span>
                       </div>
                       <div className="flex items-center gap-3 text-sm text-white/90">
                         <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
-                        <span>Setting the benchmark for remote operational security</span>
+                        <span>Combine human expertise with useful AI solutions</span>
                       </div>
                       <div className="flex items-center gap-3 text-sm text-white/90">
                         <Check className="h-4 w-4 text-[#06B6D4] flex-shrink-0" />
-                        <span>Human-centric ethics meeting cutting-edge automation</span>
+                        <span>Build lasting partnerships that grow with our clients</span>
                       </div>
                   </div>
                 </div>
@@ -730,14 +753,13 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
               <div className="max-w-2xl">
                 <span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/30">
                   <Briefcase className="h-3.5 w-3.5 text-[#06B6D4]" />
-                  SPECIALIZED SQUADS
+                  INDUSTRY-SPECIALIZED TEAMS
                 </span>
                 <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-                  Trained for Your Specific <span className="text-[#06B6D4]">Industry Vertical</span>
+                  Trained for Your Industry. <span className="text-[#06B6D4]">Ready for Your Workflow.</span>
                 </h2>
 <p className="mt-4 text-base sm:text-lg text-white/70">
-                  We don't supply generic data entry clerks. Our assistants are organized into dedicated
-                  verticals certified in your industry's exact toolsets and regulations.
+                  Our Virtual Assistants support industry-specific operations, business software, and administrative workflows — helping your team spend less time managing tasks and more time serving clients.
                 </p>
               </div>
 
@@ -786,7 +808,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                   <div className="lg:col-span-8">
                     <span className="text-xs font-bold uppercase tracking-widest text-[#06B6D4]">
-                      PRACTICE EXCELLENCE
+                      {dept.id === "legal" ? "LEGAL SUPPORT EXPERTISE" : "PRACTICE EXCELLENCE"}
                     </span>
                     <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-white">
                       {dept.tagline}
@@ -807,15 +829,23 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
 
                   <div className="lg:col-span-4">
                     <div className="rounded-2xl border border-[#0B2A4A]/10 bg-[#132F4A]/70 p-6 sm:p-8 text-center">
-                      <div className="text-xs font-bold uppercase tracking-widest text-[#0B2A4A]/60">
-                        Operational Velocity
+                      <div className="text-xs font-bold uppercase tracking-widest text-white/60">
+                        {dept.id === "legal" ? "Dedicated Support" : "Operational Velocity"}
                       </div>
-<div className="mt-3 text-4xl sm:text-5xl font-black text-white">
-                        {dept.metric}
-                      </div>
-                      <div className="mt-2 text-sm font-bold text-[#06B6D4]">
-                          {dept.metricLabel}
-                      </div>
+                      {dept.id === "legal" ? (
+                        <div className="mt-3 text-sm font-bold text-white">
+                          Aligned with your firm&apos;s processes
+                        </div>
+                      ) : (
+                        <>
+                          <div className="mt-3 text-4xl sm:text-5xl font-black text-white">
+                            {dept.metric}
+                          </div>
+                          <div className="mt-2 text-sm font-bold text-[#06B6D4]">
+                            {dept.metricLabel}
+                          </div>
+                        </>
+                      )}
 
                       <div className="mt-6">
                         <Link
@@ -823,7 +853,11 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#132F4A] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all hover:bg-[#06B6D4] hover:text-white"
                         >
                           <span>Request Staffing Profile</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
+                          {dept.id === "legal" ? (
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          ) : (
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          )}
                         </Link>
                       </div>
                     </div>
@@ -844,13 +878,13 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
             <div className="text-center max-w-3xl mx-auto">
 <span className="inline-flex items-center gap-2 rounded-full bg-[#06B6D4]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#06B6D4] uppercase border border-[#06B6D4]/10">
                   <BadgeCheck className="h-3.5 w-3.5 text-[#06B6D4]" />
-                  THE NEXGEN STANDARD
+                  THE VIRTUAL NEXGEN ADVANTAGE
               </span>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-                Why Industry Leaders Choose <span className="text-[#06B6D4]">Virtual Nexgen</span>
+                More Than a Virtual Assistant. <span className="text-[#06B6D4]">A Smarter Way to Work.</span>
               </h2>
               <p className="mt-4 text-base sm:text-lg text-white/70">
-                Engineered to eliminate the traditional risks of outsourcing while magnifying speed and savings.
+                The people, processes, and industry knowledge to help your business operate with greater confidence.
               </p>
             </div>
           </Reveal>
@@ -879,7 +913,14 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-[#0B2A4A]/10 flex items-center justify-between text-xs font-bold text-white uppercase tracking-wider">
-                      <span>Enterprise Guaranteed</span>
+                      <span>{({
+                        "dedicated-professionals": "PEOPLE YOU CAN RELY ON",
+                        "industry-expertise": "BUILT AROUND YOUR INDUSTRY",
+                        "structured-workflows": "PROCESS-DRIVEN DELIVERY",
+                        "flexible-support": "SUPPORT THAT SCALES",
+                        "business-fit-coverage": "FLEXIBLE AVAILABILITY",
+                        "quality-accountability": "ACCOUNTABLE SUPPORT",
+                      } as Record<string, string>)[feat.id] || "DEDICATED SUPPORT"}</span>
                       <Check className="h-4 w-4 text-[#06B6D4]" />
                     </div>
                   </div>

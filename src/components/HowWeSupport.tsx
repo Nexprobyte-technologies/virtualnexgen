@@ -130,7 +130,7 @@ export default function HowWeSupport() {
           </div>
 
           {/* Tabs row */}
-          <div ref={tabsRef} className="hidden sm:flex items-center justify-center gap-1.5 sm:gap-2 pb-1">
+          <div ref={tabsRef} className="hidden sm:flex items-center justify-center gap-3 md:gap-4 lg:gap-5 pb-1">
             {steps.map((s, i) => (
               <button
                 key={s.num}
@@ -152,7 +152,7 @@ export default function HowWeSupport() {
           </div>
 
           {/* Mobile tabs */}
-          <div className="flex sm:hidden items-center justify-center gap-1.5 pb-3 overflow-x-auto">
+          <div className="flex sm:hidden items-center justify-center gap-2.5 pb-3 overflow-x-auto">
             {steps.map((s, i) => (
               <button
                 key={s.num}

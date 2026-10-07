@@ -42,45 +42,45 @@
   ],
   "features": [
     {
-      "id": "skilled-pros",
-      "icon": "UserCheck",
-      "title": "Skilled Professionals",
-      "text": "Our virtual assistants are experts in administrative, creative, and technical tasks.",
+      "id": "dedicated-professionals",
+      "icon": "Users",
+      "title": "Dedicated Professionals",
+      "text": "Work with dedicated assistants who become familiar with your business, priorities, and processes.",
       "image": ""
     },
     {
-      "id": "tailored-support",
-      "icon": "SlidersHorizontal",
-      "title": "Tailored Support",
-      "text": "Customized solutions to match your specific business needs.",
+      "id": "industry-expertise",
+      "icon": "Target",
+      "title": "Industry-Focused Expertise",
+      "text": "Get support aligned with your industry’s workflows, tools, and everyday operational needs.",
       "image": ""
     },
     {
-      "id": "time-saving",
+      "id": "structured-workflows",
+      "icon": "Workflow",
+      "title": "Structured Workflows",
+      "text": "Keep tasks organized through documented processes, clear responsibilities, and consistent communication.",
+      "image": ""
+    },
+    {
+      "id": "flexible-support",
+      "icon": "Briefcase",
+      "title": "Flexible, Cost-Conscious Support",
+      "text": "Choose support that fits your workload and business needs without adding another full internal role.",
+      "image": ""
+    },
+    {
+      "id": "business-fit-coverage",
       "icon": "Clock",
-      "title": "Time-Saving Efficiency",
-      "text": "Focus on growing your business while we handle the day-to-day tasks.",
+      "title": "Coverage That Fits Your Business",
+      "text": "Align assistant schedules with your operating hours, customer needs, and time-zone requirements.",
       "image": ""
     },
     {
-      "id": "cost-effective",
-      "icon": "DollarSign",
-      "title": "Cost-Effective Solutions",
-      "text": "Affordable, scalable plans to fit your budget.",
-      "image": ""
-    },
-    {
-      "id": "availability",
-      "icon": "Headphones",
-      "title": "24/7 Availability",
-      "text": "Round-the-clock support to keep your operations running seamlessly.",
-      "image": ""
-    },
-    {
-      "id": "reliability",
-      "icon": "BadgeCheck",
-      "title": "Proven Reliability",
-      "text": "Trusted by businesses for delivering consistent, high-quality support.",
+      "id": "quality-accountability",
+      "icon": "ShieldCheck",
+      "title": "Quality & Accountability",
+      "text": "Support your operations with defined expectations, workflow oversight, and a focus on dependable execution.",
       "image": ""
     }
   ],
