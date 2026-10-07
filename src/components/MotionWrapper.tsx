@@ -34,24 +34,24 @@ export default function MotionWrapper({ children }: { children: React.ReactNode 
 
       // Smooth parallax for images
       // gsap.utils.toArray<HTMLElement>("img", containerRef.current).forEach((img) => {
-      gsap.utils
-  .toArray<HTMLElement>("img:not(.industry-carousel-window img):not(.services-track img)", containerRef.current)
-  .forEach((img) => {
-        gsap.fromTo(
-          img,
-          { y: 20 },
-          {
-            y: -20,
-            ease: "none",
-            scrollTrigger: {
-              trigger: img,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.5,
-            },
-          }
-        );
-      });
+      // gsap.utils
+      //   .toArray<HTMLElement>("img:not(.industry-carousel-window img):not(.services-track img)", containerRef.current)
+      //   .forEach((img) => {
+      //   gsap.fromTo(
+      //     img,
+      //     { y: 20 },
+      //     {
+      //       y: -20,
+      //       ease: "none",
+      //       scrollTrigger: {
+      //         trigger: img,
+      //         start: "top bottom",
+      //         end: "bottom top",
+      //         scrub: 1.5,
+      //       },
+      //     }
+      //   );
+      // });
     },
     { scope: containerRef }
   );
