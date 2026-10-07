@@ -919,7 +919,7 @@ export default async function ServiceDetailPage({
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="overflow-hidden rounded-[2rem] mt-20 border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 sm:p-14">
+          <div className="relative overflow-hidden rounded-[2rem] mt-20 border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 sm:p-14">
             <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
             <div className="relative" >
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">

@@ -48,7 +48,7 @@ export default function ClientLogos({
       </div>
 
       <Reveal delay={0.1}>
-        <div className="client-logo-orbit relative mx-auto mt-12 flex h-[23rem] w-[23rem] items-center justify-center [--orbit:115px] sm:h-[28rem] sm:w-[28rem] sm:[--orbit:190px]">
+        <div className="client-logo-orbit relative left-1/2 -translate-x-1/2 scale-[0.7] sm:left-0 sm:mx-auto sm:translate-x-0 sm:scale-100 mt-12 flex h-[23rem] w-[23rem] items-center justify-center [--orbit:115px] sm:h-[28rem] sm:w-[28rem] sm:[--orbit:190px]">
           <div className="absolute inset-0 rounded-full border border-line/70" />
           <div className="absolute inset-5 rounded-full border border-dashed border-line/50 sm:inset-6" />
           <div className="absolute left-1/2 top-1/2 h-[calc(2*var(--orbit))] w-[calc(2*var(--orbit))] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand/30" />
