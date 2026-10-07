@@ -89,6 +89,9 @@ const RICH_CONTENT_CLASSES =
   "rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-ink sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-ink [&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-lg [&_h4]:font-bold [&_h4]:text-ink [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-ink/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-ink [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-brand-dark [&_a]:underline [&_a]:decoration-brand/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-ink/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-ink/70 sm:[&_ol]:text-lg [&_li]:marker:text-brand-dark [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-ink/80 [&_hr]:my-8 [&_hr]:border-line [&_code]:rounded [&_code]:bg-brand/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-brand-deep [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-ink/70 [&_th]:border [&_th]:border-line [&_th]:bg-cream [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-ink [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-4 [&_img]:mb-6 [&_b]:font-bold [&_i]:italic [&_div]:my-2 [&_span]:inline";
 
 const DARK_WHITE_OVERRIDES =
+  "[&_h2]:text-[#02024E]! [&_h3]:text-[#02024E]! [&_h4]:text-[#02024E]! [&_p]:text-[#02024E]/80! [&_strong]:text-[#02024E]! [&_em]:text-[#02024E]! [&_b]:text-[#02024E]! [&_i]:text-[#02024E]! [&_a]:text-[#02024E]! [&_a]:decoration-[#02024E]/40! [&_ul]:text-[#02024E]/80! [&_ol]:text-[#02024E]/80! [&_li]:text-[#02024E]/80! [&_li]:marker:text-[#02024E]/60! [&_blockquote]:text-[#02024E]/85! [&_blockquote]:border-[#01012F]/15! [&_code]:bg-[#02024E]/10! [&_code]:text-[#02024E]! [&_table]:text-[#02024E]/80! [&_th]:bg-[#02024E]/10! [&_th]:text-[#02024E]! [&_th]:border-[#01012F]/15! [&_td]:text-[#02024E]/80! [&_td]:border-[#01012F]/15! [&_hr]:border-[#01012F]/15!";
+
+const WHITE_OVERRIDES_ON_DARK =
   "[&_h2]:text-white! [&_h3]:text-white! [&_h4]:text-white! [&_p]:text-white/80! [&_strong]:text-white! [&_em]:text-white! [&_b]:text-white! [&_i]:text-white! [&_a]:text-white! [&_a]:decoration-white/40! [&_ul]:text-white/80! [&_ol]:text-white/80! [&_li]:text-white/80! [&_li]:marker:text-white/60! [&_blockquote]:text-white/85! [&_blockquote]:border-white/30! [&_code]:bg-white/10! [&_code]:text-white! [&_table]:text-white/80! [&_th]:bg-white/10! [&_th]:text-white! [&_th]:border-white/20! [&_td]:text-white/80! [&_td]:border-white/20! [&_hr]:border-white/15!";
 
 type FullContentCard = {
@@ -148,7 +151,7 @@ function FullContentCards({ html }: { html: string }) {
   function renderHeading(card: FullContentCard) {
     if (!card.heading) return null;
     const heading = card.heading.replace(/<strong>(.*?)<\/strong>/g, "$1");
-    const cls = "text-lg font-extrabold text-white";
+    const cls = "text-lg font-extrabold text-[#02024E]";
     if (card.headingTag === "h2") {
       return (
         <h2
@@ -185,7 +188,7 @@ function FullContentCards({ html }: { html: string }) {
     const images = card.body.match(/<img[^>]*>/gi) || [];
     const textBody = card.body.replace(/<img[^>]*>/gi, "");
     return (
-      <article className="group overflow-hidden rounded-3xl border border-white/20 bg-white/5 backdrop-blur-sm">
+      <article className="group overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white backdrop-blur-sm">
         <div className={`grid lg:grid-cols-2 ${flip ? "lg:[direction:rtl]" : ""}`}>
           <div className="p-8 sm:p-10 lg:[direction:ltr]">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(6,182,212,0.15)]" />
@@ -206,7 +209,7 @@ function FullContentCards({ html }: { html: string }) {
                       src={src}
                       alt=""
                       loading="lazy"
-                      className="h-full w-full rounded-2xl border border-white/20 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition duration-500 group-hover:scale-[1.02]"
+                      className="h-full w-full rounded-2xl border border-[#01012F]/15 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition duration-500 group-hover:scale-[1.02]"
                     />
                   );
                 })}
@@ -236,7 +239,7 @@ function FullContentCards({ html }: { html: string }) {
     const heading = (card.heading || "").replace(/<[^>]*>/g, "").trim();
     const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
     return (
-      <article className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
+      <article className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
         <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
           {indexFromCard(card)}
         </span>
@@ -247,7 +250,7 @@ function FullContentCards({ html }: { html: string }) {
                 {indexFromCard(card)}
               </span>
               <div className="pt-1">
-                <h4 className="text-lg font-extrabold leading-snug text-white">
+                <h4 className="text-lg font-extrabold leading-snug text-[#02024E]">
                   {label}
                 </h4>
               </div>
@@ -302,7 +305,7 @@ function FullContentCards({ html }: { html: string }) {
       );
     });
     return (
-      <article className="rounded-3xl border border-white/20 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-10">
+      <article className="rounded-3xl border border-[#01012F]/10 bg-white p-6 backdrop-blur-sm sm:p-10">
         <div className="flex items-center gap-3">
           <span className="inline-block h-2 w-2 rounded-full bg-brand" />
           {renderHeading(card)}
@@ -324,13 +327,13 @@ function FullContentCards({ html }: { html: string }) {
       "",
     ).trim();
     return (
-      <div id={`faq-${index}`} className="border-b border-white/15 py-5 last:border-0 last:pb-2 first:pt-0">
+      <div id={`faq-${index}`} className="border-b border-[#01012F]/15 py-5 last:border-0 last:pb-2 first:pt-0">
         <div className="flex items-start gap-4">
           <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10">
             <ChevronDown className="h-3.5 w-3.5 text-brand" />
           </span>
           <div className="min-w-0">
-            <h4 className="text-base font-extrabold leading-snug text-white">
+            <h4 className="text-base font-extrabold leading-snug text-[#02024E]">
               {question}
             </h4>
             <div
@@ -378,7 +381,7 @@ function FullContentCards({ html }: { html: string }) {
                     {(card.heading || "").replace(/<[^>]*>/g, "")}
                   </span>
                   <div
-                    className={`${RICH_CONTENT_CLASSES} mt-4 ${DARK_WHITE_OVERRIDES}`}
+                    className={`${RICH_CONTENT_CLASSES} mt-4 ${WHITE_OVERRIDES_ON_DARK}`}
                     dangerouslySetInnerHTML={{ __html: textBody }}
                   />
                 </div>
@@ -437,13 +440,13 @@ function FullContentCards({ html }: { html: string }) {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
             {/* Left Column: FAQ Answers */}
             <div className="min-w-0 max-w-4xl">
-              <div className="rounded-[2rem] border border-white/20 bg-white/5 px-6 py-8 backdrop-blur-sm sm:px-10 sm:py-10">
+              <div className="rounded-[2rem] border border-[#01012F]/10 bg-white px-6 py-8 backdrop-blur-sm sm:px-10 sm:py-10">
                 <div className="flex items-center gap-3">
                   <span className="inline-block h-2 w-2 rounded-full bg-brand" />
                   {faqHeadingCard ? (
                     renderHeading(faqHeadingCard)
                   ) : (
-                    <h3 className="text-lg font-extrabold text-white sm:text-xl">
+                    <h3 className="text-lg font-extrabold text-[#02024E] sm:text-xl">
                       Frequently Asked Questions
                     </h3>
                   )}
@@ -461,9 +464,9 @@ function FullContentCards({ html }: { html: string }) {
             {/* Right Sidebar: FAQ Questions (Sticky) */}
             <aside className="hidden lg:block">
               <div className="sticky top-32">
-                <div className="rounded-2xl border border-white/20 bg-white/5 p-6">
-                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-white">
-                    <List className="h-4 w-4 text-[#06B6D4]" /> On This Page
+                <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6">
+                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#02024E]">
+                    <List className="h-4 w-4 text-[#12B4CF]" /> On This Page
                   </h3>
                   <nav className="mt-4">
                     <ul className="space-y-2.5">
@@ -473,9 +476,9 @@ function FullContentCards({ html }: { html: string }) {
                           <li key={i}>
                             <a
                               href={`#faq-${i}`}
-                              className="group flex items-start gap-2 text-sm leading-snug text-white/70 transition hover:text-white"
+                              className="group flex items-start gap-2 text-sm leading-snug text-[#02024E]/70 transition hover:text-[#02024E]"
                             >
-                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#06B6D4]/50 transition group-hover:bg-[#06B6D4]" />
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#12B4CF]/50 transition group-hover:bg-[#12B4CF]" />
                               {question}
                             </a>
                           </li>
@@ -600,22 +603,22 @@ export default async function ServiceDetailPage({
         : (service.content?.slice(0, 6) ?? []));
 
   return (
-    <main className="min-h-screen bg-[#132F4A]">
+    <main className="min-h-screen bg-[#F2FCFE]">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-5 bg-[#132F4A]">
+      <div className="relative overflow-hidden py-5 bg-[#F2FCFE]">
         <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/50">
-            <Link href="/" className="flex items-center gap-1.5 transition hover:text-white">
+          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
+            <Link href="/" className="flex items-center gap-1.5 transition hover:text-[#02024E]">
               <Home className="h-3.5 w-3.5" /> Home
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-            <Link href="/services" className="transition hover:text-white">
+            <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
+            <Link href="/services" className="transition hover:text-[#02024E]">
               Services
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-            <span className="text-white/80">{service.name}</span>
+            <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
+            <span className="text-[#02024E]/80">{service.name}</span>
           </nav>
         </div>
       </div>
@@ -625,13 +628,13 @@ export default async function ServiceDetailPage({
         <div className="grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
           <Reveal>
             <div>
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {service.eyebrow || service.name}
               </span>
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">
+              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-[#02024E] sm:text-5xl">
                 {service.name}
               </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#02024E]/80 sm:text-lg">
                 {service.short}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
@@ -677,14 +680,14 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Trust Badges Marquee */}
-      <section className="border-y border-white/10 bg-white/[0.02] py-6 overflow-hidden">
+      <section className="border-y border-[#01012F]/10 bg-[#E8F8FB] py-6 overflow-hidden">
         <div className="flex gap-8 animate-[marquee-x_25s_linear_infinite] whitespace-nowrap">
           {[...trustBadges, ...trustBadges].map((b, i) => (
             <div key={i} className="flex items-center gap-2.5 shrink-0">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/10">
                 <b.icon className="h-4 w-4 text-brand" />
               </div>
-              <span className="text-sm font-semibold text-white/75">
+              <span className="text-sm font-semibold text-[#02024E]/75">
                 {b.label}
               </span>
             </div>
@@ -697,10 +700,10 @@ export default async function ServiceDetailPage({
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div>
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {textOr(service.problem?.eyebrow, "The Problem")}
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold leading-tight text-[#02024E] sm:text-4xl">
                 {textOr(
                   service.problem?.heading,
                   "Most Businesses Aren't Struggling to Grow —",
@@ -712,7 +715,7 @@ export default async function ServiceDetailPage({
                   </span>
                 )}
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-white/65">
+              <p className="mt-5 text-base leading-relaxed text-[#02024E]/65">
                 {textOr(
                   service.problem?.text,
                   "Repetitive tasks quietly consume the time your team should spend growing the business.",
@@ -722,7 +725,7 @@ export default async function ServiceDetailPage({
                 {problemPointsList.map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand" />
-                    <span className="text-sm text-white/70">{item}</span>
+                    <span className="text-sm text-[#02024E]/70">{item}</span>
                   </div>
                 ))}
               </div>
@@ -734,10 +737,10 @@ export default async function ServiceDetailPage({
               {problemCardsList.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-white/20 bg-white/5 p-5 backdrop-blur-sm"
+                  className="rounded-2xl border border-[#01012F]/10 bg-white p-5 backdrop-blur-sm"
                 >
-                  <h4 className="text-sm font-bold text-white">{item.title}</h4>
-                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                  <h4 className="text-sm font-bold text-[#02024E]">{item.title}</h4>
+                  <p className="mt-2 text-xs leading-relaxed text-[#02024E]/60">
                     {item.desc}
                   </p>
                 </div>
@@ -752,17 +755,17 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {textOr(service.benefitsSection?.eyebrow, "Why Choose Us")}
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
                 {textOr(service.benefitsSection?.heading, "Built for")}
                 <span className="text-brand">
                   {" "}
                   {textOr(service.benefitsSection?.highlight, "Your Industry")}
                 </span>
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base text-white/60">
+              <p className="mx-auto mt-4 max-w-2xl text-base text-[#02024E]/60">
                 {textOr(
                   service.benefitsSection?.text,
                   "Specialised support that plugs directly into your workflow, from day one.",
@@ -776,14 +779,14 @@ export default async function ServiceDetailPage({
               const Icon = ICONS[item.icon] || Zap;
               return (
                 <Reveal key={i} delay={i * 0.08}>
-                  <div className="group rounded-2xl border border-white/20 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-[0_12px_40px_rgba(6,182,212,0.15)]">
+                  <div className="group rounded-2xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-[0_12px_40px_rgba(6,182,212,0.15)]">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 transition-colors group-hover:bg-brand/20">
                       <Icon className="h-5 w-5 text-brand" />
                     </div>
-                    <h3 className="mt-5 text-lg font-extrabold text-white">
+                    <h3 className="mt-5 text-lg font-extrabold text-[#02024E]">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-white/60">
+                    <p className="mt-2.5 text-sm leading-relaxed text-[#02024E]/60">
                       {item.desc}
                     </p>
                   </div>
@@ -797,17 +800,17 @@ export default async function ServiceDetailPage({
       {/* Interactive Chapter Folder */}
       {folderItems.length > 0 && (
         <section
-          className="relative overflow-hidden py-10 sm:py-16 bg-[#132F4A]"
+          className="relative overflow-hidden py-10 sm:py-16 bg-[#F2FCFE]"
         >
           <div className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-brand/15 blur-[130px]" />
           <div className="pointer-events-none absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-deep/25 blur-[130px]" />
           <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="text-center">
-                 <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
+                 <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
                    {textOr(service.folderSection?.eyebrow, "INSURANCE VA PLAYBOOK")}
                  </span>
-                 <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                 <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
                    {textOr(
                       service.folderSection?.heading,
                       `${folderItems.length} Essential Tasks an`,
@@ -820,7 +823,7 @@ export default async function ServiceDetailPage({
                       <span> Can Handle</span>
                     )}
                   </h2>
-                  <p className="mx-auto mt-3 max-w-2xl text-sm text-white/65 sm:text-base">
+                  <p className="mx-auto mt-3 max-w-2xl text-sm text-[#02024E]/65 sm:text-base">
                     {textOr(
                       service.folderSection?.text,
                       "Tap any folder to explore the exact workflows our virtual assistants take off your plate.",
@@ -841,7 +844,7 @@ export default async function ServiceDetailPage({
               {folderHints.map((hint) => (
                 <span
                   key={hint}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-semibold text-white/75 backdrop-blur"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/15 bg-white px-4 py-2 font-semibold text-[#02024E]/75 backdrop-blur"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                   {hint}
@@ -866,10 +869,10 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
-              <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {textOr(service.stepsSection?.eyebrow, "How It Works")}
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
                 {textOr(service.stepsSection?.heading, "Get Started in")}
                 {service.stepsSection?.highlight ? (
                   <span className="text-brand"> {service.stepsSection.highlight}</span>
@@ -878,7 +881,7 @@ export default async function ServiceDetailPage({
                 )}
               </h2>
               {service.stepsSection?.text?.trim() && (
-                <p className="mx-auto mt-4 max-w-2xl text-base text-white/60">
+                <p className="mx-auto mt-4 max-w-2xl text-base text-[#02024E]/60">
                   {service.stepsSection.text}
                 </p>
               )}
@@ -888,14 +891,14 @@ export default async function ServiceDetailPage({
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="rounded-2xl border border-white/20 bg-white/5 p-6 text-center backdrop-blur-sm">
+                <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6 text-center backdrop-blur-sm">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-lg font-extrabold text-brand">
                     {step.num}
                   </div>
-                  <h4 className="mt-4 text-base font-extrabold text-white">
+                  <h4 className="mt-4 text-base font-extrabold text-[#02024E]">
                     {step.title}
                   </h4>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60">
+                  <p className="mt-2 text-sm leading-relaxed text-[#02024E]/60">
                     {step.desc}
                   </p>
                 </div>
@@ -916,7 +919,7 @@ export default async function ServiceDetailPage({
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
         <Reveal>
-          <div className="overflow-hidden rounded-[2rem] mt-20 border border-line bg-gradient-to-br from-[#0B2A4A] via-brand-dark to-[#000000] p-8 sm:p-14">
+          <div className="overflow-hidden rounded-[2rem] mt-20 border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 sm:p-14">
             <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
             <div className="relative" >
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
@@ -973,11 +976,11 @@ export default async function ServiceDetailPage({
 
       {/* Related Services */}
       {related.length > 0 && (
-        <section className="border-t border-white/10 bg-white/[0.02] py-20">
+        <section className="border-t border-[#01012F]/10 bg-[#E8F8FB] py-20">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
-              <div className="rounded-[2rem] border border-white/15 bg-white/5 p-6 backdrop-blur-sm sm:p-10">
-                <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
+              <div className="rounded-[2rem] border border-[#01012F]/15 bg-white p-6 backdrop-blur-sm sm:p-10">
+                <h2 className="text-2xl font-extrabold text-[#02024E] sm:text-3xl">
                   {relatedHeading}
                 </h2>
                 <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -985,7 +988,7 @@ export default async function ServiceDetailPage({
                     <Reveal key={s.slug} delay={i * 0.1}>
                       <Link
                         href={`/services/${s.slug}`}
-                        className="group block overflow-hidden rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50"
+                        className="group block overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50"
                       >
                         {s.image && (
                           <div className="relative aspect-[16/9] overflow-hidden">
@@ -997,10 +1000,10 @@ export default async function ServiceDetailPage({
                           </div>
                         )}
                         <div className="p-6">
-                          <h3 className="text-lg font-extrabold text-white transition group-hover:text-brand-accent">
+                          <h3 className="text-lg font-extrabold text-[#02024E] transition group-hover:text-brand-accent">
                             {s.name}
                           </h3>
-                          <p className="mt-2 line-clamp-2 text-sm text-white/60">
+                          <p className="mt-2 line-clamp-2 text-sm text-[#02024E]/60">
                             {s.short}
                           </p>
                           <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent transition group-hover:gap-2.5">

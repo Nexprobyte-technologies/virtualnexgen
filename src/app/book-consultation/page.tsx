@@ -22,7 +22,7 @@ export default function BookConsultationPage() {
   const [booking, setBooking] = useState<CalendlyPayload | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#132F4A]">
+    <main className="min-h-screen bg-[#F2FCFE]">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
         <header className="mb-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -36,64 +36,64 @@ export default function BookConsultationPage() {
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold text-white transition hover:border-[#06B6D4] hover:text-white hover:border-[#06B6D4]"
+            className="inline-flex items-center gap-1.5 rounded-full border border-[#01012F]/20 bg-white px-4 py-2 text-xs font-semibold text-[#02024E] transition hover:border-[#12B4CF] hover:text-[#02024E] hover:border-[#12B4CF]"
           >
             ← Back to Home
           </Link>
         </header>
 
-        <div className="overflow-hidden rounded-3xl border border-white/20 bg-[#132F4A] shadow-[0_24px_70px_rgba(0,0,0,0.25)]">
+        <div className="overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.25)]">
           <div className="grid md:grid-cols-[340px_1fr]">
             {/* Left panel — event info (Calendly style) */}
-            <aside className="relative flex flex-col justify-between gap-6 bg-[#132F4A] px-6 py-7 sm:px-8">
+            <aside className="relative flex flex-col justify-between gap-6 bg-[#E8F8FB] px-6 py-7 sm:px-8">
               <div className="flex items-center gap-4">
-                <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/10 text-white">
+                <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#12B4CF]/15 text-[#02024E]">
                   <Video className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-white/80">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-[#02024E]/80">
                     Virtual Nexgen Solutions
                   </p>
-                  <h1 className="mt-0.5 text-lg font-extrabold leading-tight text-white">
+                  <h1 className="mt-0.5 text-lg font-extrabold leading-tight text-[#02024E]">
                     Book a Free Consultation
                   </h1>
                 </div>
               </div>
 
-              <p className="text-sm leading-relaxed text-white/70">
+              <p className="text-sm leading-relaxed text-[#02024E]/70">
                 Discover how our dedicated virtual assistants and AI automation
                 can streamline your business. Chat one-on-one with our team and
                 get a tailored plan for your needs.
               </p>
 
-              <div className="space-y-2.5 text-sm text-white/70">
+              <div className="space-y-2.5 text-sm text-[#02024E]/70">
                 <p className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-[#06B6D4]" /> 30 min
+                  <Clock className="h-4 w-4 text-[#12B4CF]" /> 30 min
                 </p>
                 <p className="flex items-center gap-2">
-                  <Video className="h-4 w-4 text-[#06B6D4]" /> Google Meet
+                  <Video className="h-4 w-4 text-[#12B4CF]" /> Google Meet
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-[#06B6D4]" /> info@virtualnexgen.com
+                  <Mail className="h-4 w-4 text-[#12B4CF]" /> info@virtualnexgen.com
                 </p>
                 <p className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-[#06B6D4]" /> +1 341 888 6504
+                  <Phone className="h-4 w-4 text-[#12B4CF]" /> +1 341 888 6504
                 </p>
               </div>
             </aside>
 
             {/* Right panel — official Calendly scheduling widget */}
-            <div className="p-4 sm:p-6 lg:p-8 bg-[#132F4A]">
+            <div className="p-4 sm:p-6 lg:p-8 bg-white">
               {booking ? (
-                <div className="bg-[#132F4A]">
+                <div className="bg-white">
                   <div className="mb-5 flex flex-col items-center rounded-2xl border border-emerald-200 bg-emerald-50/60 px-5 py-6 text-center">
                     <CheckCircle2 className="mb-2 h-12 w-12 text-emerald-500" />
-                    <h2 className="text-xl font-extrabold text-white">
+                    <h2 className="text-xl font-extrabold text-[#02024E]">
                       You are scheduled!
                     </h2>
-                    <p className="mt-1 text-sm text-white/60">
+                    <p className="mt-1 text-sm text-[#02024E]/60">
                       A calendar invitation has been sent to{" "}
-                      <span className="font-semibold text-white">
+                      <span className="font-semibold text-[#02024E]">
                         {booking.invitee?.email || "your email"}
                       </span>
                       . You can also save the meeting below.
@@ -101,14 +101,14 @@ export default function BookConsultationPage() {
                   </div>
 
                   {booking.event?.start_time && booking.event?.end_time && (
-                    <div className="mb-5 rounded-2xl border border-white/20 bg-white/10 px-5 py-4">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
+                    <div className="mb-5 rounded-2xl border border-[#01012F]/10 bg-white px-5 py-4">
+                      <p className="text-xs font-semibold uppercase tracking-widest text-[#02024E]/80">
                         Virtual Nexgen Solutions
                       </p>
-                      <h3 className="mt-0.5 text-base font-bold text-white">
+                      <h3 className="mt-0.5 text-base font-bold text-[#02024E]">
                         {booking.event.name || "30 Minute Meeting"}
                       </h3>
-                      <p className="mt-2 text-sm font-semibold text-white">
+                      <p className="mt-2 text-sm font-semibold text-[#02024E]">
                         {new Date(booking.event.start_time).toLocaleString(
                           "en-IN",
                           {
@@ -132,7 +132,7 @@ export default function BookConsultationPage() {
                         )}{" "}
                         (IST)
                       </p>
-                      <p className="mt-1 text-sm text-white/60">
+                      <p className="mt-1 text-sm text-[#02024E]/60">
                         Google Meet · Web conferencing details in your invite.
                       </p>
                     </div>
@@ -156,7 +156,7 @@ export default function BookConsultationPage() {
                   <button
                     type="button"
                     onClick={() => setBooking(null)}
-                    className="mt-5 w-full rounded-full border border-white/20 bg-white/10 py-2.5 text-sm font-semibold text-white/70 transition hover:border-white/50 hover:text-white"
+                    className="mt-5 w-full rounded-full border border-[#01012F]/20 bg-white py-2.5 text-sm font-semibold text-[#02024E]/70 transition hover:border-[#12B4CF] hover:text-[#02024E]"
                   >
                     Schedule Another Meeting
                   </button>
@@ -169,7 +169,7 @@ export default function BookConsultationPage() {
                       setBooking(payload as CalendlyPayload)
                     }
                   />
-                  <p className="mt-3 text-center text-[11px] text-white/40">
+                  <p className="mt-3 text-center text-[11px] text-[#02024E]/40">
                     Powered by Calendly · After scheduling, the confirmation and
                     calendar invitation are sent to your email.
                   </p>
@@ -179,7 +179,7 @@ export default function BookConsultationPage() {
           </div>
         </div>
 
-        <p className="mt-5 text-center text-xs text-white/40">
+        <p className="mt-5 text-center text-xs text-[#02024E]/40">
           Virtual Nexgen Solutions · Book a free consultation to explore our
           virtual assistant and AI automation services.
         </p>

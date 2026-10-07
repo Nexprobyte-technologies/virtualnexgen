@@ -23,13 +23,14 @@ export default function CaseStudiesPage() {
     <>
       <Navbar />
       <main className="pt-10">
-        <section className="relative overflow-hidden py-8 bg-[#132F4A]">
+        <section className="relative overflow-hidden py-8 bg-[#F2FCFE]">
           <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
           <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
           <div className="relative mx-auto max-w-7xl px-6 text-center">
             <SectionHeading
               eyebrow="Case Study"
               title="How Our Virtual Assistants and AI Automation Services Transformed Businesses."
+              lightBackground
             />
           </div>
         </section>

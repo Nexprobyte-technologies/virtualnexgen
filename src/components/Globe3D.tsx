@@ -63,17 +63,17 @@ export default function Globe3D() {
         pointsData={markerData}
         pointLat="lat"
         pointLng="lng"
-        pointColor={() => "#06B6D4"}
+        pointColor={() => "#12B4CF"}
         pointAltitude={0.01}
         pointRadius={0.08}
         pointsMerge={false}
         arcsData={arcData}
-        arcColor={() => "#06B6D4"}
+        arcColor={() => "#12B4CF"}
         arcDashLength={0.4}
         arcDashGap={0.2}
         arcDashAnimateTime={2000}
         arcStroke={0.5}
-        atmosphereColor="#06B6D4"
+        atmosphereColor="#12B4CF"
         atmosphereAltitude={0.15}
         width={size}
         height={size}

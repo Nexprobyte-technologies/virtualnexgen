@@ -187,7 +187,7 @@ export default function Features() {
               rel="noopener noreferrer"
               data-animate
               data-service-card
-              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#F2FCFE] transition-all duration-300 hover:border-[#06B6D4]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
+              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#F2FCFE] transition-all duration-300 hover:border-[#12B4CF]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
@@ -209,7 +209,7 @@ export default function Features() {
                 <p className="mt-2 text-sm leading-relaxed text-[#02024E]/60">
                   {service.description}
                 </p>
-                <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[#02024E] transition-colors duration-300 hover:bg-[#06B6D4]">
+                <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[#02024E] transition-colors duration-300 hover:bg-[#12B4CF]">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
@@ -225,7 +225,7 @@ export default function Features() {
             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/20">
               <div
                 ref={progressRef}
-                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#06B6D4] to-[#F2FCFE]"
+                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#12B4CF] to-[#F2FCFE]"
               />
             </div>
           </div>

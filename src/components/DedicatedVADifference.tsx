@@ -136,7 +136,7 @@ export default function DedicatedVADifference() {
               type="button"
               onClick={() => scrollCards(-1)}
               aria-label="Show previous benefits"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#02024E] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[#01012F]/15 text-[#02024E] transition-colors hover:border-[#12B4CF] hover:bg-[#12B4CF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#12B4CF]"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -144,7 +144,7 @@ export default function DedicatedVADifference() {
               type="button"
               onClick={() => scrollCards(1)}
               aria-label="Show more benefits"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#02024E] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[#01012F]/15 text-[#02024E] transition-colors hover:border-[#12B4CF] hover:bg-[#12B4CF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#12B4CF]"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -166,9 +166,9 @@ export default function DedicatedVADifference() {
               <article
                 key={label}
                 data-feature-card
-                className="flex h-full basis-full shrink-0 snap-start items-start gap-3 rounded-2xl border border-[#132F4A]/10 bg-gradient-to-br from-white to-[#06B6D4]/[0.04] p-4 shadow-sm transition-[border-color,box-shadow] hover:border-[#06B6D4]/40 hover:shadow-md sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)]"
+                className="flex h-full basis-full shrink-0 snap-start items-start gap-3 rounded-2xl border border-[#01012F]/10 bg-gradient-to-br from-white to-[#12B4CF]/[0.04] p-4 shadow-sm transition-[border-color,box-shadow] hover:border-[#12B4CF]/40 hover:shadow-md sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)]"
               >
-                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#06B6D4]/10 text-[#02024E]">
+                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#12B4CF]/10 text-[#02024E]">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>

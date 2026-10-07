@@ -6,37 +6,37 @@ html {
 }
 
 :root {
-  --background: #132F4A;
-  --foreground: #FFFFFF;
-  --night: #132F4A;
+  --background: #F2FCFE;
+  --foreground: #02024E;
+  --night: #01012F;
 
   /* 4-color Theme: Navy Blue, Tarkis Blue, Black, White */
-  --navy: #132F4A;
-  --navy-deep: #0d1f3a;
-  --navy-royal: #002b5c;
-  --navy-light: #1a4a7a;
+  --navy: #02024E;
+  --navy-deep: #01012F;
+  --navy-royal: #01012F;
+  --navy-light: #00697B;
 
-  --tarkisblue: #06B6D4;
-  --tarkisblue-glow: #22d3ee;
-  --tarkisblue-deep: #0891b2;
-  --tarkisblue-light: #cffafe;
+  --tarkisblue: #12B4CF;
+  --tarkisblue-glow: #2CCBE6;
+  --tarkisblue-deep: #00697B;
+  --tarkisblue-light: #F2FCFE;
 
-  --black: #000000;
-  --white: #FFFFFF;
+  --black: #01012F;
+  --white: #F2FCFE;
 
-  --brand: #06B6D4;
-  --secondary: #132F4A;
-  --brand-deep: #0891b2;
-  --brand-dark: #132F4A;
-  --brand-accent: #06B6D4;
-  --brand-accent-light: #06B6D4;
-  --ink: #000000;
-  --ink-soft: #000000;
-  --accent-blue: #06B6D4;
-  --cream: #132F4A;
-  --cream-1: #132F4A;
-  --cream-2: #132F4A;
-  --line: #06B6D4;
+  --brand: #12B4CF;
+  --secondary: #01012F;
+  --brand-deep: #00697B;
+  --brand-dark: #02024E;
+  --brand-accent: #12B4CF;
+  --brand-accent-light: #2CCBE6;
+  --ink: #02024E;
+  --ink-soft: #02024E;
+  --accent-blue: #12B4CF;
+  --cream: #F2FCFE;
+  --cream-1: #F2FCFE;
+  --cream-2: #E8F8FB;
+  --line: #12B4CF;
 
   --violet: var(--navy);
   --indigo: var(--brand-deep);
@@ -53,10 +53,10 @@ html {
   --color-navy-deep: var(--navy-deep);
   --color-navy-royal: var(--navy-royal);
   --color-navy-light: var(--navy-light);
-  --color-turkish: var(--turkish);
-  --color-turkish-glow: var(--turkish-glow);
-  --color-turkish-deep: var(--turkish-deep);
-  --color-turkish-light: var(--turkish-light);
+  --color-turkish: var(--tarkisblue);
+  --color-turkish-glow: var(--tarkisblue-glow);
+  --color-turkish-deep: var(--tarkisblue-deep);
+  --color-turkish-light: var(--tarkisblue-light);
   --color-black: var(--black);
   --color-white: var(--white);
   --color-accent: var(--turkish);
@@ -238,23 +238,23 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 ::selection {
-  background: #06B6D4;
-  color: #132F4A;
+  background: #12B4CF;
+  color: #01012F;
 }
 
 .text-gradient {
-  color: #06B6D4;
+  color: #12B4CF;
 }
 
 .glass {
   background: rgba(255, 255, 255, 0.88);
-  border: 1px solid #132F4A;
+  border: 1px solid #01012F;
   backdrop-filter: blur(14px);
 }
 
 .grid-bg {
-  background-image: linear-gradient(#06B6D4 1px, transparent 1px),
-    linear-gradient(90deg, #06B6D4 1px, transparent 1px);
+  background-image: linear-gradient(#12B4CF 1px, transparent 1px),
+    linear-gradient(90deg, #12B4CF 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -459,14 +459,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: #06B6D4;
-  border: 1px solid #06B6D4;
+  background: #12B4CF;
+  border: 1px solid #12B4CF;
 }
 
 .card {
   border-radius: 1.75rem;
-  background: #132F4A;
-  border: 1px solid #06B6D4;
+  background: #01012F;
+  border: 1px solid #12B4CF;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
@@ -476,12 +476,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 
 .card:hover {
   transform: translateY(-8px);
-  border-color: #06B6D4;
+  border-color: #12B4CF;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
 }
 
 .card-soft {
-  background: #132F4A;
+  background: #01012F;
 }
 
 .icon-tile {
@@ -489,21 +489,21 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   place-items: center;
   border-radius: 1.1rem;
   color: #ffffff;
-  background: #132F4A;
+  background: #01012F;
   box-shadow: 0 12px 28px rgba(6, 182, 212, 0.35);
 }
 
 .bg-aurora {
-  background: #132F4A;
+  background: #01012F;
 }
 
 .divider-gradient {
   height: 1px;
-  background: #06B6D4;
+  background: #12B4CF;
 }
 
 .animated-gradient {
-  background: #132F4A;
+  background: #01012F;
 }
 
 @keyframes ring-pulse {
@@ -531,7 +531,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: absolute;
   inset: 0;
   transform: translateX(-130%);
-  background: #06B6D4;
+  background: #12B4CF;
   opacity: 0.35;
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
@@ -582,8 +582,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 }
 
 .deck-border {
-  background: #132F4A;
-  border: 1px solid #06B6D4;
+  background: #01012F;
+  border: 1px solid #12B4CF;
 }
 
 @keyframes navbar-drop {
@@ -628,7 +628,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 40px;
   height: 40px;
-  border: 2px solid #06B6D4;
+  border: 2px solid #12B4CF;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -641,7 +641,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   position: fixed;
   width: 6px;
   height: 6px;
-  background: #06B6D4;
+  background: #12B4CF;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -653,12 +653,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 .custom-cursor.cursor-hover {
   width: 60px;
   height: 60px;
-  border-color: #22d3ee;
+  border-color: #2CCBE6;
   background: rgba(6, 182, 212, 0.15);
 }
 
 .custom-cursor-dot.cursor-dot-hover {
   width: 10px;
   height: 10px;
-  background: #06B6D4;
+  background: #12B4CF;
 }

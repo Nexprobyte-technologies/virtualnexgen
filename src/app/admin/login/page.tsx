@@ -36,7 +36,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="grid min-h-screen place-items-center bg-gradient-to-br from-[#132F4A] via-[#132F4A] to-[#000000] px-6">
+    <div className="grid min-h-screen place-items-center bg-gradient-to-br from-[#01012F] via-[#01012F] to-[#000000] px-6">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md rounded-[2rem] border border-white/20 bg-white/10 backdrop-blur p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur"
@@ -63,7 +63,7 @@ export default function AdminLogin() {
               onChange={(e) => setUsername(e.target.value)}
               required
               autoComplete="username"
-              className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none transition focus:border-[#06B6D4] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
               placeholder="admin"
             />
           </label>
@@ -78,7 +78,7 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
-              className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none transition focus:border-[#06B6D4] focus:bg-white/10"
+              className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none transition focus:border-[#12B4CF] focus:bg-white/10"
               placeholder="••••••••"
             />
           </label>
@@ -93,7 +93,7 @@ export default function AdminLogin() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#06B6D4] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(6,182,212,0.35)] transition hover:shadow-[0_12px_40px_rgba(6,182,212,0.5)] disabled:opacity-60"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#12B4CF] to-[#12B4CF] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(6,182,212,0.35)] transition hover:shadow-[0_12px_40px_rgba(6,182,212,0.5)] disabled:opacity-60"
         >
           {loading ? (
             <>

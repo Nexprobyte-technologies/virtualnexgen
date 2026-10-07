@@ -79,7 +79,7 @@ export default function Services() {
           <div className="pointer-events-none absolute left-0 right-0 top-28 hidden h-px lg:block">
             <div
               data-process-line
-              className="h-full w-full origin-left bg-gradient-to-r from-[#F2FCFE]/60 via-[#06B6D4]/60 to-transparent"
+              className="h-full w-full origin-left bg-gradient-to-r from-[#F2FCFE]/60 via-[#12B4CF]/60 to-transparent"
             />
           </div>
 

@@ -87,11 +87,11 @@ export default function Navbar() {
               <ul className="flex items-center gap-1">
 {isSubPage ? (
                     <li className="relative">
-                      {activeNav === "Home" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                      {activeNav === "Home" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#12B4CF]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                       <Link
                         href="/"
                         onClick={() => setActiveNav("Home")}
-                        className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
+                        className="relative z-10 block px-4 py-2 text-sm font-medium text-[#01012F] hover:text-[#12B4CF] transition-colors whitespace-nowrap rounded-full hover:bg-[#01012F]/5"
                       >
                         Home
                       </Link>
@@ -99,11 +99,11 @@ export default function Navbar() {
                   ) : (
                   staticLinks.map((link) => (
                     <li key={link.href} className="relative">
-                      {activeNav === link.label && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                      {activeNav === link.label && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#12B4CF]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                       <a
                         href={link.href}
                         onClick={() => setActiveNav(link.label)}
-                        className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
+                        className="relative z-10 block px-4 py-2 text-sm font-medium text-[#01012F] hover:text-[#12B4CF] transition-colors whitespace-nowrap rounded-full hover:bg-[#01012F]/5"
                       >
                         {link.label}
                       </a>
@@ -112,14 +112,14 @@ export default function Navbar() {
                 )}
 
                 <li ref={aboutDropdownRef} className="relative">
-                  {activeNav === "About Us" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {activeNav === "About Us" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#12B4CF]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <button
                     onClick={() => {
                       setActiveNav("About Us");
                       setAboutOpen(!aboutOpen);
                       setServicesOpen(false);
                     }}
-                    className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
+                    className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#01012F] hover:text-[#12B4CF] transition-colors whitespace-nowrap rounded-full hover:bg-[#01012F]/5"
                   >
                     About Us
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${aboutOpen ? "rotate-180" : ""}`} />
@@ -142,13 +142,13 @@ export default function Navbar() {
                 </li>
 
                 <li ref={dropdownRef} className="relative">
-                  {activeNav === "Services" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {activeNav === "Services" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#12B4CF]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <button
                     onClick={() => {
                       setActiveNav("Services");
                       setServicesOpen(!servicesOpen);
                     }}
-                    className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
+                    className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium text-[#01012F] hover:text-[#12B4CF] transition-colors whitespace-nowrap rounded-full hover:bg-[#01012F]/5"
                   >
                     Services
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
@@ -181,22 +181,22 @@ export default function Navbar() {
                 </li>
 
                 <li className="relative">
-                  {activeNav === "Blog" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {activeNav === "Blog" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#12B4CF]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <Link
                     href="/blog"
                     onClick={() => setActiveNav("Blog")}
-                    className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
+                    className="relative z-10 block px-4 py-2 text-sm font-medium text-[#01012F] hover:text-[#12B4CF] transition-colors whitespace-nowrap rounded-full hover:bg-[#01012F]/5"
                   >
                     Blog
                   </Link>
                   </li>
 
                 <li className="relative">
-                  {activeNav === "Contact Us" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#06B6D4]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {activeNav === "Contact Us" && <motion.span layoutId="navbar-active-indicator" className="pointer-events-none absolute inset-0 rounded-full bg-[#12B4CF]/10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <Link
                     href="/contacts"
                     onClick={() => setActiveNav("Contact Us")}
-                    className="relative z-10 block px-4 py-2 text-sm font-medium text-[#132F4A] hover:text-[#06B6D4] transition-colors whitespace-nowrap rounded-full hover:bg-[#132F4A]/5"
+                    className="relative z-10 block px-4 py-2 text-sm font-medium text-[#01012F] hover:text-[#12B4CF] transition-colors whitespace-nowrap rounded-full hover:bg-[#01012F]/5"
                   >
                     Contact Us
                   </Link>
@@ -207,7 +207,7 @@ export default function Navbar() {
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-[#132F4A] bg-[#132F4A] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#06B6D4] hover:border-[#06B6D4] whitespace-nowrap"
+                    className="rounded-full border border-[#01012F] bg-[#01012F] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#12B4CF] hover:border-[#12B4CF] whitespace-nowrap"
                   >
                     <span>Appointment</span>
                   </a>
@@ -229,7 +229,7 @@ export default function Navbar() {
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 text-[#132F4A] hover:text-[#06B6D4] transition-colors"
+              className="p-2 text-[#01012F] hover:text-[#12B4CF] transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -245,7 +245,7 @@ export default function Navbar() {
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
-                      className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
+                      className="rounded-xl px-4 py-3 text-sm font-medium text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF]"
                     >
                       Home
                     </Link>
@@ -255,7 +255,7 @@ export default function Navbar() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
+                        className="rounded-xl px-4 py-3 text-sm font-medium text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF]"
                       >
                         {link.label}
                       </a>
@@ -269,7 +269,7 @@ export default function Navbar() {
                         key={link.label}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-2.5 text-sm text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4] block"
+                        className="rounded-xl px-4 py-2.5 text-sm text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF] block"
                       >
                         {link.label}
                       </Link>
@@ -283,7 +283,7 @@ export default function Navbar() {
                         key={s.slug}
                         href={`/services/${s.slug}`}
                         onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-2.5 text-sm text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4] block"
+                        className="rounded-xl px-4 py-2.5 text-sm text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF] block"
                       >
                         {s.name}
                       </Link>
@@ -291,7 +291,7 @@ export default function Navbar() {
                     <Link
                       href="/services"
                       onClick={() => setMobileOpen(false)}
-                      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#06B6D4] transition hover:bg-slate-100 block"
+                      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#12B4CF] transition hover:bg-slate-100 block"
                     >
                       View All Services
                     </Link>
@@ -300,7 +300,7 @@ export default function Navbar() {
                   <div className="mt-3 border-t border-slate-200 pt-3">
                     <a
                       href="tel:+13418886504"
-                      className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#132F4A]"
+                      className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#01012F]"
                     >
                       <Phone className="h-4 w-4" />
                       +1 341 888 6504
@@ -310,7 +310,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
-                    className="mt-2 w-full rounded-full border border-[#132F4A] bg-[#132F4A] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 text-center hover:bg-[#06B6D4] hover:border-[#06B6D4] block"
+                    className="mt-2 w-full rounded-full border border-[#01012F] bg-[#01012F] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 text-center hover:bg-[#12B4CF] hover:border-[#12B4CF] block"
                   >
                     <span>Book Appointment</span>
                   </a>
@@ -320,14 +320,14 @@ export default function Navbar() {
                   <Link
                     href="/blog"
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
+                    className="rounded-xl px-4 py-3 text-sm font-medium text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF]"
                   >
                     Blog
                   </Link>
                   <Link
                     href="/contacts"
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl px-4 py-3 text-sm font-medium text-[#132F4A] transition hover:bg-slate-100 hover:text-[#06B6D4]"
+                    className="rounded-xl px-4 py-3 text-sm font-medium text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF]"
                   >
                     Contact Us
                   </Link>

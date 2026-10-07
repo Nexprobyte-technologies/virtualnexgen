@@ -66,7 +66,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative bg-[#132F4A] overflow-hidden shadow-[0_-4px_30px_rgba(0,0,0,0.05)]">
+    <footer id="contact" className="relative bg-[#01012F] overflow-hidden shadow-[0_-4px_30px_rgba(0,0,0,0.05)]">
       <div className="divider-gradient" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 lg:px-10">
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-4">
@@ -91,7 +91,7 @@ export default function Footer() {
               </h4>
               <a
                 href="tel:+13418886504"
-                className="inline-flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#06B6D4]"
+                className="inline-flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#12B4CF]"
               >
                 <Phone className="h-4 w-4" />
                 +1 341 888 6504
@@ -106,7 +106,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-[#132F4A] text-white/60 transition hover:bg-[#06B6D4] hover:text-white"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-[#01012F] text-white/60 transition hover:bg-[#12B4CF] hover:text-white"
                     >
                       <Icon className="h-4 w-4" />
                     </a>
@@ -150,7 +150,7 @@ export default function Footer() {
                     href={ai.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-9 h-9 rounded-full border border-line bg-white/10 text-white/60 transition hover:bg-[#06B6D4] hover:text-white hover:border-[#06B6D4]"
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-line bg-white/10 text-white/60 transition hover:bg-[#12B4CF] hover:text-white hover:border-[#12B4CF]"
                     title={ai.name}
                   >
                     <svg

@@ -110,8 +110,8 @@ function IndustryImageCarousel() {
           </div>
         ))}
       </div>
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#0B2A40] to-transparent sm:w-14" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#0B2A40] to-transparent sm:w-14" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#01012F] to-transparent sm:w-14" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#01012F] to-transparent sm:w-14" />
     </div>
   );
 
@@ -128,8 +128,8 @@ function ComplianceMarquee() {
 
   return (
     <div className="relative mt-4 h-[200px] sm:h-[240px] overflow-hidden">
-      <div className="pointer-events-none absolute top-0 left-0 z-10 w-full h-12 bg-gradient-to-b from-[#0B2A40] to-transparent" />
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-full h-12 bg-gradient-to-t from-[#0B2A40] to-transparent" />
+      <div className="pointer-events-none absolute top-0 left-0 z-10 w-full h-12 bg-gradient-to-b from-[#01012F] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-full h-12 bg-gradient-to-t from-[#01012F] to-transparent" />
       <div
         className="space-y-3"
         style={{ animation: "scrollY 18s linear infinite" }}

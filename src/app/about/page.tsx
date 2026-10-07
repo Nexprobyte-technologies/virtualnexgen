@@ -11,7 +11,7 @@ export default async function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-[#F2FCFE] text-ink">
         <AboutEditorialView initialData={aboutData} />
       </main>
       <Footer />

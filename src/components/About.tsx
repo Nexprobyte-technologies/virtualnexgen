@@ -211,7 +211,7 @@ export default function About() {
                   </p>
                   <span className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-bold uppercase tracking-wider text-[#00697B]">
                     See the Impact
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#06B6D4] text-[#02024E] transition-all duration-300 group-hover:translate-x-1 group-hover:shadow-[0_4px_12px_rgba(6,182,212,0.4)]">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#12B4CF] text-[#02024E] transition-all duration-300 group-hover:translate-x-1 group-hover:shadow-[0_4px_12px_rgba(6,182,212,0.4)]">
                       <ArrowUpRight className="h-3 w-3" />
                     </span>
                   </span>

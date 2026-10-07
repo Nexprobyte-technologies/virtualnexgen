@@ -117,7 +117,7 @@ function RenderRichHtml({ html }: { html: string }) {
 
   return (
     <div
-      className="rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-white [&_h2]:scroll-mt-36 sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-white [&_h3]:scroll-mt-36 [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-white/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-white [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-[#06B6D4] [&_a]:underline [&_a]:decoration-[#06B6D4]/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-white/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-white/70 sm:[&_ol]:text-lg [&_li]:marker:text-[#06B6D4] [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-white/80 [&_hr]:my-8 [&_hr]:border-white/20 [&_code]:rounded [&_code]:bg-white/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-[#06B6D4] [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-white/70 [&_th]:border [&_th]:border-white/20 [&_th]:bg-white/10 [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-white [&_td]:border [&_td]:border-white/20 [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-[10px] [&_img]:mb-6"
+      className="rich-content [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:text-[#02024E] [&_h2]:scroll-mt-36 sm:[&_h2]:text-3xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-extrabold [&_h3]:text-[#02024E] [&_h3]:scroll-mt-36 [&_p]:my-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-[#02024E]/70 sm:[&_p]:text-lg [&_strong]:font-bold [&_strong]:text-[#02024E] [&_em]:italic [&_u]:underline [&_a]:font-semibold [&_a]:text-[#12B4CF] [&_a]:underline [&_a]:decoration-[#12B4CF]/40 [&_a]:underline-offset-4 [&_ul]:my-5 [&_ul]:space-y-2.5 [&_ul]:pl-5 [&_ul]:text-base [&_ul]:leading-relaxed [&_ul]:text-[#02024E]/70 sm:[&_ul]:text-lg [&_ol]:my-5 [&_ol]:space-y-2.5 [&_ol]:pl-5 [&_ol]:text-base [&_ol]:leading-relaxed [&_ol]:text-[#02024E]/70 sm:[&_ol]:text-lg [&_li]:marker:text-[#12B4CF] [&_blockquote]:my-6 [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:pl-5 [&_blockquote]:text-lg [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-[#02024E]/80 [&_hr]:my-8 [&_hr]:border-[#01012F]/15 [&_code]:rounded [&_code]:bg-white [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-semibold [&_code]:text-[#12B4CF] [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm [&_table]:text-[#02024E]/70 [&_th]:border [&_th]:border-[#01012F]/15 [&_th]:bg-white [&_th]:px-3 [&_th]:py-2 [&_th]:font-bold [&_th]:text-[#02024E] [&_td]:border [&_td]:border-[#01012F]/15 [&_td]:px-3 [&_td]:py-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-2xl [&_img]:mt-[10px] [&_img]:mb-6"
       dangerouslySetInnerHTML={{ __html: addHeadingIds(safe) }}
     />
   );
@@ -147,7 +147,7 @@ const MARKDOWN_COMPONENTS = {
       <h2
         {...props}
         id={id}
-        className="mt-10 mb-4 scroll-mt-36 text-2xl font-extrabold leading-tight text-white sm:text-3xl"
+        className="mt-10 mb-4 scroll-mt-36 text-2xl font-extrabold leading-tight text-[#02024E] sm:text-3xl"
       />
     );
   },
@@ -161,44 +161,44 @@ const MARKDOWN_COMPONENTS = {
       <h3
         {...props}
         id={id}
-        className="mt-8 mb-3 scroll-mt-36 text-xl font-extrabold leading-snug text-white"
+        className="mt-8 mb-3 scroll-mt-36 text-xl font-extrabold leading-snug text-[#02024E]"
       />
     );
   },
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
       {...props}
-      className="my-5 text-base leading-relaxed text-white/70 sm:text-lg"
+      className="my-5 text-base leading-relaxed text-[#02024E]/70 sm:text-lg"
     />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
-    <strong {...props} className="font-bold text-white" />
+    <strong {...props} className="font-bold text-[#02024E]" />
   ),
   em: (props: React.HTMLAttributes<HTMLElement>) => (
-    <em {...props} className="italic text-white/80" />
+    <em {...props} className="italic text-[#02024E]/80" />
   ),
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
       {...props}
       target={props.href?.startsWith("http") ? "_blank" : undefined}
       rel="noopener noreferrer"
-      className="font-semibold text-[#06B6D4] underline decoration-[#06B6D4]/40 underline-offset-4 transition hover:decoration-[#06B6D4]"
+      className="font-semibold text-[#12B4CF] underline decoration-[#12B4CF]/40 underline-offset-4 transition hover:decoration-[#12B4CF]"
     />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       {...props}
-      className="my-5 space-y-2.5 pl-5 text-base leading-relaxed text-white/70 sm:text-lg"
+      className="my-5 space-y-2.5 pl-5 text-base leading-relaxed text-[#02024E]/70 sm:text-lg"
     />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       {...props}
-      className="my-5 space-y-2.5 pl-5 text-base leading-relaxed text-white/70 sm:text-lg"
+      className="my-5 space-y-2.5 pl-5 text-base leading-relaxed text-[#02024E]/70 sm:text-lg"
     />
   ),
   li: (props: React.HTMLAttributes<HTMLLIElement>) => (
-    <li {...props} className="relative pl-2 marker:text-[#06B6D4]" />
+    <li {...props} className="relative pl-2 marker:text-[#12B4CF]" />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
@@ -264,39 +264,39 @@ export default async function BlogDetailPage({
   const articleUrl = `https://virtualnexgen.com/blog/${post.slug}`;
 
   return (
-    <main className="min-h-screen bg-[#132F4A]">
+    <main className="min-h-screen bg-[#F2FCFE]">
       <section className="mx-auto mt-[10px] max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
         <div
           className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-2" : ""}`}
         >
           <div className="min-w-0">
-            <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/50">
+            <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
               <Link
                 href="/"
-                className="flex items-center gap-1.5 transition hover:text-white"
+                className="flex items-center gap-1.5 transition hover:text-[#02024E]"
               >
                 <Home className="h-3.5 w-3.5" /> Home
               </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-              <Link href="/blog" className="transition hover:text-white">
+              <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
+              <Link href="/blog" className="transition hover:text-[#02024E]">
                 Blog
               </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-              <span className="max-w-[30ch] truncate text-white/80">
+              <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
+              <span className="max-w-[30ch] truncate text-[#02024E]/80">
                 {post.title}
               </span>
             </nav>
 
             <div className="mt-6 flex items-center gap-3">
-              <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-white">
+              <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-[#02024E]">
                 {category}
               </span>
-              <span className="flex items-center gap-1 text-xs text-white/50">
+              <span className="flex items-center gap-1 text-xs text-[#02024E]/50">
                 <Clock className="h-3 w-3" /> {readTime} min read
               </span>
             </div>
 
-            <h1 className="mt-4 max-w-2xl text-2xl font-extrabold leading-[1.2] tracking-tight text-white sm:text-3xl lg:text-4xl">
+            <h1 className="mt-4 max-w-2xl text-2xl font-extrabold leading-[1.2] tracking-tight text-[#02024E] sm:text-3xl lg:text-4xl">
               {post.title}
             </h1>
           </div>
@@ -322,13 +322,13 @@ export default async function BlogDetailPage({
 
       {/* Author Row */}
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex items-center gap-4 py-6 border-b border-white/20">
+        <div className="flex items-center gap-4 py-6 border-b border-[#01012F]/15">
           <div className="h-10 w-10 shrink-0 rounded-full bg-gradient-to-br from-brand to-brand-deep flex items-center justify-center text-white font-bold text-sm">
             {post.author?.charAt(0) ?? "V"}
           </div>
           <div>
-            <p className="text-sm font-bold text-white">{post.author}</p>
-            <p className="text-xs text-white/50">Published on {formatDate(post.date)}</p>
+            <p className="text-sm font-bold text-[#02024E]">{post.author}</p>
+            <p className="text-xs text-[#02024E]/50">Published on {formatDate(post.date)}</p>
           </div>
         </div>
       </div>
@@ -354,11 +354,11 @@ export default async function BlogDetailPage({
 
             {/* Tags */}
             {post.tags && post.tags.length > 0 && (
-              <div className="mt-10 flex flex-wrap gap-2 border-t border-white/20 pt-6">
+              <div className="mt-10 flex flex-wrap gap-2 border-t border-[#01012F]/15 pt-6">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/60"
+                    className="rounded-full border border-[#01012F]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#02024E]/60"
                   >
                     {tag}
                   </span>
@@ -367,12 +367,12 @@ export default async function BlogDetailPage({
             )}
 
             {/* CTA */}
-            <div className="mt-12 overflow-hidden rounded-2xl border border-white/20 bg-white/5 shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
-              <div className="bg-[#132F4A] p-7 sm:p-9">
-                <h2 className="text-xl font-extrabold leading-snug text-white sm:text-2xl">
+            <div className="mt-12 overflow-hidden rounded-2xl border border-[#01012F]/15 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
+              <div className="bg-[#F2FCFE] p-7 sm:p-9">
+                <h2 className="text-xl font-extrabold leading-snug text-[#02024E] sm:text-2xl">
                   Work With Virtual Nexgen Solutions
                 </h2>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75">
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#02024E]/75">
                   If your business needs dependable virtual assistant support,
                   Virtual Nexgen Solutions can provide support around your
                   existing workflow. Book a discovery call today.
@@ -393,9 +393,9 @@ export default async function BlogDetailPage({
           <aside className="hidden lg:block">
             <div className="sticky top-32 space-y-6">
               {headings.length > 0 && (
-                <div className="rounded-2xl border border-white/20 bg-white/5 p-6">
-                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-white">
-                    <List className="h-4 w-4 text-[#06B6D4]" /> On This Page
+                <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6">
+                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#02024E]">
+                    <List className="h-4 w-4 text-[#12B4CF]" /> On This Page
                   </h3>
                   <nav className="mt-4">
                     <ul className="space-y-2.5">
@@ -403,9 +403,9 @@ export default async function BlogDetailPage({
                         <li key={h.id}>
                           <a
                             href={`#${h.id}`}
-                            className="group flex items-start gap-2 text-sm leading-snug text-white/70 transition hover:text-white"
+                            className="group flex items-start gap-2 text-sm leading-snug text-[#02024E]/70 transition hover:text-[#02024E]"
                           >
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#06B6D4]/50 transition group-hover:bg-[#06B6D4]" />
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#12B4CF]/50 transition group-hover:bg-[#12B4CF]" />
                             {h.text}
                           </a>
                         </li>
@@ -415,11 +415,11 @@ export default async function BlogDetailPage({
                 </div>
               )}
 
-              <div className="rounded-2xl border border-white/20 bg-white/5 p-6">
-                <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-white">
-                  <ShieldCheck className="h-4 w-4 text-[#06B6D4]" /> Why Virtual Nexgen
+              <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6">
+                <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#02024E]">
+                  <ShieldCheck className="h-4 w-4 text-[#12B4CF]" /> Why Virtual Nexgen
                 </h3>
-                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-white/75">
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[#02024E]/75">
                   <li className="flex gap-2">
                     <span className="mt-1 text-emerald-400">•</span>
                     Dedicated virtual assistants trained for your industry workflow
@@ -439,12 +439,12 @@ export default async function BlogDetailPage({
                 </ul>
               </div>
 
-              <div className="overflow-hidden rounded-2xl bg-ink text-white shadow-[0_16px_48px_rgba(0,0,0,0.25)]">
+              <div className="overflow-hidden rounded-2xl bg-white text-[#02024E] shadow-[0_16px_48px_rgba(0,0,0,0.25)]">
                 <div className="p-6">
-                  <h3 className="text-xs font-extrabold uppercase tracking-widest text-white/60">
+                  <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#02024E]/60">
                     Need Support Like This?
                   </h3>
-                  <p className="mt-3 text-sm font-medium leading-relaxed text-white/90">
+                  <p className="mt-3 text-sm font-medium leading-relaxed text-[#02024E]/90">
                     Let a Virtual Nexgen assistant handle your back-office workload so your team stays focused on the job.
                   </p>
                   <a
@@ -455,7 +455,7 @@ export default async function BlogDetailPage({
                   </a>
                   <a
                     href="tel:+13418886504"
-                    className="mt-3 flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
+                    className="mt-3 flex items-center gap-2 text-sm font-semibold text-[#02024E]/80 transition hover:text-[#02024E]"
                   >
                     <Phone className="h-4 w-4" /> +1 341 888 6504
                   </a>
@@ -468,9 +468,9 @@ export default async function BlogDetailPage({
 
       {/* Related Articles */}
       {related.length > 0 && (
-        <section className="border-t border-line bg-[#132F4A]">
+        <section className="border-t border-line bg-[#F2FCFE]">
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-            <h2 className="mb-8 text-2xl font-extrabold text-white sm:text-3xl">
+            <h2 className="mb-8 text-2xl font-extrabold text-[#02024E] sm:text-3xl">
               Related Articles
             </h2>
             <div className="grid gap-8 md:grid-cols-2">
@@ -489,7 +489,7 @@ export default async function BlogDetailPage({
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="grid h-full w-full place-items-center bg-[#132F4A]">
+                        <div className="grid h-full w-full place-items-center bg-[#E8F8FB]">
                         <span className="text-4xl font-extrabold text-brand/20">
                           {p.title.charAt(0)}
                         </span>

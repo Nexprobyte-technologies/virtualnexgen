@@ -102,7 +102,7 @@ export default function HowWeSupport() {
 
   return (
     <section ref={rootRef} className="relative bg-[#F2FCFE] py-10 sm:py-16 md:py-28 lg:py-36 overflow-hidden">
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#06B6D4]/10 blur-[140px] rounded-full" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#12B4CF]/10 blur-[140px] rounded-full" />
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 relative z-10">
         <div className="w-full flex flex-col">
@@ -137,7 +137,7 @@ export default function HowWeSupport() {
                 onClick={() => setCurrent(i)}
                 className={`relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full border text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer flex-shrink-0 ${
                   i === current
-                    ? "bg-transparent text-[#02024E] border-[#06B6D4] shadow-md scale-[1.02]"
+                    ? "bg-transparent text-[#02024E] border-[#12B4CF] shadow-md scale-[1.02]"
                     : "bg-white text-[#02024E]/70 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
                 }`}
               >
@@ -159,7 +159,7 @@ export default function HowWeSupport() {
                 onClick={() => setCurrent(i)}
                 className={`flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold transition-all flex-shrink-0 ${
                   i === current
-                    ? "bg-transparent text-[#02024E] border-[#06B6D4]"
+                    ? "bg-transparent text-[#02024E] border-[#12B4CF]"
                     : "bg-white/80 text-[#02024E]/60 border border-slate-200"
                 }`}
               >
@@ -175,7 +175,7 @@ export default function HowWeSupport() {
 
           {/* Content card */}
           <div ref={cardRef} className="w-full">
-            <div className="bg-gradient-to-br from-[#F2FCFE] via-[#F2FCFE] to-[#F2FCFE] border border-[#06B6D4]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#F2FCFE] via-[#F2FCFE] to-[#F2FCFE] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
               <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-[#12B4CF]/[0.08]">
                 {step.num}
               </div>
@@ -228,7 +228,7 @@ export default function HowWeSupport() {
           <div className="mt-4 sm:mt-6 h-1.5 bg-slate-200 rounded-full overflow-hidden">
             <div
               ref={progressRef}
-              className="h-full rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#06B6D4] to-[#F2FCFE]"
+              className="h-full rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#12B4CF] to-[#F2FCFE]"
               style={{ width: `${((current + 1) / steps.length) * 100}%` }}
             />
           </div>
@@ -240,7 +240,7 @@ export default function HowWeSupport() {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === current ? "w-8 bg-[#06B6D4]" : "w-3 bg-[#06B6D4]/30 hover:bg-[#06B6D4]/60"
+                  i === current ? "w-8 bg-[#12B4CF]" : "w-3 bg-[#12B4CF]/30 hover:bg-[#12B4CF]/60"
                 }`}
               />
             ))}

@@ -60,10 +60,10 @@ function splitColumns(items: typeof testimonials) {
 function GlassCard({ testimonial }: { testimonial: (typeof testimonials)[number] }) {
   return (
     <div className="break-inside-avoid mb-4">
-      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg transition-all duration-300 hover:border-[#06B6D4]/40 hover:bg-white/15 hover:shadow-[0_8px_40px_rgba(6,182,212,0.08)]">
+      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg transition-all duration-300 hover:border-[#12B4CF]/40 hover:bg-white/15 hover:shadow-[0_8px_40px_rgba(6,182,212,0.08)]">
         <div className="mb-3 flex gap-0.5">
           {Array.from({ length: 5 }).map((_, s) => (
-            <Star key={s} className="h-3.5 w-3.5 fill-[#06B6D4] text-[#12B4CF]" />
+            <Star key={s} className="h-3.5 w-3.5 fill-[#12B4CF] text-[#12B4CF]" />
           ))}
         </div>
         <blockquote className="text-sm leading-relaxed text-[#02024E]/70">
@@ -131,7 +131,7 @@ export default function Testimonials() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal y={20}>
-              <span className="inline-block rounded-full bg-[#06B6D4]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#12B4CF] ring-1 ring-[#06B6D4]/30">
+              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#12B4CF] ring-1 ring-[#12B4CF]/30">
                 Client Testimonials
               </span>
             </Reveal>

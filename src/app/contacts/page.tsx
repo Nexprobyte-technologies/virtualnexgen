@@ -149,32 +149,32 @@ export default function ContactPage() {
   return (
     <>
 <Navbar />
-      <main className="bg-[#132F4A] overflow-x-hidden">
+      <main className="bg-[#F2FCFE] overflow-x-hidden">
         {/* ================= Hero ================= */}
         <section
-          className="relative overflow-hidden pb-10 pt-28 sm:pt-32 bg-[#132F4A]"
+          className="relative overflow-hidden pb-10 pt-28 sm:pt-32 bg-[#F2FCFE]"
         >
           <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand/10 blur-[120px]" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             {/* Breadcrumb */}
             <Reveal>
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-white/50">
-                <Link href="/" className="transition hover:text-white">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#02024E]/50">
+                <Link href="/" className="transition hover:text-[#02024E]">
                   Home
                 </Link>
-                <span className="text-white/30">›</span>
-                <span className="font-medium text-white/70">Contact</span>
+                <span className="text-[#02024E]/30">›</span>
+                <span className="font-medium text-[#02024E]/70">Contact</span>
               </nav>
             </Reveal>
 
             {/* Trust pill */}
             <Reveal delay={0.05}>
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs text-white/60 shadow-sm backdrop-blur">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#01012F]/15 bg-white px-4 py-2 text-xs text-[#02024E]/60 shadow-sm backdrop-blur">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#06B6D4] opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#06B6D4]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#12B4CF] opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#12B4CF]" />
                 </span>
-                Trusted by <span className="font-semibold text-white">100+ businesses</span> nationwide.
+                Trusted by <span className="font-semibold text-[#02024E]">100+ businesses</span> nationwide.
               </div>
             </Reveal>
 
@@ -191,6 +191,7 @@ export default function ContactPage() {
               title="Tell Us About Your"
               highlight="Requirements"
               description="Answer a few quick questions and we'll route you to the right team."
+              lightBackground
             />
 
             <div className="mt-12 grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
@@ -204,8 +205,8 @@ export default function ContactPage() {
                     ].map((item) => {
                       const Icon = item.icon;
                       return (
-                        <li key={item.text} className="flex items-center gap-3 text-sm text-white/70">
-                          <span className="grid h-8 w-8 place-items-center rounded-full bg-[#132F4A] text-[#06B6D4]">
+                        <li key={item.text} className="flex items-center gap-3 text-sm text-[#02024E]/70">
+                          <span className="grid h-8 w-8 place-items-center rounded-full bg-[#12B4CF]/10 text-[#12B4CF]">
                             <Icon className="h-4 w-4" />
                           </span>
                           {item.text}
@@ -222,20 +223,20 @@ export default function ContactPage() {
                         const Icon = c.icon;
                         return (
                           <Reveal key={c.title} delay={0.08 * i}>
-                            <div className="h-full rounded-2xl border border-white/20 bg-white/5 p-6 sm:p-7 backdrop-blur-sm">
-                              <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#06B6D4]/10">
-                                <Icon className="h-5 w-5 text-[#06B6D4]" />
+                            <div className="h-full rounded-2xl border border-[#01012F]/15 bg-white p-6 sm:p-7 backdrop-blur-sm">
+                              <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#12B4CF]/10">
+                                <Icon className="h-5 w-5 text-[#12B4CF]" />
                               </div>
-                              <h2 className="mt-5 text-lg font-bold text-white">{c.title}</h2>
-                              <p className="mt-2 text-sm leading-relaxed text-white/60">{c.text}</p>
+                              <h2 className="mt-5 text-lg font-bold text-[#02024E]">{c.title}</h2>
+                              <p className="mt-2 text-sm leading-relaxed text-[#02024E]/60">{c.text}</p>
                               <a
                                 href={`mailto:${c.email}`}
-                                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#06B6D4] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0891b2]"
+                                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#12B4CF] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#00697B]"
                               >
                                 <Mail className="h-4 w-4" />
                                 {c.email}
                               </a>
-                              <p className="mt-3 text-center text-xs text-white/40">{c.note}</p>
+                              <p className="mt-3 text-center text-xs text-[#02024E]/40">{c.note}</p>
                             </div>
                           </Reveal>
                         );
@@ -246,21 +247,21 @@ export default function ContactPage() {
               </div>
 
               <Reveal delay={0.1}>
-                <div className="rounded-[2rem] border border-white/20 bg-white/5 p-6 sm:p-8 backdrop-blur-sm">
+                <div className="rounded-[2rem] border border-[#01012F]/15 bg-white p-6 sm:p-8 backdrop-blur-sm">
                   {status === "sent" ? (
                     <div className="flex flex-col items-center justify-center py-14 text-center">
-                      <span className="grid h-16 w-16 place-items-center rounded-full bg-[#06B6D4]/20">
-                        <CheckCircle2 className="h-8 w-8 text-[#06B6D4]" />
+                      <span className="grid h-16 w-16 place-items-center rounded-full bg-[#12B4CF]/20">
+                        <CheckCircle2 className="h-8 w-8 text-[#12B4CF]" />
                       </span>
-                      <h3 className="mt-5 text-xl font-extrabold text-white">Message Sent!</h3>
-                      <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/60">
+                      <h3 className="mt-5 text-xl font-extrabold text-[#02024E]">Message Sent!</h3>
+                      <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#02024E]/60">
                         Thanks{form.name ? ` ${form.name.split(" ")[0]}` : ""}! Our team will get
                         back to you within one business day.
                       </p>
                       <button
                         type="button"
                         onClick={() => setStatus("idle")}
-                        className="mt-7 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white/70 transition hover:border-[#06B6D4] hover:text-[#06B6D4]"
+                        className="mt-7 rounded-full border border-[#01012F]/15 bg-white px-6 py-2.5 text-sm font-semibold text-[#02024E]/70 transition hover:border-[#12B4CF] hover:text-[#12B4CF]"
                       >
                         Send Another Message
                       </button>
@@ -316,18 +317,18 @@ export default function ContactPage() {
                         className={`${inputBase} resize-none rounded-[2px]`}
                       />
 
-                      <label className="flex cursor-pointer items-start gap-3 pt-1 text-xs leading-relaxed text-white/60">
+                      <label className="flex cursor-pointer items-start gap-3 pt-1 text-xs leading-relaxed text-[#02024E]/60">
                         <input
                           type="checkbox"
                           required
                           checked={agree}
                           onChange={(e) => setAgree(e.target.checked)}
-                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#06B6D4]"
+                          className="mt-0.5 h-4 w-4 shrink-0 accent-[#12B4CF]"
                         />
                         <span>
                           I agree to be contacted by Virtual Nexgen Solutions regarding my inquiry
                           and accept the{" "}
-                          <Link href="/" className="font-medium text-[#06B6D4] underline">
+                          <Link href="/" className="font-medium text-[#12B4CF] underline">
                             Privacy Policy
                           </Link>
                           .
@@ -335,7 +336,7 @@ export default function ContactPage() {
                       </label>
 
                       {status === "error" && (
-                        <p className="rounded-xl bg-red-900/30 px-4 py-2.5 text-xs font-medium text-red-400">
+                        <p className="rounded-xl bg-red-50 px-4 py-2.5 text-xs font-medium text-red-600">
                           Something went wrong. Please try again or email us directly.
                         </p>
                       )}
@@ -343,7 +344,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={status === "sending"}
-                        className="flex w-full items-center justify-center gap-2 rounded-full bg-[#06B6D4] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#0891b2] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="flex w-full items-center justify-center gap-2 rounded-full bg-[#12B4CF] px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#00697B] disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {status === "sending" ? (
                           <>
@@ -354,7 +355,7 @@ export default function ContactPage() {
                         )}
                       </button>
 
-                      <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-[11px] text-white/40">
+                      <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-[11px] text-[#02024E]/40">
                         <Lock className="h-3 w-3" />
                         Your information is 100% secure. We never share your data with third
                         parties.
@@ -369,34 +370,35 @@ export default function ContactPage() {
 
         {/* ================= Global Presence ================= */}
         {locations.length > 0 && (
-          <section className="bg-white/5 py-16 sm:py-20 border-y border-white/10">
+          <section className="bg-[#E8F8FB] py-16 sm:py-20 border-y border-[#01012F]/10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
               <SectionHeading
                 eyebrow="Our Global Presence"
                 title="One Team, Two"
                 highlight="Locations"
                 description="Strategically positioned to support clients across time zones, without missing a beat."
+                lightBackground
               />
 
               <div className="mt-12 grid gap-6 md:grid-cols-2">
                 {locations.map((loc, i) => (
                   <Reveal key={loc.country} delay={0.08 * i}>
-                    <div className="overflow-hidden rounded-[2rem] bg-[#0B2A4A] text-white shadow-[0_24px_60px_rgba(11, 42, 74,0.25)]">
+                    <div className="overflow-hidden rounded-[2rem] bg-white text-[#02024E] shadow-[0_24px_60px_rgba(11, 42, 74,0.25)]">
                       <div className="p-7 sm:p-8 h-full">
                         <div className="flex items-start justify-between gap-4">
                           <div>
                             <h3 className="text-2xl font-bold">{loc.country}</h3>
-                            <p className="mt-1 text-sm text-white/60">{loc.tagline}</p>
+                            <p className="mt-1 text-sm text-[#02024E]/60">{loc.tagline}</p>
                           </div>
-                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/10">
+                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#12B4CF]/10">
                             <MapPin className="h-5 w-5 text-brand" />
                           </span>
                         </div>
                         <div className="mt-6 flex items-start gap-4">
-                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 bg-white/5">
+                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#01012F]/15 bg-white">
                             <span className="h-2.5 w-2.5 rounded-full bg-brand" />
                           </span>
-                          <p className="text-sm leading-relaxed text-white/85">{loc.address}</p>
+                          <p className="text-sm leading-relaxed text-[#02024E]/85">{loc.address}</p>
                         </div>
                       </div>
                     </div>
@@ -410,28 +412,28 @@ export default function ContactPage() {
                   {info?.phoneUS && (
                     <a
                       href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
-                      className="flex items-center gap-4 rounded-2xl border border-white/20 bg-white/5 px-5 py-4 transition hover:border-[#06B6D4]"
+                      className="flex items-center gap-4 rounded-2xl border border-[#01012F]/15 bg-white px-5 py-4 transition hover:border-[#12B4CF]"
                     >
-                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#06B6D4]/10">
-                        <Phone className="h-4 w-4 text-[#06B6D4]" />
+                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#12B4CF]/10">
+                        <Phone className="h-4 w-4 text-[#12B4CF]" />
                       </span>
                       <span>
-                        <span className="block text-xs text-white/40">United States</span>
-                        <span className="block text-sm font-bold text-white">{info.phoneUS}</span>
+                        <span className="block text-xs text-[#02024E]/40">United States</span>
+                        <span className="block text-sm font-bold text-[#02024E]">{info.phoneUS}</span>
                       </span>
                     </a>
                   )}
                   {info?.phoneIndia && (
                     <a
                       href={`tel:${info.phoneIndia.replace(/[^+\d]/g, "")}`}
-                      className="flex items-center gap-4 rounded-2xl border border-white/20 bg-white/5 px-5 py-4 transition hover:border-[#06B6D4]"
+                      className="flex items-center gap-4 rounded-2xl border border-[#01012F]/15 bg-white px-5 py-4 transition hover:border-[#12B4CF]"
                     >
-                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#06B6D4]/10">
-                        <Phone className="h-4 w-4 text-[#06B6D4]" />
+                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#12B4CF]/10">
+                        <Phone className="h-4 w-4 text-[#12B4CF]" />
                       </span>
                       <span>
-                        <span className="block text-xs text-white/40">India</span>
-                        <span className="block text-sm font-bold text-white">{info.phoneIndia}</span>
+                        <span className="block text-xs text-[#02024E]/40">India</span>
+                        <span className="block text-sm font-bold text-[#02024E]">{info.phoneIndia}</span>
                       </span>
                     </a>
                   )}
@@ -449,21 +451,22 @@ export default function ContactPage() {
               title="What Our Clients Are"
               highlight="Saying"
               description="Discover how Virtual Nexgen Solutions is helping businesses optimize their operations and scale effectively."
+              lightBackground
             />
             <div className="mt-12 grid gap-5 md:grid-cols-2">
               {testimonials.map((t, i) => (
                 <Reveal key={t.name} delay={0.06 * i}>
-                  <figure className="card h-full p-6 sm:p-7 bg-white/5 border border-white/10">
-                    <blockquote className="text-sm leading-relaxed text-white/80">
+                  <figure className="h-full rounded-[1.75rem] bg-white p-6 sm:p-7 border border-[#01012F]/10">
+                    <blockquote className="text-sm leading-relaxed text-[#02024E]/80">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
                     <figcaption className="mt-5 flex items-center gap-3">
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white/50">
+                      <span className="grid h-10 w-10 place-items-center rounded-full bg-[#12B4CF]/10 text-[#02024E]/50">
                         <ArrowRight className="h-4 w-4" />
                       </span>
                       <span>
-                        <span className="block text-sm font-bold text-white">{t.name}</span>
-                        <span className="block text-xs text-white/40">{t.role}</span>
+                        <span className="block text-sm font-bold text-[#02024E]">{t.name}</span>
+                        <span className="block text-xs text-[#02024E]/40">{t.role}</span>
                       </span>
                     </figcaption>
                   </figure>
@@ -481,24 +484,25 @@ export default function ContactPage() {
               title="Frequently Asked"
               highlight="Questions"
               description="Quick answers about contacting and working with our team."
+              lightBackground
             />
             <div className="mt-10 space-y-3">
               {faqs.map((faq, i) => {
                 const open = openFaq === i;
                 return (
                   <Reveal key={faq.q} delay={0.04 * i}>
-                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#132F4A] transition hover:border-brand/40">
+                    <div className="overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white transition hover:border-brand/40">
                       <button
                         type="button"
                         onClick={() => setOpenFaq(open ? null : i)}
                         aria-expanded={open}
                         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
                       >
-                        <span className="text-sm font-semibold text-white sm:text-base">
+                        <span className="text-sm font-semibold text-[#02024E] sm:text-base">
                           {faq.q}
                         </span>
                         <ChevronDown
-                          className={`h-5 w-5 shrink-0 text-white/40 transition-transform duration-300 ${
+                          className={`h-5 w-5 shrink-0 text-[#02024E]/40 transition-transform duration-300 ${
                             open ? "rotate-180" : ""
                           }`}
                         />
@@ -512,7 +516,7 @@ export default function ContactPage() {
                             transition={{ duration: 0.3 }}
                             className="overflow-hidden"
                           >
-                            <p className="border-t border-white/10 px-5 pb-5 pt-4 text-sm leading-relaxed text-white/60 sm:px-6">
+                            <p className="border-t border-[#01012F]/10 px-5 pb-5 pt-4 text-sm leading-relaxed text-[#02024E]/60 sm:px-6">
                               {faq.a}
                             </p>
                           </motion.div>
@@ -530,13 +534,13 @@ export default function ContactPage() {
         <section className="pb-20 pt-4">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <Reveal>
-              <div className="animated-gradient relative overflow-hidden rounded-[2.5rem] border border-white px-6 py-14 text-center sm:px-12 sm:py-16">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+              <div className="relative overflow-hidden rounded-[2.5rem] border border-[#01012F]/15 bg-[#E8F8FB] px-6 py-14 text-center sm:px-12 sm:py-16">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#12B4CF]/15 blur-3xl" />
                 <div className="relative">
-                  <h2 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                  <h2 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
                     Start Saving With a Free Consultation
                   </h2>
-                  <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
+                  <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#02024E]/70 sm:text-base">
                     See how much time and money a dedicated virtual assistant can save your
                     business.
                   </p>
@@ -550,7 +554,7 @@ export default function ContactPage() {
                     </Link>
                     <a
                       href="mailto:info@virtualnexgen.com"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20"
+                      className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/25 bg-white px-7 py-3 text-sm font-bold text-[#02024E] backdrop-blur transition hover:bg-[#02024E]/10"
                     >
                       <Mail className="h-4 w-4" />
                       Email Our Team

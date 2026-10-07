@@ -244,7 +244,7 @@ export default function AdminContactsPage() {
         </div>
       </div>
 
-      <div className="space-y-4 rounded-xl bg-[#132F4A] p-6 shadow border border-white/10">
+      <div className="space-y-4 rounded-xl bg-[#01012F] p-6 shadow border border-white/10">
 <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm font-medium text-white/70">
@@ -253,7 +253,7 @@ export default function AdminContactsPage() {
               <input
                 value={form.phoneUS ?? ""}
                 onChange={(e) => setForm({ ...form, phoneUS: e.target.value })}
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#06B6D4] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
               />
             </div>
             <div>
@@ -263,7 +263,7 @@ export default function AdminContactsPage() {
               <input
                 value={form.phoneIndia ?? ""}
                 onChange={(e) => setForm({ ...form, phoneIndia: e.target.value })}
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#06B6D4] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
               />
             </div>
           </div>
@@ -274,7 +274,7 @@ export default function AdminContactsPage() {
             <input
               value={form.email ?? ""}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#06B6D4] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
             />
           </div>
           <div>
@@ -284,7 +284,7 @@ export default function AdminContactsPage() {
             <input
               value={form.addressUS ?? ""}
               onChange={(e) => setForm({ ...form, addressUS: e.target.value })}
-              className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#06B6D4] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
             />
           </div>
           <div>
@@ -294,7 +294,7 @@ export default function AdminContactsPage() {
             <input
               value={form.addressIndia ?? ""}
               onChange={(e) => setForm({ ...form, addressIndia: e.target.value })}
-              className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#06B6D4] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
             />
           </div>
       </div>
@@ -302,7 +302,7 @@ export default function AdminContactsPage() {
       <button
         onClick={handleSave}
         disabled={saving}
-        className="rounded-lg bg-[#06B6D4] px-6 py-2 text-sm font-medium text-white hover:bg-[#06B6D4]/90 disabled:opacity-50"
+        className="rounded-lg bg-[#12B4CF] px-6 py-2 text-sm font-medium text-white hover:bg-[#12B4CF]/90 disabled:opacity-50"
       >
         {saving ? "Saving..." : "Save Changes"}
       </button>

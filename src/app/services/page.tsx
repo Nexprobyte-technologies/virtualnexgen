@@ -10,9 +10,9 @@ export default async function ServicesListPage() {
   const services = await getServices();
 
   return (
-    <main className="min-h-screen bg-[#132F4A]">
+    <main className="min-h-screen bg-[#F2FCFE]">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-6 bg-[#132F4A]">
+      <div className="relative overflow-hidden py-6 bg-[#F2FCFE]">
         <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
         <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -26,11 +26,11 @@ export default async function ServicesListPage() {
             <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
             <span className="text-ink/80">Services</span>
           </nav>
-          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[#02024E] sm:text-4xl lg:text-5xl">
             Our{" "}
-            <span className="text-[#06B6D4]">Services</span>
+            <span className="text-[#12B4CF]">Services</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#02024E]/60 sm:text-lg">
             Expert virtual assistant and AI automation solutions tailored to
             your industry — delivered with precision and care.
           </p>
@@ -39,8 +39,8 @@ export default async function ServicesListPage() {
 
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
         {services.length === 0 ? (
-          <div className="grid place-items-center rounded-[2rem] border border-white/20 bg-[#132F4A] p-16">
-            <p className="text-lg font-semibold text-white/50">
+          <div className="grid place-items-center rounded-[2rem] border border-[#01012F]/10 bg-[#E8F8FB] p-16">
+            <p className="text-lg font-semibold text-[#02024E]/50">
               No services available yet — check back soon!
             </p>
           </div>
@@ -50,7 +50,7 @@ export default async function ServicesListPage() {
               <Reveal key={service.slug} delay={i * 0.08}>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-[#132F4A]/10 backdrop-blur-sm transition-all duration-500 hover:border-[#06B6D4]/50 hover:bg-white/5 hover:shadow-[0_16px_40px_rgba(6,182,212,0.15)]"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white backdrop-blur-sm transition-all duration-500 hover:border-[#12B4CF]/50 hover:bg-[#02024E]/5 hover:shadow-[0_16px_40px_rgba(6,182,212,0.15)]"
                 >
                   {service.image ? (
                     <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">
@@ -62,23 +62,23 @@ export default async function ServicesListPage() {
                       />
                     </div>
                   ) : (
-                    <div className="relative grid aspect-[16/10] w-full shrink-0 place-items-center overflow-hidden bg-[#132F4A]">
-                      <span className="text-5xl font-extrabold text-white/20">
+                    <div className="relative grid aspect-[16/10] w-full shrink-0 place-items-center overflow-hidden bg-[#E8F8FB]">
+                      <span className="text-5xl font-extrabold text-[#02024E]/25">
                         {service.name.charAt(0)}
                       </span>
                     </div>
                   )}
                   <div className="flex flex-1 flex-col p-6">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#06B6D4]/60">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#12B4CF]/60">
                       {service.eyebrow || service.name}
                     </span>
-                    <h2 className="mt-2 text-xl font-extrabold leading-snug text-white transition group-hover:text-[#06B6D4]">
+                    <h2 className="mt-2 text-xl font-extrabold leading-snug text-[#02024E] transition group-hover:text-[#12B4CF]">
                       {service.name}
                     </h2>
-                    <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-white/60">
+                    <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-[#02024E]/60">
                       {service.short}
                     </p>
-                    <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#06B6D4] transition group-hover:gap-2.5">
+                    <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#12B4CF] transition group-hover:gap-2.5">
                       Learn More <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>
