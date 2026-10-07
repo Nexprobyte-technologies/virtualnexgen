@@ -41,7 +41,7 @@ export default function Marquee() {
   return (
     <section
       ref={rootRef}
-      className="border-y border-white/20 bg-[#132F4A] py-6"
+      className="border-y border-white/20 bg-[#01012F] py-6"
     >
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
         <div ref={trackRef} className="flex w-max">
@@ -50,10 +50,10 @@ export default function Marquee() {
               {items.map((label, i) => (
                 <span
                   key={`${dup}-${i}`}
-                  className="flex items-center gap-6 px-8 text-sm font-semibold uppercase tracking-[0.2em] text-white/80"
+                  className="flex items-center gap-6 px-8 text-sm font-semibold uppercase tracking-[0.2em] text-[#F2FCFE]"
                 >
                   {label}
-                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#12B4CF]" />
                 </span>
               ))}
             </div>

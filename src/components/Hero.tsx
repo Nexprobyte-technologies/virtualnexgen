@@ -62,8 +62,8 @@ function AnimatedSupportLevel({ title, subtitle, percentage }: { title: string; 
   return (
     <div>
       <div className="mt-2 flex items-center justify-between gap-3">
-        <p className="min-w-0 text-[11px] leading-snug text-white/65 sm:text-xs">{subtitle}</p>
-        <span className="shrink-0 text-sm font-bold tabular-nums text-[#06B6D4]" aria-label={`${title} support level ${value}%`}>
+        <p className="min-w-0 text-[11px] leading-snug text-[#02024E]/65 sm:text-xs">{subtitle}</p>
+        <span className="shrink-0 text-sm font-bold tabular-nums text-[#12B4CF]" aria-label={`${title} support level ${value}%`}>
           {value}%
         </span>
       </div>
@@ -319,7 +319,7 @@ export default function Hero() {
       id="home"
       ref={rootRef}
       className="relative overflow-hidden py-10 sm:py-14 md:py-18 xl:py-28"
-      style={{ background: "#132F4A" }}
+      style={{ background: "#F2FCFE" }}
     >
       <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#06B6D4]/12 blur-[120px]" />
       <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#06B6D4]/10 blur-[120px]" />
@@ -329,7 +329,7 @@ export default function Hero() {
           {/* Left: Text Content */}
           <div className="max-w-[720px] mx-auto xl:mx-0 text-left order-1">
             <div ref={badgeRef}>
-              <span className="inline-flex items-center gap-2 bg-white/10 border border-[#06B6D4]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-white">
+              <span className="inline-flex items-center gap-2 bg-white/10 border border-[#06B6D4]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl sm:rounded-full shadow-sm mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm font-semibold text-[#02024E]">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#06B6D4] rounded-full animate-pulse flex-shrink-0" />
                 <span>Virtual Assistants for Your Business</span>
               </span>
@@ -337,7 +337,7 @@ export default function Hero() {
 
             <h1
               ref={headingRef}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#02024E] mb-3 sm:mb-4 lg:mb-6 leading-[1.1]"
             >
               You Lead the Business.
               <br />
@@ -345,17 +345,17 @@ export default function Hero() {
             </h1>
 
             <div ref={typewriterRef}>
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#02024E] mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
                 Powered By Trained VAs in <br />
-                <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#06B6D4] font-semibold relative">
-                  <TypewriterText words={typewriterWords} className="text-[#06B6D4]" onWordChange={setIndustryIndex} />
+                <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#12B4CF] font-semibold relative">
+                  <TypewriterText words={typewriterWords} className="text-[#12B4CF]" onWordChange={setIndustryIndex} />
                 </span>
               </p>
             </div>
 
             <p
               ref={descRef}
-              className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-white/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xl"
+              className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-[#02024E]/80 leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xl"
             >
               {currentIndustry.description}
             </p>
@@ -370,7 +370,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     aria-label={ai.name}
                     title={ai.name}
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-line bg-white/10 text-white/60 transition-all duration-300 hover:bg-[#06B6D4] hover:text-white hover:border-[#06B6D4] hover:shadow-[0_4px_16px_rgba(6,182,212,0.4)] hover:-translate-y-0.5"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-line bg-white/10 text-[#02024E]/60 transition-all duration-300 hover:bg-[#06B6D4] hover:text-[#02024E] hover:border-[#06B6D4] hover:shadow-[0_4px_16px_rgba(6,182,212,0.4)] hover:-translate-y-0.5"
                   >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                       <path d={ai.icon} />
@@ -387,14 +387,14 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 rounded-full border border-white/90 px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:border-[#06B6D4] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto justify-center"
               >
-                <span className="text-sm sm:text-base font-bold text-white whitespace-nowrap">Book a Demo</span>
-                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/20 text-white flex-shrink-0 transition-all duration-300 group-hover:bg-[#06B6D4] group-hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)]">
+                <span className="text-sm sm:text-base font-bold text-[#02024E] whitespace-nowrap">Book a Demo</span>
+                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/20 text-[#02024E] flex-shrink-0 transition-all duration-300 group-hover:bg-[#06B6D4] group-hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)]">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </a>
               <a
                 href="#services"
-                className="group inline-flex items-center justify-center sm:justify-start gap-2 text-white/75 hover:text-[#06B6D4] font-semibold text-sm sm:text-base transition-colors py-2"
+                className="group inline-flex items-center justify-center sm:justify-start gap-2 text-[#02024E]/75 hover:text-[#12B4CF] font-semibold text-sm sm:text-base transition-colors py-2"
               >
                 <span>See Your Savings Estimate</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -408,11 +408,11 @@ export default function Hero() {
             className="mt-4 sm:mt-6 lg:mt-8 order-2"
           >
             <div className="mb-3 flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#06B6D4]">Industry-focused support</span>
-              <span className="text-xs font-medium text-white/50">{String(industryIndex + 1).padStart(2, "0")} / 15</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#12B4CF]">Industry-focused support</span>
+              <span className="text-xs font-medium text-[#02024E]/50">{String(industryIndex + 1).padStart(2, "0")} / 15</span>
             </div>
-            <div className="mb-3 flex items-center gap-2 text-white">
-              <currentIndustry.icon className="h-5 w-5 text-[#06B6D4]" />
+            <div className="mb-3 flex items-center gap-2 text-[#02024E]">
+              <currentIndustry.icon className="h-5 w-5 text-[#12B4CF]" />
               <h2 className="text-base font-bold sm:text-lg">{currentIndustry.title}</h2>
             </div>
             <div className="grid overflow-hidden rounded-2xl border border-white/20 bg-white/[0.06]">
@@ -426,8 +426,8 @@ export default function Hero() {
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#06B6D4]" />
-                          <h3 className="text-xs font-semibold leading-snug text-white sm:text-sm">{task.title}</h3>
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#12B4CF]" />
+                          <h3 className="text-xs font-semibold leading-snug text-[#02024E] sm:text-sm">{task.title}</h3>
                         </div>
                       </div>
                     </div>

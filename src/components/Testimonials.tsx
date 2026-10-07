@@ -63,16 +63,16 @@ function GlassCard({ testimonial }: { testimonial: (typeof testimonials)[number]
       <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg transition-all duration-300 hover:border-[#06B6D4]/40 hover:bg-white/15 hover:shadow-[0_8px_40px_rgba(6,182,212,0.08)]">
         <div className="mb-3 flex gap-0.5">
           {Array.from({ length: 5 }).map((_, s) => (
-            <Star key={s} className="h-3.5 w-3.5 fill-[#06B6D4] text-[#06B6D4]" />
+            <Star key={s} className="h-3.5 w-3.5 fill-[#06B6D4] text-[#12B4CF]" />
           ))}
         </div>
-        <blockquote className="text-sm leading-relaxed text-white/70">
+        <blockquote className="text-sm leading-relaxed text-[#02024E]/70">
           &ldquo;{testimonial.text}&rdquo;
         </blockquote>
         <div className="mt-5">
           <div>
-            <p className="text-sm font-semibold text-white">{testimonial.name}</p>
-            <p className="text-xs text-white/40">{testimonial.role}</p>
+            <p className="text-sm font-semibold text-[#02024E]">{testimonial.name}</p>
+            <p className="text-xs text-[#02024E]/40">{testimonial.role}</p>
           </div>
         </div>
       </div>
@@ -126,25 +126,25 @@ export default function Testimonials() {
 
       <section
         id="testimonials"
-        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#132F4A]"
+        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#F2FCFE]"
       >
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal y={20}>
-              <span className="inline-block rounded-full bg-[#06B6D4]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#06B6D4] ring-1 ring-[#06B6D4]/30">
+              <span className="inline-block rounded-full bg-[#06B6D4]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#12B4CF] ring-1 ring-[#06B6D4]/30">
                 Client Testimonials
               </span>
             </Reveal>
             <Reveal y={30} delay={0.12}>
-<h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white">
+<h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#02024E]">
               Hear How Our Solutions{" "}
-              <span className="text-[#06B6D4]">
+              <span className="text-[#12B4CF]">
                 Made a Difference
               </span>
             </h2>
             </Reveal>
             <Reveal y={20} delay={0.24}>
-              <p className="mx-auto mt-3 sm:mt-5 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-white/60">
+              <p className="mx-auto mt-3 sm:mt-5 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-[#02024E]/60">
                 Real feedback from businesses that trust Virtual Nexgen Solutions.
               </p>
             </Reveal>

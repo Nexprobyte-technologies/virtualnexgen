@@ -152,7 +152,7 @@ export default function Features() {
     <section
       id="services"
       ref={rootRef}
-      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-cream pb-24 sm:pb-32 xl:pb-0"
+      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-[#F2FCFE] pb-24 sm:pb-32 xl:pb-0"
     >
       <div className="flex min-h-[100svh] flex-col justify-center pt-16 sm:pt-20 xl:pt-24 mt-[10px] xl:h-full">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
@@ -162,6 +162,7 @@ export default function Features() {
             highlight="Service Offerings"
             align="center"
             typewriterPrefix="Explore"
+            lightBackground
             typewriterWords={[
               "Insurance Virtual Assistants",
               "Real Estate Virtual Assistants",
@@ -186,7 +187,7 @@ export default function Features() {
               rel="noopener noreferrer"
               data-animate
               data-service-card
-              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#132F4A] transition-all duration-300 hover:border-[#06B6D4]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
+              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#F2FCFE] transition-all duration-300 hover:border-[#06B6D4]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
@@ -197,18 +198,18 @@ export default function Features() {
                   loading="lazy"
                   className="object-cover"
                 />
-                <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#132F4A] shadow-sm">
+                <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#02024E] shadow-sm">
                   {service.category}
                 </span>
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-bold text-white">
+                <h3 className="text-lg font-bold text-[#02024E]">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                <p className="mt-2 text-sm leading-relaxed text-[#02024E]/60">
                   {service.description}
                 </p>
-                <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-300 hover:bg-[#06B6D4]">
+                <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[#02024E] transition-colors duration-300 hover:bg-[#06B6D4]">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
@@ -218,13 +219,13 @@ export default function Features() {
 
         <div className="services-scroll-cue mx-auto mt-6 hidden w-full max-w-7xl px-6 xl:block xl:px-10">
           <div className="flex items-center gap-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#02024E]/40">
               Scroll
             </span>
             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/20">
               <div
                 ref={progressRef}
-                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#132F4A] via-[#06B6D4] to-[#132F4A]"
+                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#06B6D4] to-[#F2FCFE]"
               />
             </div>
           </div>

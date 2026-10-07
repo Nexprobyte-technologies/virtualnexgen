@@ -66,19 +66,20 @@ export default function Services() {
   );
 
   return (
-    <section id="process" ref={rootRef} className="relative bg-[#132F4A] py-16 sm:py-20 lg:py-28">
+    <section id="process" ref={rootRef} className="relative bg-[#F2FCFE] py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <SectionHeading
           eyebrow="Our Working Process"
           title="How Our Services Will Help You"
           highlight="Grow Your Business"
+          lightBackground
         />
 
         <div className="relative mt-8 sm:mt-12 lg:mt-16">
           <div className="pointer-events-none absolute left-0 right-0 top-28 hidden h-px lg:block">
             <div
               data-process-line
-              className="h-full w-full origin-left bg-gradient-to-r from-[#132F4A]/60 via-[#06B6D4]/60 to-transparent"
+              className="h-full w-full origin-left bg-gradient-to-r from-[#F2FCFE]/60 via-[#06B6D4]/60 to-transparent"
             />
           </div>
 
@@ -93,18 +94,18 @@ export default function Services() {
                   key={step.title}
                   data-animate
                   data-process-card
-                  className="card group relative p-5 sm:p-6 lg:p-8 bg-white/10 border border-white/20 backdrop-blur-sm"
+                  className="card group relative !bg-white p-5 sm:p-6 lg:p-8 border border-[#12B4CF]/20 backdrop-blur-sm"
                 >
-                  <span className="absolute right-4 sm:right-6 top-4 sm:top-5 text-3xl sm:text-4xl font-extrabold text-white/25 transition group-hover:text-white/50">
+                  <span className="absolute right-4 sm:right-6 top-4 sm:top-5 text-3xl sm:text-4xl font-extrabold text-[#02024E]/25 transition group-hover:text-[#02024E]/50">
                     {step.number}
                   </span>
                   <div className="icon-tile mb-4 sm:mb-6 h-11 w-11 sm:h-14 sm:w-14 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
                   </div>
-                  <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl font-bold text-white">
+                  <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl font-bold text-[#02024E]">
                     {step.title}
                   </h3>
-                  <p className="text-xs sm:text-sm leading-relaxed text-white/70">
+                  <p className="text-xs sm:text-sm leading-relaxed text-[#02024E]/70">
                     {step.text}
                   </p>
                 </article>
@@ -118,7 +119,7 @@ export default function Services() {
             href="https://calendly.com/virtualnexgen-info/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-white transition"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-[#02024E] transition"
           >
             Connect With Us
           </a>

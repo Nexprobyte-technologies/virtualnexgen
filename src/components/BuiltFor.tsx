@@ -49,10 +49,10 @@ function FeatureCard({
   return (
     <div className="rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-brand/40 hover:bg-white/10 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]">
       <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
-        <Icon className="h-5 w-5 text-brand" />
+        <Icon className="h-5 w-5 text-[#12B4CF]" />
       </div>
-      <h3 className="text-base font-semibold text-white mb-2">{title}</h3>
-      <p className="text-sm text-white/70 leading-relaxed">{text}</p>
+      <h3 className="text-base font-semibold text-[#02024E] mb-2">{title}</h3>
+      <p className="text-sm text-[#02024E]/70 leading-relaxed">{text}</p>
     </div>
   );
 }
@@ -107,7 +107,7 @@ export default function BuiltFor() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#132F4A]">
+      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#F2FCFE]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
 
@@ -115,16 +115,16 @@ export default function BuiltFor() {
             <div className="flex flex-col justify-between lg:sticky lg:top-28">
               <div>
                 <Reveal y={30}>
-                  <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white leading-tight mb-2 sm:mb-3">
+                  <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#02024E] leading-tight mb-2 sm:mb-3">
                     Built for{" "}
-                    <span className="text-[#06B6D4]">Your Business</span>
+                    <span className="text-[#12B4CF]">Your Business</span>
                     <br />
                     Powered by{" "}
-                    <span className="text-white">Dedicated People</span>
+                    <span className="text-[#02024E]">Dedicated People</span>
                   </h2>
                 </Reveal>
                 <Reveal y={20} delay={0.1}>
-                  <p className="text-sm sm:text-base lg:text-lg text-white/70 mb-6 sm:mb-8 max-w-md">
+                  <p className="text-sm sm:text-base lg:text-lg text-[#02024E]/70 mb-6 sm:mb-8 max-w-md">
                     We&apos;re more than a virtual assistant provider. We deliver dedicated, industry-focused support that fits your workflows,
                     strengthens daily operations, and gives your team more time to focus on growth.
                   </p>
@@ -134,19 +134,19 @@ export default function BuiltFor() {
               <Reveal y={20} delay={0.3}>
                 <div className="bg-brand/5 border border-brand/35 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 mt-6">
                   <div className="text-left w-full sm:w-auto">
-                    <p className="text-sm sm:text-base font-bold text-white leading-snug">
+                    <p className="text-sm sm:text-base font-bold text-[#02024E] leading-snug">
                       Ready to extend your team&apos;s capacity?
                     </p>
-                    <p className="text-xs sm:text-sm text-white/60">
+                    <p className="text-xs sm:text-sm text-[#02024E]/60">
                       See how dedicated support fits your workflow.
                     </p>
                   </div>
                   <a href="#contact" className="w-full sm:w-auto flex-shrink-0">
 <button className="group pr-2 pl-5 py-2 border border-white/20 rounded-full flex items-center justify-between sm:justify-start gap-2.5 font-semibold w-full sm:w-auto cursor-pointer">
-                  <span className="text-sm font-bold text-white whitespace-nowrap">
+                  <span className="text-sm font-bold text-[#02024E] whitespace-nowrap">
                     Book a Demo
                   </span>
-                  <span className="bg-icon-circle w-6 h-6 flex items-center justify-center rounded-full bg-white/20 text-[#132F4A] flex-shrink-0">
+                  <span className="bg-icon-circle w-6 h-6 flex items-center justify-center rounded-full bg-white/20 text-[#02024E] flex-shrink-0">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="13"

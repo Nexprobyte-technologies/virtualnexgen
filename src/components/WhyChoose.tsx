@@ -48,7 +48,7 @@ function BentoCard({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-[#132F4A] transition-all duration-500 ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-[#F2FCFE] transition-all duration-500 ${className}`}
       style={{ perspective: "1000px" }}
     >
       {/* Spotlight effect following cursor */}
@@ -139,7 +139,7 @@ function ComplianceMarquee() {
             key={i}
             className="rounded-full border border-line bg-white px-4 py-2"
           >
-            <span className="text-sm text-ink">{item}</span>
+            <span className="text-sm text-[#02024E]">{item}</span>
           </div>
         ))}
       </div>
@@ -162,16 +162,16 @@ export default function WhyChoose() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 bg-[#132F4A]">
+      <section className="py-12 sm:py-16 lg:py-28 bg-[#01012F]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
 
           {/* Header */}
           <Reveal y={30}>
             <div className="mb-8 sm:mb-12 lg:mb-16 max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#F2FCFE] mb-3 sm:mb-4">
                 Why Choose Virtual Nexgen Solutions?
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-[#F2FCFE]/80 leading-relaxed">
                 Built specifically for businesses that need reliable operations,
                 secure workflows, and scalable support.
               </p>
@@ -187,13 +187,13 @@ export default function WhyChoose() {
                 <div className="p-5 sm:p-6 md:p-8">
 <div className="flex items-center gap-3 mb-4">
                   <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
-                    <Users className="h-5 w-5 text-white" />
+                    <Users className="h-5 w-5 text-[#02024E]" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#02024E]">
                     Industry-Focused Expertise
                   </h3>
                 </div>
-              <p className="text-sm sm:text-base text-white/70 mb-4">
+              <p className="text-sm sm:text-base text-[#02024E]/70 mb-4">
                     Our assistants are trained in industry-specific workflows, policy servicing,
                     renewals, endorsements, and management systems &mdash; so tasks are handled
                     accurately and efficiently.
@@ -201,7 +201,7 @@ export default function WhyChoose() {
 
                   <IndustryImageCarousel />
 
-                  <p className="text-sm sm:text-base text-white/70 mt-4">
+                  <p className="text-sm sm:text-base text-[#02024E]/70 mt-4">
                     Faster onboarding. Fewer errors. Seamless collaboration with your internal team.
                   </p>
                 </div>
@@ -214,13 +214,13 @@ export default function WhyChoose() {
                 <div className="p-5 sm:p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
-                      <Shield className="h-5 w-5 text-white" />
+                      <Shield className="h-5 w-5 text-[#02024E]" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#02024E]">
                       Security & Compliance
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-white/70 mb-2">
+                  <p className="text-sm sm:text-base text-[#02024E]/70 mb-2">
                     Protecting your business information is our priority.
                     We follow structured security practices and privacy-focused workflows to help safeguard sensitive client data throughout daily operations.
                   </p>
@@ -240,13 +240,13 @@ export default function WhyChoose() {
                 <div className="p-5 sm:p-6 md:p-8 flex flex-col h-full">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
-                      <ClipboardCheck className="h-5 w-5 text-white" />
+                      <ClipboardCheck className="h-5 w-5 text-[#02024E]" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#02024E]">
                       Quality You Can Count On
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-white/70 mb-5">
+                  <p className="text-sm sm:text-base text-[#02024E]/70 mb-5">
                     Our structured workflows, performance monitoring, and quality checks help ensure tasks are completed accurately and consistently.
                   </p>
 
@@ -254,9 +254,9 @@ export default function WhyChoose() {
                     {qualityChecks.map((item) => (
                       <li key={item} className="flex items-center gap-3">
                         <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-white/10">
-                          <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                          <Check className="h-3.5 w-3.5 text-[#02024E]" strokeWidth={3} />
                         </div>
-                        <span className="text-sm sm:text-base font-medium text-white">
+                        <span className="text-sm sm:text-base font-medium text-[#02024E]">
                           {item}
                         </span>
                       </li>
@@ -272,13 +272,13 @@ export default function WhyChoose() {
                 <div className="p-5 sm:p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
-                      <TrendingUp className="h-5 w-5 text-white" />
+                      <TrendingUp className="h-5 w-5 text-[#02024E]" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#02024E]">
                       More Capacity. Less Administrative Work.
                     </h3>
                   </div>
-                  <p className="text-sm sm:text-base text-white/70 mb-8">
+                  <p className="text-sm sm:text-base text-[#02024E]/70 mb-8">
                     Our dedicated Virtual Assistants integrate into your existing operations, helping your team manage recurring tasks, maintain documentation, and keep workflows moving.
                   </p>
 
@@ -288,10 +288,10 @@ export default function WhyChoose() {
                         key={stat.label}
                         className="flex flex-col items-center sm:items-start text-center sm:text-left bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm"
                       >
-                        <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">
+                        <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#02024E] mb-2">
                           {stat.value}
                         </p>
-                        <p className="text-xs sm:text-sm text-white/70 leading-tight">
+                        <p className="text-xs sm:text-sm text-[#02024E]/70 leading-tight">
                           {stat.label}
                         </p>
                       </div>

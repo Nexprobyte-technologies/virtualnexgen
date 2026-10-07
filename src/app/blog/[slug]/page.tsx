@@ -337,12 +337,6 @@ export default async function BlogDetailPage({
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-14">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
           <article className="min-w-0 max-w-4xl">
-            {post.excerpt && (
-              <p className="mb-6 text-lg font-medium leading-relaxed text-white/75 border-l-4 border-brand pl-5">
-                {post.excerpt}
-              </p>
-            )}
-
             <div className="mt-6">
               {post.content ? (
                 isHtml(post.content) ? (

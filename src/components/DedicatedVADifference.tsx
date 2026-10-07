@@ -106,21 +106,21 @@ export default function DedicatedVADifference() {
   }, [isPaused, scrollCards]);
 
   return (
-    <section className="bg-navyblue from-white via-[#132F4A] to-white relative overflow-hidden pt-[200px] pb-0 sm:pb-2 md:pb-4">
+    <section className="bg-[#F2FCFE] relative overflow-hidden pt-[200px] pb-0 sm:pb-2 md:pb-4">
       <ContainerScroll
         titleComponent={
           <div className="mx-auto max-w-3xl px-4 text-center">
             <div className="mb-3 inline-flex items-center justify-center gap-2 sm:gap-3">
               <span className="h-[2px] w-5 rounded-full bg-white sm:w-8" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white sm:text-xs lg:text-sm">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#02024E] sm:text-xs lg:text-sm">
                 THE DEDICATED VA DIFFERENCE
               </span>
               <span className="h-[2px] w-5 rounded-full bg-white sm:w-8" />
             </div>
-            <h2 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
+            <h2 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-[#02024E] sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
               Why Choose a Dedicated VA?
             </h2>
-            <p className="mx-auto max-w-[700px] text-xs font-normal leading-relaxed text-white sm:text-sm md:text-base lg:text-lg">
+            <p className="mx-auto max-w-[700px] text-xs font-normal leading-relaxed text-[#02024E] sm:text-sm md:text-base lg:text-lg">
               See why businesses choose us for reliable, personalized support
               &mdash; without the inconsistency of shared assistants or freelance platforms.
             </p>
@@ -129,14 +129,14 @@ export default function DedicatedVADifference() {
       >
         <div className="h-full w-full overflow-hidden rounded-[20px] border border-ink/10 bg-white p-3 shadow-xl sm:p-5">
           <div className="mb-3 flex items-center justify-end gap-2 sm:mb-4">
-            <span className="mr-2 text-xs font-semibold tabular-nums text-[#132F4A]/65" aria-live="polite">
+            <span className="mr-2 text-xs font-semibold tabular-nums text-[#02024E]/65" aria-live="polite">
               {String(currentCard + 1).padStart(2, "0")} / {String(features.length).padStart(2, "0")}
             </span>
             <button
               type="button"
               onClick={() => scrollCards(-1)}
               aria-label="Show previous benefits"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#132F4A] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#02024E] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -144,7 +144,7 @@ export default function DedicatedVADifference() {
               type="button"
               onClick={() => scrollCards(1)}
               aria-label="Show more benefits"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#132F4A] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[#132F4A]/15 text-[#02024E] transition-colors hover:border-[#06B6D4] hover:bg-[#06B6D4]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#06B6D4]"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -168,17 +168,17 @@ export default function DedicatedVADifference() {
                 data-feature-card
                 className="flex h-full basis-full shrink-0 snap-start items-start gap-3 rounded-2xl border border-[#132F4A]/10 bg-gradient-to-br from-white to-[#06B6D4]/[0.04] p-4 shadow-sm transition-[border-color,box-shadow] hover:border-[#06B6D4]/40 hover:shadow-md sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)]"
               >
-                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#06B6D4]/10 text-[#132F4A]">
+                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#06B6D4]/10 text-[#02024E]">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0891B2]">
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#00697B]">
                     Benefit {String(index + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="text-base font-bold leading-snug text-[#132F4A] sm:text-lg">
+                  <h3 className="text-base font-bold leading-snug text-[#02024E] sm:text-lg">
                     {label}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#132F4A]/70">
+                  <p className="mt-2 text-sm leading-relaxed text-[#02024E]/70">
                     {description}
                   </p>
                 </div>

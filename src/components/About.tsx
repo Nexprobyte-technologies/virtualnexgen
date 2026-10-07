@@ -80,7 +80,7 @@ export default function About() {
 
   return (
     <>
-      <section id="about" ref={aboutRef} className="relative overflow-hidden bg-[#132F4A] pt-0 pb-14 sm:pb-20 lg:pb-28">
+      <section id="about" ref={aboutRef} className="relative overflow-hidden bg-[#F2FCFE] pt-0 pb-14 sm:pb-20 lg:pb-28">
         <div className="pointer-events-none absolute left-0 top-1/3 h-80 w-80 rounded-full bg-brand-deep/10 blur-[120px]" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-12 lg:gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-10">
@@ -105,7 +105,7 @@ export default function About() {
                 className="absolute -bottom-6 -right-4 rounded-2xl border border-line bg-white/95 px-6 py-4 shadow-xl backdrop-blur"
               >
                 <p className="text-2xl font-extrabold text-gradient">2016</p>
-                <p className="text-xs font-semibold uppercase tracking-wider text-ink/60">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#02024E]/60">
                   Founded Since
                 </p>
               </div>
@@ -117,13 +117,13 @@ export default function About() {
               <span className="eyebrow">About Us</span>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-6 text-white text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              <h2 className="mt-6 text-[#02024E] text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl lg:text-5xl">
                 Discover the Story Behind{" "}
                 <span className="text-gradient">Virtual Nexgen Solutions</span>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-6 text-white text-base leading-relaxed text-ink/60 sm:text-lg">
+              <p className="mt-6 text-[#02024E] text-base leading-relaxed text-[#02024E]/60 sm:text-lg">
                 Founded in 2016, we excel in providing dedicated virtual
                 assistant and AI Automation tailored for your industry. We help
                 businesses streamline their operations, reduce overhead costs,
@@ -136,7 +136,7 @@ export default function About() {
                   (tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-line bg-cream px-4 py-2 text-sm font-medium text-white"
+                      className="rounded-full border border-line bg-[#F2FCFE] px-4 py-2 text-sm font-medium text-[#02024E]"
                     >
                       {tag}
                     </span>
@@ -149,7 +149,7 @@ export default function About() {
                 href="https://virtualnexgen.com/contacts"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-[#132F4A] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_14px_38px_rgba(6,182,212,0.35)] transition hover:shadow-[0_14px_54px_rgba(6,182,212,0.5)]"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#F2FCFE] px-7 py-3.5 text-sm font-semibold text-[#02024E] shadow-[0_14px_38px_rgba(6,182,212,0.35)] transition hover:shadow-[0_14px_54px_rgba(6,182,212,0.5)]"
               >
                 Contact Us
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -159,13 +159,13 @@ export default function About() {
         </div>
       </section>
 
-      <section id="case-studies" ref={caseRef} className="relative bg-[#132F4A] py-14 sm:py-20 lg:py-28">
+      <section id="case-studies" ref={caseRef} className="relative bg-[#F2FCFE] py-14 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <Reveal>
             <span className="eyebrow">Case Studies</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="mt-4 sm:mt-6 max-w-3xl text-2xl sm:text-3xl lg:text-5xl font-extrabold tracking-tight text-white">
+            <h2 className="mt-4 sm:mt-6 max-w-3xl text-2xl sm:text-3xl lg:text-5xl font-extrabold tracking-tight text-[#02024E]">
               How Our Virtual Assistants and AI Automation{" "}
               <span className="text-gradient">Transformed Businesses</span>
             </h2>
@@ -183,7 +183,7 @@ export default function About() {
                 rel="noopener noreferrer"
                 data-animate
                 data-case-card
-                className="card group flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(249,115,22,0.16)]"
+                className="card group flex flex-col overflow-hidden rounded-3xl bg-white !bg-white shadow-[0_10px_40px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(249,115,22,0.16)]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -194,24 +194,24 @@ export default function About() {
                     loading="lazy"
                     className="object-cover transition duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-dark shadow-sm backdrop-blur">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#F2FCFE]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#02024E] shadow-sm backdrop-blur">
                     {cs.tag}
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/50">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-[#00697B]">
                     {cs.tags}
                   </p>
-                  <h3 className="mt-2.5 text-lg font-bold leading-snug text-white transition group-hover:text-[#06B6D4]">
+                  <h3 className="mt-2.5 text-lg font-bold leading-snug text-[#02024E] transition group-hover:text-[#12B4CF]">
                     {cs.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-white/60">
+                  <p className="mt-2.5 text-sm leading-relaxed text-[#00697B]">
                     {cs.text}
                   </p>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-bold uppercase tracking-wider text-white">
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-bold uppercase tracking-wider text-[#00697B]">
                     See the Impact
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#06B6D4] text-white transition-all duration-300 group-hover:translate-x-1 group-hover:shadow-[0_4px_12px_rgba(6,182,212,0.4)]">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#06B6D4] text-[#02024E] transition-all duration-300 group-hover:translate-x-1 group-hover:shadow-[0_4px_12px_rgba(6,182,212,0.4)]">
                       <ArrowUpRight className="h-3 w-3" />
                     </span>
                   </span>
