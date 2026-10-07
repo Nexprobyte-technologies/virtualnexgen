@@ -101,8 +101,7 @@ export default function HowWeSupport() {
   const step = steps[current];
 
   return (
-    <section ref={rootRef} className="relative bg-[#F2FCFE] py-10 sm:py-16 md:py-28 lg:py-36 overflow-hidden">
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#12B4CF]/10 blur-[140px] rounded-full" />
+    <section ref={rootRef} className="relative bg-[#fffaf3] py-10 sm:py-16 md:py-28 lg:py-36 overflow-hidden">
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 relative z-10">
         <div className="w-full flex flex-col">
@@ -175,7 +174,7 @@ export default function HowWeSupport() {
 
           {/* Content card */}
           <div ref={cardRef} className="w-full">
-            <div className="bg-gradient-to-br from-[#F2FCFE] via-[#F2FCFE] to-[#F2FCFE] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
               <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-[#12B4CF]/[0.08]">
                 {step.num}
               </div>
@@ -189,7 +188,7 @@ export default function HowWeSupport() {
                   </div>
 
                   <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
-                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#F2FCFE] flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#fffaf3] flex items-center justify-center flex-shrink-0 shadow-sm">
                       <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#12B4CF]" />
                     </div>
                     <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold text-[#02024E] leading-snug">
@@ -203,7 +202,7 @@ export default function HowWeSupport() {
 
                   <div className="pt-2 sm:pt-3 border-t border-slate-200 flex flex-wrap gap-1.5 sm:gap-2.5">
                     {step.features.map((f) => (
-                      <div key={f} className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-[#02024E]/75 bg-[#F2FCFE]/90 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border border-white/20">
+                      <div key={f} className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-[#02024E]/75 bg-[#fffaf3]/90 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border border-white/20">
                         <CheckCircle className="w-3 h-3 text-[#12B4CF] flex-shrink-0" />
                         <span>{f}</span>
                       </div>
@@ -212,7 +211,7 @@ export default function HowWeSupport() {
                 </div>
 
 <div className="w-full hidden md:flex flex-col items-center justify-center p-5 bg-white/90 backdrop-blur-sm rounded-2xl border border-black/30 shadow-xs min-w-[130px] text-center mt-5">
-  <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-[#F2FCFE] text-[#12B4CF]">
+  <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-[#fffaf3] text-[#12B4CF]">
     <step.icon className="w-5 h-5" />
   </div>
   <span className="text-xs font-bold text-[#02024E] tracking-wide">
@@ -228,7 +227,7 @@ export default function HowWeSupport() {
           <div className="mt-4 sm:mt-6 h-1.5 bg-slate-200 rounded-full overflow-hidden">
             <div
               ref={progressRef}
-              className="h-full rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#12B4CF] to-[#F2FCFE]"
+              className="h-full rounded-full bg-gradient-to-r from-[#fffaf3] via-[#12B4CF] to-[#fffaf3]"
               style={{ width: `${((current + 1) / steps.length) * 100}%` }}
             />
           </div>

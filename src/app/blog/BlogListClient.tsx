@@ -44,11 +44,9 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#F2FCFE]">
+    <main className="min-h-screen bg-[#fffaf3]">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-6 bg-[#F2FCFE]">
-        <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
-        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
+      <div className="relative overflow-hidden py-6 bg-[#fffaf3]">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
           <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
             <Link
@@ -103,7 +101,7 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                             className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="grid h-full w-full place-items-center bg-[#E8F8FB]">
+                          <div className="grid h-full w-full place-items-center bg-[#fffaf3]">
                             <span className="text-5xl font-extrabold text-brand/20">
                               {getCardTitle(post).charAt(0)}
                             </span>
@@ -171,7 +169,7 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="grid h-full w-full place-items-center bg-[#E8F8FB]">
+                        <div className="grid h-full w-full place-items-center bg-[#fffaf3]">
                           <span className="text-4xl font-extrabold text-[#02024E]/25">
                             {getCardTitle(post).charAt(0)}
                           </span>

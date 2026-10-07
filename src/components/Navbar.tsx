@@ -70,7 +70,7 @@ export default function Navbar() {
 <header
       className="site-navbar fixed top-0 left-0 right-0 z-50 mt-2 sm:mt-5 animate-[navbar-drop_700ms_cubic-bezier(0.22,1,0.36,1)_both]"
     >
-      <div className="mx-auto w-[calc(100%-1rem)] sm:w-[80%] rounded-full border border-slate-200 bg-white/95 shadow-[0_10px_35px_rgba(15,23,42,0.12)] backdrop-blur-xl px-3 sm:px-6 py-1 sm:py-2 transition-shadow duration-300 hover:shadow-[0_14px_42px_rgba(15,23,42,0.18)]">
+      <div className="mx-auto w-[calc(100%-1rem)] sm:w-[80%] rounded-full border border-slate-200 bg-white shadow-[0_10px_35px_rgba(15,23,42,0.12)] px-3 sm:px-6 py-1 sm:py-2 transition-shadow duration-300 hover:shadow-[0_14px_42px_rgba(15,23,42,0.18)]">
           <div className="hidden xl:flex items-center justify-between py-1 px-2">
             <a href={isSubPage ? "/" : "#home"} className="flex shrink-0 pl-2">
               <Image

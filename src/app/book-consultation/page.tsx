@@ -22,7 +22,7 @@ export default function BookConsultationPage() {
   const [booking, setBooking] = useState<CalendlyPayload | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#F2FCFE]">
+    <main className="min-h-screen bg-[#fffaf3]">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
         <header className="mb-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export default function BookConsultationPage() {
         <div className="overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.25)]">
           <div className="grid md:grid-cols-[340px_1fr]">
             {/* Left panel — event info (Calendly style) */}
-            <aside className="relative flex flex-col justify-between gap-6 bg-[#E8F8FB] px-6 py-7 sm:px-8">
+            <aside className="relative flex flex-col justify-between gap-6 bg-[#fffaf3] px-6 py-7 sm:px-8">
               <div className="flex items-center gap-4">
                 <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#12B4CF]/15 text-[#02024E]">
                   <Video className="h-6 w-6" />

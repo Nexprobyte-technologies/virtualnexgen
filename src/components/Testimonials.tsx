@@ -126,7 +126,7 @@ export default function Testimonials() {
 
       <section
         id="testimonials"
-        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#F2FCFE]"
+        className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#fffaf3]"
       >
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-3xl text-center">

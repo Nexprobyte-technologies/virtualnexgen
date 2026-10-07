@@ -48,7 +48,7 @@ function BentoCard({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-[#F2FCFE] transition-all duration-500 ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-[#fffaf3] transition-all duration-500 ${className}`}
       style={{ perspective: "1000px" }}
     >
       {/* Spotlight effect following cursor */}
@@ -110,8 +110,6 @@ function IndustryImageCarousel() {
           </div>
         ))}
       </div>
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#01012F] to-transparent sm:w-14" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#01012F] to-transparent sm:w-14" />
     </div>
   );
 
@@ -128,8 +126,6 @@ function ComplianceMarquee() {
 
   return (
     <div className="relative mt-4 h-[200px] sm:h-[240px] overflow-hidden">
-      <div className="pointer-events-none absolute top-0 left-0 z-10 w-full h-12 bg-gradient-to-b from-[#01012F] to-transparent" />
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-full h-12 bg-gradient-to-t from-[#01012F] to-transparent" />
       <div
         className="space-y-3"
         style={{ animation: "scrollY 18s linear infinite" }}
@@ -168,10 +164,10 @@ export default function WhyChoose() {
           {/* Header */}
           <Reveal y={30}>
             <div className="mb-8 sm:mb-12 lg:mb-16 max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#F2FCFE] mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-[#fffaf3] mb-3 sm:mb-4">
                 Why Choose Virtual Nexgen Solutions?
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-[#F2FCFE]/80 leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-[#fffaf3]/80 leading-relaxed">
                 Built specifically for businesses that need reliable operations,
                 secure workflows, and scalable support.
               </p>

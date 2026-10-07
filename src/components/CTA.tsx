@@ -10,17 +10,17 @@ export default function CTA() {
 
         <Reveal y={30}>
           <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#F2FCFE] mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#fffaf3] mb-3 sm:mb-4">
               Ready to Get Started?
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-[#F2FCFE]/80 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg lg:text-lg font-normal text-[#fffaf3]/80 max-w-xl mx-auto">
               Book a free consultation and see how our virtual assistants can help your business grow.
             </p>
           </div>
         </Reveal>
 
         <Reveal y={30} delay={0.15}>
-          <div className="bg-gradient-to-r from-[#F2FCFE] via-[#F2FCFE] to-[#F2FCFE] rounded-2xl sm:rounded-3xl border border-white/20 px-5 sm:px-8 md:px-10 py-6 sm:py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-[0_25px_60px_rgba(19,47,74,0.35)]">
+          <div className="bg-gradient-to-r from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] rounded-2xl sm:rounded-3xl border border-white/20 px-5 sm:px-8 md:px-10 py-6 sm:py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-[0_25px_60px_rgba(19,47,74,0.35)]">
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#02024E] text-center md:text-left">
               Start Saving With a Free Consultation
             </p>
@@ -32,7 +32,7 @@ export default function CTA() {
                 className="group inline-flex items-center gap-3 rounded-full bg-white border border-[#02024E] px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_4px_20px_rgba(255,255,255,0.4)] transition-all duration-300 hover:bg-white hover:border-[#02024E] w-full sm:w-auto justify-center"
               >
                 <span className="text-sm sm:text-base font-bold text-[#02024E] whitespace-nowrap">Book Your Demo</span>
-                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#F2FCFE] text-[#02024E] flex-shrink-0 transition-colors duration-300 group-hover:bg-white group-hover:text-[#02024E]">
+                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#fffaf3] text-[#02024E] flex-shrink-0 transition-colors duration-300 group-hover:bg-white group-hover:text-[#02024E]">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
                 </span>
               </a>

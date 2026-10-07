@@ -264,7 +264,7 @@ export default async function BlogDetailPage({
   const articleUrl = `https://virtualnexgen.com/blog/${post.slug}`;
 
   return (
-    <main className="min-h-screen bg-[#F2FCFE]">
+    <main className="min-h-screen bg-[#fffaf3]">
       <section className="mx-auto mt-[10px] max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
         <div
           className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-2" : ""}`}
@@ -368,7 +368,7 @@ export default async function BlogDetailPage({
 
             {/* CTA */}
             <div className="mt-12 overflow-hidden rounded-2xl border border-[#01012F]/15 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
-              <div className="bg-[#F2FCFE] p-7 sm:p-9">
+              <div className="bg-[#fffaf3] p-7 sm:p-9">
                 <h2 className="text-xl font-extrabold leading-snug text-[#02024E] sm:text-2xl">
                   Work With Virtual Nexgen Solutions
                 </h2>
@@ -468,7 +468,7 @@ export default async function BlogDetailPage({
 
       {/* Related Articles */}
       {related.length > 0 && (
-        <section className="border-t border-line bg-[#F2FCFE]">
+        <section className="border-t border-line bg-[#fffaf3]">
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
             <h2 className="mb-8 text-2xl font-extrabold text-[#02024E] sm:text-3xl">
               Related Articles
@@ -489,7 +489,7 @@ export default async function BlogDetailPage({
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="grid h-full w-full place-items-center bg-[#E8F8FB]">
+                        <div className="grid h-full w-full place-items-center bg-[#fffaf3]">
                         <span className="text-4xl font-extrabold text-brand/20">
                           {p.title.charAt(0)}
                         </span>

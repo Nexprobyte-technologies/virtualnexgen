@@ -66,7 +66,7 @@ export default function Services() {
   );
 
   return (
-    <section id="process" ref={rootRef} className="relative bg-[#F2FCFE] py-16 sm:py-20 lg:py-28">
+    <section id="process" ref={rootRef} className="relative bg-[#fffaf3] py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <SectionHeading
           eyebrow="Our Working Process"
@@ -79,7 +79,7 @@ export default function Services() {
           <div className="pointer-events-none absolute left-0 right-0 top-28 hidden h-px lg:block">
             <div
               data-process-line
-              className="h-full w-full origin-left bg-gradient-to-r from-[#F2FCFE]/60 via-[#12B4CF]/60 to-transparent"
+              className="h-full w-full origin-left bg-gradient-to-r from-[#fffaf3]/60 via-[#12B4CF]/60 to-transparent"
             />
           </div>
 
@@ -119,7 +119,7 @@ export default function Services() {
             href="https://calendly.com/virtualnexgen-info/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-[#02024E] transition"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-6 sm:px-8 py-3 sm:py-4 text-sm font-semibold text-white transition"
           >
             Connect With Us
           </a>

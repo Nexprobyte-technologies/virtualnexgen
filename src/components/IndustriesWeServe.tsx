@@ -64,7 +64,7 @@ export default function IndustriesWeServe() {
   );
 
   return (
-    <section ref={rootRef} className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-[#F2FCFE]">
+    <section ref={rootRef} className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-[#fffaf3]">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 text-center">
         <Reveal>
           <span className="text-sm font-semibold uppercase tracking-wider text-[#02024E]/80">
@@ -78,7 +78,7 @@ export default function IndustriesWeServe() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#F2FCFE] via-[#F2FCFE] to-[#F2FCFE] border border-[#12B4CF]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(19,47,74,0.3)]">
+          <div className="mt-10 sm:mt-12 md:mt-16 rounded-3xl bg-gradient-to-br from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] border border-[#12B4CF]/30 p-4 sm:p-6 md:p-8 lg:p-10 shadow-[0_24px_60px_rgba(19,47,74,0.3)]">
             <div data-industry-grid className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {industries.map((industry) => {
                 const Icon = industry.icon;

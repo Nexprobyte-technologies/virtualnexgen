@@ -50,7 +50,7 @@ export default function Marquee() {
               {items.map((label, i) => (
                 <span
                   key={`${dup}-${i}`}
-                  className="flex items-center gap-6 px-8 text-sm font-semibold uppercase tracking-[0.2em] text-[#F2FCFE]"
+                  className="flex items-center gap-6 px-8 text-sm font-semibold uppercase tracking-[0.2em] text-[#fffaf3]"
                 >
                   {label}
                   <span className="h-1.5 w-1.5 rounded-full bg-[#12B4CF]" />

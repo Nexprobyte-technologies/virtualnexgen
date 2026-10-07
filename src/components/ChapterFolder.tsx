@@ -15,25 +15,22 @@ export default function ChapterFolder({
   sublabel,
 }: ChapterFolderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hasEnteredView, setHasEnteredView] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || hasEnteredView) return;
+    if (!container) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasEnteredView(true);
-          observer.disconnect();
-        }
+        setIsInView(entry.isIntersecting);
       },
-      { threshold: 0 },
+      { threshold: 0.1 },
     );
 
     observer.observe(container);
     return () => observer.disconnect();
-  }, [hasEnteredView]);
+  }, []);
 
   const goToOverview = useCallback(() => {
     document
@@ -45,18 +42,17 @@ export default function ChapterFolder({
     <div
       ref={containerRef}
       className={`transition-all duration-700 ease-out ${
-        hasEnteredView
+        isInView
           ? "translate-y-0 scale-100 opacity-100"
           : "translate-y-8 scale-[0.82] opacity-0"
       }`}
     >
       <FolderFloat
-        key={hasEnteredView ? "entered-view" : "waiting-for-view"}
         items={items}
         label={label}
         sublabel={sublabel}
         trigger="click"
-        defaultOpen={hasEnteredView}
+        autoOpenOnView={isInView}
         drift={1}
         width={280}
         height={180}

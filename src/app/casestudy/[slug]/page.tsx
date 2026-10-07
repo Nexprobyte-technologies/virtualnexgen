@@ -26,7 +26,7 @@ export default function CaseStudyDetailPage() {
     return (
       <>
         <Navbar />
-        <main className="pt-10 flex items-center justify-center min-h-screen bg-[#F2FCFE]">
+        <main className="pt-10 flex items-center justify-center min-h-screen bg-[#fffaf3]">
           <p className="text-[#02024E]/50">Loading...</p>
         </main>
         <Footer />
@@ -37,7 +37,7 @@ export default function CaseStudyDetailPage() {
   return (
     <>
       <Navbar />
-        <main className="pt-10 bg-[#F2FCFE]">
+        <main className="pt-10 bg-[#fffaf3]">
         {/* Hero Banner */}
 
 

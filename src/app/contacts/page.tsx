@@ -149,12 +149,11 @@ export default function ContactPage() {
   return (
     <>
 <Navbar />
-      <main className="bg-[#F2FCFE] overflow-x-hidden">
+      <main className="bg-[#fffaf3] overflow-x-hidden">
         {/* ================= Hero ================= */}
         <section
-          className="relative overflow-hidden pb-10 pt-28 sm:pt-32 bg-[#F2FCFE]"
+          className="relative overflow-hidden pb-10 pt-28 sm:pt-32 bg-[#fffaf3]"
         >
-          <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand/10 blur-[120px]" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             {/* Breadcrumb */}
             <Reveal>
@@ -370,7 +369,7 @@ export default function ContactPage() {
 
         {/* ================= Global Presence ================= */}
         {locations.length > 0 && (
-          <section className="bg-[#E8F8FB] py-16 sm:py-20 border-y border-[#01012F]/10">
+          <section className="bg-[#fffaf3] py-16 sm:py-20 border-y border-[#01012F]/10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
               <SectionHeading
                 eyebrow="Our Global Presence"
@@ -534,8 +533,7 @@ export default function ContactPage() {
         <section className="pb-20 pt-4">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <Reveal>
-              <div className="relative overflow-hidden rounded-[2.5rem] border border-[#01012F]/15 bg-[#E8F8FB] px-6 py-14 text-center sm:px-12 sm:py-16">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#12B4CF]/15 blur-3xl" />
+              <div className="relative overflow-hidden rounded-[2.5rem] border border-[#01012F]/15 bg-[#fffaf3] px-6 py-14 text-center sm:px-12 sm:py-16">
                 <div className="relative">
                   <h2 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
                     Start Saving With a Free Consultation

@@ -10,11 +10,9 @@ export default async function ServicesListPage() {
   const services = await getServices();
 
   return (
-    <main className="min-h-screen bg-[#F2FCFE]">
+    <main className="min-h-screen bg-[#fffaf3]">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-6 bg-[#F2FCFE]">
-        <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
-        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
+      <div className="relative overflow-hidden py-6 bg-[#fffaf3]">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
           <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-ink/50">
             <Link
@@ -39,7 +37,7 @@ export default async function ServicesListPage() {
 
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
         {services.length === 0 ? (
-          <div className="grid place-items-center rounded-[2rem] border border-[#01012F]/10 bg-[#E8F8FB] p-16">
+          <div className="grid place-items-center rounded-[2rem] border border-[#01012F]/10 bg-[#fffaf3] p-16">
             <p className="text-lg font-semibold text-[#02024E]/50">
               No services available yet — check back soon!
             </p>
@@ -62,7 +60,7 @@ export default async function ServicesListPage() {
                       />
                     </div>
                   ) : (
-                    <div className="relative grid aspect-[16/10] w-full shrink-0 place-items-center overflow-hidden bg-[#E8F8FB]">
+                    <div className="relative grid aspect-[16/10] w-full shrink-0 place-items-center overflow-hidden bg-[#fffaf3]">
                       <span className="text-5xl font-extrabold text-[#02024E]/25">
                         {service.name.charAt(0)}
                       </span>

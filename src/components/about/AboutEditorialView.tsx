@@ -344,14 +344,12 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
         ];
 
   return (
-    <div className="bg-[#F2FCFE] text-ink selection:bg-[#12B4CF] selection:text-white">
+    <div className="bg-[#fffaf3] text-ink selection:bg-[#12B4CF] selection:text-white">
       {/* ========================================================================= */}
       {/* 1. EDITORIAL HERO SECTION */}
       {/* ========================================================================= */}
       <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 border-b border-[#01012F]/10">
         {/* Soft background ambient glow */}
-        <div className="pointer-events-none absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-[#12B4CF]/10 blur-[140px] opacity-80" />
-        <div className="pointer-events-none absolute top-1/2 -left-40 h-[400px] w-[400px] rounded-full bg-[#12B4CF]/10 blur-[130px]" />
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           {/* Top Editorial Eyebrow */}
@@ -491,7 +489,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 2. THE INTERACTIVE TIMELINE JOURNEY (2016 -> PRESENT) */}
       {/* ========================================================================= */}
-      <section id="timeline" className="relative py-20 md:py-32 overflow-hidden bg-[#E8F8FB]">
+      <section id="timeline" className="relative py-20 md:py-32 overflow-hidden bg-[#fffaf3]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="max-w-3xl">
@@ -532,7 +530,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 className={`group relative flex flex-col items-start p-4 rounded-2xl text-left transition-all duration-300 ${
                       isActive
                         ? "bg-[#01012F] text-white shadow-lg"
-                        : "bg-white text-ink border border-[#01012F]/10 hover:bg-[#E8F8FB]"
+                        : "bg-white text-ink border border-[#01012F]/10 hover:bg-[#fffaf3]"
                   }`}
                   >
                     <div className="flex items-center justify-between w-full">
@@ -642,8 +640,6 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         {/* Subtle decorative glow */}
-        <div className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-[#12B4CF]/20 blur-[130px]" />
-        <div className="pointer-events-none absolute -top-32 left-0 h-96 w-96 rounded-full bg-[#12B4CF]/10 blur-[130px]" />
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
@@ -746,7 +742,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 4. INTERACTIVE DEPARTMENT SPOTLIGHTS */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#E8F8FB]">
+      <section className="relative py-20 md:py-28 bg-[#fffaf3]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -991,7 +987,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 7. ENTERPRISE DATA SECURITY & PRIVACY SHOWCASE */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#E8F8FB] overflow-hidden">
+      <section className="relative py-20 md:py-28 bg-[#fffaf3] overflow-hidden">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">

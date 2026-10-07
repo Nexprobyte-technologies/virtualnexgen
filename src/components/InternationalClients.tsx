@@ -8,8 +8,7 @@ const Globe3D = dynamic(() => import("./Globe3D"), { ssr: false });
 
 export default function InternationalClients() {
   return (
-    <section className="relative overflow-hidden bg-[#F2FCFE] py-12 sm:py-16 lg:py-24">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[600px] -translate-x-1/2 rounded-full bg-[#12B4CF]/10 blur-[140px]" />
+    <section className="relative overflow-hidden bg-[#fffaf3] py-12 sm:py-16 lg:py-24">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col items-center gap-8 sm:gap-12 lg:flex-row lg:items-center lg:justify-between">

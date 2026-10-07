@@ -319,10 +319,8 @@ export default function Hero() {
       id="home"
       ref={rootRef}
       className="relative overflow-hidden py-10 sm:py-14 md:py-18 xl:py-28"
-      style={{ background: "#F2FCFE" }}
+      style={{ background: "#fffaf3" }}
     >
-      <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-[#12B4CF]/12 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#12B4CF]/10 blur-[120px]" />
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
         <div className="grid gap-6 items-center xl:grid-cols-[1.2fr_0.8fr] xl:gap-2 2xl:grid-cols-[1.3fr_0.7fr]">

@@ -603,11 +603,9 @@ export default async function ServiceDetailPage({
         : (service.content?.slice(0, 6) ?? []));
 
   return (
-    <main className="min-h-screen bg-[#F2FCFE]">
+    <main className="min-h-screen bg-[#fffaf3]">
       {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-5 bg-[#F2FCFE]">
-        <div className="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
-        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-brand-deep/8 blur-[120px]" />
+      <div className="relative overflow-hidden py-5 bg-[#fffaf3]">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
           <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
             <Link href="/" className="flex items-center gap-1.5 transition hover:text-[#02024E]">
@@ -680,7 +678,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Trust Badges Marquee */}
-      <section className="border-y border-[#01012F]/10 bg-[#E8F8FB] py-6 overflow-hidden">
+      <section className="border-y border-[#01012F]/10 bg-[#fffaf3] py-6 overflow-hidden">
         <div className="flex gap-8 animate-[marquee-x_25s_linear_infinite] whitespace-nowrap">
           {[...trustBadges, ...trustBadges].map((b, i) => (
             <div key={i} className="flex items-center gap-2.5 shrink-0">
@@ -800,10 +798,8 @@ export default async function ServiceDetailPage({
       {/* Interactive Chapter Folder */}
       {folderItems.length > 0 && (
         <section
-          className="relative overflow-hidden py-10 sm:py-16 bg-[#F2FCFE]"
+          className="relative overflow-hidden py-10 sm:py-16 bg-[#fffaf3]"
         >
-          <div className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-brand/15 blur-[130px]" />
-          <div className="pointer-events-none absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-deep/25 blur-[130px]" />
           <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="text-center">
@@ -920,7 +916,6 @@ export default async function ServiceDetailPage({
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2rem] mt-20 border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 sm:p-14">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-brand/20 blur-3xl" />
             <div className="relative" >
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 {service.ctaTitle ||
@@ -936,7 +931,7 @@ export default async function ServiceDetailPage({
                   href={ctaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-deep px-7 py-3.5 text-sm font-bold text-ink transition hover:brightness-110"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-deep px-7 py-3.5 text-sm font-bold text-white transition hover:brightness-110"
                 >
                   {service.ctaButton || "Book a Free Consultation"}
                   <ArrowUpRight className="h-4 w-4" />
@@ -976,7 +971,7 @@ export default async function ServiceDetailPage({
 
       {/* Related Services */}
       {related.length > 0 && (
-        <section className="border-t border-[#01012F]/10 bg-[#E8F8FB] py-20">
+        <section className="border-t border-[#01012F]/10 bg-[#fffaf3] py-20">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="rounded-[2rem] border border-[#01012F]/15 bg-white p-6 backdrop-blur-sm sm:p-10">

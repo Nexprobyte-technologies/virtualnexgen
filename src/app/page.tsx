@@ -24,7 +24,7 @@ import CustomCursor from "@/components/CustomCursor";
 
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col bg-[#F2FCFE] text-ink">
+    <main className="flex flex-1 flex-col bg-[#fffaf3] text-ink">
       <ScrollProgress />
       <SmoothAnchor />
       <CustomCursor />

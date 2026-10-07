@@ -70,11 +70,8 @@ function MarqueeColumn({
 
   return (
     <div className="relative h-[300px] sm:h-[420px] lg:h-[460px] overflow-hidden">
-      {/* Top fade */}
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 z-10 bg-gradient-to-b from-[#01012F] to-transparent" />
-      {/* Bottom fade */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 z-10 bg-gradient-to-t from-[#01012F] to-transparent" />
-
       <div
         className="marquee-track flex flex-col gap-4"
         style={{
@@ -107,7 +104,7 @@ export default function BuiltFor() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#F2FCFE]">
+      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#fffaf3]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
 

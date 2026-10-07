@@ -23,6 +23,7 @@ export interface FolderFloatProps {
   sublabel?: string;
   trigger?: FolderFloatTrigger;
   defaultOpen?: boolean;
+  autoOpenOnView?: boolean;
   closeOnSelect?: boolean;
   physics?: boolean;
   drift?: number;
@@ -148,6 +149,7 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
   sublabel = "",
   trigger = "hover",
   defaultOpen = false,
+  autoOpenOnView = false,
   closeOnSelect = true,
   physics = true,
   drift = 0.5,
@@ -375,6 +377,15 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
     },
     [stopPhysics],
   );
+
+  useEffect(() => {
+    if (!autoOpenOnView) {
+      set(false);
+      return undefined;
+    }
+    const frame = requestAnimationFrame(() => set(true));
+    return () => cancelAnimationFrame(frame);
+  }, [autoOpenOnView, set]);
 
   useEffect(() => {
     if (!autoCycle) return undefined;

@@ -137,7 +137,6 @@ export default function AdminAppointments() {
   return (
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-2xl bg-slate-900 p-6 text-white shadow-[0_20px_50px_rgba(15,23,42,0.25)] lg:p-7">
-        <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-brand/25 blur-3xl" />
         <div className="relative">
           <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent-light">
             Appointments

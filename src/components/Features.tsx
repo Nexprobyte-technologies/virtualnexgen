@@ -152,7 +152,7 @@ export default function Features() {
     <section
       id="services"
       ref={rootRef}
-      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-[#F2FCFE] pb-24 sm:pb-32 xl:pb-0"
+      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-[#fffaf3] pb-24 sm:pb-32 xl:pb-0"
     >
       <div className="flex min-h-[100svh] flex-col justify-center pt-16 sm:pt-20 xl:pt-24 mt-[10px] xl:h-full">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
@@ -187,7 +187,7 @@ export default function Features() {
               rel="noopener noreferrer"
               data-animate
               data-service-card
-              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#F2FCFE] transition-all duration-300 hover:border-[#12B4CF]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
+              className="w-[280px] shrink-0 overflow-hidden sm:w-[330px] xl:w-[370px] border border-line rounded-3xl bg-[#fffaf3] transition-all duration-300 hover:border-[#12B4CF]/50 hover:shadow-[0_16px_40px_rgba(6,182,212,0.12)]"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
@@ -225,7 +225,7 @@ export default function Features() {
             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/20">
               <div
                 ref={progressRef}
-                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#F2FCFE] via-[#12B4CF] to-[#F2FCFE]"
+                className="h-full w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#fffaf3] via-[#12B4CF] to-[#fffaf3]"
               />
             </div>
           </div>

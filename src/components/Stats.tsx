@@ -141,21 +141,8 @@ export default function Stats() {
     <section
       id="why-us"
       ref={rootRef}
-      className="relative overflow-hidden bg-white py-28 lg:flex lg:min-h-screen lg:flex-col lg:pt-28 lg:pb-10"
+      className="relative overflow-hidden bg-[#fffaf3] py-28 lg:flex lg:min-h-screen lg:flex-col lg:pt-28 lg:pb-10"
     >
-      <Parallax
-        speed={0.5}
-        className="pointer-events-none absolute -right-20 top-10 h-80 w-80 rounded-full bg-brand/15 blur-[110px]"
-      >
-        <span />
-      </Parallax>
-      <Parallax
-        speed={-0.4}
-        className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-brand-deep/15 blur-[110px]"
-      >
-        <span />
-      </Parallax>
-
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div data-focus-heading>
           <SectionHeading

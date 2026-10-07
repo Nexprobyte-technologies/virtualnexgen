@@ -80,8 +80,7 @@ export default function About() {
 
   return (
     <>
-      <section id="about" ref={aboutRef} className="relative overflow-hidden bg-[#F2FCFE] pt-0 pb-14 sm:pb-20 lg:pb-28">
-        <div className="pointer-events-none absolute left-0 top-1/3 h-80 w-80 rounded-full bg-brand-deep/10 blur-[120px]" />
+      <section id="about" ref={aboutRef} className="relative overflow-hidden bg-[#fffaf3] pt-0 pb-14 sm:pb-20 lg:pb-28">
 
         <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-12 lg:gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-10">
           <Reveal x={-60} y={0} duration={1}>
@@ -136,7 +135,7 @@ export default function About() {
                   (tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-line bg-[#F2FCFE] px-4 py-2 text-sm font-medium text-[#02024E]"
+                      className="rounded-full border border-line bg-[#fffaf3] px-4 py-2 text-sm font-medium text-[#02024E]"
                     >
                       {tag}
                     </span>
@@ -149,7 +148,7 @@ export default function About() {
                 href="https://virtualnexgen.com/contacts"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full bg-[#F2FCFE] px-7 py-3.5 text-sm font-semibold text-[#02024E] shadow-[0_14px_38px_rgba(6,182,212,0.35)] transition hover:shadow-[0_14px_54px_rgba(6,182,212,0.5)]"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#fffaf3] px-7 py-3.5 text-sm font-semibold text-[#02024E] shadow-[0_14px_38px_rgba(6,182,212,0.35)] transition hover:shadow-[0_14px_54px_rgba(6,182,212,0.5)]"
               >
                 Contact Us
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -159,7 +158,7 @@ export default function About() {
         </div>
       </section>
 
-      <section id="case-studies" ref={caseRef} className="relative bg-[#F2FCFE] py-14 sm:py-20 lg:py-28">
+      <section id="case-studies" ref={caseRef} className="relative bg-[#fffaf3] py-14 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <Reveal>
             <span className="eyebrow">Case Studies</span>
@@ -194,7 +193,7 @@ export default function About() {
                     loading="lazy"
                     className="object-cover transition duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#F2FCFE]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#fffaf3]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#02024E] shadow-sm backdrop-blur">
                     {cs.tag}
                   </span>
