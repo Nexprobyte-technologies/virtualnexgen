@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function CTA() {
   return (
-    <section id="faq" className="py-6 sm:py-10 md:py-16 lg:py-20 bg-[#01012F] rounded-b-[30px] lg:rounded-b-[60px] mb-[-60px] relative z-10">
+    <section id="faq" className="py-6 sm:py-8 md:py-12 lg:py-14 bg-[#01012F] rounded-b-[30px] lg:rounded-b-[60px] mb-[-60px] relative z-10">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
 
         <Reveal y={30}>

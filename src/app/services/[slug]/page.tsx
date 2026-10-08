@@ -623,7 +623,7 @@ export default async function ServiceDetailPage({
 
       {/* Hero */}
       <section className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
+        <div className="grid items-center gap-12 py-12 lg:grid-cols-2 lg:py-14">
           <Reveal>
             <div>
               <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
@@ -694,7 +694,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Problem Section */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div>
@@ -749,7 +749,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Benefits */}
-      <section className="bg-cream/30 py-20">
+      <section className="bg-cream/30 py-14">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
@@ -861,7 +861,7 @@ export default async function ServiceDetailPage({
       />
 
       {/* How It Works */}
-      <section className="bg-cream/30 py-20">
+      <section className="bg-cream/30 py-14">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">
@@ -913,7 +913,7 @@ export default async function ServiceDetailPage({
       />
 
       {/* CTA */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
+      <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2rem] mt-20 border border-line bg-gradient-to-br from-brand-dark to-brand-deep p-8 sm:p-14">
             <div className="relative" >
@@ -971,7 +971,7 @@ export default async function ServiceDetailPage({
 
       {/* Related Services */}
       {related.length > 0 && (
-        <section className="border-t border-[#01012F]/10 bg-[#fffaf3] py-20">
+        <section className="border-t border-[#01012F]/10 bg-[#fffaf3] py-14">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal>
               <div className="rounded-[2rem] border border-[#01012F]/15 bg-white p-6 backdrop-blur-sm sm:p-10">

@@ -66,7 +66,7 @@ export default function Services() {
   );
 
   return (
-    <section id="process" ref={rootRef} className="relative bg-[#fffaf3] py-16 sm:py-20 lg:py-28">
+    <section id="process" ref={rootRef} className="relative bg-[#fffaf3] py-10 sm:py-14 lg:py-18">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <SectionHeading
           eyebrow="Our Working Process"

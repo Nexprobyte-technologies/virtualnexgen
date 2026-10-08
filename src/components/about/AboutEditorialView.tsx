@@ -348,7 +348,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 1. EDITORIAL HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 border-b border-[#01012F]/10">
+      <section className="relative overflow-hidden pt-10 pb-14 md:pt-12 md:pb-18 border-b border-[#01012F]/10">
         {/* Soft background ambient glow */}
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -489,7 +489,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 2. THE INTERACTIVE TIMELINE JOURNEY (2016 -> PRESENT) */}
       {/* ========================================================================= */}
-      <section id="timeline" className="relative py-20 md:py-32 overflow-hidden bg-[#fffaf3]">
+      <section id="timeline" className="relative py-14 md:py-18 overflow-hidden bg-[#fffaf3]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="max-w-3xl">
@@ -638,7 +638,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 3. MANIFESTO: MISSION, VISION & GUIDING PRINCIPLES */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
+      <section className="relative py-14 md:py-18 overflow-hidden">
         {/* Subtle decorative glow */}
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -742,7 +742,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 4. INTERACTIVE DEPARTMENT SPOTLIGHTS */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#fffaf3]">
+      <section className="relative py-14 md:py-18 bg-[#fffaf3]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -868,7 +868,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 5. 6 CORE ADVANTAGES (FEATURES FROM CMS) */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 border-y border-[#01012F]/10">
+      <section className="relative py-14 md:py-18 border-y border-[#01012F]/10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-3xl mx-auto">
@@ -930,7 +930,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 6. SIDE-BY-SIDE COMPARISON: THE PARADIGM SHIFT */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28">
+      <section className="relative py-14 md:py-18">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-3xl mx-auto">
@@ -987,7 +987,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 7. ENTERPRISE DATA SECURITY & PRIVACY SHOWCASE */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28 bg-[#fffaf3] overflow-hidden">
+      <section className="relative py-14 md:py-18 bg-[#fffaf3] overflow-hidden">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
@@ -1084,7 +1084,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       {/* 8. 4-STEP PARTNERSHIP PROCESS FRAMEWORK */}
       {/* ========================================================================= */}
-      <section className="relative py-20 md:py-28">
+      <section className="relative py-14 md:py-18">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal y={20}>
             <div className="text-center max-w-3xl mx-auto">

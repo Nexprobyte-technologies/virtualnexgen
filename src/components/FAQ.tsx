@@ -64,7 +64,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-white">
+    <section className="relative py-12 sm:py-14 md:py-16 overflow-hidden bg-white">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
         <Reveal>
           <div className="text-center mb-10 sm:mb-12 md:mb-16">

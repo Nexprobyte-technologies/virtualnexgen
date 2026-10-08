@@ -35,7 +35,7 @@ export default async function ServicesListPage() {
         </div>
       </div>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-14">
         {services.length === 0 ? (
           <div className="grid place-items-center rounded-[2rem] border border-[#01012F]/10 bg-[#fffaf3] p-16">
             <p className="text-lg font-semibold text-[#02024E]/50">

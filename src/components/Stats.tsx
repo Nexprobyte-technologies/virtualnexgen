@@ -141,7 +141,7 @@ export default function Stats() {
     <section
       id="why-us"
       ref={rootRef}
-      className="relative overflow-hidden bg-[#fffaf3] py-28 lg:flex lg:min-h-screen lg:flex-col lg:pt-28 lg:pb-10"
+      className="relative overflow-hidden bg-[#fffaf3] py-16 lg:flex lg:flex-col lg:pt-16 lg:pb-10"
     >
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div data-focus-heading>

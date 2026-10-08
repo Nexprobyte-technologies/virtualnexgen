@@ -77,7 +77,7 @@ export default function FAQ9({
   const items = faqs?.length ? faqs : defaultFaqs;
 
   return (
-    <section className="relative bg-white py-16 sm:py-20 md:py-24">
+    <section className="relative bg-white py-12 sm:py-14 md:py-16">
       <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-12">
           <div className="flex-1 min-w-0">

@@ -158,7 +158,7 @@ export default function About() {
         </div>
       </section>
 
-      <section id="case-studies" ref={caseRef} className="relative bg-[#fffaf3] py-14 sm:py-20 lg:py-28">
+      <section id="case-studies" ref={caseRef} className="relative bg-[#fffaf3] py-10 sm:py-14 lg:py-18">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <Reveal>
             <span className="eyebrow">Case Studies</span>

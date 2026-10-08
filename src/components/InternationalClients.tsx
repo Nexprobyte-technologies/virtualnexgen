@@ -8,7 +8,7 @@ const Globe3D = dynamic(() => import("./Globe3D"), { ssr: false });
 
 export default function InternationalClients() {
   return (
-    <section className="relative overflow-hidden bg-[#fffaf3] py-12 sm:py-16 lg:py-24">
+    <section className="relative overflow-hidden bg-[#fffaf3] py-10 sm:py-14 lg:py-18">
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col items-center gap-8 sm:gap-12 lg:flex-row lg:items-center lg:justify-between">

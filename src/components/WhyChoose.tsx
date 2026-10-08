@@ -158,7 +158,7 @@ export default function WhyChoose() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 bg-[#01012F]">
+      <section className="py-10 sm:py-14 lg:py-18 bg-[#01012F]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
 
           {/* Header */}

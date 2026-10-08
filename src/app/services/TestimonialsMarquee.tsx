@@ -26,7 +26,7 @@ export default function TestimonialsMarquee({
   const items = [...testimonials, ...testimonials];
 
   return (
-    <section className="border-y border-[#01012F]/10 bg-[#fffaf3] py-20 overflow-hidden">
+    <section className="border-y border-[#01012F]/10 bg-[#fffaf3] py-14 overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="text-center">
           <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">

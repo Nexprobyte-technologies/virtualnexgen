@@ -64,7 +64,7 @@ export default function IndustriesWeServe() {
   );
 
   return (
-    <section ref={rootRef} className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-[#fffaf3]">
+    <section ref={rootRef} className="relative py-10 sm:py-14 md:py-16 overflow-hidden bg-[#fffaf3]">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 text-center">
         <Reveal>
           <span className="text-sm font-semibold uppercase tracking-wider text-[#02024E]/80">

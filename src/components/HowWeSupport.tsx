@@ -101,7 +101,7 @@ export default function HowWeSupport() {
   const step = steps[current];
 
   return (
-    <section ref={rootRef} className="relative bg-[#fffaf3] py-10 sm:py-16 md:py-28 lg:py-36 overflow-hidden">
+    <section ref={rootRef} className="relative bg-[#fffaf3] py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 relative z-10">
         <div className="w-full flex flex-col">

@@ -152,7 +152,7 @@ export default function Features() {
     <section
       id="services"
       ref={rootRef}
-      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-[#fffaf3] pb-24 sm:pb-32 xl:pb-0"
+      className="services-showcase-section relative h-auto min-h-screen overflow-x-clip overflow-y-visible bg-[#fffaf3] pb-12 sm:pb-16 xl:pb-0"
     >
       <div className="flex min-h-[100svh] flex-col justify-center pt-16 sm:pt-20 xl:pt-24 mt-[10px] xl:h-full">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">

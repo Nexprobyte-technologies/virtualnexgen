@@ -85,7 +85,7 @@ export default function Stats3({ stats }: { stats: StatItem[] }) {
     <section
       id="stats3"
       ref={rootRef}
-      className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-28"
+      className="relative overflow-hidden bg-white py-12 sm:py-14 lg:py-18"
     >
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-3xl text-center mb-16">

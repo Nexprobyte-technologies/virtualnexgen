@@ -182,7 +182,7 @@ export default function ContactPage() {
         </section>
 
         {/* ================= Form ================= */}
-        <section className="py-16 sm:py-20">
+        <section className="py-12 sm:py-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <SectionHeading
               align="center"
@@ -369,7 +369,7 @@ export default function ContactPage() {
 
         {/* ================= Global Presence ================= */}
         {locations.length > 0 && (
-          <section className="bg-[#fffaf3] py-16 sm:py-20 border-y border-[#01012F]/10">
+          <section className="bg-[#fffaf3] py-12 sm:py-14 border-y border-[#01012F]/10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
               <SectionHeading
                 eyebrow="Our Global Presence"
@@ -443,7 +443,7 @@ export default function ContactPage() {
         )}
 
         {/* ================= Testimonials ================= */}
-        <section className="py-16 sm:py-20">
+        <section className="py-12 sm:py-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <SectionHeading
               eyebrow="Testimonials"
@@ -476,7 +476,7 @@ export default function ContactPage() {
         </section>
 
         {/* ================= FAQ ================= */}
-        <section className="py-16 sm:py-20">
+        <section className="py-12 sm:py-14">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-10">
             <SectionHeading
               eyebrow="Contact FAQs"

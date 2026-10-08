@@ -106,7 +106,7 @@ export default function DedicatedVADifference() {
   }, [isPaused, scrollCards]);
 
   return (
-    <section className="bg-[#fffaf3] relative overflow-hidden pt-[200px] pb-0 sm:pb-2 md:pb-4">
+    <section className="bg-[#fffaf3] relative overflow-hidden pt-12 sm:pt-16 lg:pt-20 pb-0 sm:pb-2 md:pb-4">
       <ContainerScroll
         titleComponent={
           <div className="mx-auto max-w-3xl px-4 text-center">

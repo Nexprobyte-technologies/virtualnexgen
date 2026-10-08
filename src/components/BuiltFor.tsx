@@ -104,7 +104,7 @@ export default function BuiltFor() {
         }
       `}</style>
 
-      <section className="py-12 sm:py-16 lg:py-28 overflow-hidden bg-[#fffaf3]">
+      <section className="py-10 sm:py-14 lg:py-18 overflow-hidden bg-[#fffaf3]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
 
