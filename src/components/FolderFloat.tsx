@@ -20,7 +20,6 @@ export type FolderFloatTrigger = "hover" | "click";
 export interface FolderFloatProps {
   items?: FolderFloatItem[];
   label?: string;
-  sublabel?: string;
   trigger?: FolderFloatTrigger;
   defaultOpen?: boolean;
   autoOpenOnView?: boolean;
@@ -146,7 +145,6 @@ const STYLE = `
 const FolderFloat: React.FC<FolderFloatProps> = ({
   items = DEFAULT_ITEMS,
   label = "Design feedback",
-  sublabel = "",
   trigger = "hover",
   defaultOpen = false,
   autoOpenOnView = false,
@@ -214,7 +212,6 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
     [items],
   );
   const n = list.length;
-  const sub = sublabel || `${n} ${n === 1 ? "note" : "notes"}`;
   const pos = useMemo<{ x: number; y: number; r: number }[]>(
     () => layout(list, spread, lift, tilt, sizes),
     [list, spread, lift, tilt, sizes],
@@ -615,17 +612,16 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
           aria-hidden="true"
         />
         <span
-          className="absolute right-0 bottom-0 left-0 z-[2] box-border flex h-[76%] flex-col justify-end gap-[5px] px-4 py-3.5 [border-radius:var(--ff-r)] [background:linear-gradient(180deg,color-mix(in_srgb,var(--ff-front)_92%,#fff),var(--ff-front)_60%)] [color:var(--ff-label)] shadow-[0_-10px_24px_rgba(0,0,0,0.28)] [transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] [transform-origin:50%_100%] [transition:transform_var(--ff-open)_var(--ff-ease-out)] group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-angle)))] motion-reduce:group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] motion-reduce:[transition:opacity_200ms_ease]"
+          className="absolute right-0 bottom-0 left-0 z-[2] box-border flex h-[76%] flex-col items-center justify-end gap-[5px] px-3 py-3.5 text-center [border-radius:var(--ff-r)] [background:linear-gradient(180deg,color-mix(in_srgb,var(--ff-front)_92%,#fff),var(--ff-front)_60%)] [color:var(--ff-label)] shadow-[0_-10px_24px_rgba(0,0,0,0.28)] [transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] [transform-origin:50%_100%] [transition:transform_var(--ff-open)_var(--ff-ease-out)] group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-angle)))] motion-reduce:group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] motion-reduce:[transition:opacity_200ms_ease]"
           aria-hidden="true"
         >
-          <span className="text-[13px] font-medium">{label}</span>
-          <span className="text-[11px] opacity-55">{sub}</span>
+          <span className="text-base font-semibold leading-tight sm:text-lg">{label}</span>
         </span>
         <button
           type="button"
           className="absolute right-0 bottom-0 left-0 z-[3] m-0 h-[76%] cursor-pointer border-0 bg-transparent p-0 outline-none [border-radius:var(--ff-r)] [-webkit-tap-highlight-color:transparent]"
           aria-expanded={open}
-          aria-label={`${label}, ${sub}`}
+          aria-label={label}
           onClick={() => set(!open)}
         />
       </div>

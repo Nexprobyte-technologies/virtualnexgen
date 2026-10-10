@@ -6,7 +6,6 @@ import {
   ChevronRight,
   Clock,
   ExternalLink,
-  Home,
   List,
   Phone,
   ShieldCheck,
@@ -27,6 +26,7 @@ function formatDate(date: string): string {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -270,24 +270,7 @@ export default async function BlogDetailPage({
           className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-2" : ""}`}
         >
           <div className="min-w-0">
-            <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
-              <Link
-                href="/"
-                className="flex items-center gap-1.5 transition hover:text-[#02024E]"
-              >
-                <Home className="h-3.5 w-3.5" /> Home
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
-              <Link href="/blog" className="transition hover:text-[#02024E]">
-                Blog
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
-              <span className="max-w-[30ch] truncate text-[#02024E]/80">
-                {post.title}
-              </span>
-            </nav>
-
-            <div className="mt-6 flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-[#02024E]">
                 {category}
               </span>

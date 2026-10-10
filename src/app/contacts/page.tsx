@@ -106,6 +106,24 @@ export default function ContactPage() {
       .catch(() => {});
   }, []);
 
+  useEffect(() => {
+    const countrySlug = new URLSearchParams(window.location.search).get("country");
+    const countryNames: Record<string, string> = {
+      "united-states": "the United States",
+      canada: "Canada",
+      "united-kingdom": "the United Kingdom",
+      australia: "Australia",
+    };
+    const countryName = countrySlug ? countryNames[countrySlug] : undefined;
+    if (!countryName) return;
+
+    setForm((current) =>
+      current.message
+        ? current
+        : { ...current, message: `I'm interested in support for my business in ${countryName}.` },
+    );
+  }, []);
+
   const locations = useMemo(() => {
     if (!info) return [];
     return [
@@ -150,43 +168,11 @@ export default function ContactPage() {
     <>
 <Navbar />
       <main className="bg-[#fffaf3] overflow-x-hidden">
-        {/* ================= Hero ================= */}
-        <section
-          className="relative overflow-hidden pb-10 pt-28 sm:pt-32 bg-[#fffaf3]"
-        >
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-            {/* Breadcrumb */}
-            <Reveal>
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#02024E]/50">
-                <Link href="/" className="transition hover:text-[#02024E]">
-                  Home
-                </Link>
-                <span className="text-[#02024E]/30">›</span>
-                <span className="font-medium text-[#02024E]/70">Contact</span>
-              </nav>
-            </Reveal>
-
-            {/* Trust pill */}
-            <Reveal delay={0.05}>
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#01012F]/15 bg-white px-4 py-2 text-xs text-[#02024E]/60 shadow-sm backdrop-blur">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#12B4CF] opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#12B4CF]" />
-                </span>
-                Trusted by <span className="font-semibold text-[#02024E]">100+ businesses</span> nationwide.
-              </div>
-            </Reveal>
-
-            {/* Channel cards */}
-          </div>
-        </section>
-
         {/* ================= Form ================= */}
-        <section className="py-12 sm:py-14">
+        <section className="pb-12 pt-12 sm:pb-14 sm:pt-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <SectionHeading
               align="center"
-              eyebrow="Get In Touch"
               title="Tell Us About Your"
               highlight="Requirements"
               description="Answer a few quick questions and we'll route you to the right team."
@@ -266,7 +252,7 @@ export default function ContactPage() {
                       </button>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form id="contact-form" onSubmit={handleSubmit} className="space-y-4">
                       <input
                         required
                         type="text"
@@ -456,13 +442,10 @@ export default function ContactPage() {
               {testimonials.map((t, i) => (
                 <Reveal key={t.name} delay={0.06 * i}>
                   <figure className="h-full rounded-[1.75rem] bg-white p-6 sm:p-7 border border-[#01012F]/10">
-                    <blockquote className="text-sm leading-relaxed text-[#02024E]/80">
+                    <blockquote className="text-sm italic leading-relaxed text-[#02024E]/80">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
-                    <figcaption className="mt-5 flex items-center gap-3">
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-[#12B4CF]/10 text-[#02024E]/50">
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
+                    <figcaption className="mt-5">
                       <span>
                         <span className="block text-sm font-bold text-[#02024E]">{t.name}</span>
                         <span className="block text-xs text-[#02024E]/40">{t.role}</span>

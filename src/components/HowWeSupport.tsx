@@ -66,8 +66,37 @@ export default function HowWeSupport() {
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
+    const section = rootRef.current;
+    if (!section) return;
+
+    let timer: number | undefined;
+    let isInView = false;
+    const startTimer = () => {
+      if (timer === undefined && isInView && !document.hidden) {
+        timer = window.setInterval(next, 5000);
+      }
+    };
+    const stopTimer = () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      if (isInView) startTimer();
+      else stopTimer();
+    });
+    const handleVisibilityChange = () => {
+      if (document.hidden) stopTimer();
+      else startTimer();
+    };
+
+    observer.observe(section);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stopTimer();
+    };
   }, [next]);
 
   useGSAP(
@@ -117,13 +146,11 @@ export default function HowWeSupport() {
               </p>
             </div>
             <div className="flex-shrink-0 self-start sm:self-end">
-              <a href="#services">
-                <button className="group text-[#02024E] cursor-pointer font-bold px-3.5 sm:px-5 py-1.5 sm:py-2 border border-white/20 rounded-full inline-flex items-center gap-1.5 sm:gap-2 shadow-xs text-xs sm:text-sm hover:shadow-md transition-all whitespace-nowrap">
+              <a href="#services" className="group text-[#02024E] cursor-pointer font-bold px-3.5 sm:px-5 py-1.5 sm:py-2 border border-white/20 rounded-full inline-flex items-center gap-1.5 sm:gap-2 shadow-xs text-xs sm:text-sm hover:shadow-md transition-all whitespace-nowrap">
                   <span className="text-[#02024E] font-bold">Discover More</span>
                   <span className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded-full bg-white/20 text-[#02024E] flex-shrink-0 transition-transform duration-300 group-hover:rotate-45">
                     <ArrowUpRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                   </span>
-                </button>
               </a>
             </div>
           </div>

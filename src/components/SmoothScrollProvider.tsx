@@ -16,14 +16,30 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     });
     lenisRef.current = lenis;
 
+    let frameId = 0;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      frameId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    const start = () => {
+      if (!frameId) frameId = requestAnimationFrame(raf);
+    };
+    const stop = () => {
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+    };
+    const handleVisibilityChange = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    start();
 
     return () => {
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       lenis.destroy();
       lenisRef.current = null;
     };

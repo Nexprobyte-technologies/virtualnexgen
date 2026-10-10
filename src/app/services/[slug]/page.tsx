@@ -3,8 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ArrowUpRight,
-  ChevronRight,
-  Home,
   CheckCircle2,
   PhoneCall,
   Clock,
@@ -604,23 +602,6 @@ export default async function ServiceDetailPage({
 
   return (
     <main className="min-h-screen bg-[#fffaf3]">
-      {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-5 bg-[#fffaf3]">
-        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
-            <Link href="/" className="flex items-center gap-1.5 transition hover:text-[#02024E]">
-              <Home className="h-3.5 w-3.5" /> Home
-            </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
-            <Link href="/services" className="transition hover:text-[#02024E]">
-              Services
-            </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
-            <span className="text-[#02024E]/80">{service.name}</span>
-          </nav>
-        </div>
-      </div>
-
       {/* Hero */}
       <section className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid items-center gap-12 py-12 lg:grid-cols-2 lg:py-14">
@@ -822,7 +803,9 @@ export default async function ServiceDetailPage({
                   <p className="mx-auto mt-3 max-w-2xl text-sm text-[#02024E]/65 sm:text-base">
                     {textOr(
                       service.folderSection?.text,
-                      "Tap any folder to explore the exact workflows our virtual assistants take off your plate.",
+                      service.slug === "insurance-virtual-assistants"
+                        ? "Explore how an insurance virtual assistant can streamline daily operations, improve client communication, and help your agency save time while staying organized and efficient."
+                        : "Tap any folder to explore the exact workflows our virtual assistants take off your plate.",
                     )}
                   </p>
               </div>
@@ -832,7 +815,6 @@ export default async function ServiceDetailPage({
               <ChapterFolder
                 items={folderItems}
                 label={service.name}
-                sublabel={`${folderItems.length} sections`}
               />
             </div>
 

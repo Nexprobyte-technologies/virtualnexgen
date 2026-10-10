@@ -1,40 +1,34 @@
 "use client";
 
 import {
-  Shield,
-  Users,
-  Lock,
-  TrendingUp,
-  FileCheck,
-  RefreshCw,
-  HeadphonesIcon,
-  BarChart3,
-  BookOpen,
-  Zap,
   Globe,
-  ClipboardCheck,
+  UserRound,
+  ShieldCheck,
+  Clock,
+  TrendingUp,
+  CircleCheck,
+  MessagesSquare,
+  Workflow,
+  Rocket,
 } from "lucide-react";
 import Reveal from "./Reveal";
 
 const col1 = [
-  { icon: Shield, title: "Industry-Focused Support", text: "We work exclusively with agencies and businesses that need dedicated operational support." },
-  { icon: FileCheck, title: "Policy Servicing", text: "Complete policy servicing, endorsements, and documentation handled accurately." },
-  { icon: Lock, title: "Secure & Compliant", text: "Structured processes and secure systems ensure data accuracy and confidentiality." },
-  { icon: HeadphonesIcon, title: "24/7 Availability", text: "Round-the-clock support so your operations never skip a beat." },
+  { icon: Globe, title: "Industry-Specific Expertise", text: "Our assistants understand your industry's workflows, tools, and administrative requirements." },
+  { icon: UserRound, title: "Dedicated VA Support", text: "Get a dedicated assistant who learns your business, understands your priorities, and supports your team consistently." },
+  { icon: ShieldCheck, title: "Security-Focused Workflows", text: "Structured processes and controlled access help protect sensitive business and client information." },
 ];
 
 const col2 = [
-  { icon: Users, title: "Trained Professionals", text: "Our team is trained in industry-specific operations and agency management systems." },
-  { icon: RefreshCw, title: "Renewals Management", text: "Timely renewals and follow-ups handled proactively to avoid coverage gaps." },
-  { icon: TrendingUp, title: "Scalable Support", text: "Our team scales with your business growth without increasing internal workload." },
-  { icon: BarChart3, title: "Data-Driven Insights", text: "Track progress and performance with structured reporting and workflows." },
+  { icon: Clock, title: "Reliable Availability", text: "Keep essential administrative tasks moving with support aligned to your business hours and coverage requirements." },
+  { icon: TrendingUp, title: "Scalable Business Support", text: "Expand your virtual assistant support as your workload grows and your operational needs evolve." },
+  { icon: CircleCheck, title: "Quality-Focused Execution", text: "Defined procedures and ongoing oversight help maintain accuracy, consistency, and accountability." },
 ];
 
 const col3 = [
-  { icon: Zap, title: "Fast Turnaround", text: "Quick execution of tasks with quality checks to ensure first-time accuracy." },
-  { icon: BookOpen, title: "Deep Expertise", text: "Years of experience across industries means less back-and-forth for your team." },
-  { icon: Globe, title: "Global Reach", text: "Supporting businesses across multiple regions with localized operational knowledge." },
-  { icon: ClipboardCheck, title: "Quality Verified", text: "Every task goes through verification to maintain consistent service quality." },
+  { icon: MessagesSquare, title: "Clear Communication", text: "Stay connected through regular updates, task coordination, and direct communication with your assistant." },
+  { icon: Workflow, title: "Seamless Workflow Integration", text: "Our assistants work with your existing systems, processes, and standard operating procedures." },
+  { icon: Rocket, title: "Faster Operational Turnaround", text: "Delegate recurring administrative work so your team can spend more time on customers and business growth." },
 ];
 
 function FeatureCard({
@@ -47,7 +41,7 @@ function FeatureCard({
   text: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-brand/40 hover:bg-white/10 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]">
+    <div className="rounded-2xl border border-[#12B4CF]/45 bg-white/55 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#12B4CF]/75 hover:bg-white/80 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]">
       <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
         <Icon className="h-5 w-5 text-[#12B4CF]" />
       </div>
@@ -69,9 +63,9 @@ function MarqueeColumn({
   const doubled = [...items, ...items];
 
   return (
-    <div className="relative h-[300px] sm:h-[420px] lg:h-[460px] overflow-hidden">
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 z-10 bg-gradient-to-b from-[#01012F] to-transparent" />
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 z-10 bg-gradient-to-t from-[#01012F] to-transparent" />
+    <div className="relative h-[360px] sm:h-[500px] lg:h-[560px] overflow-hidden">
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-20 z-10 bg-gradient-to-b from-[#12B4CF]/25 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-20 z-10 bg-gradient-to-t from-[#12B4CF]/25 to-transparent" />
       <div
         className="marquee-track flex flex-col gap-4"
         style={{
@@ -94,8 +88,8 @@ export default function BuiltFor() {
           0% { transform: translateY(0); }
           100% { transform: translateY(-50%); }
         }
-        .marquee-grid:hover .marquee-track {
-          animation-play-state: paused;
+        .marquee-track:hover {
+          animation-play-state: paused !important;
         }
         @media (prefers-reduced-motion: reduce) {
           .flex.flex-col[style*="marqueeY"] {
@@ -132,14 +126,13 @@ export default function BuiltFor() {
                 <div className="bg-brand/5 border border-brand/35 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 mt-6">
                   <div className="text-left w-full sm:w-auto">
                     <p className="text-sm sm:text-base font-bold text-[#02024E] leading-snug">
-                      Ready to extend your team&apos;s capacity?
+                      Ready for the Next Stage of Growth?
                     </p>
                     <p className="text-xs sm:text-sm text-[#02024E]/60">
-                      See how dedicated support fits your workflow.
+                      Get reliable, industry-focused support to streamline daily operations and keep your business moving forward.
                     </p>
                   </div>
-                  <a href="#contact" className="w-full sm:w-auto flex-shrink-0">
-<button className="group pr-2 pl-5 py-2 border border-white/20 rounded-full flex items-center justify-between sm:justify-start gap-2.5 font-semibold w-full sm:w-auto cursor-pointer">
+                  <a href="#contact" className="group pr-2 pl-5 py-2 border border-white/20 rounded-full flex items-center justify-between sm:justify-start gap-2.5 font-semibold w-full sm:w-auto flex-shrink-0 cursor-pointer">
                   <span className="text-sm font-bold text-[#02024E] whitespace-nowrap">
                     Book a Demo
                   </span>
@@ -160,7 +153,6 @@ export default function BuiltFor() {
                           <path d="M7 17 17 7" />
                         </svg>
                       </span>
-                    </button>
                   </a>
                 </div>
               </Reveal>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronRight, Home, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { getCardDescription, getCardTitle } from "@/lib/blog-seo";
 import type { BlogPost } from "@/lib/types";
@@ -16,6 +16,7 @@ function formatDate(date: string): string {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -45,20 +46,9 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
 
   return (
     <main className="min-h-screen bg-[#fffaf3]">
-      {/* Breadcrumb */}
-      <div className="relative overflow-hidden py-6 bg-[#fffaf3]">
+      <div className="relative overflow-hidden bg-[#fffaf3] pb-6 pt-14 sm:pt-16">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-          <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#02024E]/50">
-            <Link
-              href="/"
-              className="flex items-center gap-1.5 transition hover:text-[#02024E]"
-            >
-              <Home className="h-3.5 w-3.5" /> Home
-            </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-[#02024E]/30" />
-            <span className="text-[#02024E]/80">Blog</span>
-          </nav>
-          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[#02024E] sm:text-4xl lg:text-5xl">
+          <h1 className="max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[#02024E] sm:text-4xl lg:text-5xl">
             Insights, Tips &{" "}
             <span className="text-[#12B4CF]">Updates</span>
           </h1>

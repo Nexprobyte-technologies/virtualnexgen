@@ -9,67 +9,56 @@ export default function CustomCursor() {
   useEffect(() => {
     const cursor = cursorRef.current;
     const dot = dotRef.current;
-    if (!cursor || !dot) return;
+    if (!cursor || !dot || !window.matchMedia("(pointer: fine)").matches) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dot.style.left = `${mouseX}px`;
-      dot.style.top = `${mouseY}px`;
-    };
-
-    const animate = () => {
-      cursorX += (mouseX - cursorX) * 0.12;
-      cursorY += (mouseY - cursorY) * 0.12;
-      cursor.style.left = `${cursorX}px`;
-      cursor.style.top = `${cursorY}px`;
-      requestAnimationFrame(animate);
-    };
-
-    const onMouseEnter = () => {
+    const onPointerMove = (event: PointerEvent) => {
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+      dot.style.left = `${event.clientX}px`;
+      dot.style.top = `${event.clientY}px`;
       cursor.style.opacity = "1";
       dot.style.opacity = "1";
     };
 
-    const onMouseLeave = () => {
+    const onPointerLeave = () => {
       cursor.style.opacity = "0";
       dot.style.opacity = "0";
     };
 
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseenter", onMouseEnter);
-    document.addEventListener("mouseleave", onMouseLeave);
-    animate();
-
-    // Add hover effect for interactive elements
-    const addHoverListeners = () => {
-      const elements = document.querySelectorAll("a, button, [data-cursor-hover]");
-      elements.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursor.classList.add("cursor-hover");
-          dot.classList.add("cursor-dot-hover");
-        });
-        el.addEventListener("mouseleave", () => {
-          cursor.classList.remove("cursor-hover");
-          dot.classList.remove("cursor-dot-hover");
-        });
-      });
+    const setHoverState = (hovering: boolean) => {
+      cursor.classList.toggle("cursor-hover", hovering);
+      dot.classList.toggle("cursor-dot-hover", hovering);
     };
 
-    addHoverListeners();
-    const observer = new MutationObserver(addHoverListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
+    const onPointerOver = (event: PointerEvent) => {
+      const target = event.target;
+      if (target instanceof Element && target.closest("a, button, [data-cursor-hover]")) {
+        setHoverState(true);
+      }
+    };
+
+    const onPointerOut = (event: PointerEvent) => {
+      const target = event.target;
+      const related = event.relatedTarget;
+      if (
+        target instanceof Element &&
+        target.closest("a, button, [data-cursor-hover]") &&
+        (!(related instanceof Element) || !related.closest("a, button, [data-cursor-hover]"))
+      ) {
+        setHoverState(false);
+      }
+    };
+
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerleave", onPointerLeave);
+    document.addEventListener("pointerover", onPointerOver);
+    document.addEventListener("pointerout", onPointerOut);
 
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseenter", onMouseEnter);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      observer.disconnect();
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerleave", onPointerLeave);
+      document.removeEventListener("pointerover", onPointerOver);
+      document.removeEventListener("pointerout", onPointerOut);
     };
   }, []);
 

@@ -6,13 +6,11 @@ import FolderFloat, { type FolderFloatItem } from "@/components/FolderFloat";
 interface ChapterFolderProps {
   items: FolderFloatItem[];
   label: string;
-  sublabel?: string;
 }
 
 export default function ChapterFolder({
   items,
   label,
-  sublabel,
 }: ChapterFolderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
@@ -50,7 +48,6 @@ export default function ChapterFolder({
       <FolderFloat
         items={items}
         label={label}
-        sublabel={sublabel}
         trigger="click"
         autoOpenOnView={isInView}
         drift={1}

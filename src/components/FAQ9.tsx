@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Mail, Phone } from "lucide-react";
 import Reveal from "./Reveal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -54,6 +54,47 @@ const stats = [
   { value: "500+", label: "Active VAs" },
   { value: "50+", label: "Industries Served" },
 ];
+
+function CountUpValue({ value }: { value: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(1);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    let startTime = 0;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      setProgress(0);
+
+      const animate = (time: number) => {
+        if (!startTime) startTime = time;
+        const elapsed = Math.min((time - startTime) / 1200, 1);
+        setProgress(1 - (1 - elapsed) ** 3);
+        if (elapsed < 1) frame = window.requestAnimationFrame(animate);
+      };
+
+      frame = window.requestAnimationFrame(animate);
+    }, { threshold: 0.35 });
+
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const displayValue = value.replace(/\d+(?:\.\d+)?/, (number) => {
+    const target = Number(number);
+    const decimals = number.includes(".") ? number.split(".")[1].length : 0;
+    return (target * progress).toFixed(decimals);
+  });
+
+  return <div ref={ref} aria-label={value}>{displayValue}</div>;
+}
 
 export interface FaqItem {
   question: string;
@@ -178,7 +219,7 @@ export default function FAQ9({
                         transition={{ duration: 0.2 }}
                       >
                         <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
-                          {stat.value}
+                          <CountUpValue value={stat.value} />
                         </div>
                         <div className="text-sm text-white/80">{stat.label}</div>
                       </motion.div>
@@ -227,7 +268,7 @@ export default function FAQ9({
                     transition={{ duration: 0.2 }}
                   >
                     <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
-                      {stat.value}
+                      <CountUpValue value={stat.value} />
                     </div>
                     <div className="text-sm text-white/80">{stat.label}</div>
                   </motion.div>

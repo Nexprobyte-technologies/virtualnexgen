@@ -4,6 +4,7 @@ import { useRef, useCallback } from "react";
 import Image from "next/image";
 import { Check, Shield, ClipboardCheck, TrendingUp, Users } from "lucide-react";
 import Reveal from "./Reveal";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const complianceItems = [
   "Continuous Compliance Training",
@@ -20,8 +21,8 @@ const qualityChecks = [
 ];
 
 const stats = [
-  { value: "40%", label: "Lower operational workload" },
-  { value: "60%", label: "Less Time on Admin Tasks" },
+  { count: 40, suffix: "%", label: "Lower operational workload" },
+  { count: 60, suffix: "%", label: "Less Time on Admin Tasks" },
   { value: "3x", label: "Potential Operational Capacity" },
 ];
 
@@ -144,6 +145,38 @@ function ComplianceMarquee() {
 }
 
 export default function WhyChoose() {
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const root = statsRef.current;
+      if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      gsap.utils.toArray<HTMLElement>("[data-count-up]", root).forEach((element) => {
+        const end = Number(element.dataset.countUp);
+        const suffix = element.dataset.suffix ?? "%";
+        const counter = { value: 0 };
+
+        gsap.to(counter, {
+          value: end,
+          duration: 1.8,
+          ease: "power1.out",
+          scrollTrigger: { trigger: root, start: "top 85%", once: true },
+          onStart: () => {
+            element.textContent = `0${suffix}`;
+          },
+          onUpdate: () => {
+            element.textContent = `${Math.floor(counter.value)}${suffix}`;
+          },
+          onComplete: () => {
+            element.textContent = `${end}${suffix}`;
+          },
+        });
+      });
+    },
+    { scope: statsRef },
+  );
+
   return (
     <>
       <style>{`
@@ -278,14 +311,18 @@ export default function WhyChoose() {
                     Our dedicated Virtual Assistants integrate into your existing operations, helping your team manage recurring tasks, maintain documentation, and keep workflows moving.
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {stats.map((stat) => (
                       <div
                         key={stat.label}
                         className="flex flex-col items-center sm:items-start text-center sm:text-left bg-white/10 border border-white/20 rounded-2xl p-4 shadow-sm"
                       >
                         <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#02024E] mb-2">
-                          {stat.value}
+                          {stat.count !== undefined ? (
+                            <span data-count-up={stat.count} data-suffix={stat.suffix}>
+                              {stat.count}{stat.suffix}
+                            </span>
+                          ) : stat.value}
                         </p>
                         <p className="text-xs sm:text-sm text-[#02024E]/70 leading-tight">
                           {stat.label}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,6 +59,48 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 function getFeatureIcon(iconName: string) {
   const Icon = ICON_MAP[iconName] || CheckCircle2;
   return Icon;
+}
+
+function CountUpText({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [progress, setProgress] = useState(1);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    let startTime = 0;
+    const duration = 1200;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      setProgress(0);
+
+      const animate = (time: number) => {
+        if (!startTime) startTime = time;
+        const nextProgress = Math.min((time - startTime) / duration, 1);
+        setProgress(1 - (1 - nextProgress) ** 3);
+        if (nextProgress < 1) frame = window.requestAnimationFrame(animate);
+      };
+
+      frame = window.requestAnimationFrame(animate);
+    }, { threshold: 0.35 });
+
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const animatedValue = value.replace(/\d[\d,]*(?:\.\d+)?/g, (number) => {
+    const target = Number(number.replace(/,/g, ""));
+    const decimals = number.includes(".") ? number.split(".")[1].length : 0;
+    return (target * progress).toFixed(decimals);
+  });
+
+  return <span ref={ref} aria-label={value}>{animatedValue}</span>;
 }
 
 // Timeline chapters data
@@ -133,86 +175,21 @@ const TIMELINE_CHAPTERS = [
 
 // Department tabs data
 const DEPARTMENTS = [
-  {
-    id: "legal",
-    name: "Legal & Professional Services",
-    icon: Scale,
-    tagline: "Reliable Legal Administrative Support",
-    overview:
-      "Our assistants help law firms stay organized by managing client intake, maintaining case records, coordinating appointments, and supporting routine administrative workflows.",
-    bullets: [
-      "Client intake & follow-ups",
-      "Case file organization",
-      "Calendar & appointment management",
-      "Document preparation & tracking",
-    ],
-    metric: "18+ hrs",
-    metricLabel: "Reclaimed weekly per attorney",
-  },
-  {
-    id: "insurance",
-    name: "Insurance & Claims",
-    icon: ShieldCheck,
-    tagline: "End-to-End Agency Policy & Claims Processing",
-    overview:
-      "Trained on industry standard agency management systems (AMS360, Applied Epic, EZLynx), our insurance assistants handle policy issuance, quote comparisons, and loss runs.",
-    bullets: [
-      "Certificate of Insurance (COI) issuance within 15 mins",
-      "Policy checking, endorsements & cancellations",
-      "Carrier portal quote submissions & loss runs",
-      "Claims intake, follow-ups & renewal notifications",
-    ],
-    metric: "99.7%",
-    metricLabel: "COI accuracy & compliance rate",
-  },
-  {
-    id: "realestate",
-    name: "Real Estate",
-    icon: Building,
-    tagline: "Contract-to-Close & MLS Pipeline Coordination",
-    overview:
-      "From qualifying incoming buyer leads to coordinating complex escrow documents, our real estate specialists ensure no deal falls through the cracks.",
-    bullets: [
-      "MLS listing creation, description writing & syndication",
-      "Contract-to-close document management & calendar deadlines",
-      "Instant buyer/seller lead follow-up & CRM hygiene",
-      "Tenant screening, maintenance coordination & lease renewals",
-    ],
-    metric: "3.2x",
-    metricLabel: "Faster lead response time",
-  },
-  {
-    id: "administrative",
-    name: "Finance & Accounting",
-    icon: Briefcase,
-    tagline: "C-Suite Leverage & Daily Bookkeeping",
-    overview:
-      "High-level executive assistants who take total ownership of your calendar, inbox, meeting preparation, travel itineraries, and QuickBooks reconciliations.",
-    bullets: [
-      "Inbox zero triage & high-priority calendar management",
-      "QuickBooks & Xero reconciliation, invoicing & receipts",
-      "Vendor communication & procurement management",
-      "Board deck preparation, research reports & presentations",
-    ],
-    metric: "25+ hrs",
-    metricLabel: "Saved per executive monthly",
-  },
-  {
-    id: "ai-automation",
-    name: "Operations & AI Support",
-    icon: Zap,
-    tagline: "Autonomous Agentic Pipelines & CRM Syncing",
-    overview:
-      "We design, build, and maintain custom AI automation bots that connect your forms, CRM, email marketing, and communication channels without human delay.",
-    bullets: [
-      "Zapier, Make & custom API workflow integrations",
-      "Intelligent customer response chatbots with vector knowledge",
-      "Automatic document extraction & classification",
-      "Multi-channel automated outreach & lead qualification",
-    ],
-    metric: "60%",
-    metricLabel: "Reduction in routine repetitive tasks",
-  },
+  { id: "insurance-agencies", name: "Insurance Agencies", icon: ShieldCheck, tagline: "Policy Servicing & Insurance Operations Support", overview: "Our insurance Virtual Assistants help agencies manage policy administration, renewals, quoting workflows, and client communication. We support your team with organized processes that keep policy information accurate and service requests moving.", bullets: ["Policy updates, endorsements & servicing", "Renewal tracking & client follow-ups", "Certificate of Insurance (COI) processing", "Quote preparation & application data entry"], focus: "Policy Support", focusDescription: "Reliable assistance for everyday agency workflows" },
+  { id: "hvac", name: "HVAC Companies", icon: Zap, tagline: "Service Scheduling & Dispatch Coordination", overview: "Our HVAC Virtual Assistants help service businesses manage incoming calls, schedule technicians, coordinate dispatch, and follow up with customers. We support your office operations so your field team can stay focused on service delivery.", bullets: ["Service call handling & appointment scheduling", "Technician dispatch & calendar coordination", "Estimate follow-ups & customer reminders", "ServiceTitan job updates & record maintenance"], focus: "Service Coordination", focusDescription: "Keep appointments, technicians, and customers aligned" },
+  { id: "real-estate", name: "Real Estate Agencies", icon: Building, tagline: "Listing Administration & Lead Management", overview: "Our real estate Virtual Assistants support agents and brokerages with listing updates, lead follow-ups, transaction coordination, and client communication. We help keep property information organized and opportunities moving through your pipeline.", bullets: ["Listing creation & property data updates", "Buyer and seller lead follow-ups", "Showing coordination & appointment scheduling", "Transaction document organization"], focus: "Lead Management", focusDescription: "Keep inquiries organized and follow-ups on track" },
+  { id: "wealth-management", name: "Wealth Management Firms (RIAs)", icon: DollarSign, tagline: "Client Servicing & Advisory Operations Support", overview: "Our wealth management Virtual Assistants help advisory firms manage client administration, meeting coordination, documentation, and CRM updates. We support your operational workflows while following your firm’s established procedures for handling confidential information.", bullets: ["Client onboarding & account documentation", "Meeting scheduling & preparation", "CRM updates & client record maintenance", "Paperwork tracking & follow-up coordination"], focus: "Client Service Support", focusDescription: "More organized workflows for your advisory team" },
+  { id: "construction", name: "Construction Companies", icon: Building, tagline: "Project Administration & Back-Office Coordination", overview: "Our construction Virtual Assistants help contractors manage project documentation, vendor communication, invoices, and administrative follow-ups. We keep essential project information organized so your team can focus on execution.", bullets: ["Project files & document management", "Invoice entry & payment follow-ups", "Vendor coordination & purchase order tracking", "Schedule updates & administrative reporting"], focus: "Project Administration", focusDescription: "Keep documentation and back-office tasks organized" },
+  { id: "plumbing", name: "Plumbing Companies", icon: SlidersHorizontal, tagline: "Service Call Management & Appointment Coordination", overview: "Our plumbing Virtual Assistants help service companies manage customer calls, book appointments, coordinate technicians, and maintain job records. We support the administrative work that keeps your service operation running smoothly.", bullets: ["Incoming service calls & appointment booking", "Technician scheduling & dispatch support", "Customer reminders & estimate follow-ups", "Job updates, invoicing & record maintenance"], focus: "Service Call Coordination", focusDescription: "Keep your schedule organized and customers informed" },
+  { id: "restoration", name: "Restoration Companies", icon: ShieldCheck, tagline: "Emergency Job Coordination & Claims Administration", overview: "Our restoration Virtual Assistants support teams managing water, fire, and property damage projects. From initial call coordination to documentation and follow-ups, we help keep job information organized throughout the restoration process.", bullets: ["Emergency call intake & job creation", "Claim documentation & file organization", "Estimate, photo & report coordination", "Customer, adjuster & vendor follow-ups"], focus: "Restoration Workflow Support", focusDescription: "Keep job records, communication, and follow-ups moving" },
+  { id: "freight-trucking", name: "Freight & Trucking Companies", icon: Briefcase, tagline: "Dispatch Administration & Freight Operations Support", overview: "Our trucking Virtual Assistants help carriers manage dispatch communication, load tracking, paperwork, and billing workflows. We support the administrative side of transportation so your team can stay focused on keeping freight moving.", bullets: ["Load booking & dispatch coordination", "Shipment tracking & status updates", "Proof of Delivery (POD) collection", "Invoice preparation & payment follow-ups"], focus: "Freight Coordination", focusDescription: "Keep loads, paperwork, and billing on track" },
+  { id: "property-management", name: "Property Management Companies", icon: Building, tagline: "Tenant Services & Property Administration", overview: "Our property management Virtual Assistants help manage tenant communication, maintenance requests, lease documentation, and property records. We help your team stay organized while delivering timely administrative support to residents and property owners.", bullets: ["Tenant inquiries & communication", "Maintenance request intake & coordination", "Lease documentation & renewal tracking", "Rent records, notices & property data updates"], focus: "Property Operations", focusDescription: "Organized support for tenants, owners, and properties" },
+  { id: "roofing", name: "Roofing Companies", icon: Building, tagline: "Roofing Lead Management & Project Coordination", overview: "Our roofing Virtual Assistants help contractors manage new inquiries, inspection appointments, estimates, and customer follow-ups. We support your office workflows from the first lead through ongoing project administration.", bullets: ["Roofing lead intake & follow-ups", "Inspection scheduling & calendar management", "Estimate preparation & proposal tracking", "Customer updates & project documentation"], focus: "Lead-to-Project Support", focusDescription: "Keep prospects, inspections, and estimates moving" },
+  { id: "accounting", name: "CPA & Accounting Firms", icon: DollarSign, tagline: "Bookkeeping Administration & Client Document Coordination", overview: "Our accounting Virtual Assistants help CPA firms manage bookkeeping support, document collection, transaction entry, and client follow-ups. We help maintain organized records and support recurring accounting workflows under your firm’s review procedures.", bullets: ["Transaction categorization & data entry", "Client document collection & follow-ups", "Accounts payable and receivable support", "Reconciliation preparation & records organization"], focus: "Accounting Workflow Support", focusDescription: "Keep records, documents, and client requests organized" },
+  { id: "law-firms", name: "Law Firms", icon: Scale, tagline: "Precision Case Administration & Legal Support", overview: "Our legal Virtual Assistants integrate into your firm’s established workflows to support client intake, document management, scheduling, and billing administration. We work within your processes and confidentiality requirements to help keep daily operations organized.", bullets: ["Client intake & matter file creation", "Court calendar & appointment coordination", "Document preparation & e-filing assistance", "Billing entry & retainer tracking (Clio, MyCase, Filevine)"], focus: "Legal Administrative Support", focusDescription: "More organized case files, calendars, and client workflows" },
+  { id: "mortgage", name: "Mortgage Companies", icon: DollarSign, tagline: "Loan Processing Administration & Borrower Follow-Ups", overview: "Our mortgage Virtual Assistants help loan teams coordinate documentation, track outstanding requirements, update loan records, and maintain borrower communication. We support the administrative process that helps keep applications moving.", bullets: ["Loan file setup & document organization", "Borrower document collection & follow-ups", "Application status updates & data entry", "Closing checklist & appointment coordination"], focus: "Loan File Coordination", focusDescription: "Keep documentation and application follow-ups on track" },
+  { id: "medical", name: "Medical Practices", icon: Stethoscope, tagline: "Patient Administration & Practice Coordination", overview: "Our medical practice Virtual Assistants support front-office workflows, appointment scheduling, patient communication, and administrative record management. Our team follows your practice’s procedures for privacy, access, and handling patient information.", bullets: ["Appointment scheduling & reminders", "Patient inquiries & administrative follow-ups", "Patient record updates & document management", "Referral coordination & billing administration"], focus: "Practice Administration", focusDescription: "Keep appointments, records, and patient communication organized" },
+  { id: "ecommerce", name: "E-commerce Businesses", icon: Headphones, tagline: "Order Management & Customer Experience Support", overview: "Our e-commerce Virtual Assistants help online businesses manage customer inquiries, order processing, product information, and returns. We support daily store operations so your team can focus on customer experience and business growth.", bullets: ["Order processing & fulfillment coordination", "Customer inquiries & post-purchase support", "Product listing updates & catalog maintenance", "Returns, refunds & order status follow-ups"], focus: "E-commerce Operations", focusDescription: "Keep orders, listings, and customer requests moving" },
 ];
 
 // Comparison data
@@ -263,7 +240,7 @@ interface AboutEditorialViewProps {
 
 export default function AboutEditorialView({ initialData }: AboutEditorialViewProps) {
   const [activeTimeline, setActiveTimeline] = useState<number>(0);
-  const [activeDept, setActiveDept] = useState<string>("legal");
+  const [activeDept, setActiveDept] = useState<string>("insurance-agencies");
   const [data, setData] = useState(initialData || {});
 
   // Refetch latest data from /api/about if needed
@@ -348,30 +325,12 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       {/* ========================================================================= */}
       {/* 1. EDITORIAL HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative overflow-hidden pt-10 pb-14 md:pt-12 md:pb-18 border-b border-[#01012F]/10">
+      <section className="relative overflow-hidden pt-20 pb-14 md:pt-24 md:pb-18 border-b border-[#01012F]/10">
         {/* Soft background ambient glow */}
 
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          {/* Top Editorial Eyebrow */}
-          <Reveal y={20}>
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#01012F]/15 pb-6">
-              <div className="inline-flex items-center gap-2.5 rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#12B4CF] uppercase border border-[#12B4CF]/30 shadow-sm">
-                <span className="h-2 w-2 rounded-full bg-[#12B4CF] animate-pulse" />
-                VIRTUAL NEXGEN CHRONICLE • ESTABLISHED 2016
-              </div>
-
-              <div className="hidden sm:flex items-center gap-6 text-xs font-semibold tracking-wider text-[#01012F]/70 uppercase">
-                <span>VOL. X • 2026 EDITION</span>
-                <span>•</span>
-                <span>320+ CLIENTS WORLDWIDE</span>
-                <span>•</span>
-                <span>GLOBAL OPERATIONS</span>
-              </div>
-            </div>
-          </Reveal>
-
           {/* Main Editorial Headline & Lead */}
-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:items-end">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <Reveal y={25} delay={0.1}>
                 <h1 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
@@ -429,19 +388,19 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                     </div>
                     <div className="mt-4 grid grid-cols-2 gap-4">
                       <div className="border-r border-[#01012F]/10 pr-3">
-                        <div className="text-3xl font-extrabold text-ink">2016</div>
+                        <div className="text-3xl font-extrabold text-ink"><CountUpText value="2016" /></div>
                         <div className="text-xs text-ink/70 mt-1 font-medium">The Year our journey began</div>
                       </div>
                       <div>
-                        <div className="text-3xl font-extrabold text-ink">15+</div>
+                        <div className="text-3xl font-extrabold text-ink"><CountUpText value="15+" /></div>
                         <div className="text-xs text-ink/70 mt-1 font-medium">Industries supported</div>
                       </div>
                       <div className="border-r border-[#01012F]/10 pr-3 pt-3 border-t">
-                        <div className="text-3xl font-extrabold text-[#12B4CF]">350+</div>
+                        <div className="text-3xl font-extrabold text-[#12B4CF]"><CountUpText value="350+" /></div>
                         <div className="text-xs text-ink/70 mt-1 font-medium">Businesses supported*</div>
                       </div>
                       <div className="pt-3 border-t border-[#01012F]/10">
-                        <div className="text-3xl font-extrabold text-ink">24/7</div>
+                        <div className="text-3xl font-extrabold text-ink"><CountUpText value="24/7" /></div>
                         <div className="text-xs text-ink/70 mt-1 font-medium">Support availability*</div>
                       </div>
                     </div>
@@ -458,13 +417,22 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
           <Reveal y={30} delay={0.4}>
             <div className="mt-14 relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-3 shadow-[0_20px_60px_rgba(19,47,74,0.12)]">
               <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl bg-[#01012F]">
-                <Image
+                {/* <Image
                   src={data.heroImage || "/uploads/about-who-we-are.png"}
                   alt="Virtual Nexgen Operations"
                   fill
                   priority
                   className="object-cover object-center"
-                />
+                /> */}
+               <Image
+  src="/uploads/aboutNew.jpg"
+  alt="Virtual Nexgen Operations"
+  fill
+  priority
+  sizes="(max-width: 768px) 100vw, 1400px"
+  quality={100}
+  className="object-cover object-center"
+/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#01012F] via-[#01012F]/40 to-transparent" />
 
                 {/* Floating Quote Badge on Image */}
@@ -539,7 +507,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                           isActive ? "text-[#12B4CF]" : "text-ink"
                         }`}
                       >
-                        {chapter.year}
+                        <CountUpText value={chapter.year} />
                       </span>
                       <span
                         className={`h-2.5 w-2.5 rounded-full ${
@@ -613,7 +581,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                           {activeTimeline === 0 ? "OUR FOUNDATION" : "Historical Impact"}
                         </div>
                         <div className="mt-3 text-4xl sm:text-5xl font-black text-ink">
-                          {TIMELINE_CHAPTERS[activeTimeline].stats}
+                          <CountUpText key={activeTimeline} value={TIMELINE_CHAPTERS[activeTimeline].stats} />
                         </div>
                         <div className="text-sm font-semibold text-[#12B4CF] mt-1">
                           {TIMELINE_CHAPTERS[activeTimeline].statLabel}
@@ -759,18 +727,11 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                 </p>
               </div>
 
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#12B4CF] hover:text-[#00697B] transition-colors"
-              >
-                <span>View All 9+ Practice Areas</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
           </Reveal>
 
-          {/* Department Navigation Tabs */}
-          <div className="mt-12 flex flex-wrap gap-2.5 border-b border-[#01012F]/15 pb-4">
+          {/* Industry selection cards */}
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {DEPARTMENTS.map((dept) => {
               const Icon = dept.icon;
               const isActive = activeDept === dept.id;
@@ -778,10 +739,10 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                 <button
                   key={dept.id}
                   onClick={() => setActiveDept(dept.id)}
-                  className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+                  className={`flex min-h-14 items-center gap-2.5 rounded-xl border px-3 py-2.5 text-left text-sm font-bold leading-snug transition-all duration-300 ${
                     isActive
-                      ? "bg-[#01012F] text-white shadow-md"
-                      : "bg-white text-[#01012F] border border-[#01012F]/10 hover:bg-[#01012F] hover:text-white"
+                      ? "border-[#01012F] bg-[#01012F] text-white shadow-md"
+                      : "border-[#01012F]/10 bg-white text-[#01012F] hover:border-[#12B4CF]/50 hover:bg-[#12B4CF]/5"
                   }`}
                 >
                   <Icon className={`h-4 w-4 ${isActive ? "text-[#12B4CF]" : "text-ink"}`} />
@@ -791,7 +752,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
             })}
           </div>
 
-          {/* Active Department Spotlight Content */}
+          {/* Selected industry details */}
           <div className="mt-8">
             {DEPARTMENTS.filter((d) => d.id === activeDept).map((dept) => (
               <motion.div
@@ -804,7 +765,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                   <div className="lg:col-span-8">
                     <span className="text-xs font-bold uppercase tracking-widest text-[#12B4CF]">
-                      {dept.id === "legal" ? "LEGAL SUPPORT EXPERTISE" : "PRACTICE EXCELLENCE"}
+                      PRACTICE EXCELLENCE
                     </span>
                     <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-ink">
                       {dept.tagline}
@@ -826,22 +787,10 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                   <div className="lg:col-span-4">
                     <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6 sm:p-8 text-center">
                       <div className="text-xs font-bold uppercase tracking-widest text-ink/60">
-                        {dept.id === "legal" ? "Dedicated Support" : "Operational Velocity"}
+                        Operational Focus
                       </div>
-                      {dept.id === "legal" ? (
-                        <div className="mt-3 text-sm font-bold text-ink">
-                          Aligned with your firm&apos;s processes
-                        </div>
-                      ) : (
-                        <>
-                          <div className="mt-3 text-4xl sm:text-5xl font-black text-ink">
-                            {dept.metric}
-                          </div>
-                          <div className="mt-2 text-sm font-bold text-[#12B4CF]">
-                            {dept.metricLabel}
-                          </div>
-                        </>
-                      )}
+                      <div className="mt-3 text-xl font-black text-ink">{dept.focus}</div>
+                      <div className="mt-2 text-sm leading-relaxed text-ink/70">{dept.focusDescription}</div>
 
                       <div className="mt-6">
                         <Link
@@ -849,11 +798,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#01012F] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all hover:bg-[#12B4CF] hover:text-white"
                         >
                           <span>Request Staffing Profile</span>
-                          {dept.id === "legal" ? (
-                            <ArrowUpRight className="h-3.5 w-3.5" />
-                          ) : (
-                            <ArrowRight className="h-3.5 w-3.5" />
-                          )}
+                          <ArrowRight className="h-3.5 w-3.5" />
                         </Link>
                       </div>
                     </div>
@@ -1012,7 +957,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                       <Users className="h-5 w-5" />
                     </span>
                     <div>
-                      <h4 className="text-base font-bold text-ink">100% In-House Direct Employees</h4>
+                      <h4 className="text-base font-bold text-ink"><CountUpText value="100%" /> In-House Direct Employees</h4>
                       <p className="text-sm text-ink/70 mt-1">
                         Every assistant is bound by legal NDAs, background checked, and held strictly accountable.
                       </p>
@@ -1040,7 +985,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                       <ShieldCheck className="h-5 w-5" />
                     </span>
                     <div>
-                      <h4 className="text-base font-bold text-ink">Biometric Verification & 24/7 Guards</h4>
+                      <h4 className="text-base font-bold text-ink">Biometric Verification & <CountUpText value="24/7" /> Guards</h4>
                       <p className="text-sm text-ink/70 mt-1">
                         Physical access to workstations requires biometric fingerprint clearance with on-site security.
                       </p>
@@ -1053,12 +998,12 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
             <div className="lg:col-span-6">
               <Reveal y={25} delay={0.25}>
                 <div className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-4 shadow-2xl backdrop-blur-md">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-black">
+                  <div className="relative aspect-[10/11] w-full overflow-hidden rounded-2xl bg-black">
                     <Image
                       src="/uploads/about-security.png"
                       alt="Virtual Nexgen Security Vault"
                       fill
-                      className="object-cover"
+                      className="scale-125 object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#01012F] via-transparent to-transparent opacity-80" />
                     
@@ -1093,7 +1038,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                 THE ONBOARDING BLUEPRINT
               </span>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
-                Up and Running in <span className="text-[#12B4CF]">48 Hours</span>
+                Up and Running in <span className="text-[#12B4CF]"><CountUpText value="48" /> Hours</span>
               </h2>
               <p className="mt-4 text-base sm:text-lg text-ink/70">
                 A frictionless 4-step framework engineered for zero disruption to your daily operations.

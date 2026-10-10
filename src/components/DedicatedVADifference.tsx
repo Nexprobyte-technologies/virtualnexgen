@@ -80,6 +80,7 @@ const features = [
 
 export default function DedicatedVADifference() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [currentCard, setCurrentCard] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -100,20 +101,48 @@ export default function DedicatedVADifference() {
   }, []);
 
   useEffect(() => {
-    if (isPaused) return;
-    const timer = window.setInterval(() => scrollCards(1), 3000);
-    return () => window.clearInterval(timer);
+    const section = sectionRef.current;
+    if (!section || isPaused) return;
+
+    let timer: number | undefined;
+    let isInView = false;
+    const startTimer = () => {
+      if (timer === undefined && isInView && !document.hidden) {
+        timer = window.setInterval(() => scrollCards(1), 3000);
+      }
+    };
+    const stopTimer = () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      if (isInView) startTimer();
+      else stopTimer();
+    });
+    const handleVisibilityChange = () => {
+      if (document.hidden) stopTimer();
+      else startTimer();
+    };
+
+    observer.observe(section);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stopTimer();
+    };
   }, [isPaused, scrollCards]);
 
   return (
-    <section className="bg-[#fffaf3] relative overflow-hidden pt-12 sm:pt-16 lg:pt-20 pb-0 sm:pb-2 md:pb-4">
+    <section ref={sectionRef} className="bg-[#fffaf3] relative overflow-hidden pt-12 sm:pt-16 lg:pt-20 pb-0 sm:pb-2 md:pb-4">
       <ContainerScroll
         titleComponent={
           <div className="mx-auto max-w-3xl px-4 text-center">
             <div className="mb-3 inline-flex items-center justify-center gap-2 sm:gap-3">
               <span className="h-[2px] w-5 rounded-full bg-white sm:w-8" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#02024E] sm:text-xs lg:text-sm">
-                THE DEDICATED VA DIFFERENCE
+                The Dedicated VA Advantage
               </span>
               <span className="h-[2px] w-5 rounded-full bg-white sm:w-8" />
             </div>
@@ -121,8 +150,7 @@ export default function DedicatedVADifference() {
               Why Choose a Dedicated VA?
             </h2>
             <p className="mx-auto max-w-[700px] text-xs font-normal leading-relaxed text-[#02024E] sm:text-sm md:text-base lg:text-lg">
-              See why businesses choose us for reliable, personalized support
-              &mdash; without the inconsistency of shared assistants or freelance platforms.
+              Get consistent, personalized support that becomes an extension of your team—not just another outsourced service.
             </p>
           </div>
         }
