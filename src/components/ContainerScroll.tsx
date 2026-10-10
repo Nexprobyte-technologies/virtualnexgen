@@ -29,9 +29,9 @@ export function ContainerScroll({
     return isMobile ? [0.7, 0.9] : [1.05, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [8, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
   return (
     <div
@@ -90,7 +90,7 @@ export function Card({
         boxShadow:
           "0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
       }}
-      className="max-w-6xl mt-12 mx-auto h-[24rem] md:h-[28rem] w-full border-4 border-[#01012F]/20 bg-[#01012F] p-2 md:p-4 rounded-[30px] shadow-2xl"
+      className="max-w-6xl mt-3 mx-auto h-[24rem] md:h-[28rem] w-full border-4 border-[#01012F]/20 bg-[#01012F] p-2 md:p-4 rounded-[30px] shadow-2xl"
     >
       <div className="h-full w-full overflow-hidden rounded-2xl bg-white p-2 md:p-4">
         {children}

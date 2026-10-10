@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ContainerScroll from "./ContainerScroll";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const features = [
   {
@@ -84,6 +85,57 @@ export default function DedicatedVADifference() {
   const [currentCard, setCurrentCard] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      const track = carouselRef.current;
+      if (!section || !track) return;
+
+      const media = gsap.matchMedia();
+      media.add(
+        "(min-width: 1024px) and (min-height: 720px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const getDistance = () => Math.max(track.scrollWidth - track.clientWidth, 0);
+          let lastIndex = -1;
+
+          const tween = gsap.to(track, {
+            x: () => -getDistance(),
+            ease: "none",
+            scrollTrigger: {
+              id: "dedicated-benefits-horizontal",
+              trigger: section,
+              start: "top top",
+              end: () => `+=${getDistance()}`,
+              pin: true,
+              pinSpacing: true,
+              scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const maxFirstIndex = Math.max(features.length - 3, 0);
+                const nextIndex = Math.round(self.progress * maxFirstIndex);
+                if (nextIndex !== lastIndex) {
+                  lastIndex = nextIndex;
+                  setCurrentCard(nextIndex);
+                }
+              },
+            },
+          });
+
+          const refreshId = requestAnimationFrame(() => ScrollTrigger.refresh());
+          return () => {
+            cancelAnimationFrame(refreshId);
+            tween.scrollTrigger?.kill();
+            tween.kill();
+          };
+        },
+      );
+
+      return () => media.revert();
+    },
+    { scope: sectionRef },
+  );
+
   const scrollCards = useCallback((direction: -1 | 1) => {
     const carousel = carouselRef.current;
     if (!carousel) return;
@@ -102,7 +154,11 @@ export default function DedicatedVADifference() {
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section || isPaused) return;
+    if (
+      !section ||
+      isPaused ||
+      window.matchMedia("(min-width: 1024px) and (min-height: 720px)").matches
+    ) return;
 
     let timer: number | undefined;
     let isInView = false;
@@ -164,7 +220,7 @@ export default function DedicatedVADifference() {
               type="button"
               onClick={() => scrollCards(-1)}
               aria-label="Show previous benefits"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#01012F]/15 text-[#02024E] transition-colors hover:border-[#12B4CF] hover:bg-[#12B4CF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#12B4CF]"
+              className="hidden h-10 w-10 place-items-center rounded-full border border-[#01012F]/15 text-[#02024E] transition-colors hover:border-[#12B4CF] hover:bg-[#12B4CF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#12B4CF] sm:grid lg:hidden"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -172,14 +228,14 @@ export default function DedicatedVADifference() {
               type="button"
               onClick={() => scrollCards(1)}
               aria-label="Show more benefits"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#01012F]/15 text-[#02024E] transition-colors hover:border-[#12B4CF] hover:bg-[#12B4CF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#12B4CF]"
+              className="hidden h-10 w-10 place-items-center rounded-full border border-[#01012F]/15 text-[#02024E] transition-colors hover:border-[#12B4CF] hover:bg-[#12B4CF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#12B4CF] sm:grid lg:hidden"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
           <div
             ref={carouselRef}
-            className="flex h-[calc(100%-3.5rem)] snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex h-[calc(100%-3.5rem)] snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:overflow-visible"
             aria-label="Dedicated VA benefits"
             onScroll={(event) => {
               const carousel = event.currentTarget;
