@@ -566,7 +566,7 @@ export default function AdminBlog() {
             className="fixed inset-0 z-40 animate-[fade-in_0.2s_ease] bg-ink/40 backdrop-blur-[2px]"
             onClick={closeEditor}
           />
-          <div className="fixed inset-y-0 right-0 z-50 flex max-w-[85vw] w-full h-full animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl overflow-y-auto">
+          <div className="fixed inset-y-0 right-0 z-50 flex w-full h-full animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl">
             <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-6 py-4 shrink-0">
               <div className="min-w-0">
                 <h3 className="text-base font-extrabold text-slate-900">

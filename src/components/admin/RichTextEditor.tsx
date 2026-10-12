@@ -321,14 +321,21 @@ export default function RichTextEditor({
       </div>
 
       {/* Editor Body */}
-      <div className="relative flex-1 min-h-0 bg-white overflow-y-auto" style={{ minHeight }}>
+      <div
+        className={`relative bg-white ${
+          isFullscreen ? "flex-1 min-h-0 overflow-y-auto" : ""
+        }`}
+        style={isFullscreen ? undefined : { minHeight }}
+      >
         {showSource ? (
           <textarea
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full h-full p-4 font-mono text-xs text-slate-800 bg-slate-900 text-slate-100 outline-none resize-none border-none leading-relaxed"
+            className={`w-full p-4 font-mono text-xs text-slate-800 bg-slate-900 text-slate-100 outline-none resize-none border-none leading-relaxed ${
+              isFullscreen ? "h-full" : ""
+            }`}
             placeholder="Edit raw HTML code..."
-            style={{ minHeight }}
+            style={isFullscreen ? undefined : { minHeight }}
           />
         ) : (
           <div
@@ -336,8 +343,10 @@ export default function RichTextEditor({
             contentEditable
             onInput={handleEditorInput}
             onBlur={handleEditorInput}
-            className="w-full h-full p-4 text-sm text-slate-800 outline-none leading-relaxed prose max-w-none focus:outline-none overflow-y-auto"
-            style={{ minHeight }}
+            className={`w-full p-4 text-sm text-slate-800 outline-none leading-relaxed prose max-w-none focus:outline-none ${
+              isFullscreen ? "h-full" : ""
+            }`}
+            style={isFullscreen ? undefined : { minHeight }}
           />
         )}
       </div>
