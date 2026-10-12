@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import { FaSearch, FaLayerGroup, FaRocket, FaShieldAlt, FaChartLine } from "react-icons/fa";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -55,50 +55,34 @@ const steps = [
 
 export default function HowWeSupport() {
   const [current, setCurrent] = useState(0);
-  const [isCardHovered, setIsCardHovered] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-
-  const next = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % steps.length);
-  }, []);
+  const lastWheelTimeRef = useRef(0);
 
   useEffect(() => {
     const section = rootRef.current;
     if (!section) return;
 
-    let timer: number | undefined;
-    let isInView = false;
-    const startTimer = () => {
-      if (timer === undefined && isInView && !document.hidden && !isCardHovered) {
-        timer = window.setInterval(next, 5000);
-      }
-    };
-    const stopTimer = () => {
-      if (timer !== undefined) window.clearInterval(timer);
-      timer = undefined;
-    };
-    const observer = new IntersectionObserver(([entry]) => {
-      isInView = entry.isIntersecting;
-      if (isInView) startTimer();
-      else stopTimer();
-    });
-    const handleVisibilityChange = () => {
-      if (document.hidden) stopTimer();
-      else startTimer();
+    const handleWheel = (event: WheelEvent) => {
+      const direction = Math.sign(event.deltaY);
+      const hasNextStep = direction > 0 && current < steps.length - 1;
+      const hasPreviousStep = direction < 0 && current > 0;
+      if (!hasNextStep && !hasPreviousStep) return;
+
+      // Keep this section in place while the visitor moves through its steps.
+      event.preventDefault();
+      const now = Date.now();
+      if (now - lastWheelTimeRef.current < 650) return;
+      lastWheelTimeRef.current = now;
+      setCurrent((stepIndex) => Math.max(0, Math.min(steps.length - 1, stepIndex + direction)));
     };
 
-    observer.observe(section);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      stopTimer();
-    };
-  }, [isCardHovered, next]);
+    section.addEventListener("wheel", handleWheel, { passive: false });
+    return () => section.removeEventListener("wheel", handleWheel);
+  }, [current]);
 
   useGSAP(
     () => {
@@ -131,7 +115,7 @@ export default function HowWeSupport() {
   const step = steps[current];
 
   return (
-    <section ref={rootRef} className="relative bg-[#fffaf3] py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
+    <section ref={rootRef} data-lenis-prevent-wheel className="relative bg-[#fffaf3] py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 relative z-10">
         <div className="w-full flex flex-col">
@@ -203,8 +187,6 @@ export default function HowWeSupport() {
           {/* Content card */}
           <div
             ref={cardRef}
-            onMouseEnter={() => setIsCardHovered(true)}
-            onMouseLeave={() => setIsCardHovered(false)}
             className="w-full"
           >
             <div className="bg-gradient-to-br from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
