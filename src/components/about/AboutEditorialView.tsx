@@ -108,68 +108,78 @@ const TIMELINE_CHAPTERS = [
   {
     year: "2016",
     tag: "THE INCEPTION",
-    title: "Breaking the Freelancer Volatility Cycle",
-    subtitle: "A radical promise: full-time, vetted dedicated talent with strict NDAs.",
+    title: "The Inception",
+    subtitle: "",
     description:
-      "Virtual Nexgen Solutions has focused on helping businesses manage their day-to-day operations with dedicated Virtual Assistants. Our approach combines industry-specific training, clearly defined workflows, and a commitment to protecting client information.",
+      "Virtual Nexgen Solutions began with a clear mission: help businesses simplify daily operations through dependable Virtual Assistant support. From administrative tasks to essential business workflows, we built our foundation on dedicated service, practical processes, and a commitment to helping clients focus on growth.",
+    panelLabel: "OUR FOUNDATION",
     stats: "Since 2016",
-    statLabel: "A decade of dedicated business support",
+    statLabel: "Reliable Virtual Assistant Support Built Around Your Business",
+    noteLabel: "Our Story",
     deliverables: [
       "Dedicated Virtual Assistant Support",
       "Structured Training & SOPs",
       "Confidentiality-Focused Workflows",
-      "Industry-Specific Expertise",
+      "Client-Centered Service Delivery",
     ],
-    highlight:
-      "Established in Coimbatore, India, with a commitment to dependable Virtual Assistant services and long-term client partnerships.",
+    highlight: "Founded in Coimbatore, India, Virtual Nexgen Solutions set out to help businesses manage everyday workloads with dedicated Virtual Assistants, structured processes, and personalized operational support.",
   },
   {
     year: "2019",
     tag: "DEEP SPECIALIZATION",
-    title: "Vertical-Specific Operational Hubs",
-    subtitle: "Expanding from administrative help into regulated legal, healthcare, and insurance pipelines.",
+    title: "Industry-Specific Expertise Across Business Sectors",
+    subtitle: "Expanding beyond general administration to deliver specialized Virtual Assistant support for diverse industries and operational needs.",
     description:
-      "As client operational complexity grew, we engineered dedicated domain divisions. We trained specialized squads in industry software like AMS360, Clio, QuickBooks, and AppFolio, allowing clients to plug trained talent directly into revenue-generating workflows.",
-    stats: "150+ Specialists",
-    statLabel: "Across 4 Regulated Verticals",
+      "As businesses required more than general administrative help, we developed a more specialized approach to Virtual Assistant services. From healthcare, insurance, legal, and financial services to construction, HVAC, plumbing, roofing, restoration, real estate, logistics, e-commerce, and manufacturing, our focus is on aligning trained talent with industry workflows, business tools, and operational priorities.",
+    panelLabel: "OUR EXPANDING EXPERTISE",
+    stats: "Support Across Industries",
+    statLabel: "Dedicated Virtual Assistants Adapted to Your Business Needs",
+    noteLabel: "Our Approach",
     deliverables: [
-      "Legal Case Briefing & Drafting",
-      "Insurance Policy Audits & Loss Runs",
-      "Real Estate Transaction Coordination",
+      "Industry-Specific Virtual Assistant Services",
+      "Specialized Software & Workflow Training",
+      "Operational Support Across Multiple Sectors",
+      "Customized Processes & SOP Development",
     ],
-    highlight: "Achieved 99.2% on-time delivery across all specialized service lines.",
+    highlight: "Every industry has unique workflows, tools, and customer expectations. We align Virtual Assistant responsibilities with your business processes to help manage daily operations, improve efficiency, and give your team more time to focus on growth.",
   },
   {
     year: "2022",
     tag: "SECURITY VAULT",
-    title: "Institutional-Grade Data Infrastructure",
-    subtitle: "Deploying hardware VPN tunnels, on-site physical security, and biometric access controls.",
+    title: "Security-First Operations & Data Protection",
+    subtitle: "Strengthening confidentiality, access management, and secure workflows to help protect sensitive business information.",
     description:
-      "Enterprise security became our hallmark. We transitioned our facilities into high-compliance centers with 24/7 on-site guards, segregated client networks, hardware-enforced VPNs, and fingerprint authentication for every workstation.",
-    stats: "100%",
-    statLabel: "Clean Security Audit Record",
+      "As our client operations expanded, protecting business information became an increasingly important priority. We strengthened our focus on secure access practices, confidentiality procedures, controlled system permissions, and structured workflows designed to help safeguard client data throughout daily operations.",
+    panelLabel: "OUR SECURITY COMMITMENT",
+    stats: "Security by Design",
+    statLabel: "Protecting Client Information Through Responsible Practices",
+    noteLabel: "Our Approach",
     deliverables: [
-      "Biometric Workstation Authentication",
-      "Isolated Client Virtual LANs",
-      "HIPAA & Financial Confidentiality Alignment",
+      "Controlled System Access & Permissions",
+      "Confidentiality-Focused Workflows",
+      "Secure Credential Management",
+      "Standardized Data Handling Procedures",
     ],
-    highlight: "Zero security breaches or data incidents recorded across our history.",
+    highlight: "We prioritize confidentiality and responsible information handling through defined procedures, appropriate access controls, and security-conscious work practices. Our goal is to help clients delegate essential business tasks with greater confidence and peace of mind.",
   },
   {
     year: "PRESENT",
     tag: "AGENTIC AI ERA",
-    title: "The Hybrid Powerhouse: Humans + AI",
-    subtitle: "Augmenting every dedicated specialist with intelligent automation pipelines.",
+    title: "The Next Generation of Business Support: Humans + AI",
+    subtitle: "Combining dedicated Virtual Assistants with intelligent AI solutions to streamline workflows and help businesses scale smarter.",
     description:
-      "Today, Virtual Nexgen sits at the forefront of the modern workforce revolution. We don't just supply exceptional human specialists — we equip them with custom AI automations, automated CRM synchronizers, and document intelligence tools that multiply client throughput by 3x.",
-    stats: "320+ Global Clients",
-    statLabel: "Average 40% Workload Reduction",
+      "Today, Virtual Nexgen Solutions combines dedicated human expertise with AI-powered tools to help businesses manage repetitive tasks, streamline communication, organize information, and improve operational efficiency. Our hybrid approach brings together human judgment, industry-specific knowledge, and intelligent automation to support evolving business needs.",
+    panelLabel: "OUR NEXT CHAPTER",
+    stats: "Human Expertise. Intelligent AI.",
+    statLabel: "Smarter Workflows. More Time for Business Growth.",
+    noteLabel: "Our Vision",
     deliverables: [
-      "AI-Assisted Workflow Engineering",
-      "24/7 Round-the-Clock Timezone Coverage",
-      "Real-Time SLA & KPI Dashboards",
+      "AI-Assisted Workflow Automation",
+      "Human-Led Business & Administrative Support",
+      "Intelligent CRM & Data Management Workflows",
+      "Scalable Virtual Assistant + AI Solutions",
     ],
-    highlight: "Over 320 businesses in the US, UK, Canada & Australia actively powered.",
+    highlight: "We are building a more efficient way for businesses to operate by combining reliable Virtual Assistant services with practical AI capabilities. From everyday administration to workflow automation, our goal is to help teams reduce manual work, improve consistency, and focus on higher-value priorities.",
   },
 ];
 
@@ -544,13 +554,11 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                         Chapter {activeTimeline + 1} of 4 • {TIMELINE_CHAPTERS[activeTimeline].year}
                       </div>
 
-                      {activeTimeline !== 0 && (
-                        <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-ink">
-                          {TIMELINE_CHAPTERS[activeTimeline].title}
-                        </h3>
-                      )}
+                      <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-ink">
+                        {TIMELINE_CHAPTERS[activeTimeline].title}
+                      </h3>
 
-                      {activeTimeline !== 0 && (
+                      {TIMELINE_CHAPTERS[activeTimeline].subtitle && (
                         <p className="mt-2 text-base font-semibold text-[#12B4CF]">
                           {TIMELINE_CHAPTERS[activeTimeline].subtitle}
                         </p>
@@ -578,7 +586,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                     <div className="lg:col-span-5">
                       <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6 shadow-[0_10px_30px_rgba(19,47,74,0.06)]">
                         <div className="text-xs font-bold uppercase tracking-widest text-ink/50">
-                          {activeTimeline === 0 ? "OUR FOUNDATION" : "Historical Impact"}
+                          {TIMELINE_CHAPTERS[activeTimeline].panelLabel}
                         </div>
                         <div className="mt-3 text-4xl sm:text-5xl font-black text-ink">
                           <CountUpText key={activeTimeline} value={TIMELINE_CHAPTERS[activeTimeline].stats} />
@@ -589,7 +597,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
 
                         <div className="mt-6 rounded-xl bg-[#01012F] p-4 text-xs font-medium leading-relaxed text-white/70">
                           <span className="font-bold text-white block mb-1">
-                            {activeTimeline === 0 ? "Our Story" : "Archived Note:"}
+                            {TIMELINE_CHAPTERS[activeTimeline].noteLabel}
                           </span>
                           {TIMELINE_CHAPTERS[activeTimeline].highlight}
                         </div>
@@ -934,71 +942,67 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
       {/* ========================================================================= */}
       <section className="relative py-14 md:py-18 bg-[#fffaf3] overflow-hidden">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-stretch">
             <div className="lg:col-span-6">
               <Reveal y={20}>
 <span className="inline-flex items-center gap-2 rounded-full bg-[#01012F]/10 px-4 py-1.5 text-xs font-bold tracking-widest text-[#12B4CF] uppercase border border-[#01012F]/20">
                   <Lock className="h-3.5 w-3.5 text-[#12B4CF]" />
-                  BANK-LEVEL SECURITY PROTOCOLS
+                  CONFIDENTIALITY-FIRST SECURITY PRACTICES
                 </span>
                 <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl text-ink">
-                  Zero-Tolerance Security & <span className="text-[#12B4CF]">Confidentiality</span>
+                  Your Business Data. <span className="text-[#12B4CF]">Our Commitment to Security.</span>
                 </h2>
                 <p className="mt-4 text-base sm:text-lg text-ink/80 leading-relaxed">
-                  Your business data, customer records, and trade secrets remain protected under our
-                  fortified physical and digital security architecture.
+                  Your business information deserves careful protection. We emphasize confidentiality, controlled access, and responsible data handling to help safeguard sensitive information and support secure, reliable daily operations.
                 </p>
               </Reveal>
 
               <div className="mt-8 space-y-4">
-                <Reveal y={20} delay={0.1}>
-                  <div className="flex items-start gap-4 rounded-2xl border border-[#01012F]/10 bg-white p-4 backdrop-blur-sm">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#12B4CF] text-white font-bold flex-shrink-0">
-                      <Users className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <h4 className="text-base font-bold text-ink"><CountUpText value="100%" /> In-House Direct Employees</h4>
-                      <p className="text-sm text-ink/70 mt-1">
-                        Every assistant is bound by legal NDAs, background checked, and held strictly accountable.
-                      </p>
+                {[
+                  {
+                    title: "01 — Dedicated In-House Team",
+                    description: "Our team works within our established office environment and follows defined procedures for handling client information.",
+                  },
+                  {
+                    title: "02 — Confidentiality Agreements",
+                    description: "Confidentiality agreements reinforce our commitment to protecting client information and respecting data privacy.",
+                  },
+                  {
+                    title: "03 — Controlled System Access",
+                    description: "Access to client platforms and business information is assigned according to job responsibilities and authorized permissions.",
+                  },
+                  {
+                    title: "04 — Secure Credential Handling",
+                    description: "We encourage responsible password management and approved methods for sharing and managing login credentials.",
+                  },
+                  {
+                    title: "05 — Privacy-Focused Workflows",
+                    description: "Our processes emphasize careful handling of sensitive records, customer information, and confidential business documents.",
+                  },
+                  {
+                    title: "06 — Standardized Operating Procedures",
+                    description: "Documented workflows help team members follow consistent procedures when managing client tasks and information.",
+                  },
+                ].map((practice, index) => (
+                  <Reveal key={practice.title} y={20} delay={0.1 + index * 0.05}>
+                    <div className="flex items-start gap-4 rounded-2xl border border-[#01012F]/10 bg-white p-4 backdrop-blur-sm">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#12B4CF] text-white font-bold flex-shrink-0">
+                        <Lock className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <h4 className="text-base font-bold text-ink">{practice.title}</h4>
+                        <p className="text-sm text-ink/70 mt-1">{practice.description}</p>
+                      </div>
                     </div>
-                  </div>
-                </Reveal>
-
-                <Reveal y={20} delay={0.15}>
-                  <div className="flex items-start gap-4 rounded-2xl border border-[#01012F]/10 bg-white p-4 backdrop-blur-sm">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#01012F] text-white font-bold flex-shrink-0">
-                      <Lock className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <h4 className="text-base font-bold text-ink">Encrypted VPNs & Isolated VLANs</h4>
-                      <p className="text-sm text-ink/70 mt-1">
-                        Client sessions occur over encrypted VPN tunnels on secure, segregated network channels.
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-
-                <Reveal y={20} delay={0.2}>
-                  <div className="flex items-start gap-4 rounded-2xl border border-[#01012F]/10 bg-white p-4 backdrop-blur-sm">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#12B4CF] text-white font-bold flex-shrink-0">
-                      <ShieldCheck className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <h4 className="text-base font-bold text-ink">Biometric Verification & <CountUpText value="24/7" /> Guards</h4>
-                      <p className="text-sm text-ink/70 mt-1">
-                        Physical access to workstations requires biometric fingerprint clearance with on-site security.
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
+                  </Reveal>
+                ))}
               </div>
             </div>
 
             <div className="lg:col-span-6">
-              <Reveal y={25} delay={0.25}>
-                <div className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-4 shadow-2xl backdrop-blur-md">
-                  <div className="relative aspect-[10/11] w-full overflow-hidden rounded-2xl bg-black">
+              <Reveal y={25} delay={0.25} className="h-full">
+                <div className="relative h-full overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-4 shadow-2xl backdrop-blur-md">
+                  <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl bg-black">
                     <Image
                       src="/uploads/about-security.png"
                       alt="Virtual Nexgen Security Vault"
@@ -1011,10 +1015,10 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                       <div className="rounded-xl border border-white/20 bg-[#01012F]/90 p-4 backdrop-blur-md">
                         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/50">
                           <ShieldCheck className="h-4 w-4 text-[#12B4CF]" />
-                          Enterprise Compliance Badge
+                          CONFIDENTIALITY-FIRST SECURITY
                         </div>
                         <div className="text-sm font-semibold text-white mt-1">
-                          Strict regulatory compliance across HIPAA, legal confidentiality, and financial data protocols.
+                          Responsible data handling and controlled access support secure, reliable daily operations.
                         </div>
                       </div>
                     </div>

@@ -6,7 +6,6 @@ import {
   ChevronRight,
   Clock,
   ExternalLink,
-  List,
   Phone,
   ShieldCheck,
 } from "lucide-react";
@@ -40,29 +39,6 @@ function slugifyHeading(text: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-");
-}
-
-function extractHeadings(content: string): { id: string; text: string }[] {
-  const headings: { id: string; text: string }[] = [];
-  const counts = new Map<string, number>();
-  const pushHeading = (text: string) => {
-    const base = slugifyHeading(text);
-    if (!base) return;
-    const count = counts.get(base) ?? 0;
-    counts.set(base, count + 1);
-    headings.push({ id: count > 0 ? `${base}-${count}` : base, text });
-  };
-  const markdownRegex = /#{2,3}\s+(.+)/g;
-  let match: RegExpExecArray | null;
-  while ((match = markdownRegex.exec(content)) !== null) {
-    pushHeading(match[1].trim());
-  }
-  const htmlRegex = /<h([23])[^>]*>(.*?)<\/h\1>/gi;
-  while ((match = htmlRegex.exec(content)) !== null) {
-    const text = (match[2] ?? "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-    if (text) pushHeading(text);
-  }
-  return headings;
 }
 
 function isHtml(text: string): boolean {
@@ -260,14 +236,13 @@ export default async function BlogDetailPage({
   const related = allPosts.filter((p) => p.slug !== slug).slice(0, 2);
   const category = post.tags?.[0] ?? "General";
   const readTime = estimateReadTime(post.content);
-  const headings = extractHeadings(post.content);
   const articleUrl = `https://virtualnexgen.com/blog/${post.slug}`;
 
   return (
     <main className="min-h-screen bg-[#fffaf3]">
       <section className="mx-auto mt-[10px] max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
         <div
-          className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-2" : ""}`}
+          className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-[0.85fr_1.15fr]" : ""}`}
         >
           <div className="min-w-0">
             <div className="flex items-center gap-3">
@@ -286,11 +261,11 @@ export default async function BlogDetailPage({
 
           {post.image && (
             <div className="mt-8 flex justify-center lg:justify-end">
-              <div className="w-[300px] max-w-full overflow-hidden rounded-[24px]">
+              <div className="h-[280px] w-[600px] max-w-full overflow-hidden rounded-[24px] sm:h-[340px]">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="block h-auto w-[300px] rounded-[24px] object-contain"
+                  className="block h-full w-full rounded-[24px] object-cover"
                 />
               </div>
             </div>
@@ -375,29 +350,6 @@ export default async function BlogDetailPage({
           {/* Right Sidebar */}
           <aside className="hidden lg:block">
             <div className="sticky top-32 space-y-6">
-              {headings.length > 0 && (
-                <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6">
-                  <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#02024E]">
-                    <List className="h-4 w-4 text-[#12B4CF]" /> On This Page
-                  </h3>
-                  <nav className="mt-4">
-                    <ul className="space-y-2.5">
-                      {headings.map((h) => (
-                        <li key={h.id}>
-                          <a
-                            href={`#${h.id}`}
-                            className="group flex items-start gap-2 text-sm leading-snug text-[#02024E]/70 transition hover:text-[#02024E]"
-                          >
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#12B4CF]/50 transition group-hover:bg-[#12B4CF]" />
-                            {h.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </div>
-              )}
-
               <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6">
                 <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#02024E]">
                   <ShieldCheck className="h-4 w-4 text-[#12B4CF]" /> Why Virtual Nexgen

@@ -680,24 +680,24 @@ export default async function ServiceDetailPage({
           <Reveal>
             <div>
               <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
-                {textOr(service.problem?.eyebrow, "The Problem")}
+                {textOr(service.problem?.eyebrow, "THE PROBLEM")}
               </span>
               <h2 className="mt-6 text-3xl font-extrabold leading-tight text-[#02024E] sm:text-4xl">
                 {textOr(
                   service.problem?.heading,
-                  "Most Businesses Aren't Struggling to Grow —",
+                  "Businesses Aren’t Short on Ambition —",
                 )}
                 {service.problem?.highlight?.trim() || service.problem?.heading?.trim() ? null : (
                   <span className="text-brand">
                     {" "}
-                    They&rsquo;re Buried in Operations
+                    They’re Overloaded With Work
                   </span>
                 )}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-[#02024E]/65">
                 {textOr(
                   service.problem?.text,
-                  "Repetitive tasks quietly consume the time your team should spend growing the business.",
+                  "Repetitive administrative tasks and inefficient workflows take time away from the work that drives business growth.",
                 )}
               </p>
               <div className="mt-8 space-y-4">
@@ -785,20 +785,16 @@ export default async function ServiceDetailPage({
             <Reveal>
               <div className="text-center">
                  <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
-                   {textOr(service.folderSection?.eyebrow, "INSURANCE VA PLAYBOOK")}
+                   {textOr(service.folderSection?.eyebrow, service.name.toUpperCase())}
                  </span>
                  <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
-                   {textOr(
-                      service.folderSection?.heading,
-                      `${folderItems.length} Essential Tasks an`,
-                    )}
-                    <span className="text-brand-accent">
-                      {" "}
-                      {textOr(service.folderSection?.highlight, service.name)}
-                    </span>
-                    {service.folderSection?.highlight?.trim() ? null : (
-                      <span> Can Handle</span>
-                    )}
+                   {service.folderSection?.heading?.trim() ? (
+                     service.folderSection.heading
+                   ) : (
+                     <>
+                       Explore <span className="text-brand-accent">{service.name}</span> Workflows
+                     </>
+                   )}
                   </h2>
                   <p className="mx-auto mt-3 max-w-2xl text-sm text-[#02024E]/65 sm:text-base">
                     {textOr(

@@ -20,16 +20,25 @@ export const trustBadges: ServiceTrustBadge[] = [
 export const defaultTrustBadges = trustBadges;
 
 export const problemPoints = [
-  "Workflow backlogs impacting delivery",
-  "High local staffing overhead",
-  "Burnout from repetitive admin work",
+  "Operational bottlenecks slowing delivery",
+  "Rising staffing and overhead costs",
+  "Teams overwhelmed by repetitive admin work",
+  "Missed leads and delayed follow-ups",
+  "Inconsistent processes across daily operations",
+  "Limited time for strategic business growth",
+  "Increasing workloads and employee burnout",
+  "Disorganized records and administrative backlogs",
 ];
 
 export const problemCards: ServiceProblemCard[] = [
-  { title: "Workflow Bottlenecks", desc: "Tasks pile up when processes start too late." },
-  { title: "Slow Turnaround", desc: "Delayed responses create client friction." },
-  { title: "Data Gaps", desc: "Incomplete updates lead to reporting issues." },
-  { title: "Rising Overhead", desc: "Local staffing costs keep increasing." },
+  { title: "Workflow Bottlenecks", desc: "Tasks pile up when processes become inefficient." },
+  { title: "Slow Turnaround", desc: "Delayed responses affect customer experience." },
+  { title: "Data Gaps", desc: "Missed updates create reporting challenges." },
+  { title: "Rising Overhead", desc: "Staffing costs put pressure on profitability." },
+  { title: "Missed Opportunities", desc: "Unanswered inquiries can lead to lost business." },
+  { title: "Administrative Overload", desc: "Repetitive tasks distract teams from core priorities." },
+  { title: "Inconsistent Processes", desc: "Unclear workflows lead to avoidable errors." },
+  { title: "Limited Scalability", desc: "Growing workloads strain existing resources." },
 ];
 
 export const defaultBenefits: ServiceBenefit[] = [

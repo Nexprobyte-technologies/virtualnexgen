@@ -8,53 +8,54 @@ import { gsap, useGSAP } from "@/lib/gsap";
 const steps = [
   {
     num: "01",
-    label: "Understand",
-    phase: "PHASE 01 · Business Discovery & Needs Assessment",
+    label: "Business Assessment",
+    phase: "PHASE 01 · Business Discovery & Workflow Planning",
     icon: FaSearch,
-    title: "Identify Where Support Creates Value",
-    desc: "We learn how your business operates, identify time-consuming responsibilities, and determine where a dedicated Virtual Assistant can make the greatest contribution.",
-    features: ["Business Needs Assessment", "Administrative Workload Review", "Support Requirements Planning"],
+    title: "Identify Where a Virtual Assistant Adds the Most Value",
+    desc: "We analyze your daily operations, identify time-consuming tasks, and pinpoint where a dedicated Virtual Assistant can streamline workflows and help your business operate more efficiently.",
+    features: ["Business Needs & Goal Assessment", "Administrative Workload Analysis", "Virtual Assistant Role Planning"],
   },
   {
     num: "02",
-    label: "Build Workflow",
-    phase: "PHASE 02 · Process Design & Documentation",
+    label: "Workflow Documentation",
+    phase: "PHASE 02 · Process Design & Workflow Documentation",
     icon: FaLayerGroup,
-    title: "Turn Daily Tasks Into Clear Processes",
-    desc: "We organize your recurring responsibilities into structured workflows, document essential procedures, and establish clear guidelines for task ownership and communication.",
-    features: ["Standard Operating Procedures", "Task & Responsibility Planning", "Workflow Documentation"],
+    title: "Turn Daily Tasks Into Streamlined Workflows",
+    desc: "We transform recurring business tasks into clear, repeatable processes, document essential procedures, and define responsibilities to ensure consistent execution, smooth communication, and reliable Virtual Assistant support.",
+    features: ["Standard Operating Procedures (SOPs)", "Task Ownership & Responsibility Planning", "Workflow Documentation & Guidelines"],
   },
   {
     num: "03",
-    label: "Put in Motion",
-    phase: "PHASE 03 · Onboarding & Implementation",
+    label: "VA Onboarding",
+    phase: "PHASE 03 · VA Onboarding & Implementation",
     icon: FaRocket,
-    title: "Bring Your Dedicated VA Into the Team",
-    desc: "We prepare your Virtual Assistant to work with your systems, understand your processes, and take on assigned responsibilities through a structured onboarding process.",
-    features: ["Dedicated VA Onboarding", "Software & Systems Familiarization", "Task Handover & Implementation"],
+    title: "Integrate Your Dedicated VA Into Daily Operations",
+    desc: "We prepare your Virtual Assistant to work with your business tools, follow established procedures, and manage assigned responsibilities through a structured onboarding process designed for a smooth transition.",
+    features: ["Dedicated VA Onboarding & Training", "Software & Systems Familiarization", "Task Handover & Workflow Integration"],
   },
   {
     num: "04",
-    label: "Maintain Standards",
-    phase: "PHASE 04 · Quality Assurance & Monitoring",
+    label: "Quality Assurance",
+    phase: "PHASE 04 · Quality Assurance & Performance Management",
     icon: FaShieldAlt,
-    title: "Keep Work Accurate and On Track",
-    desc: "We review task completion, reinforce established procedures, and monitor performance to help ensure work remains consistent with your business expectations.",
-    features: ["Work Accuracy Reviews", "Process Compliance Checks", "Performance Tracking"],
+    title: "Maintain Quality, Accuracy, and Accountability",
+    desc: "We review completed tasks, monitor performance, and reinforce established procedures to help ensure your Virtual Assistant delivers accurate, consistent work aligned with your business standards.",
+    features: ["Task Accuracy & Quality Reviews", "SOP Compliance & Process Checks", "Performance Monitoring & Feedback"],
   },
   {
     num: "05",
-    label: "Grow with Confidence",
-    phase: "PHASE 05 · Continuous Improvement & Expansion",
+    label: "Continuous Improvement",
+    phase: "PHASE 05 · Continuous Improvement & Business Growth",
     icon: FaChartLine,
-    title: "Adapt Your Support as You Grow",
-    desc: "As your workload and priorities change, we help refine existing processes and adjust your Virtual Assistant support to meet evolving business needs.",
-    features: ["Workflow Improvements", "Changing Workload Management", "Flexible Support Expansion"],
+    title: "Scale Your Support as Your Business Evolves",
+    desc: "As your business grows, we help optimize workflows, adapt Virtual Assistant responsibilities, and expand operational support to match your changing priorities and long-term goals.",
+    features: ["Continuous Workflow Optimization", "Evolving Workload & Task Management", "Flexible Support & Team Expansion"],
   },
 ];
 
 export default function HowWeSupport() {
   const [current, setCurrent] = useState(0);
+  const [isCardHovered, setIsCardHovered] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -72,7 +73,7 @@ export default function HowWeSupport() {
     let timer: number | undefined;
     let isInView = false;
     const startTimer = () => {
-      if (timer === undefined && isInView && !document.hidden) {
+      if (timer === undefined && isInView && !document.hidden && !isCardHovered) {
         timer = window.setInterval(next, 5000);
       }
     };
@@ -97,7 +98,7 @@ export default function HowWeSupport() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       stopTimer();
     };
-  }, [next]);
+  }, [isCardHovered, next]);
 
   useGSAP(
     () => {
@@ -200,7 +201,12 @@ export default function HowWeSupport() {
           </div>
 
           {/* Content card */}
-          <div ref={cardRef} className="w-full">
+          <div
+            ref={cardRef}
+            onMouseEnter={() => setIsCardHovered(true)}
+            onMouseLeave={() => setIsCardHovered(false)}
+            className="w-full"
+          >
             <div className="bg-gradient-to-br from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
               <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-[#12B4CF]/[0.08]">
                 {step.num}
@@ -244,7 +250,7 @@ export default function HowWeSupport() {
   <span className="text-xs font-bold text-[#02024E] tracking-wide">
     Step {step.num} of 05
   </span>
-  <span className="text-[10px] text-[#02024E]/50 font-medium">Verified SOP</span>
+  <span className="text-[10px] text-[#02024E]/50 font-medium">{step.label}</span>
 </div>
               </div>
             </div>

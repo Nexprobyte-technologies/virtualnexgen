@@ -1,7 +1,19 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Globe, Play, Share2, AtSign, Phone } from "lucide-react";
 
 import Reveal from "./Reveal";
+
+type FooterBlogPost = {
+  slug: string;
+  title: string;
+  image: string;
+  date: string;
+  createdAt: string;
+  status?: "draft" | "published";
+};
 
 const services = [
   "Insurance Virtual Assistants",
@@ -15,24 +27,28 @@ const services = [
   "Manufacturing & Engineering Services",
 ];
 
-const blogPosts = [
+const newestBlogPosts: FooterBlogPost[] = [
   {
-    title:
-      "When a Construction Project Changes: The Administrative Work Behind Every Change Order",
-    href: "https://virtualnexgen.com/blog/construction-virtual-assistant-change-order-support",
-    image: "https://virtualnexgen.com/assets/uploads/blog/59452.png",
+    title: "Social Media Tips for Insurance Agencies: Boost Engagement.",
+    slug: "social-media-tips-for-insurance-agencies-boost-engagement",
+    date: "2026-09-30",
+    createdAt: "2026-09-30T07:52:50.118Z",
+    image: "/uploads/1790754768926-783095.webp",
   },
   {
     title:
-      "A Day in the Life of a Busy Roofing Company: Where a Virtual Assistant Fits In",
-    href: "https://virtualnexgen.com/blog/roofing-virtual-assistant-business-support",
-    image: "https://virtualnexgen.com/assets/uploads/blog/36357.png",
+      "Trucking Dispatch Virtual Assistant: A Practical System for Loads, Drivers, and Documentation",
+    slug: "trucking-dispatch-virtual-assistant-load-driver-support",
+    date: "2026-08-20",
+    createdAt: "2026-09-25T00:00:00.000Z",
+    image: "/Blog%20Images/41871.webp",
   },
   {
-    title:
-      "Wealth Management Virtual Assistant: Reduce Back-Office Work and Improve Client Service",
-    href: "https://virtualnexgen.com/blog/wealth-management-administrative-support",
-    image: "https://virtualnexgen.com/assets/uploads/blog/20048.png",
+    title: "7 Common Amazon Seller Mistakes That Reduce Sales (And How to Fix Them)",
+    slug: "amazon-seller-account-mistakes",
+    date: "2026-08-20",
+    createdAt: "2026-09-22T10:46:32.335Z",
+    image: "/Blog%20Images/33596.webp",
   },
 ];
 
@@ -65,6 +81,34 @@ const socials = [
 ];
 
 export default function Footer() {
+  const [blogPosts, setBlogPosts] = useState(newestBlogPosts);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch("/api/blog", { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: { posts?: FooterBlogPost[] } | null) => {
+        if (!data?.posts || cancelled) return;
+
+        const sortedPosts = data.posts
+          .filter((post) => post.status !== "draft")
+          .sort((a, b) => {
+            const aDate = Date.parse(a.date);
+            const bDate = Date.parse(b.date);
+            return (Number.isNaN(bDate) ? 0 : bDate) - (Number.isNaN(aDate) ? 0 : aDate);
+          })
+          .slice(0, 3);
+
+        if (sortedPosts.length > 0) setBlogPosts(sortedPosts);
+      })
+      .catch(() => undefined);
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <footer id="contact" className="relative bg-[#01012F] overflow-hidden shadow-[0_-4px_30px_rgba(0,0,0,0.05)]">
       <div className="divider-gradient" />
@@ -194,10 +238,8 @@ export default function Footer() {
               <div className="grid gap-5">
                 {blogPosts.map((post) => (
                   <a
-                    key={post.href}
-                    href={post.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
                     className="group flex items-center gap-4"
                   >
                     <Image

@@ -92,7 +92,7 @@ export default function IndustriesWeServe() {
                     <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#12B4CF]/15 flex-shrink-0 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-[#12B4CF]">
                       <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#12B4CF] group-hover:text-[#02024E] transition-colors duration-300" strokeWidth={1.75} />
                     </div>
-                    <span className="text-xs sm:text-sm md:text-base font-semibold text-[#02024E] leading-tight">
+                    <span className="text-left text-xs sm:text-sm md:text-base font-semibold text-[#02024E] leading-tight">
                       {industry.name}
                     </span>
                   </div>

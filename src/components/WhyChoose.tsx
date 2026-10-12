@@ -7,10 +7,16 @@ import Reveal from "./Reveal";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const complianceItems = [
-  "Continuous Compliance Training",
   "Privacy-First Workflows",
   "NDA-Backed Confidentiality",
-  "Controlled & Secure Access",
+  "Controlled & Secure System Access",
+  "Role-Based Access Permissions",
+  "Secure Credential Management",
+  "Confidential Data Handling",
+  "Standardized Security Procedures",
+  "Ongoing Security Awareness Training",
+  "Compliance-Focused Operations",
+  "Continuous Security Reviews",
 ];
 
 const qualityChecks = [
@@ -250,8 +256,7 @@ export default function WhyChoose() {
                     </h3>
                   </div>
                   <p className="text-sm sm:text-base text-[#02024E]/70 mb-2">
-                    Protecting your business information is our priority.
-                    We follow structured security practices and privacy-focused workflows to help safeguard sensitive client data throughout daily operations.
+                    Your business data deserves the highest level of care. We follow structured security practices, confidentiality standards, and privacy-focused workflows to help protect sensitive information and support secure day-to-day operations.
                   </p>
 
                   <ComplianceMarquee />
