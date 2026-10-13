@@ -1,7 +1,3 @@
-DELETE FROM "AdminUser"
-WHERE "username" = 'admin'
-   OR "password" = 'admin@123';
-
 INSERT INTO "AdminUser" ("id", "username", "password", "role", "createdAt", "updatedAt")
 VALUES (
   'admin_virtualnexgen2025',
