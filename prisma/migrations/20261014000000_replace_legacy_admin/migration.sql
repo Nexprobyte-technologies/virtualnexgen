@@ -1,8 +1,8 @@
 INSERT INTO "AdminUser" ("id", "username", "password", "role", "createdAt", "updatedAt")
 VALUES (
-  'admin_virtualnexgen2025',
-  'virtualnexgen2025@gmail.com',
-  'scrypt:cd2182727bf0f9f62ae1b06cbe845f78:11e660ee5cb7a83e00bb0cf306b9a3392f4894478b5315b4c6d65272a3e97ee7b9cdda48531115158d758510cdb6d5c00a882ecb2fac27d01d3e422299af59f3',
+  'admin_default',
+  'admin',
+  'scrypt:4f3c2b1a09876543210fedcba9876543:faed8b79745bc3e71262b3c4484c2680201ec776c428aa31799bed73ee3d00b2884818376d0b083067cf2d9e91194928b9485da37b977aa3c35fc87efb228608',
   'admin',
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP

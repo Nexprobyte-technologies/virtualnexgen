@@ -7,8 +7,8 @@ const SESSION_SECRET =
   process.env.ADMIN_SESSION_SECRET ??
   process.env.DATABASE_URL ??
   (process.env.NODE_ENV !== "production" ? "virtualnexgen-local-admin-session" : undefined);
-const INITIAL_ADMIN_USERNAME = "virtualnexgen2025@gmail.com";
-const INITIAL_ADMIN_PASSWORD = "123456";
+const INITIAL_ADMIN_USERNAME = "admin";
+const INITIAL_ADMIN_PASSWORD = "admin@123";
 
 function verifyAdminPassword(password: string, stored: string): boolean {
   const [algorithm, salt, expectedHex] = stored.split(":");

@@ -1,8 +1,8 @@
 import { randomBytes, scryptSync } from "node:crypto";
 import { PrismaClient } from "@prisma/client";
 
-const username = "virtualnexgen2025@gmail.com";
-const password = process.env.ADMIN_PASSWORD ?? "123456";
+const username = "admin";
+const password = process.env.ADMIN_PASSWORD ?? "admin@123";
 
 const salt = randomBytes(16).toString("hex");
 const hash = scryptSync(password, salt, 64).toString("hex");
