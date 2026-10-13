@@ -12,72 +12,72 @@ const services = [
     category: "Insurance",
     description:
       "Policy management, claims processing, and seamless insurance support that ensures accuracy and efficiency.",
-    image: "/uploads/cs-insurance.jpg",
-    href: "https://virtualnexgen.com/service/Insurance-Virtual-Assistants",
+    image: "/uploads/service1.jpeg",
+    href: "/services/insurance-virtual-assistants",
   },
   {
     title: "Real Estate Virtual Assistants",
     category: "Real Estate",
     description:
       "Lead management, appointments, listings, and property operations handled by trained specialists.",
-    image: "/uploads/cs-realestate.jpg",
-    href: "https://virtualnexgen.com/service/Real-Estate-Virtual-Assistants",
+    image: "/uploads/service2.jpeg",
+    href: "/services/Real-Estate-Virtual-Assistants",
   },
   {
     title: "Legal Virtual Assistants",
     category: "Legal",
     description:
       "Case management, legal research, document drafting, and back-office support tailored for law firms.",
-    image: "/uploads/cs-legal.jpg",
-    href: "https://virtualnexgen.com/service/Legal-Virtual-Assistants",
+    image: "/uploads/service3.jpeg",
+    href: "/services/Legal-Virtual-Assistants",
   },
   {
     title: "Healthcare Virtual Assistants",
     category: "Healthcare",
     description:
       "Patient coordination, appointment scheduling, and medical admin support with confidentiality.",
-    image: "/uploads/about-who-we-are.png",
-    href: "https://virtualnexgen.com/service/Healthcare-Virtual-Assistants",
+    image: "/uploads/service4.jpeg",
+    href: "/services/Healthcare-Virtual-Assistants",
   },
   {
     title: "Marketing Virtual Assistants",
     category: "Marketing",
     description:
       "Social media management, content creation, and campaign coordination for a stronger brand.",
-    image: "/uploads/about-sets-apart.png",
-    href: "https://virtualnexgen.com/service/Marketing-Virtual-Assistants",
+    image: "/uploads/service5.jpeg",
+    href: "/services/Marketing-Virtual-Assistants",
   },
   {
     title: "Administrative Support",
     category: "Admin",
     description:
       "Email management, scheduling, data entry, and reliable administrative support for daily operations.",
-    image: "/uploads/about-mission-vision.png",
-    href: "https://virtualnexgen.com/service/Administrative-Support",
+    image: "/uploads/service6.jpeg",
+    href: "/services/Administrative-Support",
   },
   {
     title: "Bookkeeping Virtual Assistants",
     category: "Bookkeeping",
     description:
       "Accurate accounting, invoicing, expense tracking, and financial records that stay audit-ready.",
-    image: "/uploads/about-why-choose.jpg",
-    href: "https://virtualnexgen.com/service/Bookkeeping-Virtual-Assistants",
+    image: "/uploads/service7.jpeg",
+    href: "/services/Bookkeeping-Virtual-Assistants",
   },
   {
     title: "AI Automation Services",
     category: "AI Solutions",
     description:
       "Chatbots, intelligent workflows, and AI tools that reduce costs, save time, and drive innovation.",
-    image: "/uploads/cs-ai.jpg",
-    href: "https://virtualnexgen.com/service/AI-Automation-Services",
+    image: "/uploads/service8.jpeg",
+    href: "/services/AI-Automation-Services",
   },
   {
     title: "Manufacturing & Engineering",
     category: "Manufacturing",
     description:
       "Specialized technical support with excellence for manufacturing and engineering operations.",
-    image: "/uploads/about-security.png",
-    href: "https://virtualnexgen.com/service/Manufacturing-Engineering-Services-with-Excellence",
+    image: "/uploads/service9.jpeg",
+    href: "/services/Manufacturing-Engineering-Services-with-Excellence",
   },
 ];
 

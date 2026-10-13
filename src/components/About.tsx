@@ -89,7 +89,7 @@ export default function About() {
               <Parallax speed={0.03}>
                 <div className="w-full overflow-hidden rounded-[2rem] border border-line shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
                   <Image
-                    src="/uploads/aboutNew.jpg"
+                    src="/uploads/about-why-choose.jpg"
                     alt="About Virtual Nexgen Solutions"
                     width={960}
                     height={810}
