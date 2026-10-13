@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, LogIn, ShieldCheck } from "lucide-react";
+import StarBurstBackground from "@/components/StarBurstBackground";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -36,10 +37,15 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="grid min-h-screen place-items-center bg-gradient-to-br from-[#01012F] via-[#01012F] to-[#000000] px-6">
+    <main className="relative isolate grid min-h-screen place-items-center overflow-hidden bg-[#01012F] px-6">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(18,180,207,0.12),_transparent_54%),linear-gradient(135deg,_#01012F,_#01012F_52%,_#000000)]"
+      />
+      <StarBurstBackground />
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-[2rem] border border-white/20 bg-white/10 backdrop-blur p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur"
+        className="relative z-10 w-full max-w-md rounded-[2rem] border border-white/20 bg-[#050b2b]/75 p-8 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl"
       >
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="icon-tile h-14 w-14">
@@ -106,6 +112,6 @@ export default function AdminLogin() {
           )}
         </button>
       </form>
-    </div>
+    </main>
   );
 }

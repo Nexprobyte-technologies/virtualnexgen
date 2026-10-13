@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "db:migrate": "prisma migrate deploy",
+    "admin:set-credentials": "node scripts/set-admin-credentials.mjs",
     "import:blog-images": "node scripts/import-blog-images.mjs",
     "postinstall": "prisma skills sync || exit 0"
   },
