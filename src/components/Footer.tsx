@@ -117,11 +117,12 @@ export default function Footer() {
           <Reveal className="lg:col-span-1">
             <div>
               <Image
-                src="https://virtualnexgen.com/assets/uploads/logo/37678.png"
+                src="/uploads/11590.webp"
                 alt="Virtual Nexgen Solutions"
                 width={160}
                 height={48}
                 loading="lazy"
+                unoptimized
                 className="h-12 w-auto object-contain"
               />
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">

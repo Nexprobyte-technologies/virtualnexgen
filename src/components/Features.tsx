@@ -12,7 +12,7 @@ const services = [
     category: "Insurance",
     description:
       "Policy management, claims processing, and seamless insurance support that ensures accuracy and efficiency.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/61141.png",
+    image: "/uploads/cs-insurance.jpg",
     href: "https://virtualnexgen.com/service/Insurance-Virtual-Assistants",
   },
   {
@@ -20,7 +20,7 @@ const services = [
     category: "Real Estate",
     description:
       "Lead management, appointments, listings, and property operations handled by trained specialists.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/11911.png",
+    image: "/uploads/cs-realestate.jpg",
     href: "https://virtualnexgen.com/service/Real-Estate-Virtual-Assistants",
   },
   {
@@ -28,7 +28,7 @@ const services = [
     category: "Legal",
     description:
       "Case management, legal research, document drafting, and back-office support tailored for law firms.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/96748.png",
+    image: "/uploads/cs-legal.jpg",
     href: "https://virtualnexgen.com/service/Legal-Virtual-Assistants",
   },
   {
@@ -36,7 +36,7 @@ const services = [
     category: "Healthcare",
     description:
       "Patient coordination, appointment scheduling, and medical admin support with confidentiality.",
-    image: "https://virtualnexgen.com/assets/uploads/about/83526.png",
+    image: "/uploads/about-who-we-are.png",
     href: "https://virtualnexgen.com/service/Healthcare-Virtual-Assistants",
   },
   {
@@ -44,7 +44,7 @@ const services = [
     category: "Marketing",
     description:
       "Social media management, content creation, and campaign coordination for a stronger brand.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/11170.png",
+    image: "/uploads/about-sets-apart.png",
     href: "https://virtualnexgen.com/service/Marketing-Virtual-Assistants",
   },
   {
@@ -52,7 +52,7 @@ const services = [
     category: "Admin",
     description:
       "Email management, scheduling, data entry, and reliable administrative support for daily operations.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/39995.jpg",
+    image: "/uploads/about-mission-vision.png",
     href: "https://virtualnexgen.com/service/Administrative-Support",
   },
   {
@@ -60,7 +60,7 @@ const services = [
     category: "Bookkeeping",
     description:
       "Accurate accounting, invoicing, expense tracking, and financial records that stay audit-ready.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/93584.jpg",
+    image: "/uploads/about-why-choose.jpg",
     href: "https://virtualnexgen.com/service/Bookkeeping-Virtual-Assistants",
   },
   {
@@ -68,7 +68,7 @@ const services = [
     category: "AI Solutions",
     description:
       "Chatbots, intelligent workflows, and AI tools that reduce costs, save time, and drive innovation.",
-    image: "https://virtualnexgen.com/assets/uploads/about/63494.jpg",
+    image: "/uploads/cs-ai.jpg",
     href: "https://virtualnexgen.com/service/AI-Automation-Services",
   },
   {
@@ -76,7 +76,7 @@ const services = [
     category: "Manufacturing",
     description:
       "Specialized technical support with excellence for manufacturing and engineering operations.",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/22211.jpg",
+    image: "/uploads/about-security.png",
     href: "https://virtualnexgen.com/service/Manufacturing-Engineering-Services-with-Excellence",
   },
 ];
@@ -196,6 +196,7 @@ export default function Features() {
                   fill
                   sizes="(min-width: 1024px) 370px, (min-width: 640px) 330px, 280px"
                   loading="lazy"
+                  unoptimized
                   className="object-cover"
                 />
                 <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#02024E] shadow-sm">

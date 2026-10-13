@@ -14,7 +14,7 @@ const caseStudies = [
     title:
       "How Real Estate Virtual Assistants Streamlined Operations and Boosted Sales",
     text: "A real estate agency's pipeline was clogged with unqualified leads and missed appointments...",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/97341.jpg",
+    image: "/uploads/cs-realestate.jpg",
     href: "https://virtualnexgen.com/case-study/How-Real-Estate-Virtual-Assistants-Streamlined-Operations-and-Boosted-Sales",
   },
   {
@@ -23,7 +23,7 @@ const caseStudies = [
     title:
       "How AI Automation Transformed Operations for a Home Improvement Business",
     text: "A growing home improvement business struggled to follow up on leads quickly...",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/40212.jpg",
+    image: "/uploads/cs-ai.jpg",
     href: "/case-study/ai-automation-home-improvement",
   },
   {
@@ -32,7 +32,7 @@ const caseStudies = [
     title:
       "How Legal Virtual Assistants Enhanced Efficiency & Profitability for Law Firms",
     text: "A mid-sized law firm was drowning in administrative work...",
-    image: "https://virtualnexgen.com/assets/uploads/aboutus/40212.jpg",
+    image: "/uploads/cs-legal.jpg",
     href: "https://virtualnexgen.com/case-study/How-Legal-Virtual-Assistants-Enhanced-Efficiency-and-Profitability-for-Law-Firms",
   },
 ];
@@ -89,12 +89,13 @@ export default function About() {
               <Parallax speed={0.03}>
                 <div className="w-full overflow-hidden rounded-[2rem] border border-line shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
                   <Image
-                    src="https://virtualnexgen.com/assets/uploads/aboutus/11960.jpg"
+                    src="/uploads/aboutNew.jpg"
                     alt="About Virtual Nexgen Solutions"
                     width={960}
                     height={810}
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     loading="lazy"
+                    unoptimized
                     className="h-auto w-full object-contain"
                   />
                 </div>
@@ -191,6 +192,7 @@ export default function About() {
                     fill
                     sizes="(min-width: 1024px) 380px, (min-width: 768px) 45vw, 100vw"
                     loading="lazy"
+                    unoptimized
                     className="object-cover transition duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#fffaf3]/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
