@@ -19,8 +19,11 @@ export default function StarBurstBackground() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d");
-    if (!canvas || !context) return;
+    if (canvas === null) return;
+    const targetCanvas: HTMLCanvasElement = canvas;
+
+    const context = targetCanvas.getContext("2d");
+    if (context === null) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const stars: Star[] = Array.from({ length: STAR_COUNT }, (_, index) => ({
@@ -38,12 +41,12 @@ export default function StarBurstBackground() {
     let previousTime = 0;
 
     function resize() {
-      const bounds = canvas.getBoundingClientRect();
+      const bounds = targetCanvas.getBoundingClientRect();
       const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
       width = bounds.width;
       height = bounds.height;
-      canvas.width = Math.round(width * ratio);
-      canvas.height = Math.round(height * ratio);
+      targetCanvas.width = Math.round(width * ratio);
+      targetCanvas.height = Math.round(height * ratio);
       context?.setTransform(ratio, 0, 0, ratio, 0, 0);
       if (reducedMotion) draw(0);
     }
@@ -102,7 +105,7 @@ export default function StarBurstBackground() {
     }
 
     const observer = new ResizeObserver(resize);
-    observer.observe(canvas);
+    observer.observe(targetCanvas);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     resize();
     if (!reducedMotion && !document.hidden) {

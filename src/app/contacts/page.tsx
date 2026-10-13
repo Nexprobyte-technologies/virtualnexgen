@@ -173,6 +173,7 @@ export default function ContactPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
             <SectionHeading
               align="center"
+              eyebrow="Contact Us"
               title="Tell Us About Your"
               highlight="Requirements"
               description="Answer a few quick questions and we'll route you to the right team."
