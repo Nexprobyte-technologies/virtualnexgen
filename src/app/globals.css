@@ -678,3 +678,55 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   height: 10px;
   background: #12B4CF;
 }
+
+.footer-blog-viewport {
+  height: 16.5rem;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent);
+}
+
+.footer-blog-track {
+  display: flex;
+  flex-direction: column;
+  animation: footer-blog-scroll 24s linear infinite;
+  will-change: transform;
+}
+
+.footer-blog-group {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.footer-blog-group + .footer-blog-group {
+  padding-top: 1.25rem;
+}
+
+.footer-blog-viewport:hover .footer-blog-track,
+.footer-blog-viewport:focus-within .footer-blog-track {
+  animation-play-state: paused;
+}
+
+@keyframes footer-blog-scroll {
+  to {
+    transform: translateY(calc(-50% - 0.625rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-blog-viewport {
+    height: auto;
+    max-height: 16.5rem;
+    overflow-y: auto;
+    mask-image: none;
+  }
+
+  .footer-blog-track {
+    animation: none;
+  }
+
+  .footer-blog-group + .footer-blog-group {
+    display: none;
+  }
+}

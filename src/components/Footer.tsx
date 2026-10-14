@@ -110,6 +110,32 @@ export default function Footer() {
     };
   }, []);
 
+  const renderBlogCards = (duplicate = false) => (
+    <div className="footer-blog-group" aria-hidden={duplicate}>
+      {blogPosts.map((post) => (
+        <a
+          key={post.slug}
+          href={`/blog/${post.slug}`}
+          tabIndex={duplicate ? -1 : undefined}
+          className="group flex items-center gap-4"
+        >
+          <Image
+            src={post.image}
+            alt=""
+            width={80}
+            height={64}
+            loading="lazy"
+            unoptimized
+            className="h-16 w-20 shrink-0 rounded-xl object-cover"
+          />
+          <span className="text-sm font-medium leading-snug text-white/70 transition group-hover:text-white">
+            {post.title}
+          </span>
+        </a>
+      ))}
+    </div>
+  );
+
   return (
     <footer id="contact" className="relative bg-[#01012F] overflow-hidden shadow-[0_-4px_30px_rgba(0,0,0,0.05)]">
       <div className="divider-gradient" />
@@ -241,26 +267,11 @@ export default function Footer() {
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
                 Our Blog
               </h4>
-              <div className="grid gap-5">
-                {blogPosts.map((post) => (
-                  <a
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="group flex items-center gap-4"
-                  >
-                    <Image
-                      src={post.image}
-                      alt=""
-                      width={80}
-                      height={64}
-                      loading="lazy"
-                      className="h-16 w-20 shrink-0 rounded-xl object-cover"
-                    />
-                    <span className="text-sm font-medium leading-snug text-white/70 transition group-hover:text-white">
-                      {post.title}
-                    </span>
-                  </a>
-                ))}
+              <div className="footer-blog-viewport" aria-label="Latest blog posts">
+                <div className="footer-blog-track">
+                  {renderBlogCards()}
+                  {renderBlogCards(true)}
+                </div>
               </div>
             </div>
           </Reveal>
