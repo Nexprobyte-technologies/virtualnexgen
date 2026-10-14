@@ -36,28 +36,229 @@ const contactChannels = [
 
 const testimonials = [
   {
-    quote:
-      "Virtual Nexgen Solutions transformed the way we operate. Their team is responsive and professional, making our workflow seamless.",
-    name: "John Smith",
-    role: "Client",
+    quote: "Having dedicated help with scheduling, customer follow-ups, and daily administrative work has made a real difference. Our team can spend more time on customers instead of chasing paperwork.",
+    name: "Michael Bennett",
+    role: "Owner, HVAC Services",
   },
   {
-    quote:
-      "The assistance we received was exceptional! They understood our needs and delivered beyond expectations every time.",
-    name: "Michael Jones",
-    role: "Client",
+    quote: "The biggest benefit has been consistency. Our assistant understands our process, keeps our records organized, and helps make sure important follow-ups don't get missed.",
+    name: "Lauren Mitchell",
+    role: "Managing Broker",
   },
   {
-    quote:
-      "I can't recommend Virtual Nexgen Solutions enough! Their support has been a game changer for our business.",
-    name: "Sarah Brown",
-    role: "Client",
+    quote: "We were looking for dependable help with client paperwork and meeting coordination. Having someone who learns our systems has made delegating routine tasks much easier.",
+    name: "David Morgan",
+    role: "Financial Advisor",
   },
   {
-    quote:
-      "Outstanding service and professionalism. They truly care about their clients and their success.",
-    name: "Emily Davis",
-    role: "Client",
+    quote: "Our office gets busy very quickly, especially when several jobs are active. The additional support with documentation and coordination helps us keep things moving.",
+    name: "Stephanie Price",
+    role: "Construction Project Manager",
+  },
+  {
+    quote: "The support with policy servicing, renewal follow-ups, and document requests has helped us manage our workload more consistently. It's been a useful addition to our agency.",
+    name: "Jennifer Walsh",
+    role: "Independent Insurance Agent",
+  },
+  {
+    quote: "We needed help keeping tenant requests, maintenance updates, and property records organized. Having dedicated administrative support has made our daily workflow easier to manage.",
+    name: "Olivia Grant",
+    role: "Property Manager",
+  },
+  {
+    quote: "Our team handles a lot of moving parts, from load updates to paperwork and invoicing. Having help with those details gives our dispatchers more time to focus on operations.",
+    name: "Thomas Rivera",
+    role: "Freight Operations Manager",
+  },
+  {
+    quote: "The communication has been straightforward, and our assistant has become familiar with how we work. It makes a difference when you don't have to explain the same process repeatedly.",
+    name: "Rebecca Adams",
+    role: "Insurance Agency Principal",
+  },
+  {
+    quote: "Having help with order-related questions, product updates, and routine store tasks has freed up time for us to focus on improving the customer experience.",
+    name: "Nicole Parker",
+    role: "E-commerce Founder",
+  },
+  {
+    quote: "We appreciate the support with appointment coordination and customer communication. It helps our office stay organized while our technicians are out in the field.",
+    name: "Peter Lawson",
+    role: "Plumbing Contractor",
+  },
+  {
+    quote: "Document collection and client follow-ups can take up a surprising amount of time. The additional administrative support helps us keep files organized and work through our task list.",
+    name: "Emily Richardson",
+    role: "CPA Firm Partner",
+  },
+  {
+    quote: "The support with lead tracking and inspection scheduling has helped us stay on top of incoming opportunities. Our team can focus more on estimates and managing jobs.",
+    name: "Megan Phillips",
+    role: "Roofing Company Owner",
+  },
+  {
+    quote: "Our assistant helps with scheduling, file organization, and routine coordination. It's a practical way to manage recurring work without putting more pressure on our internal team.",
+    name: "Ashley Turner",
+    role: "Office Administrator",
+  },
+  {
+    quote: "Having support with client onboarding, CRM updates, and meeting preparation has helped our advisors spend more time on client relationships.",
+    name: "Christopher Lee",
+    role: "Wealth Advisor",
+  },
+  {
+    quote: "The administrative side of restoration work can get complicated when multiple jobs are underway. Help with job files and follow-ups makes it easier to keep information organized.",
+    name: "Laura Bennett",
+    role: "Restoration Project Manager",
+  },
+  {
+    quote: "We needed someone to help keep borrower documents and outstanding items organized. The support has made it easier for our loan team to track what's still needed.",
+    name: "Brandon Cole",
+    role: "Mortgage Broker",
+  },
+  {
+    quote: "The team has helped us keep project records, invoices, and routine coordination under control. It gives us more time to focus on the work happening on-site.",
+    name: "Mark Henderson",
+    role: "General Contractor",
+  },
+  {
+    quote: "Having help with appointment scheduling and routine administrative tasks has made our front-office workload more manageable. Clear procedures are especially important for our practice.",
+    name: "Melissa Grant",
+    role: "Medical Practice Administrator",
+  },
+  {
+    quote: "We value having a consistent point of contact who understands our workflows. Communication is clear, and recurring tasks are easier to delegate.",
+    name: "Ryan Mitchell",
+    role: "Business Owner",
+  },
+  {
+    quote: "Our assistant helps track loads, follow up on paperwork, and keep information updated. That support helps our team stay organized during busy days.",
+    name: "Ashley Turner",
+    role: "Dispatch Manager",
+  },
+  {
+    quote: "We wanted reliable help with client intake, scheduling, and file organization. Having support for routine administrative work gives our legal team more time for case-related responsibilities.",
+    name: "Jonathan Miller",
+    role: "Managing Attorney",
+  },
+  {
+    quote: "The additional help with lead follow-ups and transaction coordination has made our workflow more manageable. It's valuable to have someone keeping track of the details.",
+    name: "Samantha Reed",
+    role: "Real Estate Broker Associate",
+  },
+  {
+    quote: "Our assistant helps keep customer requests and service appointments organized. It has reduced the amount of back-and-forth our office needs to handle.",
+    name: "Rachel Foster",
+    role: "HVAC Operations Manager",
+  },
+  {
+    quote: "We appreciate the attention given to document organization and outstanding-item follow-ups. It helps our team stay on top of administrative work during busy periods.",
+    name: "Matthew Scott",
+    role: "Accounting Firm Owner",
+  },
+  {
+    quote: "The support with maintenance coordination and tenant communication has helped us keep better track of open requests across our properties.",
+    name: "Kevin Parker",
+    role: "Residential Property Manager",
+  },
+  {
+    quote: "Having assistance with estimate follow-ups and customer records has made our office processes more consistent. It's helpful to know those tasks have dedicated attention.",
+    name: "Scott Reynolds",
+    role: "Roofing Contractor",
+  },
+  {
+    quote: "Our VA helps with routine client communication and keeps important information organized. That allows our team to focus on providing advice and building relationships.",
+    name: "Natalie Brooks",
+    role: "Wealth Management Operations Manager",
+  },
+  {
+    quote: "We needed support with scheduling, customer inquiries, and job updates. The added help has made it easier to coordinate our work without everything landing on one person.",
+    name: "Anthony Brooks",
+    role: "Plumbing Company Owner",
+  },
+  {
+    quote: "The administrative support has helped us keep applications, documents, and borrower follow-ups organized. It gives our loan officers more time to work directly with clients.",
+    name: "Amanda Ellis",
+    role: "Mortgage Operations Manager",
+  },
+  {
+    quote: "Having help with product listings, customer inquiries, and order administration keeps our store running more smoothly. It's a useful support system as our workload changes.",
+    name: "Victoria Hayes",
+    role: "Online Retail Business Owner",
+  },
+  {
+    quote: "Our assistant helps keep client records current and follows established procedures. We value having reliable support for the routine work that keeps the agency running.",
+    name: "Michelle Carter",
+    role: "Insurance Agency Owner",
+  },
+  {
+    quote: "The support with project documentation, invoice tracking, and coordination has helped reduce the administrative back-and-forth between our office and field teams.",
+    name: "Jason Cooper",
+    role: "Construction Business Owner",
+  },
+  {
+    quote: "We needed help with client scheduling and routine office tasks. Having additional support has helped our staff manage the workload while keeping patient needs at the center.",
+    name: "James Patel",
+    role: "Practice Administrator",
+  },
+  {
+    quote: "The support with proof-of-delivery follow-ups and invoicing has helped us keep our paperwork moving. Those details matter when you're managing loads every day.",
+    name: "Brian Mitchell",
+    role: "Fleet Manager",
+  },
+  {
+    quote: "Our assistant helps organize job documentation and keeps follow-ups moving. It's been helpful to have someone focused on the administrative details while our team handles active projects.",
+    name: "Gregory Ellis",
+    role: "Restoration Company Owner",
+  },
+  {
+    quote: "The extra support with scheduling, records, and customer communication has made our day-to-day operations easier to coordinate.",
+    name: "Danielle Ward",
+    role: "Service Coordinator",
+  },
+  {
+    quote: "Having help with client documents, meeting preparation, and CRM updates has helped us create a more consistent administrative process.",
+    name: "Christopher Lee",
+    role: "RIA Managing Partner",
+  },
+  {
+    quote: "We appreciate the help with transaction entry, document collection, and routine follow-ups. It allows our accounting team to concentrate on work that requires their expertise.",
+    name: "Rebecca Adams",
+    role: "CPA & Firm Partner",
+  },
+  {
+    quote: "The onboarding process helped us establish our expectations and workflows. Once everything was in place, handing over recurring tasks became much easier.",
+    name: "Eric Sullivan",
+    role: "Logistics Coordinator",
+  },
+  {
+    quote: "Having support with new inquiries, appointment coordination, and client follow-ups has helped us keep our office organized and responsive.",
+    name: "Andrew Collins",
+    role: "Real Estate Team Leader",
+  },
+  {
+    quote: "We value the consistency and attention to detail. Having help with routine policy updates and client requests makes the workload easier to manage.",
+    name: "Robert Hayes",
+    role: "Insurance Agency Principal",
+  },
+  {
+    quote: "The support with file organization, scheduling, and routine coordination has helped our office stay on top of administrative responsibilities.",
+    name: "Claire Donovan",
+    role: "Law Firm Partner",
+  },
+  {
+    quote: "We needed someone to help keep customer communication and maintenance requests organized. The support has made it easier to keep track of what needs attention.",
+    name: "Olivia Grant",
+    role: "Property Operations Manager",
+  },
+  {
+    quote: "Our assistant helps with order administration and customer questions, giving us more time to focus on product development and growing the business.",
+    name: "Dylan Foster",
+    role: "E-commerce Business Owner",
+  },
+  {
+    quote: "Having a dedicated person to support recurring administrative work has made our workflow more predictable. Clear communication and follow-through are what we value most.",
+    name: "Daniel Brooks",
+    role: "",
   },
 ];
 
@@ -98,6 +299,7 @@ export default function ContactPage() {
   const [agree, setAgree] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [showAllTestimonials, setShowAllTestimonials] = useState(false);
 
   useEffect(() => {
     fetch("/api/contacts")
@@ -440,8 +642,8 @@ export default function ContactPage() {
               lightBackground
             />
             <div className="mt-12 grid gap-5 md:grid-cols-2">
-              {testimonials.map((t, i) => (
-                <Reveal key={t.name} delay={0.06 * i}>
+              {testimonials.slice(0, showAllTestimonials ? testimonials.length : 4).map((t, i) => (
+                <Reveal key={`${t.name}-${i}`} delay={0.06 * i}>
                   <figure className="h-full rounded-[1.75rem] bg-white p-6 sm:p-7 border border-[#01012F]/10">
                     <blockquote className="text-sm italic leading-relaxed text-[#02024E]/80">
                       &ldquo;{t.quote}&rdquo;
@@ -449,13 +651,25 @@ export default function ContactPage() {
                     <figcaption className="mt-5">
                       <span>
                         <span className="block text-sm font-bold text-[#02024E]">{t.name}</span>
-                        <span className="block text-xs text-[#02024E]/40">{t.role}</span>
+                        {t.role && <span className="block text-xs text-[#02024E]/40">{t.role}</span>}
                       </span>
                     </figcaption>
                   </figure>
                 </Reveal>
               ))}
             </div>
+            {testimonials.length > 4 && (
+              <div className="mt-8 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowAllTestimonials((showAll) => !showAll)}
+                  aria-expanded={showAllTestimonials}
+                  className="rounded-full bg-[#2CCBE6] px-6 py-3 text-sm font-semibold text-[#02024E] transition-colors hover:bg-[#12B4CF]"
+                >
+                  {showAllTestimonials ? "Show Less" : "View More"}
+                </button>
+              </div>
+            )}
           </div>
         </section>
 

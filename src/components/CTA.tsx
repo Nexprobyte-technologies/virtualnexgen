@@ -124,8 +124,8 @@ export default function CTA() {
           to { background-position: 200% center; }
         }
         @keyframes cta-card-pulse {
-          0%, 100% { box-shadow: 0 25px 60px rgba(18,180,207,0.16); }
-          50% { box-shadow: 0 28px 72px rgba(18,180,207,0.3), 0 0 24px rgba(18,180,207,0.14); }
+          0%, 100% { border-color: rgba(2,2,78,0.55); box-shadow: 0 25px 60px rgba(18,180,207,0.18), 0 0 0 4px rgba(2,2,78,0.08); }
+          50% { border-color: #fffaf3; box-shadow: 0 28px 72px rgba(18,180,207,0.3), 0 0 0 4px rgba(18,180,207,0.2); }
         }
         @keyframes cta-neon-sweep {
           0% { transform: scaleX(0.02); opacity: 0.25; }
@@ -181,7 +181,7 @@ export default function CTA() {
         </Reveal>
 
         <Reveal y={30} delay={0.15}>
-          <div className="cta-consultation-card bg-gradient-to-br from-white via-[#fffaf3] to-[#ddfaff] rounded-2xl sm:rounded-3xl border border-white/70 px-5 sm:px-8 md:px-10 py-6 sm:py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-[0_25px_60px_rgba(18,180,207,0.18)]">
+          <div className="cta-consultation-card bg-[#2CCBE6] rounded-2xl sm:rounded-3xl border-2 border-[#02024E]/55 px-5 sm:px-8 md:px-10 py-6 sm:py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-[0_25px_60px_rgba(18,180,207,0.24),0_0_0_4px_rgba(2,2,78,0.08)]">
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#02024E] text-center md:text-left">
               Start Saving With a Free Consultation
             </p>
@@ -190,10 +190,10 @@ export default function CTA() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-white border border-[#02024E] px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_4px_20px_rgba(255,255,255,0.4)] transition-all duration-300 hover:bg-white hover:border-[#02024E] w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-3 rounded-full bg-[#02024E] border border-[#02024E] px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_4px_20px_rgba(2,2,78,0.25)] transition-all duration-300 hover:bg-[#01012F] hover:border-[#01012F] w-full sm:w-auto justify-center"
               >
-                <span className="text-sm sm:text-base font-bold text-[#02024E] whitespace-nowrap">Book Your Demo</span>
-                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#fffaf3] text-[#02024E] flex-shrink-0 transition-colors duration-300 group-hover:bg-white group-hover:text-[#02024E]">
+                <span className="text-sm sm:text-base font-bold text-white whitespace-nowrap">Book Your Demo</span>
+                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white/15 text-white flex-shrink-0 transition-colors duration-300 group-hover:bg-white/25">
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
                 </span>
               </a>

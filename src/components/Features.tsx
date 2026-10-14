@@ -12,7 +12,7 @@ const services = [
     category: "Insurance",
     description:
       "Policy management, claims processing, and seamless insurance support that ensures accuracy and efficiency.",
-    image: "/uploads/service1.jpeg",
+    image: "/uploads/ser1.jpg",
     href: "/services/insurance-virtual-assistants",
   },
   {
@@ -20,7 +20,7 @@ const services = [
     category: "Real Estate",
     description:
       "Lead management, appointments, listings, and property operations handled by trained specialists.",
-    image: "/uploads/service2.jpeg",
+    image: "/uploads/ser2.jpg",
     href: "/services/Real-Estate-Virtual-Assistants",
   },
   {
@@ -28,7 +28,7 @@ const services = [
     category: "Legal",
     description:
       "Case management, legal research, document drafting, and back-office support tailored for law firms.",
-    image: "/uploads/service3.jpeg",
+    image: "/uploads/ser3.jpg",
     href: "/services/Legal-Virtual-Assistants",
   },
   {
@@ -36,7 +36,7 @@ const services = [
     category: "Healthcare",
     description:
       "Patient coordination, appointment scheduling, and medical admin support with confidentiality.",
-    image: "/uploads/service4.jpeg",
+    image: "/uploads/ser4.jpg",
     href: "/services/Healthcare-Virtual-Assistants",
   },
   {
@@ -44,7 +44,7 @@ const services = [
     category: "Marketing",
     description:
       "Social media management, content creation, and campaign coordination for a stronger brand.",
-    image: "/uploads/service5.jpeg",
+    image: "/uploads/ser5.jpg",
     href: "/services/Marketing-Virtual-Assistants",
   },
   {
@@ -52,7 +52,7 @@ const services = [
     category: "Admin",
     description:
       "Email management, scheduling, data entry, and reliable administrative support for daily operations.",
-    image: "/uploads/service6.jpeg",
+    image: "/uploads/ser6.jpg",
     href: "/services/Administrative-Support",
   },
   {
@@ -60,7 +60,7 @@ const services = [
     category: "Bookkeeping",
     description:
       "Accurate accounting, invoicing, expense tracking, and financial records that stay audit-ready.",
-    image: "/uploads/service7.jpeg",
+    image: "/uploads/ser7.jpg",
     href: "/services/Bookkeeping-Virtual-Assistants",
   },
   {
@@ -68,7 +68,7 @@ const services = [
     category: "AI Solutions",
     description:
       "Chatbots, intelligent workflows, and AI tools that reduce costs, save time, and drive innovation.",
-    image: "/uploads/service8.jpeg",
+    image: "/uploads/ser8.jpg",
     href: "/services/AI-Automation-Services",
   },
   {
@@ -76,7 +76,7 @@ const services = [
     category: "Manufacturing",
     description:
       "Specialized technical support with excellence for manufacturing and engineering operations.",
-    image: "/uploads/service9.jpeg",
+    image: "/uploads/ser9.jpg",
     href: "/services/Manufacturing-Engineering-Services-with-Excellence",
   },
 ];
@@ -203,14 +203,14 @@ export default function Features() {
                   {service.category}
                 </span>
               </div>
-              <div className="p-5">
-                <h3 className="text-lg font-bold text-[#02024E]">
+              <div className="flex h-[230px] flex-col p-5 sm:h-[220px] xl:h-[215px]">
+                <h3 className="h-12 text-lg font-bold text-[#02024E]">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#02024E]/60">
+                <p className="mt-2 h-[5.25rem] line-clamp-4 text-sm leading-relaxed text-[#02024E]/60 sm:h-[4.5rem] sm:line-clamp-3">
                   {service.description}
                 </p>
-                <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[#02024E] transition-colors duration-300 hover:bg-[#12B4CF]">
+                <span className="mt-3 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#02024E] transition-colors duration-300 hover:bg-[#12B4CF]">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
