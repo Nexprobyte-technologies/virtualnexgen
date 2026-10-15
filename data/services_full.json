@@ -3,10 +3,10 @@
     "id": 1,
     "name": "Insurance Virtual Assistants",
     "slug": "Insurance-Virtual-Assistants",
-    "url": "https://virtualnexgen.com/service/Insurance-Virtual-Assistants",
+    "url": "/service/Insurance-Virtual-Assistants",
     "title": "Insurance Virtual Assistants",
     "metaDescription": "Transform your insurance agency with skilled virtual assistants. Expert in AMS360, COI processing, claims management, policy renewals & data entry. Cut costs by 70%, boost efficiency today!",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/61141.png",
+    "image": "/uploads/ser1.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/61141.png",
       "https://virtualnexgen.com/assets/uploads/aboutus/26220.jpeg",
@@ -141,7 +141,7 @@
     "url": "https://virtualnexgen.com/service/Real-Estate-Virtual-Assistants",
     "title": "Real Estate Virtual Assistants",
     "metaDescription": "Scale your real estate business with expert VAs. Specializing in lead generation, transaction coordination, MLS listings, CRM management & client communication. Grow faster, save 70%!",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/11911.png",
+    "image": "/uploads/ser2.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/11911.png",
       "https://virtualnexgen.com/assets/uploads/aboutus/41576.png",
@@ -259,7 +259,7 @@
     "url": "https://virtualnexgen.com/service/Legal-Virtual-Assistants",
     "title": "Legal Virtual Assistants",
     "metaDescription": "Boost law firm efficiency with skilled legal virtual assistants. Expert in case management, legal research, document preparation, client intake & billing. Reduce costs, increase productivity!",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/96748.png",
+    "image": "/uploads/ser3.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/96748.png",
       "https://virtualnexgen.com/assets/uploads/aboutus/48661.jpeg",
@@ -372,7 +372,7 @@
     "url": "https://virtualnexgen.com/service/Healthcare-Virtual-Assistants",
     "title": "Healthcare Virtual Assistants",
     "metaDescription": "Elevate your healthcare practice with expert medical VAs. Specializing in patient scheduling, medical billing, EHR management, insurance verification & telehealth support. HIPAA-compliant!",
-    "image": "https://virtualnexgen.com/assets/uploads/about/83526.png",
+    "image": "/uploads/ser4.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/about/83526.png",
       "https://virtualnexgen.com/assets/uploads/aboutus/40115.png",
@@ -485,7 +485,7 @@
     "url": "https://virtualnexgen.com/service/Marketing-Virtual-Assistants",
     "title": "Marketing Virtual Assistants",
     "metaDescription": "Boost marketing ROI with skilled virtual assistants. Expert in social media management, content creation, email campaigns, SEO, PPC & analytics. Scale your marketing, save 70%!",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/11170.png",
+    "image": "/uploads/ser5.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/11170.png",
       "https://virtualnexgen.com/assets/uploads/aboutus/99590.jpg",
@@ -598,7 +598,7 @@
     "url": "https://virtualnexgen.com/service/Administrative-Support",
     "title": "Administrative Support Virtual Assistants",
     "metaDescription": "Save time with expert administrative VAs. Specializing in calendar management, email handling, data entry, travel booking & customer service. Boost productivity, reduce overhead by 70%!",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/39995.jpg",
+    "image": "/uploads/ser6.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/39995.jpg",
       "https://virtualnexgen.com/assets/uploads/aboutus/53537.png",
@@ -711,7 +711,7 @@
     "url": "https://virtualnexgen.com/service/Bookkeeping-Virtual-Assistants",
     "title": "Bookkeeping Virtual Assistants",
     "metaDescription": "Simplify your finances with expert Bookkeeping Virtual Assistants. Accurate bookkeeping, financial reporting & expense tracking. Save time, reduce errors!",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/93584.jpg",
+    "image": "/uploads/ser7.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/93584.jpg",
       "https://virtualnexgen.com/assets/uploads/aboutus/64651.jpg",
@@ -824,7 +824,7 @@
     "url": "https://virtualnexgen.com/service/AI-Automation-Services",
     "title": "AI Automation Services",
     "metaDescription": "Transform your business with AI automation! Streamline operations, boost efficiency & scale faster. Expert AI solutions for modern businesses. Get started today!",
-    "image": "https://virtualnexgen.com/assets/uploads/about/63494.jpg",
+    "image": "/uploads/ser8.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/about/63494.jpg",
       "https://virtualnexgen.com/assets/uploads/aboutus/37751.png",
@@ -942,7 +942,7 @@
     "url": "https://virtualnexgen.com/service/Manufacturing-Engineering-Services-with-Excellence",
     "title": "Industrial Engineering & Lean Six Sigma Consulting",
     "metaDescription": "Get Master",
-    "image": "https://virtualnexgen.com/assets/uploads/aboutus/22211.jpg",
+    "image": "/uploads/ser9.jpg",
     "images": [
       "https://virtualnexgen.com/assets/uploads/aboutus/22211.jpg",
       "https://virtualnexgen.com/assets/uploads/aboutus/40779.jpg",

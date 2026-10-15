@@ -340,18 +340,16 @@ export default function Hero() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 shadow-sm transition-all duration-300 hover:bg-[#12B4CF] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto justify-center"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base shadow-sm transition-all duration-300 hover:bg-[#12B4CF] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto"
               >
-                <span className="text-sm sm:text-base font-bold text-[#02024E] whitespace-nowrap">Book a Demo</span>
-                <span className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/20 text-[#02024E] flex-shrink-0 transition-all duration-300 group-hover:bg-[#12B4CF] group-hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)]">
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
+                <span className="whitespace-nowrap">Book a Demo</span>
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
                 href="#services"
-                className="group inline-flex items-center justify-center sm:justify-start gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base transition-colors hover:bg-[#12B4CF]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base shadow-sm transition-all duration-300 hover:bg-[#12B4CF] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto"
               >
-                <span>See Your Savings Estimate</span>
+                <span className="whitespace-nowrap">See Your Savings Estimate</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
             </div>
