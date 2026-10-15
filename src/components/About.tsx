@@ -15,7 +15,7 @@ const caseStudies = [
       "How Real Estate Virtual Assistants Streamlined Operations and Boosted Sales",
     text: "A real estate agency's pipeline was clogged with unqualified leads and missed appointments...",
     image: "/uploads/cs-realestate.jpg",
-    href: "https://virtualnexgen.com/case-study/How-Real-Estate-Virtual-Assistants-Streamlined-Operations-and-Boosted-Sales",
+    href: "/casestudy/How-Real-Estate-Virtual-Assistants-Streamlined-Operations-and-Boosted-Sales",
   },
   {
     tag: "AI Automation",
@@ -24,7 +24,7 @@ const caseStudies = [
       "How AI Automation Transformed Operations for a Home Improvement Business",
     text: "A growing home improvement business struggled to follow up on leads quickly...",
     image: "/uploads/cs-ai.jpg",
-    href: "/case-study/ai-automation-home-improvement",
+    href: "casestudy/How-AI-Automation-Transformed-Operations-for-a-Home-Improvement-Business",
   },
   {
     tag: "Legal Back-Office Support",
@@ -33,7 +33,7 @@ const caseStudies = [
       "How Legal Virtual Assistants Enhanced Efficiency & Profitability for Law Firms",
     text: "A mid-sized law firm was drowning in administrative work...",
     image: "/uploads/cs-legal.jpg",
-    href: "https://virtualnexgen.com/case-study/How-Legal-Virtual-Assistants-Enhanced-Efficiency-and-Profitability-for-Law-Firms",
+    href: "/casestudy/How-Legal-Virtual-Assistants-Enhanced-Efficiency-and-Profitability-for-Law-Firms",
   },
 ];
 
