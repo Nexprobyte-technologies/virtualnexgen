@@ -21,7 +21,7 @@ const services = [
     description:
       "Lead management, appointments, listings, and property operations handled by trained specialists.",
     image: "/uploads/ser2.jpg",
-    href: "/services/Real-Estate-Virtual-Assistants",
+    href: "/services/real-estate-virtual-assistants",
   },
   {
     title: "Legal Virtual Assistants",
@@ -29,7 +29,7 @@ const services = [
     description:
       "Case management, legal research, document drafting, and back-office support tailored for law firms.",
     image: "/uploads/ser3.jpg",
-    href: "/services/Legal-Virtual-Assistants",
+    href: "/services/legal-virtual-assistants",
   },
   {
     title: "Healthcare Virtual Assistants",
@@ -37,7 +37,7 @@ const services = [
     description:
       "Patient coordination, appointment scheduling, and medical admin support with confidentiality.",
     image: "/uploads/ser4.jpg",
-    href: "/services/Healthcare-Virtual-Assistants",
+    href: "/services/healthcare-virtual-assistants",
   },
   {
     title: "Marketing Virtual Assistants",
@@ -45,7 +45,7 @@ const services = [
     description:
       "Social media management, content creation, and campaign coordination for a stronger brand.",
     image: "/uploads/ser5.jpg",
-    href: "/services/Marketing-Virtual-Assistants",
+    href: "/services/marketing-virtual-assistants",
   },
   {
     title: "Administrative Support",
@@ -53,7 +53,7 @@ const services = [
     description:
       "Email management, scheduling, data entry, and reliable administrative support for daily operations.",
     image: "/uploads/ser6.jpg",
-    href: "/services/Administrative-Support",
+    href: "/services/administrative-support",
   },
   {
     title: "Bookkeeping Virtual Assistants",
@@ -61,7 +61,7 @@ const services = [
     description:
       "Accurate accounting, invoicing, expense tracking, and financial records that stay audit-ready.",
     image: "/uploads/ser7.jpg",
-    href: "/services/Bookkeeping-Virtual-Assistants",
+    href: "/services/bookkeeping-virtual-assistants",
   },
   {
     title: "AI Automation Services",
@@ -69,7 +69,7 @@ const services = [
     description:
       "Chatbots, intelligent workflows, and AI tools that reduce costs, save time, and drive innovation.",
     image: "/uploads/ser8.jpg",
-    href: "/services/AI-Automation-Services",
+    href: "/services/ai-automation-services",
   },
   {
     title: "Manufacturing & Engineering",
@@ -77,7 +77,7 @@ const services = [
     description:
       "Specialized technical support with excellence for manufacturing and engineering operations.",
     image: "/uploads/ser9.jpg",
-    href: "/services/Manufacturing-Engineering-Services-with-Excellence",
+    href: "/services/manufacturing-engineering-services-with-excellence",
   },
 ];
 
