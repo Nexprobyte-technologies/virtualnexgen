@@ -20,7 +20,7 @@ const staticLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/services") || pathname.startsWith("/about") || pathname.startsWith("/casestudy") || pathname.startsWith("/contacts");
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/services") || pathname.startsWith("/about") || pathname.startsWith("/casestudy") || pathname.startsWith("/contacts") || pathname.startsWith("/calculator");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeNav, setActiveNav] = useState(() => {
     if (pathname.startsWith("/blog")) return "Blog";
