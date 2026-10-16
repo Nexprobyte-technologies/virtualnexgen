@@ -43,6 +43,7 @@ export interface FolderFloatProps {
   spread?: number;
   lift?: number;
   tilt?: number;
+  rowHeight?: number;
   flapAngle?: number;
   restAngle?: number;
   openDuration?: number;
@@ -105,13 +106,20 @@ const layout = (
   lift: number,
   tilt: number,
   sizes: (Size | null)[],
+  rowHeight: number = ROW,
 ) => {
+  const isNarrow = spread < 185;
+  const actualRowHeight = isNarrow ? Math.min(rowHeight, 38) : rowHeight;
+  const maxRowWidth = Math.max(160, spread * 2);
+  const maxPillWidth = Math.max(120, maxRowWidth - 12);
+
   const rows: { items: { i: number; pw: number }[]; width: number }[] = [];
   let row: { i: number; pw: number }[] = [];
   let width = 0;
   list.forEach((item, i) => {
-    const pw = sizes[i]?.w ?? PAD + item.label.length * CHAR;
-    if (row.length && width + GAP + pw > spread * 2) {
+    const rawPw = sizes[i]?.w ?? PAD + item.label.length * CHAR;
+    const pw = Math.min(rawPw, maxPillWidth);
+    if (row.length && width + GAP + pw > maxRowWidth) {
       rows.push({ items: row, width });
       row = [];
       width = 0;
@@ -123,13 +131,17 @@ const layout = (
   const pos: { x: number; y: number; r: number }[] = [];
   rows.forEach((r, ri) => {
     let x = -r.width / 2;
-    const shift = (ri % 2 ? 1 : -1) * Math.min(16, spread * 0.1);
+    const shift = (ri % 2 ? 1 : -1) * Math.min(isNarrow ? 6 : 14, spread * 0.06);
     r.items.forEach(({ i, pw }) => {
       const j = jitter(i);
+      const rawX = x + pw / 2 + shift + (j - 0.5) * (isNarrow ? 3 : 6);
+      const minX = -spread + pw / 2;
+      const maxX = spread - pw / 2;
+      const clampedX = minX <= maxX ? Math.max(minX, Math.min(maxX, rawX)) : 0;
       pos[i] = {
-        x: x + pw / 2 + shift + (j - 0.5) * 6,
-        y: -lift - ri * ROW - j * 6,
-        r: tilt * (j * 2 - 1),
+        x: clampedX,
+        y: -lift - ri * actualRowHeight - j * (isNarrow ? 3 : 6),
+        r: tilt * (j * 2 - 1) * (isNarrow ? 0.6 : 1),
       };
       x += pw + GAP;
     });
@@ -168,6 +180,7 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
   spread = 230,
   lift = 30,
   tilt = 8,
+  rowHeight = 52,
   flapAngle = 34,
   restAngle = 16,
   openDuration = 520,
@@ -213,8 +226,8 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
   );
   const n = list.length;
   const pos = useMemo<{ x: number; y: number; r: number }[]>(
-    () => layout(list, spread, lift, tilt, sizes),
-    [list, spread, lift, tilt, sizes],
+    () => layout(list, spread, lift, tilt, sizes, rowHeight),
+    [list, spread, lift, tilt, sizes, rowHeight],
   );
   const topItemY = pos.length ? Math.min(...pos.map(({ y }) => y)) : 0;
   const popoutClearance = Math.max(0, 48 - 14 - topItemY);
@@ -475,17 +488,28 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
       sy: e.clientY,
       moved: false,
     };
-    try {
-      e.currentTarget.setPointerCapture(e.pointerId);
-    } catch {}
+    if (e.pointerType !== "touch") {
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
+    }
   };
   const move = (e: PointerEvent<HTMLButtonElement>, i: number) => {
     const w = world.current;
     const d = w.drag;
     if (!d || d.i !== i || d.id !== e.pointerId) return;
     if (!d.moved && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) >= DRAG_MIN) {
+      if (
+        e.pointerType === "touch" &&
+        Math.abs(e.clientY - d.sy) > Math.abs(e.clientX - d.sx)
+      ) {
+        return;
+      }
       d.moved = true;
       e.currentTarget.setAttribute("data-drag", "");
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
     }
     if (!d.moved) return;
     const b = w.bodies[i];
@@ -575,7 +599,7 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
                 pillRefs.current[i] = el;
               }}
               type="button"
-              className="pointer-events-none absolute top-0 left-1/2 m-0 h-[34px] cursor-pointer rounded-[17px] border border-white/40 px-3.5 whitespace-nowrap opacity-0 shadow-[0_4px_12px_rgba(0,0,0,0.14)] outline-none [background:var(--ff-item)] [color:var(--ff-item-ink)] [font:inherit] [transform:translate(-50%,44px)_scale(0.6)] [transform-origin:50%_50%] [-webkit-tap-highlight-color:transparent] [transition:transform_var(--ff-close)_var(--ff-ease-out)_calc((var(--ff-n)-1-var(--i))*var(--ff-stagger)*0.5),opacity_160ms_ease_calc((var(--ff-n)-1-var(--i))*var(--ff-stagger)*0.5+var(--ff-close)*0.45),scale_160ms_var(--ff-ease-out)] group-data-[open]:pointer-events-auto group-data-[open]:opacity-100 group-data-[open]:[transform:translate(calc(-50%+var(--x)),var(--y))_rotate(var(--r))_scale(1)] group-data-[open]:[transition:transform_var(--ff-open)_var(--ff-spring)_calc(var(--i)*var(--ff-stagger)),opacity_160ms_ease_calc(var(--i)*var(--ff-stagger)),scale_160ms_var(--ff-ease-out)] group-data-[live]:cursor-grab group-data-[live]:[transition:scale_160ms_var(--ff-ease-out)] data-[drag]:cursor-grabbing! group-data-[open]:hover:[scale:1.05] group-data-[open]:active:[scale:0.97] data-[pop]:[animation:folder-float-pop_320ms_var(--ff-ease-out)] motion-reduce:[transition:opacity_200ms_ease] motion-reduce:group-data-[open]:[transition:opacity_200ms_ease_calc(var(--i)*var(--ff-stagger))]"
+              className="pointer-events-none absolute top-0 left-1/2 m-0 h-[30px] sm:h-[34px] cursor-pointer rounded-[17px] border border-white/40 px-2.5 sm:px-3.5 whitespace-nowrap max-w-[min(260px,calc(100vw-36px))] sm:max-w-none opacity-0 shadow-[0_4px_12px_rgba(0,0,0,0.14)] outline-none touch-pan-y select-none [background:var(--ff-item)] [color:var(--ff-item-ink)] [font:inherit] [transform:translate(-50%,44px)_scale(0.6)] [transform-origin:50%_50%] [-webkit-tap-highlight-color:transparent] [transition:transform_var(--ff-close)_var(--ff-ease-out)_calc((var(--ff-n)-1-var(--i))*var(--ff-stagger)*0.5),opacity_160ms_ease_calc((var(--ff-n)-1-var(--i))*var(--ff-stagger)*0.5+var(--ff-close)*0.45),scale_160ms_var(--ff-ease-out)] group-data-[open]:pointer-events-auto group-data-[open]:opacity-100 group-data-[open]:[transform:translate(calc(-50%+var(--x)),var(--y))_rotate(var(--r))_scale(1)] group-data-[open]:[transition:transform_var(--ff-open)_var(--ff-spring)_calc(var(--i)*var(--ff-stagger)),opacity_160ms_ease_calc(var(--i)*var(--ff-stagger)),scale_160ms_var(--ff-ease-out)] group-data-[live]:cursor-grab group-data-[live]:[transition:scale_160ms_var(--ff-ease-out)] data-[drag]:cursor-grabbing! group-data-[open]:hover:[scale:1.05] group-data-[open]:active:[scale:0.97] data-[pop]:[animation:folder-float-pop_320ms_var(--ff-ease-out)] motion-reduce:[transition:opacity_200ms_ease] motion-reduce:group-data-[open]:[transition:opacity_200ms_ease_calc(var(--i)*var(--ff-stagger))]"
               tabIndex={open ? 0 : -1}
               aria-hidden={!open}
               data-pop={popped === i ? "" : undefined}
@@ -595,14 +619,14 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
                 if (!world.current.live || e.detail === 0) pick(item, i);
               }}
             >
-              <span className="block [animation:folder-float-drift_3.2s_ease-in-out_infinite] [animation-delay:calc(var(--i)*-0.7s)] [animation-play-state:paused] group-data-[open]:[animation-play-state:running] group-data-[physics]:[animation:none] group-data-[live]:[animation:none] motion-reduce:[animation:none]">
+              <span className="block truncate max-w-full text-xs sm:text-[13px] [animation:folder-float-drift_3.2s_ease-in-out_infinite] [animation-delay:calc(var(--i)*-0.7s)] [animation-play-state:paused] group-data-[open]:[animation-play-state:running] group-data-[physics]:[animation:none] group-data-[live]:[animation:none] motion-reduce:[animation:none]">
                 {item.label}
               </span>
             </button>
           );
         })}
       </div>
-      <div className="relative [width:var(--ff-w)] [height:var(--ff-h)]">
+      <div className="relative [width:var(--ff-w)] [height:var(--ff-h)] mx-auto max-w-full">
         <span
           className="absolute inset-0 z-0 [border-radius:var(--ff-r)] [background:var(--ff-back)] [transform:perspective(600px)_rotateX(8deg)] [transform-origin:50%_100%] before:absolute before:top-[calc(-1*var(--ff-tab))] before:left-0 before:h-[calc(var(--ff-tab)+var(--ff-r))] before:w-[42%] before:[border-radius:var(--ff-r)_var(--ff-r)_0_0] before:[background:inherit] before:content-['']"
           aria-hidden="true"
@@ -612,10 +636,12 @@ const FolderFloat: React.FC<FolderFloatProps> = ({
           aria-hidden="true"
         />
         <span
-          className="absolute right-0 bottom-0 left-0 z-[2] box-border flex h-[76%] flex-col items-center justify-end gap-[5px] px-3 py-3.5 text-center [border-radius:var(--ff-r)] [background:linear-gradient(180deg,color-mix(in_srgb,var(--ff-front)_92%,#fff),var(--ff-front)_60%)] [color:var(--ff-label)] shadow-[0_-10px_24px_rgba(0,0,0,0.28)] [transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] [transform-origin:50%_100%] [transition:transform_var(--ff-open)_var(--ff-ease-out)] group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-angle)))] motion-reduce:group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] motion-reduce:[transition:opacity_200ms_ease]"
+          className="absolute right-0 bottom-0 left-0 z-[2] box-border flex h-[76%] flex-col items-center justify-end gap-[4px] px-2.5 py-3 sm:px-3 sm:py-3.5 text-center [border-radius:var(--ff-r)] [background:linear-gradient(180deg,color-mix(in_srgb,var(--ff-front)_92%,#fff),var(--ff-front)_60%)] [color:var(--ff-label)] shadow-[0_-10px_24px_rgba(0,0,0,0.28)] [transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] [transform-origin:50%_100%] [transition:transform_var(--ff-open)_var(--ff-ease-out)] group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-angle)))] motion-reduce:group-data-[open]:[transform:perspective(600px)_rotateX(calc(-1*var(--ff-rest)))] motion-reduce:[transition:opacity_200ms_ease]"
           aria-hidden="true"
         >
-          <span className="text-base font-semibold leading-tight sm:text-lg">{label}</span>
+          <span className="text-xs sm:text-sm md:text-base font-bold leading-snug line-clamp-2 px-2 text-center max-w-full break-words">
+            {label}
+          </span>
         </span>
         <button
           type="button"

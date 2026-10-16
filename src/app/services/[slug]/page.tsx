@@ -781,7 +781,7 @@ export default async function ServiceDetailPage({
         <section
           className="relative overflow-hidden py-10 sm:py-16 bg-[#fffaf3]"
         >
-          <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="relative mx-auto max-w-7xl px-3 sm:px-8">
             <Reveal>
               <div className="text-center">
                  <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
@@ -807,18 +807,18 @@ export default async function ServiceDetailPage({
               </div>
             </Reveal>
 
-            <div className="relative mt-4 flex justify-center overflow-x-clip">
+            <div className="relative mt-4 flex justify-center w-full max-w-full overflow-x-clip">
               <ChapterFolder
                 items={folderItems}
                 label={service.name}
               />
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-sm">
               {folderHints.map((hint) => (
                 <span
                   key={hint}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/15 bg-white px-4 py-2 font-semibold text-[#02024E]/75 backdrop-blur"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/15 bg-white px-3.5 py-1.5 sm:px-4 sm:py-2 font-semibold text-[#02024E]/75 backdrop-blur"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
                   {hint}
@@ -839,7 +839,8 @@ export default async function ServiceDetailPage({
       />
 
       {/* How It Works */}
-      <section className="bg-cream/30 py-14">
+      <section id="complete-overview" className="bg-cream/30 py-14 scroll-mt-20">
+        <div id="get-started" className="scroll-mt-20" />
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="text-center">

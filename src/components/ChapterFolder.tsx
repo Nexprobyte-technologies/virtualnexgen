@@ -14,6 +14,76 @@ export default function ChapterFolder({
 }: ChapterFolderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [dimensions, setDimensions] = useState({
+    width: 280,
+    height: 180,
+    spread: 280,
+    lift: 34,
+    rowHeight: 52,
+    enablePhysics: true,
+  });
+
+  const updateDimensions = useCallback(() => {
+    if (!containerRef.current) return;
+    const cw = containerRef.current.clientWidth || window.innerWidth;
+
+    if (cw < 360) {
+      const fw = Math.min(240, Math.max(210, cw - 20));
+      setDimensions({
+        width: fw,
+        height: Math.round(fw * 0.62),
+        spread: Math.max(115, Math.floor((cw - 24) / 2)),
+        lift: 22,
+        rowHeight: 36,
+        enablePhysics: false,
+      });
+    } else if (cw < 640) {
+      const fw = Math.min(260, Math.max(230, cw - 32));
+      setDimensions({
+        width: fw,
+        height: Math.round(fw * 0.62),
+        spread: Math.max(140, Math.floor((cw - 32) / 2)),
+        lift: 26,
+        rowHeight: 38,
+        enablePhysics: false,
+      });
+    } else if (cw < 1024) {
+      setDimensions({
+        width: 270,
+        height: 175,
+        spread: Math.min(270, Math.floor((cw - 48) / 2)),
+        lift: 32,
+        rowHeight: 48,
+        enablePhysics: true,
+      });
+    } else {
+      setDimensions({
+        width: 280,
+        height: 180,
+        spread: 280,
+        lift: 34,
+        rowHeight: 52,
+        enablePhysics: true,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    updateDimensions();
+    const handleResize = () => updateDimensions();
+    window.addEventListener("resize", handleResize);
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined" && containerRef.current) {
+      ro = new ResizeObserver(() => updateDimensions());
+      ro.observe(containerRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ro?.disconnect();
+    };
+  }, [updateDimensions]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -31,15 +101,17 @@ export default function ChapterFolder({
   }, []);
 
   const goToOverview = useCallback(() => {
-    document
-      .getElementById("complete-overview")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target =
+      document.getElementById("complete-overview") ||
+      document.getElementById("get-started") ||
+      document.querySelector("section#how-it-works");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className={`transition-all duration-700 ease-out ${
+      className={`w-full flex justify-center transition-all duration-700 ease-out ${
         isInView
           ? "translate-y-0 scale-100 opacity-100"
           : "translate-y-8 scale-[0.82] opacity-0"
@@ -50,16 +122,18 @@ export default function ChapterFolder({
         label={label}
         trigger="click"
         autoOpenOnView={isInView}
-        drift={1}
-        width={280}
-        height={180}
-        spread={280}
-        lift={34}
-        radius={22}
-        tilt={7}
+        drift={dimensions.enablePhysics ? 1 : 0.6}
+        physics={dimensions.enablePhysics}
+        width={dimensions.width}
+        height={dimensions.height}
+        spread={dimensions.spread}
+        lift={dimensions.lift}
+        rowHeight={dimensions.rowHeight}
+        radius={20}
+        tilt={6}
         openDuration={560}
-        stagger={40}
-        bounce={0.3}
+        stagger={35}
+        bounce={0.25}
         onSelect={goToOverview}
         closeOnSelect
       />
