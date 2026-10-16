@@ -30,26 +30,52 @@ const services = [
 
 const newestBlogPosts: FooterBlogPost[] = [
   {
-    title: "Social Media Tips for Insurance Agencies: Boost Engagement.",
-    slug: "social-media-tips-for-insurance-agencies-boost-engagement",
-    date: "2026-09-30",
-    createdAt: "2026-09-30T07:52:50.118Z",
-    image: "/uploads/1790754768926-783095.webp",
+    title:
+      "Manufacturing & Engineering Services with Excellence: How Virtual Assistants Improve Operational Efficiency and Business Growth",
+    slug: "manufacturing-engineering-virtual-assistant-services-webp",
+    date: "2026-10-12",
+    createdAt: "2026-10-12T20:31:38.000Z",
+    image: "/uploadss/12161.png",
   },
   {
     title:
-      "Trucking Dispatch Virtual Assistant: A Practical System for Loads, Drivers, and Documentation",
-    slug: "trucking-dispatch-virtual-assistant-load-driver-support",
-    date: "2026-08-20",
-    createdAt: "2026-09-25T00:00:00.000Z",
-    image: "/Blog%20Images/41871.webp",
+      "Beyond Policy Paperwork: How Insurance Virtual Assistants Help Agencies Improve Efficiency and Client Service",
+    slug: "insurance-virtual-assistant-agency-support",
+    date: "2026-10-12",
+    createdAt: "2026-10-12T21:30:02.000Z",
+    image: "/uploadss/82905.png",
   },
   {
-    title: "7 Common Amazon Seller Mistakes That Reduce Sales (And How to Fix Them)",
-    slug: "amazon-seller-account-mistakes",
-    date: "2026-08-20",
-    createdAt: "2026-09-22T10:46:32.335Z",
-    image: "/Blog%20Images/33596.webp",
+    title:
+      "The Wealth Management Time Gap: How Virtual Assistants Help Financial Advisors Focus on Clients, Not Administration",
+    slug: "wealth-management-virtual-assistant-client-admin-support",
+    date: "2026-10-12",
+    createdAt: "2026-10-12T21:48:35.000Z",
+    image: "/uploadss/47920.png",
+  },
+  {
+    title:
+      "Beyond the Service Call: How HVAC Virtual Assistants Help Contractors Manage Scheduling, Customer Calls, and Business Growth",
+    slug: "hvac-virtual-assistant-scheduling-customer-calls",
+    date: "2026-10-12",
+    createdAt: "2026-10-12T22:15:34.000Z",
+    image: "/uploadss/67396.png",
+  },
+  {
+    title:
+      "From Incoming Calls to Confirmed Jobs: How Plumbing Virtual Assistants Help Contractors Manage Leads, Appointments, and Customer Communication",
+    slug: "plumbing-virtual-assistant-appointments-lead-management",
+    date: "2026-10-12",
+    createdAt: "2026-10-12T22:24:46.000Z",
+    image: "/uploadss/50598.png",
+  },
+  {
+    title:
+      "When Every Minute Matters: How Restoration Virtual Assistants Help Contractors Coordinate Emergency Jobs and Manage Operations",
+    slug: "restoration-virtual-assistant-emergency-job-coordination",
+    date: "2026-10-12",
+    createdAt: "2026-10-12T22:40:14.000Z",
+    image: "/uploadss/28702.png",
   },
 ];
 
@@ -97,9 +123,13 @@ export default function Footer() {
           .sort((a, b) => {
             const aDate = Date.parse(a.date);
             const bDate = Date.parse(b.date);
-            return (Number.isNaN(bDate) ? 0 : bDate) - (Number.isNaN(aDate) ? 0 : aDate);
+            const diff = (Number.isNaN(bDate) ? 0 : bDate) - (Number.isNaN(aDate) ? 0 : aDate);
+            if (diff !== 0) return diff;
+            const aCreated = Date.parse(a.createdAt);
+            const bCreated = Date.parse(b.createdAt);
+            return (Number.isNaN(bCreated) ? 0 : bCreated) - (Number.isNaN(aCreated) ? 0 : aCreated);
           })
-          .slice(0, 3);
+          .slice(0, 6);
 
         if (sortedPosts.length > 0) setBlogPosts(sortedPosts);
       })
@@ -265,7 +295,7 @@ export default function Footer() {
           <Reveal delay={0.16} className="lg:col-span-2">
             <div id="blog">
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
-                Our Blog
+                Our Blogs
               </h4>
               <div className="footer-blog-viewport" aria-label="Latest blog posts">
                 <div className="footer-blog-track">
