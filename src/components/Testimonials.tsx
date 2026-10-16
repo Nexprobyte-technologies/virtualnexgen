@@ -239,20 +239,20 @@ function splitColumns(items: typeof testimonials) {
 
 function GlassCard({ testimonial }: { testimonial: (typeof testimonials)[number] }) {
   return (
-    <div className="break-inside-avoid mb-4">
-      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg transition-all duration-300 hover:border-[#12B4CF]/40 hover:bg-white/15 hover:shadow-[0_8px_40px_rgba(6,182,212,0.08)]">
-        <div className="mb-3 flex gap-0.5">
+    <div className="break-inside-avoid mb-3 sm:mb-4">
+      <div className="rounded-2xl border border-[#01012F]/10 bg-white/85 backdrop-blur-md p-4 sm:p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[#12B4CF]/40 hover:bg-white hover:shadow-[0_8px_40px_rgba(6,182,212,0.12)]">
+        <div className="mb-2.5 sm:mb-3 flex gap-0.5">
           {Array.from({ length: 5 }).map((_, s) => (
-            <Star key={s} className="h-3.5 w-3.5 fill-[#12B4CF] text-[#12B4CF]" />
+            <Star key={s} className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-[#12B4CF] text-[#12B4CF]" />
           ))}
         </div>
-        <blockquote className="text-sm italic leading-relaxed text-[#02024E]/70">
+        <blockquote className="text-xs sm:text-sm italic leading-relaxed text-[#02024E]/75">
           &ldquo;{testimonial.text}&rdquo;
         </blockquote>
-        <div className="mt-5">
+        <div className="mt-3.5 sm:mt-5">
           <div>
-            <p className="text-sm font-semibold text-[#02024E]">{testimonial.name}</p>
-            <p className="text-xs text-[#02024E]/40">{testimonial.role}</p>
+            <p className="text-xs sm:text-sm font-bold text-[#02024E]">{testimonial.name}</p>
+            <p className="text-[11px] sm:text-xs text-[#02024E]/50">{testimonial.role}</p>
           </div>
         </div>
       </div>
@@ -272,9 +272,9 @@ function MarqueeColumn({
   const doubled = [...items, ...items];
 
   return (
-    <div className="relative h-[280px] overflow-hidden sm:h-[360px] md:h-[420px] lg:h-[460px]">
+    <div className="relative h-[380px] sm:h-[440px] md:h-[480px] lg:h-[520px] overflow-hidden">
       <div
-        className="testimonials-marquee-track flex flex-col"
+        className="testimonials-marquee-track flex flex-col select-none"
         style={{
           animation: `marqueeY ${duration}s linear infinite${reverse ? " reverse" : ""}`,
         }}
@@ -302,7 +302,9 @@ export default function Testimonials() {
             animation: none !important;
           }
         }
-        .testimonials-marquee-track:hover {
+        .testimonials-marquee-track:hover,
+        .testimonials-marquee-track:active,
+        .testimonials-marquee-track:focus-within {
           animation-play-state: paused !important;
         }
       `}</style>
@@ -311,37 +313,48 @@ export default function Testimonials() {
         id="testimonials"
         className="relative overflow-hidden py-8 sm:py-12 lg:py-16 bg-[#fffaf3]"
       >
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="relative mx-auto max-w-7xl px-3 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal y={20}>
-              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#12B4CF] ring-1 ring-[#12B4CF]/30">
+              <span className="inline-block rounded-full bg-[#12B4CF]/10 px-3.5 sm:px-5 py-1 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#12B4CF] ring-1 ring-[#12B4CF]/30">
                 Client Testimonials
               </span>
             </Reveal>
             <Reveal y={30} delay={0.12}>
-<h2 className="mt-5 sm:mt-7 text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#02024E]">
-              Hear How Our Solutions{" "}
-              <span className="text-[#12B4CF]">
-                Made a Difference
-              </span>
-            </h2>
+              <h2 className="mt-4 sm:mt-7 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#02024E] px-1">
+                Hear How Our Solutions{" "}
+                <span className="text-[#12B4CF]">
+                  Made a Difference
+                </span>
+              </h2>
             </Reveal>
             <Reveal y={20} delay={0.24}>
-              <p className="mx-auto mt-3 sm:mt-5 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-[#02024E]/60">
+              <p className="mx-auto mt-2.5 sm:mt-5 max-w-xl text-xs sm:text-base lg:text-lg leading-relaxed text-[#02024E]/60 px-2">
                 Real feedback from businesses that trust Virtual Nexgen Solutions.
               </p>
             </Reveal>
           </div>
 
-          <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 md:gap-6">
-            {cols.map((col, i) => (
-              <MarqueeColumn
-                key={i}
-                items={col}
-                duration={28 + i * 6}
-                reverse={i % 2 === 1}
-              />
-            ))}
+          <div className="relative mt-6 sm:mt-10">
+            {/* Top gradient fade mask */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 sm:h-16 bg-gradient-to-b from-[#fffaf3] via-[#fffaf3]/80 to-transparent" />
+            {/* Bottom gradient fade mask */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 sm:h-16 bg-gradient-to-t from-[#fffaf3] via-[#fffaf3]/80 to-transparent" />
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 md:gap-6">
+              {cols.map((col, i) => (
+                <div
+                  key={i}
+                  className={`${i === 1 ? "hidden sm:block" : ""} ${i === 2 ? "hidden md:block" : ""}`}
+                >
+                  <MarqueeColumn
+                    items={col}
+                    duration={36 + i * 8}
+                    reverse={i % 2 === 1}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
