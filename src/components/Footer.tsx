@@ -283,7 +283,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Virtual Nexgen Solutions. All rights
               reserved.
             </p>
-            <div className="flex gap-6 text-xs text-white/40">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-white/40 sm:justify-end">
               <a href="#" className="transition hover:text-white">
                 Privacy Policy
               </a>

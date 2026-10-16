@@ -143,7 +143,7 @@ export default function Stats() {
       ref={rootRef}
       className="relative overflow-hidden bg-[#fffaf3] py-16 lg:flex lg:flex-col lg:pt-16 lg:pb-10"
     >
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div data-focus-heading>
           <SectionHeading
             eyebrow="Why Choose Us"

@@ -87,7 +87,7 @@ export default function Stats3({ stats }: { stats: StatItem[] }) {
       ref={rootRef}
       className="relative overflow-hidden bg-white py-12 sm:py-14 lg:py-18"
     >
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <span className="inline-block rounded-full bg-cream-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
             Key Highlights

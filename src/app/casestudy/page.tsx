@@ -24,7 +24,7 @@ export default function CaseStudiesPage() {
       <Navbar />
       <main className="pt-10">
         <section className="relative overflow-hidden py-8 bg-[#fffaf3]">
-          <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 text-center">
             <SectionHeading
               eyebrow="Case Study"
               title="How Our Virtual Assistants and AI Automation Services Transformed Businesses."
@@ -34,7 +34,7 @@ export default function CaseStudiesPage() {
         </section>
 
         <section className="py-16">
-          <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
               {studies.map((study) => (
                 <Link
@@ -52,7 +52,7 @@ export default function CaseStudiesPage() {
                       />
                     </div>
                   )}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     {study.tag && (
                       <span className="mb-2 inline-block rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand-dark">
                         {study.tag}

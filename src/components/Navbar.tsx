@@ -239,7 +239,7 @@ export default function Navbar() {
 
         {mobileOpen && (
           <div className="xl:hidden mt-2 max-h-[calc(100dvh-6rem-env(safe-area-inset-top))] overflow-y-auto overscroll-contain rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.15)] animate-[navbar-drop_350ms_cubic-bezier(0.22,1,0.36,1)_both]">
-            <div className="mx-auto max-w-[1280px] px-6 py-4">
+            <div className="mx-auto max-w-[1280px] px-3 py-4 min-[380px]:px-4 sm:px-6">
               <nav className="flex flex-col gap-1">
 {isSubPage ? (
                     <Link

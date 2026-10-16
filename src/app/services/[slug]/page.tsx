@@ -188,7 +188,7 @@ function FullContentCards({ html }: { html: string }) {
     return (
       <article className="group overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white backdrop-blur-sm">
         <div className={`grid lg:grid-cols-2 ${flip ? "lg:[direction:rtl]" : ""}`}>
-          <div className="p-8 sm:p-10 lg:[direction:ltr]">
+          <div className="p-5 sm:p-10 lg:[direction:ltr]">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand shadow-[0_0_0_5px_rgba(6,182,212,0.15)]" />
             {renderHeading(card)}
             <div
@@ -237,7 +237,7 @@ function FullContentCards({ html }: { html: string }) {
     const heading = (card.heading || "").replace(/<[^>]*>/g, "").trim();
     const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
     return (
-      <article className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
+      <article className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-5 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
         <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
           {indexFromCard(card)}
         </span>
@@ -364,7 +364,7 @@ function FullContentCards({ html }: { html: string }) {
       )}
 
       {featuredImageCards.length > 0 && (
-        <div className="overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-brand-dark to-brand-deep p-8 text-white sm:p-12">
+        <div className="overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-brand-dark to-brand-deep p-5 text-white sm:p-12">
           {featuredImageCards.map((card, i) => {
             const images = card.body.match(/<img[^>]*>/gi) || [];
             const textBody = card.body.replace(/<img[^>]*>/gi, "");
@@ -438,7 +438,7 @@ function FullContentCards({ html }: { html: string }) {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
             {/* Left Column: FAQ Answers */}
             <div className="min-w-0 max-w-4xl">
-              <div className="rounded-[2rem] border border-[#01012F]/10 bg-white px-6 py-8 backdrop-blur-sm sm:px-10 sm:py-10">
+              <div className="rounded-[2rem] border border-[#01012F]/10 bg-white px-4 py-6 backdrop-blur-sm sm:px-10 sm:py-10">
                 <div className="flex items-center gap-3">
                   <span className="inline-block h-2 w-2 rounded-full bg-brand" />
                   {faqHeadingCard ? (
@@ -610,7 +610,7 @@ export default async function ServiceDetailPage({
               <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {service.eyebrow || service.name}
               </span>
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-[#02024E] sm:text-5xl">
+              <h1 className="mt-6 text-3xl font-extrabold leading-[1.1] tracking-tight text-[#02024E] sm:text-5xl">
                 {service.name}
               </h1>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#02024E]/80 sm:text-lg">
@@ -621,14 +621,14 @@ export default async function ServiceDetailPage({
                   href={heroPrimaryUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-7 py-3.5 text-sm font-semibold text-white transition"
+                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 sm:px-7 py-3.5 text-sm font-semibold text-white transition"
                 >
                   {heroPrimaryLabel}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
                 <a
                   href="#get-started"
-                  className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-7 py-3.5 text-sm font-semibold text-ink/80 transition hover:border-brand hover:text-brand-dark"
+                  className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-5 sm:px-7 py-3.5 text-sm font-semibold text-ink/80 transition hover:border-brand hover:text-brand-dark"
                 >
                   {heroSecondaryLabel}
                 </a>
@@ -712,7 +712,7 @@ export default async function ServiceDetailPage({
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-4">
               {problemCardsList.map((item) => (
                 <div
                   key={item.title}

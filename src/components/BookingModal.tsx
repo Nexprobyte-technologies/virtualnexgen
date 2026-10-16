@@ -117,7 +117,7 @@ export default function BookingModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 flex items-start justify-center overflow-y-auto px-4 pt-28 pb-10"
+      className="fixed inset-0 flex items-start justify-center overflow-y-auto px-2 pt-20 pb-6 sm:px-4 sm:pt-28 sm:pb-10"
       style={{ zIndex: 99999 }}
     >
       <div
@@ -134,7 +134,7 @@ export default function BookingModal({
         </button>
 
         <div className="flex w-full flex-col md:flex-row">
-          <div className="flex-1 border-r border-line p-6 sm:p-8">
+          <div className="flex-1 border-r border-line p-4 sm:p-8">
             {step === "success" ? (
               <div className="flex h-full flex-col items-center justify-center text-center">
                 <CheckCircle className="mb-4 h-14 w-14 text-green-500" />
@@ -224,7 +224,7 @@ export default function BookingModal({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3">
                   <div>
                     <label className="mb-1 block text-xs font-medium text-ink/60">
                       Full Name *
@@ -256,7 +256,7 @@ export default function BookingModal({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3">
                   <div>
                     <label className="mb-1 block text-xs font-medium text-ink/60">
                       Phone

@@ -270,7 +270,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
       {...rest}
     >
       <div ref={trackRef} className="relative w-full">
-        <div ref={stageRef} className="sticky top-0 w-full overflow-hidden [--se-title-size:4rem]">
+        <div ref={stageRef} className="sticky top-0 w-full overflow-hidden [--se-title-size:4rem] max-sm:[--se-title-size:2rem] max-[379px]:[--se-title-size:1.75rem]">
           <div
             ref={frameRef}
             className="absolute inset-0 [clip-path:inset(21%_29%_21%_29%_round_24px)] [will-change:clip-path]"

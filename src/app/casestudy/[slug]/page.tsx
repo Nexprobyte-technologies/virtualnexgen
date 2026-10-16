@@ -61,19 +61,19 @@ export default function CaseStudyDetailPage() {
 
         {/* Content */}
         <section className="py-16">
-          <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="mx-auto w-full max-w-4xl">
               <div className="mt-10">
                 {/* Tag pills (span) */}
                 <div className="flex flex-wrap items-center gap-2">
                   {study.tag && (
-                    <span className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/20 bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#02024E]">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/20 bg-white px-3 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-[#02024E]">
                       <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                       {study.tag}
                     </span>
                   )}
                   {study.industry && (
-                    <span className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#02024E]">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-[#02024E]">
                       <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                       {study.industry}
                     </span>

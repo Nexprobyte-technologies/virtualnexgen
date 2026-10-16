@@ -343,7 +343,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
           <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <Reveal y={25} delay={0.1}>
-                <h1 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
+                <h1 className="text-3xl min-[380px]:text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
                   Built on Trust <span className="text-[#12B4CF]">Driven</span> by Your{" "}
                   <span className="relative inline-block">
                     <span className="relative z-10 text-ink">Growth.</span>
@@ -365,12 +365,12 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 
               {/* Quick Actions */}
               <Reveal y={25} delay={0.3}>
-                <div className="mt-8 flex flex-wrap items-center gap-4">
+                <div className="mt-8 flex flex-col items-stretch gap-3 min-[380px]:flex-row min-[380px]:flex-wrap min-[380px]:items-center min-[380px]:gap-4">
                   <a
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 rounded-full bg-[#12B4CF] px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300 hover:bg-[#01012F] hover:text-white"
+                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#12B4CF] px-5 min-[380px]:px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300 hover:bg-[#01012F] hover:text-white"
                   >
                     <span>Schedule Consultation</span>
                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#01012F] text-white transition-transform duration-300 group-hover:bg-[#12B4CF] group-hover:text-white group-hover:rotate-45">
@@ -380,7 +380,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
 
                   <a
                     href="#timeline"
-                    className="inline-flex items-center gap-2.5 rounded-full border border-[#01012F]/30 bg-white px-6 py-3.5 text-sm sm:text-base font-bold text-ink backdrop-blur-sm transition-all duration-300 hover:bg-[#01012F] hover:text-white hover:border-[#01012F]"
+                    className="inline-flex items-center justify-center gap-2.5 rounded-full border border-[#01012F]/30 bg-white px-5 min-[380px]:px-6 py-3.5 text-sm sm:text-base font-bold text-ink backdrop-blur-sm transition-all duration-300 hover:bg-[#01012F] hover:text-white hover:border-[#01012F]"
                   >
                     <span>Explore Our Journey</span>
                     <ArrowRight className="h-4 w-4 text-[#12B4CF]" />
@@ -392,7 +392,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
             {/* Quick Stats Column */}
             <div className="lg:col-span-4">
               <Reveal y={25} delay={0.35}>
-                <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6 backdrop-blur-md shadow-[0_12px_32px_rgba(19,47,74,0.06)]">
+                <div className="rounded-2xl border border-[#01012F]/10 bg-white p-4 min-[380px]:p-6 backdrop-blur-md shadow-[0_12px_32px_rgba(19,47,74,0.06)]">
                     <div className="text-xs font-bold uppercase tracking-widest text-[#12B4CF]">
                       Impact at a Glance
                     </div>
@@ -634,7 +634,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             {/* Mission Card */}
             <Reveal y={25} delay={0.1}>
-              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-8 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#12B4CF]/50">
+              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-5 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#12B4CF]/50">
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#12B4CF] text-white font-bold">
@@ -674,7 +674,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
 
             {/* Vision Card */}
             <Reveal y={25} delay={0.2}>
-              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-8 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#12B4CF]/50">
+              <div className="relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-5 sm:p-10 backdrop-blur-md transition-all duration-300 hover:border-[#12B4CF]/50">
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#01012F] text-white font-bold">

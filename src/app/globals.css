@@ -243,6 +243,50 @@ body {
   }
 }
 
+/* Keep shared page and component layouts inside narrow phone viewports. */
+@media (max-width: 390px) {
+  html,
+  body {
+    width: 100%;
+    min-width: 320px;
+  }
+
+  main,
+  section,
+  header,
+  footer,
+  nav,
+  article,
+  aside {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :where(.grid, .flex) > * {
+    min-width: 0;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
+
+  /* Preserve deliberate horizontal carousels while preventing page-level overflow. */
+  .rich-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .custom-cursor,
+  .custom-cursor-dot {
+    display: none;
+  }
+}
+
 *,
 *::before,
 *::after {

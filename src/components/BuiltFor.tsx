@@ -31,6 +31,8 @@ const col3 = [
   { icon: Rocket, title: "Faster Operational Turnaround", text: "Delegate recurring administrative work so your team can spend more time on customers and business growth." },
 ];
 
+const allFeatures = [...col1, ...col2, ...col3];
+
 function FeatureCard({
   icon: Icon,
   title,
@@ -41,7 +43,7 @@ function FeatureCard({
   text: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[#12B4CF]/45 bg-white/55 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#12B4CF]/75 hover:bg-white/80 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]">
+    <div className="h-full rounded-2xl border border-[#12B4CF]/45 bg-white/55 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#12B4CF]/75 hover:bg-white/80 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]">
       <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
         <Icon className="h-5 w-5 text-[#12B4CF]" />
       </div>
@@ -158,9 +160,20 @@ export default function BuiltFor() {
               </Reveal>
             </div>
 
+            {/* Phone layout: consistent, swipeable feature cards */}
+            <div className="sm:hidden -mx-4 px-4 overflow-x-auto overscroll-x-contain snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex w-max gap-4 pb-2">
+                {allFeatures.map((feature) => (
+                  <div key={feature.title} className="h-[280px] w-[min(82vw,300px)] shrink-0 snap-start">
+                    <FeatureCard {...feature} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* RIGHT COLUMN - 3-Column Marquee Grid */}
             <Reveal y={40} delay={0.15}>
-              <div className="marquee-grid grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="marquee-grid hidden grid-cols-3 gap-4 sm:grid">
                 <MarqueeColumn items={col1} duration={32} />
                 <MarqueeColumn items={col2} duration={38} reverse />
                 <MarqueeColumn items={col3} duration={35} />
