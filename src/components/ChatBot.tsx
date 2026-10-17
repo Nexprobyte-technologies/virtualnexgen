@@ -305,16 +305,20 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
         type="button"
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close chat" : "Open chat"}
-        className="chat-widget-toggle fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-white shadow-[0_16px_44px_rgba(249,115,22,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(249,115,22,0.6)]"
+        className="chat-widget-toggle fixed bottom-5 right-5 z-50 grid h-[44px] w-[90px] place-items-center rounded-full bg-gradient-to-br from-brand-deep to-brand text-white shadow-[0_16px_44px_rgba(249,115,22,0.45)] transition hover:scale-105 hover:shadow-[0_16px_60px_rgba(249,115,22,0.6)] lg:h-[52px] lg:bottom-6 lg:right-6 xl:h-[60px] xl:bottom-8 xl:right-8"
       >
-        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {open ? (
+          <X className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6" />
+        ) : (
+          <MessageCircle className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6" />
+        )}
         {!open && (
-          <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500" />
+          <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 lg:h-3 lg:w-3 xl:h-3.5 xl:w-3.5" />
         )}
       </button>
 
       {open && (
-        <div className="chat-widget-panel fixed bottom-24 right-5 z-50 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_30px_90px_rgba(0,0,0,0.25)]">
+        <div className="chat-widget-panel fixed bottom-24 right-5 z-50 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_30px_90px_rgba(0,0,0,0.25)] lg:bottom-[calc(60px+16px)] lg:right-6 lg:h-[600px] lg:w-[min(92vw,480px)] xl:bottom-[calc(80px+16px)] xl:right-8 xl:h-[660px] xl:w-[min(92vw,560px)]">
           <div className="flex items-center gap-3 bg-gradient-to-r from-brand-deep to-brand px-4 py-3.5">
             <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
               <Bot className="h-5 w-5 text-ink" />

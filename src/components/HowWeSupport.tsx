@@ -72,15 +72,14 @@ export default function HowWeSupport() {
       const hasPreviousStep = direction < 0 && current > 0;
       if (!hasNextStep && !hasPreviousStep) return;
 
-      // Keep this section in place while the visitor moves through its steps.
-      event.preventDefault();
+      // Only debounce step changes; do NOT block native page scrolling.
       const now = Date.now();
       if (now - lastWheelTimeRef.current < 650) return;
       lastWheelTimeRef.current = now;
       setCurrent((stepIndex) => Math.max(0, Math.min(steps.length - 1, stepIndex + direction)));
     };
 
-    section.addEventListener("wheel", handleWheel, { passive: false });
+    section.addEventListener("wheel", handleWheel, { passive: true });
     return () => section.removeEventListener("wheel", handleWheel);
   }, [current]);
 
@@ -115,7 +114,7 @@ export default function HowWeSupport() {
   const step = steps[current];
 
   return (
-    <section ref={rootRef} data-lenis-prevent-wheel className="relative bg-[#fffaf3] py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
+    <section ref={rootRef} className="relative bg-[#fffaf3] py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
 
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12 relative z-10">
         <div className="w-full flex flex-col">

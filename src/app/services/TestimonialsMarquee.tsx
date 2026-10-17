@@ -49,7 +49,7 @@ export default function TestimonialsMarquee({
           {items.map((t, i) => (
             <div
               key={i}
-              className="w-[380px] shrink-0 rounded-2xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+              className="w-[380px] sm:w-[280px] shrink-0 rounded-2xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
             >
               <p className="text-sm leading-relaxed text-[#02024E]/75 italic">
                 &ldquo;{t.quote}&rdquo;

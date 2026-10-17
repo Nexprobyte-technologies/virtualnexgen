@@ -67,7 +67,7 @@ export default function InternationalClients() {
           </Reveal>
 
           <Reveal delay={0.15} className="relative w-full max-w-xs sm:max-w-lg lg:max-w-xl">
-            <div ref={globeSlotRef} className="mx-auto aspect-square w-full max-w-[420px]">
+            <div ref={globeSlotRef} className="mx-auto aspect-square w-full max-w-[420px] sm:max-w-[280px]">
               {loadGlobe ? <Globe3D /> : <div aria-hidden="true" className="h-full w-full" />}
             </div>
           </Reveal>

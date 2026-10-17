@@ -1,4 +1,4 @@
-import sanitizeHtml from "sanitize-html";
+﻿import sanitizeHtml from "sanitize-html";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -238,7 +238,7 @@ function FullContentCards({ html }: { html: string }) {
     const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
     return (
       <article className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-5 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
-        <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
+        <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] sm:text-[5rem] font-extrabold leading-none text-brand/10">
           {indexFromCard(card)}
         </span>
         <div className="relative grid gap-7 lg:grid-cols-[1fr_320px] lg:items-start">
@@ -604,13 +604,13 @@ export default async function ServiceDetailPage({
     <main className="min-h-screen bg-[#fffaf3]">
       {/* Hero */}
       <section className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid items-center gap-12 py-12 lg:grid-cols-2 lg:py-14">
+        <div className="grid items-center gap-6 sm:gap-12 py-12 lg:py-14 lg:grid-cols-2">
           <Reveal>
             <div>
               <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {service.eyebrow || service.name}
               </span>
-              <h1 className="mt-6 text-3xl font-extrabold leading-[1.1] tracking-tight text-[#02024E] sm:text-5xl">
+              <h1 className="mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.1] tracking-tight text-[#02024E]">
                 {service.name}
               </h1>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#02024E]/80 sm:text-lg">
@@ -624,7 +624,7 @@ export default async function ServiceDetailPage({
                   className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 sm:px-7 py-3.5 text-sm font-semibold text-white transition"
                 >
                   {heroPrimaryLabel}
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight className="h-4 w-4 transition-transform" />
                 </a>
                 <a
                   href="#get-started"
@@ -638,7 +638,7 @@ export default async function ServiceDetailPage({
 
           {/* Auto-Moving Gallery */}
           <Reveal delay={0.15}>
-            <div className="relative h-[420px] sm:h-[520px]">
+            <div className="infinite-spiral-container relative h-[420px] sm:h-[520px] max-w-full overflow-hidden">
               <InfiniteSpiral
                 items={spiralImages}
                 animationMode="all"
@@ -685,12 +685,12 @@ export default async function ServiceDetailPage({
               <h2 className="mt-6 text-3xl font-extrabold leading-tight text-[#02024E] sm:text-4xl">
                 {textOr(
                   service.problem?.heading,
-                  "Businesses Aren’t Short on Ambition —",
+                  "Businesses Arenâ€™t Short on Ambition â€”",
                 )}
                 {service.problem?.highlight?.trim() || service.problem?.heading?.trim() ? null : (
                   <span className="text-brand">
                     {" "}
-                    They’re Overloaded With Work
+                    Theyâ€™re Overloaded With Work
                   </span>
                 )}
               </h2>
@@ -737,7 +737,7 @@ export default async function ServiceDetailPage({
               <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {textOr(service.benefitsSection?.eyebrow, "Why Choose Us")}
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
+              <h2 className="mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#02024E] leading-tight">
                 {textOr(service.benefitsSection?.heading, "Built for")}
                 <span className="text-brand">
                   {" "}
@@ -787,7 +787,7 @@ export default async function ServiceDetailPage({
                  <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent-light">
                    {textOr(service.folderSection?.eyebrow, service.name.toUpperCase())}
                  </span>
-                 <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
+                 <h2 className="mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#02024E] leading-tight">
                    {service.folderSection?.heading?.trim() ? (
                      service.folderSection.heading
                    ) : (
@@ -796,7 +796,7 @@ export default async function ServiceDetailPage({
                      </>
                    )}
                   </h2>
-                  <p className="mx-auto mt-3 max-w-2xl text-sm text-[#02024E]/65 sm:text-base">
+                  <p className="mx-auto mt-3 max-w-[92%] sm:max-w-2xl text-sm text-[#02024E]/65 sm:text-base leading-relaxed">
                     {textOr(
                       service.folderSection?.text,
                       service.slug === "insurance-virtual-assistants"
@@ -807,7 +807,7 @@ export default async function ServiceDetailPage({
               </div>
             </Reveal>
 
-            <div className="relative mt-4 flex justify-center w-full max-w-full overflow-x-clip">
+            <div className="relative mt-4 flex justify-center w-full max-w-full overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <ChapterFolder
                 items={folderItems}
                 label={service.name}
@@ -847,7 +847,7 @@ export default async function ServiceDetailPage({
               <span className="inline-block rounded-full bg-[#12B4CF]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#02024E]">
                 {textOr(service.stepsSection?.eyebrow, "How It Works")}
               </span>
-              <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-[#02024E] sm:text-4xl">
+              <h2 className="mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#02024E] leading-tight">
                 {textOr(service.stepsSection?.heading, "Get Started in")}
                 {service.stepsSection?.highlight ? (
                   <span className="text-brand"> {service.stepsSection.highlight}</span>
@@ -902,7 +902,7 @@ export default async function ServiceDetailPage({
               </h2>
               <p className="mt-[20px] max-w-2xl text-base leading-relaxed text-white/70">
                 {service.ctaText ||
-                  "Talk to our team and get a tailored plan for your business — no obligation, just a clear roadmap for how we can help."}
+                  "Talk to our team and get a tailored plan for your business â€” no obligation, just a clear roadmap for how we can help."}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -996,3 +996,4 @@ export default async function ServiceDetailPage({
     </main>
   );
 }
+
