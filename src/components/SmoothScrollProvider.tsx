@@ -9,6 +9,11 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Let touch browsers own scrolling and pull-to-refresh. Lenis is useful
+    // for wheel/trackpad navigation, but hijacking touch scrolling can make
+    // the live mobile viewport feel stuck after a refresh or app resume.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

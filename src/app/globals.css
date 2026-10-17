@@ -112,9 +112,35 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "DM Sans", var(--font-dm-sans), system-ui, -apple-system, sans-serif;
-  overflow-x: clip;
+  overflow-x: hidden;
   min-height: 100dvh;
-  overscroll-behavior: none;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: auto;
+}
+
+/* Stable sizing for production CSS and older mobile WebKit. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+img,
+video,
+canvas {
+  height: auto;
+}
+
+iframe {
+  border: 0;
 }
 
 .site-navbar {
@@ -284,6 +310,21 @@ body {
   .custom-cursor,
   .custom-cursor-dot {
     display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  :where(.flex, .grid) > * {
+    min-width: 0;
+  }
+
+  /* Long CMS content and URLs must wrap instead of widening the page. */
+  :where(main, article, section) {
+    overflow-wrap: anywhere;
+  }
+
+  :where(pre, code) {
+    max-width: 100%;
   }
 }
 
