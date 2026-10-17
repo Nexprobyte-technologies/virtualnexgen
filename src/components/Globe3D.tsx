@@ -143,7 +143,7 @@ export default function Globe3D() {
       ref={containerRef}
       role="group"
       aria-label="Interactive globe showing routes from India to the United States, Canada, the United Kingdom, and Australia"
-      className="relative mx-auto aspect-square w-full max-w-[420px]"
+      className="relative mx-auto aspect-square w-full max-w-[420px] sm:max-w-[280px]"
     >
       <ReactGlobe
         ref={globeRef}

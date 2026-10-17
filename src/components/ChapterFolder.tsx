@@ -28,23 +28,23 @@ export default function ChapterFolder({
     const cw = containerRef.current.clientWidth || window.innerWidth;
 
     if (cw < 360) {
-      const fw = Math.min(240, Math.max(210, cw - 20));
+      const fw = Math.min(240, Math.max(200, cw - 32));
       setDimensions({
         width: fw,
         height: Math.round(fw * 0.62),
-        spread: Math.max(115, Math.floor((cw - 24) / 2)),
-        lift: 22,
-        rowHeight: 36,
+        spread: Math.max(90, Math.floor((cw - 48) / 2)),
+        lift: 20,
+        rowHeight: 34,
         enablePhysics: false,
       });
     } else if (cw < 640) {
-      const fw = Math.min(260, Math.max(230, cw - 32));
+      const fw = Math.min(260, Math.max(220, cw - 40));
       setDimensions({
         width: fw,
         height: Math.round(fw * 0.62),
-        spread: Math.max(140, Math.floor((cw - 32) / 2)),
-        lift: 26,
-        rowHeight: 38,
+        spread: Math.max(110, Math.floor((cw - 56) / 2)),
+        lift: 24,
+        rowHeight: 36,
         enablePhysics: false,
       });
     } else if (cw < 1024) {

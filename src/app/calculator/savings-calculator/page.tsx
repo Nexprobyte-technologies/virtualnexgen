@@ -381,7 +381,7 @@ export default function SavingsCalculatorPage() {
 
               {/* Right Column: Visual Card with Floating Stats */}
               <div className="relative flex items-center justify-center lg:justify-end">
-                <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-[40px] overflow-hidden border border-[#02024E]/10 shadow-[0_20px_60px_rgba(2,2,78,0.12)] bg-gradient-to-br from-white via-white/80 to-[#12B4CF]/10 backdrop-blur-sm p-6 flex flex-col justify-between">
+                <div className="relative w-full max-w-[420px] sm:max-w-[320px] aspect-[4/5] rounded-[40px] overflow-hidden border border-[#02024E]/10 shadow-[0_20px_60px_rgba(2,2,78,0.12)] bg-gradient-to-br from-white via-white/80 to-[#12B4CF]/10 backdrop-blur-sm p-6 flex flex-col justify-between">
                   {/* Background graphic */}
                   <div className="absolute inset-0 bg-[radial-gradient(#12B4CF_1px,transparent_1px)] [background-size:16px_16px] opacity-20" />
                   

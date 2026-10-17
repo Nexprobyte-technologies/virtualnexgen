@@ -291,7 +291,7 @@ export default function Hero() {
     <section
       id="home"
       ref={rootRef}
-      className="relative overflow-hidden pt-16 pb-10 sm:py-14 md:py-18 xl:py-28"
+      className="relative overflow-hidden pt-20 pb-10 sm:pt-16 sm:pb-14 md:py-18 xl:py-28"
       style={{ background: "#fffaf3" }}
     >
 
@@ -340,17 +340,17 @@ export default function Hero() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base shadow-sm transition-all duration-300 hover:bg-[#12B4CF] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-[#12B4CF] w-full sm:w-auto"
               >
                 <span className="whitespace-nowrap">Book a Demo</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300" />
               </a>
               <a
                 href="/calculator/savings-calculator"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base shadow-sm transition-all duration-300 hover:bg-[#12B4CF] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-[#12B4CF] w-full sm:w-auto"
               >
                 <span className="whitespace-nowrap">See Your Savings Estimate</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300" />
               </a>
             </div>
           </div>
