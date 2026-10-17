@@ -190,11 +190,11 @@ export default function CTA() {
                 href="https://calendly.com/virtualnexgen-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-[#02024E] border border-[#02024E] px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_4px_20px_rgba(2,2,78,0.25)] transition-all duration-300 hover:bg-[#01012F] hover:border-[#01012F] w-full sm:w-auto justify-center"
+                className="group inline-flex items-center gap-3 rounded-full bg-[#02024E] border border-[#02024E] px-5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 hover:bg-[#01012F] hover:border-[#01012F] w-full sm:w-auto justify-center"
               >
                 <span className="text-sm sm:text-base font-bold text-white whitespace-nowrap">Book Your Demo</span>
-                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white/15 text-white flex-shrink-0 transition-colors duration-300 group-hover:bg-white/25">
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
+                <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white/15 text-white flex-shrink-0 transition-colors duration-300">
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300" />
                 </span>
               </a>
             </div>

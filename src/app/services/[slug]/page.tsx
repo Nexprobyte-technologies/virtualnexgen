@@ -238,7 +238,7 @@ function FullContentCards({ html }: { html: string }) {
     const label = heading.replace(/^\d{1,2}\.\s*/, "") || card.heading || "";
     return (
       <article className="relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-5 backdrop-blur-sm transition duration-300 hover:border-brand/50 sm:p-9">
-        <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] font-extrabold leading-none text-brand/10">
+        <span className="pointer-events-none absolute -right-6 -top-8 text-[7rem] sm:text-[5rem] font-extrabold leading-none text-brand/10">
           {indexFromCard(card)}
         </span>
         <div className="relative grid gap-7 lg:grid-cols-[1fr_320px] lg:items-start">
@@ -624,7 +624,7 @@ export default async function ServiceDetailPage({
                   className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand px-5 sm:px-7 py-3.5 text-sm font-semibold text-white transition"
                 >
                   {heroPrimaryLabel}
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight className="h-4 w-4 transition-transform" />
                 </a>
                 <a
                   href="#get-started"
@@ -638,7 +638,7 @@ export default async function ServiceDetailPage({
 
           {/* Auto-Moving Gallery */}
           <Reveal delay={0.15}>
-            <div className="relative h-[420px] sm:h-[520px]">
+            <div className="infinite-spiral-container relative h-[420px] sm:h-[520px] max-w-full overflow-hidden">
               <InfiniteSpiral
                 items={spiralImages}
                 animationMode="all"

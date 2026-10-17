@@ -370,10 +370,10 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#12B4CF] px-5 min-[380px]:px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300 hover:bg-[#01012F] hover:text-white"
+                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#12B4CF] px-5 min-[380px]:px-7 py-3.5 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-[#01012F] hover:text-white"
                   >
                     <span>Schedule Consultation</span>
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#01012F] text-white transition-transform duration-300 group-hover:bg-[#12B4CF] group-hover:text-white group-hover:rotate-45">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-white transition-transform duration-300 group-hover:bg-[#12B4CF] group-hover:text-white group-hover:rotate-45">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </a>

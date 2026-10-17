@@ -43,7 +43,7 @@ export default function BookConsultationPage() {
         </header>
 
         <div className="overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.25)]">
-          <div className="grid md:grid-cols-[340px_1fr]">
+          <div className="grid md:grid-cols-[340px_1fr] sm:grid-cols-1 gap-6 sm:gap-0">
             {/* Left panel — event info (Calendly style) */}
             <aside className="relative flex flex-col justify-between gap-6 bg-[#fffaf3] px-6 py-7 sm:px-8">
               <div className="flex items-center gap-4">
@@ -164,7 +164,7 @@ export default function BookConsultationPage() {
               ) : (
                 <>
                   <CalendlyEmbed
-                    height={740}
+                    height={560}
                     onBookingConfirmed={(payload) =>
                       setBooking(payload as CalendlyPayload)
                     }
