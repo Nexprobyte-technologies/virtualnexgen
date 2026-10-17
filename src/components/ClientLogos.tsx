@@ -87,6 +87,8 @@ export default function ClientLogos({
 
       <Reveal delay={0.1}>
         <div className="mx-auto mt-8 w-full max-w-4xl px-2 sm:mt-10 sm:px-6">
+          {/* Desktop: circuit layout (hidden on mobile) */}
+          <div className="hidden lg:block">
             <div className="relative mx-auto aspect-[1000/820] w-full">
               <svg
                 aria-hidden="true"
@@ -176,6 +178,36 @@ export default function ClientLogos({
                 {centerLines.map((line, i) => <span key={i} className="block">{line}</span>)}
               </div>
             </div>
+          </div>
+
+          {/* Mobile: swipeable logo strip */}
+          <div className="lg:hidden mt-6 overflow-x-auto snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 pb-6">
+            <div className="flex w-max gap-4 snap-start">
+              {resolved.map((logo, i) => (
+                <div key={`${logo.name}-mobile-${i}`} className="shrink-0 snap-start flex flex-col items-center gap-2">
+                  {logo.src ? (
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={120}
+                      height={48}
+                      loading="lazy"
+                      className="h-9 w-auto object-contain"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold leading-tight text-[#02024E] line-clamp-2 text-center">
+                      {logo.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Center expertise line (mobile only; desktop shows it inside the circuit) */}
+          <div className="lg:hidden mt-6 flex flex-col items-center justify-center gap-1.5 rounded-full border border-[#7DEBFF]/80 bg-[#01012F]/30 px-4 py-3 text-center text-[9px] font-extrabold uppercase tracking-wider text-white sm:gap-2 sm:px-6 sm:py-4 sm:text-xs">
+            {centerLines.map((line, i) => <span key={i} className="block">{line}</span>)}
+          </div>
         </div>
       </Reveal>
     </section>
