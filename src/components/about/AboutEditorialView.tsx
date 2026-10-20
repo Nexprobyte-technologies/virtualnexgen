@@ -370,17 +370,17 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                     href="https://calendly.com/virtualnexgen-info/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#12B4CF] px-5 min-[380px]:px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300 hover:bg-[#01012F] hover:text-white"
+                    className="group inline-flex h-14 items-center justify-center gap-3 rounded-full bg-[#12B4CF] px-5 min-[380px]:px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-[0_4px_24px_rgba(6,182,212,0.35)] transition-all duration-300 hover:bg-[#01012F] hover:text-white"
                   >
                     <span>Schedule Consultation</span>
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#01012F] text-white transition-transform duration-300 group-hover:bg-[#12B4CF] group-hover:text-white group-hover:rotate-45">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full text-white transition-all duration-300 group-hover:rotate-45 group-hover:text-[#12B4CF]">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </a>
 
                   <a
                     href="#timeline"
-                    className="inline-flex items-center justify-center gap-2.5 rounded-full border border-[#01012F]/30 bg-white px-5 min-[380px]:px-6 py-3.5 text-sm sm:text-base font-bold text-ink backdrop-blur-sm transition-all duration-300 hover:bg-[#01012F] hover:text-white hover:border-[#01012F]"
+                    className="inline-flex h-14 items-center justify-center gap-2.5 rounded-full border border-[#01012F]/30 bg-white px-5 min-[380px]:px-6 py-3.5 text-sm sm:text-base font-bold text-ink backdrop-blur-sm transition-all duration-300 hover:bg-[#01012F] hover:text-white hover:border-[#01012F]"
                   >
                     <span>Explore Our Journey</span>
                     <ArrowRight className="h-4 w-4 text-[#12B4CF]" />

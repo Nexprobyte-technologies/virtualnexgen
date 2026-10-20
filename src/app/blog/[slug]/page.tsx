@@ -244,10 +244,10 @@ export default async function BlogDetailPage({
     <main className="min-h-screen bg-[#fffaf3]">
       <section className="mx-auto mt-[10px] max-w-7xl px-5 py-8 sm:px-8 lg:py-12">
         <div
-          className={`grid items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-[0.85fr_1.15fr]" : ""}`}
+          className={`grid grid-cols-1 items-center gap-8 lg:gap-12 ${post.image ? "lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]" : ""}`}
         >
           <div className="min-w-0">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-[#02024E]">
                 {category}
               </span>
@@ -262,8 +262,8 @@ export default async function BlogDetailPage({
           </div>
 
           {post.image && (
-            <div className="mt-8 flex justify-center lg:justify-end">
-              <div className="h-[280px] w-[600px] max-w-full overflow-hidden rounded-[24px] sm:h-[340px]">
+            <div className="mt-8 flex min-w-0 justify-center lg:mt-0 lg:justify-end">
+              <div className="aspect-[4/3] w-full max-w-[600px] overflow-hidden rounded-[24px] sm:aspect-[16/9]">
                 <img
                   src={post.image}
                   alt={post.title}
@@ -302,12 +302,14 @@ export default async function BlogDetailPage({
                 isHtml(post.content) ? (
                   <RenderRichHtml html={post.content} />
                 ) : (
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={MARKDOWN_COMPONENTS}
-                  >
-                    {post.content}
-                  </ReactMarkdown>
+                  <div className="rich-content">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={MARKDOWN_COMPONENTS}
+                    >
+                      {post.content}
+                    </ReactMarkdown>
+                  </div>
                 )
               ) : null}
             </div>
@@ -350,8 +352,8 @@ export default async function BlogDetailPage({
           </article>
 
           {/* Right Sidebar */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-32 space-y-6">
+          <aside className="min-w-0">
+            <div className="space-y-6 lg:sticky lg:top-32">
               <div className="rounded-2xl border border-[#01012F]/10 bg-white p-6">
                 <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#02024E]">
                   <ShieldCheck className="h-4 w-4 text-[#12B4CF]" /> Why Virtual Nexgen

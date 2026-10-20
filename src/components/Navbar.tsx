@@ -37,6 +37,7 @@ export default function Navbar() {
   });
   const [services, setServices] = useState<Service[]>([]);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
@@ -70,6 +71,24 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
+
+  // While the mobile side menu is open: lock the page behind it and hide the
+  // floating chat button so it cannot sit on top of the menu items.
+  useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+    if (mobileOpen) {
+      root.classList.add("nav-menu-open");
+      body.classList.add("nav-menu-open");
+    } else {
+      root.classList.remove("nav-menu-open");
+      body.classList.remove("nav-menu-open");
+    }
+    return () => {
+      root.classList.remove("nav-menu-open");
+      body.classList.remove("nav-menu-open");
+    };
+  }, [mobileOpen]);
 
   return (
     <>
@@ -234,9 +253,13 @@ export default function Navbar() {
               />
             </a>
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => {
+                setMobileOpen(!mobileOpen);
+                if (mobileOpen) setMobileServicesOpen(false);
+              }}
               className="p-2 text-[#01012F] hover:text-[#12B4CF] transition-colors"
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -244,7 +267,10 @@ export default function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="xl:hidden mt-2 max-h-[calc(100dvh-6rem-env(safe-area-inset-top))] overflow-y-auto overscroll-contain rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.15)] animate-[navbar-drop_350ms_cubic-bezier(0.22,1,0.36,1)_both]">
+          <div
+            data-lenis-prevent
+            className="xl:hidden mt-2 max-h-[calc(100dvh-6rem-env(safe-area-inset-top))] overflow-y-auto overscroll-contain rounded-2xl border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.15)] animate-[navbar-drop_350ms_cubic-bezier(0.22,1,0.36,1)_both]"
+          >
             <div className="mx-auto max-w-[1280px] px-3 py-4 min-[380px]:px-4 sm:px-6">
               <nav className="flex flex-col gap-1">
 {isSubPage ? (
@@ -283,24 +309,48 @@ export default function Navbar() {
                   </div>
 
                   <div className="border-t border-slate-200 mt-2 pt-2">
-                    <p className="px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Services</p>
-                    {services.map((s) => (
-                      <Link
-                        key={s.slug}
-                        href={`/services/${s.slug}`}
-                        onClick={() => setMobileOpen(false)}
-                        className="rounded-xl px-4 py-2.5 text-sm text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF] block"
-                      >
-                        {s.name}
-                      </Link>
-                    ))}
-                    <Link
-                      href="/services"
-                      onClick={() => setMobileOpen(false)}
-                      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#12B4CF] transition hover:bg-slate-100 block"
+                    <button
+                      type="button"
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      aria-expanded={mobileServicesOpen}
+                      aria-controls="mobile-services-list"
+                      className="flex w-full items-center justify-between gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-500 uppercase tracking-wider transition hover:bg-slate-100 hover:text-[#12B4CF]"
                     >
-                      View All Services
-                    </Link>
+                      <span>Services</span>
+                      <ChevronDown
+                        className={`h-4 w-4 shrink-0 transition-transform duration-300 ${
+                          mobileServicesOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {mobileServicesOpen && (
+                      <div id="mobile-services-list" className="pb-1">
+                        <Link
+                          href="/services"
+                          onClick={() => {
+                            setMobileServicesOpen(false);
+                            setMobileOpen(false);
+                          }}
+                          className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[#12B4CF] transition hover:bg-slate-100 block"
+                        >
+                          All Services
+                        </Link>
+                        {services.map((s) => (
+                          <Link
+                            key={s.slug}
+                            href={`/services/${s.slug}`}
+                            onClick={() => {
+                              setMobileServicesOpen(false);
+                              setMobileOpen(false);
+                            }}
+                            className="rounded-xl px-4 py-2.5 text-sm text-[#01012F] transition hover:bg-slate-100 hover:text-[#12B4CF] block"
+                          >
+                            {s.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="mt-3 border-t border-slate-200 pt-3">

@@ -221,6 +221,18 @@ body {
   bottom: max(1.25rem, env(safe-area-inset-bottom));
 }
 
+/* While the mobile side menu is open, lock the page behind it and hide the
+   floating chat button so it cannot cover the menu items. */
+html.nav-menu-open,
+body.nav-menu-open {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+body.nav-menu-open .chat-widget-toggle {
+  display: none;
+}
+
 .chat-widget-panel {
   right: max(1.25rem, env(safe-area-inset-right));
   bottom: calc(6rem + env(safe-area-inset-bottom));
@@ -243,8 +255,9 @@ body {
   }
 }
 
-/* Keep shared page and component layouts inside narrow phone viewports. */
-@media (max-width: 390px) {
+/* Keep shared page and component layouts inside narrow viewports
+   (phones and small tablets, up to the `sm` breakpoint at 640px). */
+@media (max-width: 639px) {
   html,
   body {
     width: 100%;
@@ -262,6 +275,9 @@ body {
     max-width: 100%;
   }
 
+  /* Grid/flex children must be allowed to shrink. Without this a fixed-width
+     descendant (e.g. a 600px hero image) forces the track wider than the
+     viewport, which makes the whole page zoom out on phones. */
   :where(.grid, .flex) > * {
     min-width: 0;
   }
@@ -280,7 +296,24 @@ body {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
+}
 
+/* Long URLs / unbroken words in user-authored post content must never push
+   the page wider than the viewport. */
+.rich-content,
+.rich-content p,
+.rich-content li,
+.rich-content h1,
+.rich-content h2,
+.rich-content h3,
+.rich-content h4,
+.rich-content td,
+.rich-content th {
+  overflow-wrap: break-word;
+}
+
+/* The custom cursor is a pointer-only enhancement. */
+@media (max-width: 639px), (pointer: coarse) {
   .custom-cursor,
   .custom-cursor-dot {
     display: none;

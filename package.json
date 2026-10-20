@@ -10,6 +10,7 @@
     "db:migrate": "prisma migrate deploy",
     "admin:set-credentials": "node scripts/set-admin-credentials.mjs",
     "import:blog-images": "node scripts/import-blog-images.mjs",
+    "audit:responsive": "node audit-responsive.mjs",
     "postinstall": "prisma skills sync || exit 0"
   },
   "dependencies": {

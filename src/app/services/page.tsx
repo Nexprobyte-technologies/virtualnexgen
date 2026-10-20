@@ -11,7 +11,7 @@ export default async function ServicesListPage() {
 
   return (
     <main className="min-h-screen bg-[#fffaf3]">
-      <div className="relative overflow-hidden py-6 bg-[#fffaf3]">
+      <div className="relative overflow-hidden py-6 bg-[#fffaf3] mt-10">
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
           <h1 className="max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[#02024E] sm:text-4xl lg:text-5xl">
             Our{" "}
