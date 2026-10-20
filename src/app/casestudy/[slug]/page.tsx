@@ -6,8 +6,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollExpand from "@/components/ScrollExpand";
-import { CalendarDays, ChevronRight, Phone } from "lucide-react";
+import { CalendarDays, ChevronRight, Mail, Phone } from "lucide-react";
 import type { CaseStudy } from "@/lib/types";
+import { CONTACT_EMAIL } from "@/lib/contact-details";
 
 export default function CaseStudyDetailPage() {
   const params = useParams();
@@ -129,6 +130,13 @@ export default function CaseStudyDetailPage() {
                   >
                     <Phone className="h-4 w-4" />
                     Get in Touch Now!
+                  </a>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#02024E] transition-colors hover:text-[#02024E]/70"
+                  >
+                    <Mail className="h-4 w-4" />
+                    {CONTACT_EMAIL}
                   </a>
                 </div>
 

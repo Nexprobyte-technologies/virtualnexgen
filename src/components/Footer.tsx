@@ -2,10 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Globe, Play, Share2, AtSign, Phone } from "lucide-react";
+import { Globe, Play, Share2, AtSign, Mail, Phone } from "lucide-react";
 import { SiPerplexity } from "react-icons/si";
 
 import Reveal from "./Reveal";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_INDIA,
+  CONTACT_PHONE_US,
+  telHref,
+} from "@/lib/contact-details";
 
 type FooterBlogPost = {
   slug: string;
@@ -191,13 +197,29 @@ export default function Footer() {
               <h4 className="mt-8 mb-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                 Talk to Our Support
               </h4>
-              <a
-                href="tel:+13418886504"
-                className="inline-flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#12B4CF]"
-              >
-                <Phone className="h-4 w-4" />
-                +1 341 888 6504
-              </a>
+              <div className="space-y-2.5">
+                <a
+                  href={telHref(CONTACT_PHONE_US)}
+                  className="flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#12B4CF]"
+                >
+                  <Phone className="h-4 w-4" />
+                  {CONTACT_PHONE_US}
+                </a>
+                <a
+                  href={telHref(CONTACT_PHONE_INDIA)}
+                  className="flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-[#12B4CF]"
+                >
+                  <Phone className="h-4 w-4" />
+                  {CONTACT_PHONE_INDIA}
+                </a>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#12B4CF]"
+                >
+                  <Mail className="h-4 w-4" />
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
               <div className="mt-6 flex gap-2.5">
                 {socials.map((s, i) => {
                   const Icon = s.icon;
@@ -313,7 +335,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Virtual Nexgen Solutions. All rights
               reserved.
             </p>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-white/40 sm:justify-end">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white/40 sm:justify-end">
               <a href="#" className="transition hover:text-white">
                 Privacy Policy
               </a>
@@ -329,6 +351,18 @@ export default function Footer() {
               >
                 Admin
               </a>
+              <span className="hidden h-3 w-px bg-white/20 sm:block" />
+              <span>
+                Developed by{" "}
+                <a
+                  href="https://www.nexprobyte.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-white"
+                >
+                  Nexprobyte
+                </a>
+              </span>
             </div>
           </div>
         </Reveal>

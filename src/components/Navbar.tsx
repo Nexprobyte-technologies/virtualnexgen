@@ -4,10 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Service } from "@/lib/types";
 import ChatBot from "@/components/ChatBot";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_INDIA,
+  CONTACT_PHONE_US,
+  telHref,
+} from "@/lib/contact-details";
 
 const aboutLinks = [
   { label: "About Us", href: "/about" },
@@ -299,11 +305,25 @@ export default function Navbar() {
 
                   <div className="mt-3 border-t border-slate-200 pt-3">
                     <a
-                      href="tel:+13418886504"
+                      href={telHref(CONTACT_PHONE_US)}
                       className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#01012F]"
                     >
                       <Phone className="h-4 w-4" />
-                      +1 341 888 6504
+                      {CONTACT_PHONE_US}
+                    </a>
+                    <a
+                      href={telHref(CONTACT_PHONE_INDIA)}
+                      className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-[#01012F]/70"
+                    >
+                      <Phone className="h-4 w-4" />
+                      {CONTACT_PHONE_INDIA}
+                    </a>
+                    <a
+                      href={`mailto:${CONTACT_EMAIL}`}
+                      className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-[#01012F]/70"
+                    >
+                      <Mail className="h-4 w-4" />
+                      {CONTACT_EMAIL}
                     </a>
                   <a
                     href="https://calendly.com/virtualnexgen-info/30min"

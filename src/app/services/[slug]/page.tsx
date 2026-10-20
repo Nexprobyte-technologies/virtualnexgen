@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   ArrowUpRight,
   CheckCircle2,
+  Mail,
   PhoneCall,
   Clock,
   Shield,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import TestimonialsMarquee from "../TestimonialsMarquee";
 import { getService, getServices } from "@/lib/services";
+import { CONTACT_EMAIL, telHref } from "@/lib/contact-details";
 import {
   clientLogos as defaultClientLogos,
   defaultBenefits,
@@ -916,11 +918,18 @@ export default async function ServiceDetailPage({
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a
-                  href={`tel:${(service.ctaPhone || "+1 341 888 6504").replace(/[^+\d]/g, "")}`}
+                  href={telHref(service.ctaPhone || "+1 341 888 6504")}
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/20"
                 >
                   <PhoneCall className="h-4 w-4" />
                   {service.ctaPhone || "+1 341 888 6504"}
+                </a>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/20"
+                >
+                  <Mail className="h-4 w-4" />
+                  {CONTACT_EMAIL}
                 </a>
               </div>
 

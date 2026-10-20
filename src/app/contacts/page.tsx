@@ -23,13 +23,14 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { ContactInfo } from "@/lib/contacts";
+import { CONTACT_EMAIL, mapHref, telHref } from "@/lib/contact-details";
 
 const contactChannels = [
   {
     icon: Headset,
     title: "Contact Support",
     text: "Have questions about onboarding, workflows, or existing services? Our support team is ready to assist you.",
-    email: "info@virtualnexgen.com",
+    email: CONTACT_EMAIL,
     note: "Response during business hours",
   },
 ];
@@ -333,13 +334,15 @@ export default function ContactPage() {
         country: "United States",
         tagline: "Client Strategy & Support",
         address: info.addressUS,
-        map: "https://www.google.com/maps?q=2360+Hood+Avenue+San+Diego+CA+92123&output=embed",
+        phone: info.phoneUS,
+        map: mapHref(info.addressUS),
       },
       {
         country: "India",
         tagline: "Operations & Virtual Assistant Teams",
         address: info.addressIndia,
-        map: "https://www.google.com/maps?q=Srinivasa+Spaces+Coimbatore+Tamil+Nadu&output=embed",
+        phone: info.phoneIndia,
+        map: mapHref(info.addressIndia),
       },
     ].filter((l) => l.address);
   }, [info]);
@@ -556,19 +559,127 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* ================= Global Presence ================= */}
+        {/* ================= Contact Info ================= */}
         {locations.length > 0 && (
           <section className="bg-[#fffaf3] py-12 sm:py-14 border-y border-[#01012F]/10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
               <SectionHeading
-                eyebrow="Our Global Presence"
-                title="One Team, Two"
-                highlight="Locations"
-                description="Strategically positioned to support clients across time zones, without missing a beat."
+                eyebrow="Contact Info"
+                title="Connect With Us"
+                description="If you want to gain an edge in today's competitive age get in touch with us now. Let's discuss possibilities, and convert them into realities!"
                 lightBackground
               />
 
-              <div className="mt-12 grid gap-6 md:grid-cols-2">
+              {/* Phone Number / Address / Contact Info */}
+              <div className="mt-12 grid gap-6 md:grid-cols-3">
+                {/* Phone Number */}
+                <Reveal delay={0.05}>
+                  <div className="flex h-full flex-col rounded-[2rem] border border-[#01012F]/15 bg-white p-6 shadow-[0_24px_60px_rgba(11,42,74,0.18)] sm:p-7">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#12B4CF]/10">
+                        <Phone className="h-5 w-5 text-[#12B4CF]" />
+                      </span>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-[#02024E]/70">
+                        Phone Number
+                      </h3>
+                    </div>
+                    <div className="mt-6 space-y-5">
+                      {locations.map((loc) =>
+                        loc.phone ? (
+                          <a
+                            key={loc.country}
+                            href={telHref(loc.phone)}
+                            className="group flex items-start gap-3"
+                          >
+                            <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-brand" />
+                            <span>
+                              <span className="block text-xs text-[#02024E]/40">
+                                {loc.country}
+                              </span>
+                              <span className="block text-sm font-bold text-[#02024E] transition group-hover:text-[#12B4CF]">
+                                {loc.phone}
+                              </span>
+                            </span>
+                          </a>
+                        ) : null,
+                      )}
+                    </div>
+                  </div>
+                </Reveal>
+
+                {/* Address */}
+                <Reveal delay={0.12}>
+                  <div className="flex h-full flex-col rounded-[2rem] border border-[#01012F]/15 bg-white p-6 shadow-[0_24px_60px_rgba(11,42,74,0.18)] sm:p-7">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#12B4CF]/10">
+                        <MapPin className="h-5 w-5 text-[#12B4CF]" />
+                      </span>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-[#02024E]/70">
+                        Address
+                      </h3>
+                    </div>
+                    <div className="mt-6 space-y-5">
+                      {locations.map((loc) => (
+                        <a
+                          key={loc.country}
+                          href={loc.map}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-start gap-3"
+                        >
+                          <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-brand" />
+                          <span>
+                            <span className="block text-xs text-[#02024E]/40">
+                              {loc.country}
+                            </span>
+                            <span className="block text-sm leading-relaxed text-[#02024E]/85 transition group-hover:text-[#12B4CF]">
+                              {loc.address}
+                            </span>
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+
+                {/* Contact Info */}
+                <Reveal delay={0.19}>
+                  <div className="flex h-full flex-col rounded-[2rem] border border-[#01012F]/15 bg-white p-6 shadow-[0_24px_60px_rgba(11,42,74,0.18)] sm:p-7">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#12B4CF]/10">
+                        <Mail className="h-5 w-5 text-[#12B4CF]" />
+                      </span>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-[#02024E]/70">
+                        Contact Info
+                      </h3>
+                    </div>
+                    <div className="mt-6 space-y-5">
+                      <a
+                        href={`mailto:${info?.email || CONTACT_EMAIL}`}
+                        className="group flex items-start gap-3"
+                      >
+                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-brand" />
+                        <span>
+                          <span className="block text-xs text-[#02024E]/40">Email</span>
+                          <span className="block text-sm font-bold break-all text-[#02024E] transition group-hover:text-[#12B4CF]">
+                            {info?.email || CONTACT_EMAIL}
+                          </span>
+                        </span>
+                      </a>
+                      <Link
+                        href="/book-consultation"
+                        className="flex items-center gap-3 text-sm font-bold text-[#02024E] transition hover:text-[#12B4CF]"
+                      >
+                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-brand" />
+                        Book a Free Consultation
+                      </Link>
+                    </div>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* Global presence */}
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
                 {locations.map((loc, i) => (
                   <Reveal key={loc.country} delay={0.08 * i}>
                     <div className="overflow-hidden rounded-[2rem] bg-white text-[#02024E] shadow-[0_24px_60px_rgba(11, 42, 74,0.25)]">
@@ -582,51 +693,20 @@ export default function ContactPage() {
                             <MapPin className="h-5 w-5 text-brand" />
                           </span>
                         </div>
-                        <div className="mt-6 flex items-start gap-4">
-                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#01012F]/15 bg-white">
-                            <span className="h-2.5 w-2.5 rounded-full bg-brand" />
-                          </span>
-                          <p className="text-sm leading-relaxed text-[#02024E]/85">{loc.address}</p>
-                        </div>
+                        <a
+                          href={loc.map}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#02024E]/80 transition hover:text-[#12B4CF]"
+                        >
+                          <MapPin className="h-4 w-4 text-brand" />
+                          View on map
+                        </a>
                       </div>
                     </div>
                   </Reveal>
                 ))}
               </div>
-
-              {/* Phone / email strip */}
-              <Reveal delay={0.15}>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {info?.phoneUS && (
-                    <a
-                      href={`tel:${info.phoneUS.replace(/[^+\d]/g, "")}`}
-                      className="flex items-center gap-4 rounded-2xl border border-[#01012F]/15 bg-white px-5 py-4 transition hover:border-[#12B4CF]"
-                    >
-                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#12B4CF]/10">
-                        <Phone className="h-4 w-4 text-[#12B4CF]" />
-                      </span>
-                      <span>
-                        <span className="block text-xs text-[#02024E]/40">United States</span>
-                        <span className="block text-sm font-bold text-[#02024E]">{info.phoneUS}</span>
-                      </span>
-                    </a>
-                  )}
-                  {info?.phoneIndia && (
-                    <a
-                      href={`tel:${info.phoneIndia.replace(/[^+\d]/g, "")}`}
-                      className="flex items-center gap-4 rounded-2xl border border-[#01012F]/15 bg-white px-5 py-4 transition hover:border-[#12B4CF]"
-                    >
-                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#12B4CF]/10">
-                        <Phone className="h-4 w-4 text-[#12B4CF]" />
-                      </span>
-                      <span>
-                        <span className="block text-xs text-[#02024E]/40">India</span>
-                        <span className="block text-sm font-bold text-[#02024E]">{info.phoneIndia}</span>
-                      </span>
-                    </a>
-                  )}
-                </div>
-              </Reveal>
             </div>
           </section>
         )}
@@ -749,7 +829,7 @@ export default function ContactPage() {
                       Book Your Demo
                     </Link>
                     <a
-                      href="mailto:info@virtualnexgen.com"
+                      href={`mailto:${CONTACT_EMAIL}`}
                       className="inline-flex items-center gap-2 rounded-full border border-[#01012F]/25 bg-white px-7 py-3 text-sm font-bold text-[#02024E] backdrop-blur transition hover:bg-[#02024E]/10"
                     >
                       <Mail className="h-4 w-4" />

@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Mail, Phone } from "lucide-react";
 import Reveal from "./Reveal";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_INDIA,
+  CONTACT_PHONE_US,
+  telHref,
+} from "@/lib/contact-details";
 
 const defaultFaqs = [
   {
@@ -188,18 +194,25 @@ export default function FAQ9({
                   </p>
                   <div className="space-y-4">
                     <a
-                      href="mailto:hello@nexprobyte.com"
+                      href={`mailto:${CONTACT_EMAIL}`}
                       className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
                     >
                       <Mail className="w-5 h-5 text-brand" />
-                      <span className="font-medium">hello@nexprobyte.com</span>
+                      <span className="font-medium">{CONTACT_EMAIL}</span>
                     </a>
                     <a
-                      href="tel:+1234567890"
+                      href={telHref(CONTACT_PHONE_US)}
                       className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
                     >
                       <Phone className="w-5 h-5 text-brand" />
-                      <span className="font-medium">+1 (234) 567-890</span>
+                      <span className="font-medium">{CONTACT_PHONE_US}</span>
+                    </a>
+                    <a
+                      href={telHref(CONTACT_PHONE_INDIA)}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+                    >
+                      <Phone className="w-5 h-5 text-brand" />
+                      <span className="font-medium">{CONTACT_PHONE_INDIA}</span>
                     </a>
                   </div>
                 </div>
@@ -241,18 +254,25 @@ export default function FAQ9({
               </p>
             <div className="space-y-4">
               <a
-                href="mailto:hello@nexprobyte.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
               >
                 <Mail className="w-5 h-5 text-brand" />
-                <span className="font-medium">hello@nexprobyte.com</span>
+                <span className="font-medium">{CONTACT_EMAIL}</span>
               </a>
               <a
-                href="tel:+1234567890"
+                href={telHref(CONTACT_PHONE_US)}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
               >
                 <Phone className="w-5 h-5 text-brand" />
-                <span className="font-medium">+1 (234) 567-890</span>
+                <span className="font-medium">{CONTACT_PHONE_US}</span>
+              </a>
+              <a
+                href={telHref(CONTACT_PHONE_INDIA)}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+              >
+                <Phone className="w-5 h-5 text-brand" />
+                <span className="font-medium">{CONTACT_PHONE_INDIA}</span>
               </a>
             </div>
             <div className="pt-4 border-t border-white/10">

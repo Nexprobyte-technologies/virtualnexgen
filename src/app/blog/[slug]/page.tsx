@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Clock,
   ExternalLink,
+  Mail,
   Phone,
   ShieldCheck,
 } from "lucide-react";
@@ -15,6 +16,7 @@ import sanitizeHtml from "sanitize-html";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { buildBlogPostMetadata } from "@/lib/blog-seo";
 import AskAboutUs from "@/components/AskAboutUs";
+import { CONTACT_EMAIL, telHref } from "@/lib/contact-details";
 
 export const dynamic = "force-dynamic";
 
@@ -389,10 +391,16 @@ export default async function BlogDetailPage({
                     <CalendarCheck className="h-4 w-4" /> Book a Free Call
                   </a>
                   <a
-                    href="tel:+13418886504"
+                    href={telHref("+1 341 888 6504")}
                     className="mt-3 flex items-center gap-2 text-sm font-semibold text-[#02024E]/80 transition hover:text-[#02024E]"
                   >
                     <Phone className="h-4 w-4" /> +1 341 888 6504
+                  </a>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="mt-2 flex items-center gap-2 text-sm font-semibold text-[#02024E]/80 transition hover:text-[#02024E]"
+                  >
+                    <Mail className="h-4 w-4" /> {CONTACT_EMAIL}
                   </a>
                 </div>
               </div>
