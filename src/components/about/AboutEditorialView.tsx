@@ -426,7 +426,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
           {/* Hero Feature Visual with Editorial Caption */}
           <Reveal y={30} delay={0.4}>
             <div className="mt-14 relative overflow-hidden rounded-3xl border border-[#01012F]/10 bg-white p-3 shadow-[0_20px_60px_rgba(19,47,74,0.12)]">
-              <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl bg-[#01012F]">
+              <div className="relative aspect-[3/4] sm:aspect-[16/9] lg:aspect-[21/9] w-full overflow-hidden rounded-2xl bg-[#01012F]">
                 {/* <Image
                   src={data.heroImage || "/uploads/about-who-we-are.png"}
                   alt="Virtual Nexgen Operations"
@@ -452,9 +452,9 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                       &ldquo;Great work begins with great people. We bring together skilled professionals,
                       structured processes, and a shared commitment to helping businesses grow.&rdquo;
                     </p>
-                    <div className="mt-3 flex items-center justify-between text-xs text-white/50 font-semibold uppercase tracking-wider">
-                      <span>VIRTUAL NEXGEN SOLUTIONS TEAM</span>
-                      <span className="text-[#12B4CF]">COIMBATORE, INDIA</span>
+                    <div className="mt-3 block text-xs text-white/50 font-semibold uppercase tracking-wider sm:flex sm:items-center sm:justify-between">
+                      <span className="block">VIRTUAL NEXGEN SOLUTIONS TEAM</span>
+                      <span className="block text-[#12B4CF]">COIMBATORE, INDIA</span>
                     </div>
                   </div>
                 </div>

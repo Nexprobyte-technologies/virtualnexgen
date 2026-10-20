@@ -47,12 +47,15 @@ export default function ClientLogos({
         ),
       ].slice(0, 16)
     : sourceLogos;
+  // Only show boxes that have an image; boxes without an image (and their
+  // connecting lines) are skipped so the remaining logos stay aligned.
+  const displayLogos = resolved.filter((logo) => !!logo.src);
   const showHighlight = highlight !== undefined && highlight.trim() !== "";
   const centerLines = (centerText?.trim() || (isInsuranceSoftware ? "AMS\nExperts" : "VA\nExperts")).split("\n");
-  const circuitLogoPositions = resolved.map((_, i) => {
+  const circuitLogoPositions = displayLogos.map((_, i) => {
     const ringIndex = Math.floor(i / 2);
     const isOuterRing = i % 2 === 0;
-    const angle = -Math.PI / 2 + (ringIndex * Math.PI * 2) / Math.ceil(resolved.length / 2) + (isOuterRing ? 0 : Math.PI / Math.ceil(resolved.length / 2));
+    const angle = -Math.PI / 2 + (ringIndex * Math.PI * 2) / Math.ceil(displayLogos.length / 2) + (isOuterRing ? 0 : Math.PI / Math.ceil(displayLogos.length / 2));
     const rx = isOuterRing ? 400 : 255;
     const ry = isOuterRing ? 300 : 190;
     return {
@@ -77,9 +80,9 @@ export default function ClientLogos({
                 "Our VAs Are Experts in All Major"}{" "}
               {showHighlight ? (
                 <span className="text-[#12B4CF]">{highlight!.trim()}</span>
-              ) : (
+              ) : isInsuranceSoftware ? (
                 <span className="text-[#12B4CF]">Insurance Software</span>
-              )}
+              ) : null}
             </h2>
           </div>
         </Reveal>
@@ -110,7 +113,7 @@ export default function ClientLogos({
                 </defs>
                 <ellipse cx="500" cy="410" rx="400" ry="300" fill="none" stroke="#12B4CF" strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="3 12" />
                 <ellipse cx="500" cy="410" rx="255" ry="190" fill="none" stroke="#38BDF8" strokeOpacity="0.17" strokeWidth="1.5" strokeDasharray="2 8" />
-                {resolved.map((logo, i) => {
+                {displayLogos.map((logo, i) => {
                   const target = circuitLogoPositions[i];
                   const startRx = Math.max(120, target.rx * 0.34);
                   const startRy = Math.max(120, target.ry * 0.34);
@@ -155,7 +158,7 @@ export default function ClientLogos({
                 })}
               </svg>
 
-              {resolved.map((logo, i) => {
+              {displayLogos.map((logo, i) => {
                 const position = circuitLogoPositions[i];
                 return (
                   <div
