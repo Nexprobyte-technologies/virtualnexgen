@@ -1,4 +1,9 @@
-import { addBlogPost, getBlogPosts, isBlogPostPublished } from "@/lib/blog";
+import {
+  addBlogPost,
+  getBlogPosts,
+  isBlogPostPublished,
+  sortPostsByDateDesc,
+} from "@/lib/blog";
 import { requireAdmin } from "@/lib/auth";
 import { toBlogPostSummary } from "@/lib/blog-seo";
 
@@ -10,25 +15,22 @@ export async function GET(request: Request) {
 
   const filtered = publishedOnly ? posts.filter(isBlogPostPublished) : posts;
   let result = filtered.map(toBlogPostSummary);
+
+  // Category chips filter on the first tag, the same label shown on the cards.
+  const category = params.get("category")?.trim();
+  if (category) {
+    result = result.filter(
+      (post) => (post.tags?.[0] ?? "General") === category,
+    );
+  }
+
   const total = result.length;
 
   const limit = Number.parseInt(params.get("limit") ?? "", 10);
   const offset = Number.parseInt(params.get("offset") ?? "", 10);
 
   if (params.get("sort") === "date") {
-    result = [...result].sort((a, b) => {
-      const aDate = Date.parse(a.date);
-      const bDate = Date.parse(b.date);
-      const diff =
-        (Number.isNaN(bDate) ? 0 : bDate) - (Number.isNaN(aDate) ? 0 : aDate);
-      if (diff !== 0) return diff;
-      const aCreated = Date.parse(a.createdAt);
-      const bCreated = Date.parse(b.createdAt);
-      return (
-        (Number.isNaN(bCreated) ? 0 : bCreated) -
-        (Number.isNaN(aCreated) ? 0 : aCreated)
-      );
-    });
+    result = sortPostsByDateDesc(result);
   }
 
   if (Number.isFinite(offset) && offset > 0) {

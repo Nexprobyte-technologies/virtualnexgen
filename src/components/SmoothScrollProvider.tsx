@@ -15,6 +15,9 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       smoothWheel: true,
     });
     lenisRef.current = lenis;
+    // Lenis cancels native smooth scrolling, so components that want to jump
+    // to a section have to drive the animation through this instance.
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     let frameId = 0;
     function raf(time: number) {
@@ -42,6 +45,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       lenis.destroy();
       lenisRef.current = null;
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
 

@@ -216,6 +216,30 @@ export function isBlogPostPublished(post: BlogPost): boolean {
   return (post.status ?? "published") === "published";
 }
 
+/**
+ * Sorts posts newest first. The store keeps them in ascending date order, so
+ * every "most recent" listing has to sort explicitly. The comparison is
+ * shared with the public API so the first page and the pages loaded later are
+ * always ordered the same way.
+ */
+export function sortPostsByDateDesc<
+  T extends { date: string; createdAt: string },
+>(posts: T[]): T[] {
+  return [...posts].sort((a, b) => {
+    const aDate = Date.parse(a.date);
+    const bDate = Date.parse(b.date);
+    const diff =
+      (Number.isNaN(bDate) ? 0 : bDate) - (Number.isNaN(aDate) ? 0 : aDate);
+    if (diff !== 0) return diff;
+    const aCreated = Date.parse(a.createdAt);
+    const bCreated = Date.parse(b.createdAt);
+    return (
+      (Number.isNaN(bCreated) ? 0 : bCreated) -
+      (Number.isNaN(aCreated) ? 0 : aCreated)
+    );
+  });
+}
+
 export async function getBlogPosts(options?: {
   publishedOnly?: boolean;
   /**

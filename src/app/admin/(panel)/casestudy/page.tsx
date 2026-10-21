@@ -162,7 +162,10 @@ export default function AdminCaseStudyPage() {
             className="fixed inset-0 z-40 animate-[fade-in_0.2s_ease] bg-ink/40 backdrop-blur-[2px]"
             onClick={closeForm}
           />
-          <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-2xl animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl">
+          <div
+            data-lenis-prevent
+            className="fixed inset-y-0 right-0 z-50 flex h-full w-full animate-[drawer-in_0.25s_ease-out] flex-col bg-white shadow-2xl"
+          >
             <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
               <div className="min-w-0">
                 <h3 className="text-base font-extrabold text-slate-900">
@@ -184,8 +187,8 @@ export default function AdminCaseStudyPage() {
               </button>
             </div>
 
-            <div className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
-              <div className="grid gap-4 sm:grid-cols-2">
+            <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 py-4">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <input
                   placeholder="Title"
                   value={form.title ?? ""}
