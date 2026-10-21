@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 import { motion } from "framer-motion";
-import type { Service } from "@/lib/types";
+import type { ServiceSummary } from "@/lib/services";
 import ChatBot from "@/components/ChatBot";
 import {
   CONTACT_EMAIL,
@@ -35,27 +35,20 @@ export default function Navbar() {
     if (pathname.startsWith("/about") || pathname.startsWith("/casestudy")) return "About Us";
     return "Home";
   });
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<ServiceSummary[]>([]);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
   const aboutDropdownRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const threshold = window.innerHeight * 0.2;
-      setScrolled(window.scrollY > threshold);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    fetch("/api/services")
+    // Only the menu labels are needed, so skip the full service payloads.
+    fetch("/api/services?summary=1")
       .then((res) => res.json())
-      .then((data) => setServices(Array.isArray(data.services) ? data.services : []))
+      .then((data) =>
+        setServices(Array.isArray(data.services) ? data.services : []),
+      )
       .catch(() => {});
   }, []);
 

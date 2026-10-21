@@ -5,9 +5,9 @@ import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { getCardDescription, getCardTitle } from "@/lib/blog-seo";
-import type { BlogPost } from "@/lib/types";
+import type { BlogPostSummary } from "@/lib/blog-seo";
 
-const POSTS_PER_PAGE = 9;
+export const POSTS_PER_PAGE = 9;
 
 function formatDate(date: string): string {
   const d = new Date(date);
@@ -21,27 +21,39 @@ function formatDate(date: string): string {
 }
 
 interface BlogListClientProps {
-  initialPosts: BlogPost[];
+  initialPosts: BlogPostSummary[];
+  categories: string[];
+  total: number;
 }
 
-export default function BlogListClient({ initialPosts }: BlogListClientProps) {
-  const [displayedPosts, setDisplayedPosts] = useState<BlogPost[]>(initialPosts.slice(0, POSTS_PER_PAGE));
+export default function BlogListClient({
+  initialPosts,
+  categories,
+  total,
+}: BlogListClientProps) {
+  const [displayedPosts, setDisplayedPosts] =
+    useState<BlogPostSummary[]>(initialPosts);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(initialPosts.length > POSTS_PER_PAGE);
+  const [hasMore, setHasMore] = useState(initialPosts.length < total);
 
-  const categories = Array.from(
-    new Set(initialPosts.map((p) => p.tags?.[0] ?? "General"))
-  );
-
+  // Load the next page on demand instead of shipping every post up front.
   const loadMore = () => {
     setIsLoading(true);
-    setTimeout(() => {
-      const currentLength = displayedPosts.length;
-      const nextPosts = initialPosts.slice(currentLength, currentLength + POSTS_PER_PAGE);
-      setDisplayedPosts([...displayedPosts, ...nextPosts]);
-      setHasMore(currentLength + nextPosts.length < initialPosts.length);
-      setIsLoading(false);
-    }, 300);
+    fetch(
+      `/api/blog?published=1&offset=${displayedPosts.length}&limit=${POSTS_PER_PAGE}`,
+    )
+      .then((res) => res.json())
+      .then((data: { posts?: BlogPostSummary[] }) => {
+        const nextPosts = Array.isArray(data?.posts) ? data.posts : [];
+        setDisplayedPosts((current) => [...current, ...nextPosts]);
+        setHasMore(displayedPosts.length + nextPosts.length < total);
+      })
+      .catch(() => {
+        setHasMore(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -61,7 +73,7 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
       </div>
 
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:py-14">
-        {initialPosts.length === 0 ? (
+        {total === 0 ? (
           <div className="grid place-items-center rounded-[2rem] border border-[#01012F]/10 bg-white p-16">
             <p className="text-lg font-semibold text-[#02024E]/50">
               No blog posts yet — check back soon!
@@ -210,14 +222,14 @@ export default function BlogListClient({ initialPosts }: BlogListClientProps) {
                     )}
                   </button>
                   <p className="mt-4 text-sm text-[#02024E]/50">
-                    Showing {displayedPosts.length} of {initialPosts.length} articles
+                    Showing {displayedPosts.length} of {total} articles
                   </p>
                 </div>
               )}
               {!hasMore && displayedPosts.length > 0 && (
                 <div className="mt-12 text-center">
                   <p className="text-sm text-[#02024E]/50">
-                    Showing all {initialPosts.length} articles
+                    Showing all {total} articles
                   </p>
                 </div>
               )}

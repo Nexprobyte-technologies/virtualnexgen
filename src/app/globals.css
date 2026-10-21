@@ -366,6 +366,29 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   }
 }
 
+.service-testimonials-track {
+  animation: testimonials-marquee 9s linear infinite;
+}
+
+/* Pause the testimonial carousel while the pointer is over it so the cards
+   can actually be read. */
+.service-testimonials-track:hover,
+.service-testimonials-track:active,
+.service-testimonials-track:focus-within {
+  animation-play-state: paused;
+}
+
+.service-trust-marquee-track {
+  animation: marquee-x 25s linear infinite;
+}
+
+/* Same for the trust badge strip that runs under every service page. */
+.service-trust-marquee-track:hover,
+.service-trust-marquee-track:active,
+.service-trust-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
 @keyframes industry-carousel-left {
   from {
     transform: translateX(0);
@@ -505,6 +528,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
 
   .animate-marquee,
   .industry-carousel-track,
+  .service-testimonials-track,
+  .service-trust-marquee-track,
   .typewriter-caret,
   .hero-slide,
   .nav-drop,

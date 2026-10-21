@@ -234,11 +234,14 @@ export default async function BlogDetailPage({
   const post = await getBlogPost(slug, { publishedOnly: true });
   if (!post) notFound();
 
-  const allPosts = await getBlogPosts({ publishedOnly: true });
+  // Related posts only render as cards, so their bodies are never needed.
+  const allPosts = await getBlogPosts({
+    publishedOnly: true,
+    includeContent: false,
+  });
   const related = allPosts.filter((p) => p.slug !== slug).slice(0, 2);
   const category = post.tags?.[0] ?? "General";
   const readTime = estimateReadTime(post.content);
-  const articleUrl = `https://virtualnexgen.com/blog/${post.slug}`;
 
   return (
     <main className="min-h-screen bg-[#fffaf3]">

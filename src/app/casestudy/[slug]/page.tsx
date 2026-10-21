@@ -1,39 +1,67 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollExpand from "@/components/ScrollExpand";
 import { CalendarDays, ChevronRight, Mail, Phone } from "lucide-react";
-import type { CaseStudy } from "@/lib/types";
+import { getCaseStudyBySlug } from "@/lib/casestudy";
 import { CONTACT_EMAIL } from "@/lib/contact-details";
+import { SITE_URL } from "@/lib/blog-seo";
 
-export default function CaseStudyDetailPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
-  const [study, setStudy] = useState<CaseStudy | null>(null);
+export const dynamic = "force-dynamic";
 
-  useEffect(() => {
-    if (!slug) return;
-    fetch(`/api/casestudy/${slug}`)
-      .then((r) => r.json())
-      .then((data) => setStudy(data))
-      .catch(() => {});
-  }, [slug]);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const study = getCaseStudyBySlug(slug);
 
   if (!study) {
-    return (
-      <>
-        <Navbar />
-        <main className="pt-10 flex items-center justify-center min-h-screen bg-[#fffaf3]">
-          <p className="text-[#02024E]/50">Loading...</p>
-        </main>
-        <Footer />
-      </>
-    );
+    return {
+      title: "Case Study | Virtual Nexgen Solutions",
+      robots: "noindex, follow",
+    };
   }
+
+  const title = `${study.title} | Virtual Nexgen Solutions`;
+  const description =
+    study.excerpt?.trim() ||
+    `How Virtual Nexgen Solutions delivered results for ${study.industry ?? "our client"}.`;
+  const url = `${SITE_URL}/casestudy/${study.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url,
+      siteName: "Virtual Nexgen Solutions",
+      publishedTime: study.date ?? undefined,
+      images: study.image ? [{ url: study.image }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: study.image ? [study.image] : undefined,
+    },
+  };
+}
+
+export default async function CaseStudyDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const study = getCaseStudyBySlug(slug);
+  if (!study) notFound();
 
   return (
     <>

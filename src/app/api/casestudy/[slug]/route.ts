@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCaseStudyBySlug, updateCaseStudy, deleteCaseStudy } from "@/lib/casestudy";
-import { isAuthed } from "@/lib/auth";
+import { requireAdmin } from "@/lib/auth";
 
 export async function GET(
   _req: Request,
@@ -18,9 +18,9 @@ export async function PUT(
   req: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const cookie = req.headers.get("cookie") || "";
-  const match = cookie.match(/vxs_admin=([^;]+)/);
-  if (!isAuthed(match?.[1])) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -37,9 +37,9 @@ export async function DELETE(
   req: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const cookie = req.headers.get("cookie") || "";
-  const match = cookie.match(/vxs_admin=([^;]+)/);
-  if (!isAuthed(match?.[1])) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

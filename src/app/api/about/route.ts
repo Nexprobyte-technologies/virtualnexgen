@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAbout, updateAbout } from "@/lib/about";
-import { isAuthed } from "@/lib/auth";
+import { requireAdmin } from "@/lib/auth";
 
 export async function GET() {
   const about = getAbout();
@@ -8,9 +8,9 @@ export async function GET() {
 }
 
 export async function PUT(req: Request) {
-  const cookie = req.headers.get("cookie") || "";
-  const match = cookie.match(/vxs_admin=([^;]+)/);
-  if (!isAuthed(match?.[1])) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

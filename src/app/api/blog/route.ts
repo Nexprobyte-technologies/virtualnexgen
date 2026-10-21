@@ -1,10 +1,44 @@
-import { addBlogPost, getBlogPosts } from "@/lib/blog";
+import { addBlogPost, getBlogPosts, isBlogPostPublished } from "@/lib/blog";
 import { requireAdmin } from "@/lib/auth";
+import { toBlogPostSummary } from "@/lib/blog-seo";
 
-export async function GET() {
-  const posts = await getBlogPosts();
-  const list = posts.map(({ content, ...rest }) => rest);
-  return Response.json({ posts: list });
+export async function GET(request: Request) {
+  // The list never needs the article body, so skip merging the full content.
+  const posts = await getBlogPosts({ includeContent: false });
+  const params = new URL(request.url).searchParams;
+  const publishedOnly = params.get("published") === "1";
+
+  const filtered = publishedOnly ? posts.filter(isBlogPostPublished) : posts;
+  let result = filtered.map(toBlogPostSummary);
+  const total = result.length;
+
+  const limit = Number.parseInt(params.get("limit") ?? "", 10);
+  const offset = Number.parseInt(params.get("offset") ?? "", 10);
+
+  if (params.get("sort") === "date") {
+    result = [...result].sort((a, b) => {
+      const aDate = Date.parse(a.date);
+      const bDate = Date.parse(b.date);
+      const diff =
+        (Number.isNaN(bDate) ? 0 : bDate) - (Number.isNaN(aDate) ? 0 : aDate);
+      if (diff !== 0) return diff;
+      const aCreated = Date.parse(a.createdAt);
+      const bCreated = Date.parse(b.createdAt);
+      return (
+        (Number.isNaN(bCreated) ? 0 : bCreated) -
+        (Number.isNaN(aCreated) ? 0 : aCreated)
+      );
+    });
+  }
+
+  if (Number.isFinite(offset) && offset > 0) {
+    result = result.slice(offset);
+  }
+  if (Number.isFinite(limit) && limit > 0) {
+    result = result.slice(0, limit);
+  }
+
+  return Response.json({ posts: result, total });
 }
 
 export async function POST(request: Request) {

@@ -1,10 +1,28 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { getServices } from "@/lib/services";
+import { SITE_URL } from "@/lib/blog-seo";
 import Reveal from "@/components/Reveal";
 import FAQ9 from "@/components/FAQ9";
 
 export const dynamic = "force-dynamic";
+
+const SERVICES_DESCRIPTION =
+  "Expert virtual assistant and AI automation solutions tailored to your industry — delivered with precision and care.";
+
+export const metadata: Metadata = {
+  title: "Our Services | Virtual Nexgen Solutions",
+  description: SERVICES_DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}/services` },
+  openGraph: {
+    type: "website",
+    title: "Our Services | Virtual Nexgen Solutions",
+    description: SERVICES_DESCRIPTION,
+    url: `${SITE_URL}/services`,
+    siteName: "Virtual Nexgen Solutions",
+  },
+};
 
 export default async function ServicesListPage() {
   const services = await getServices();

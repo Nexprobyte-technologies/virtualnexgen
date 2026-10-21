@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 import TestimonialsMarquee from "../TestimonialsMarquee";
 import { getService, getServices } from "@/lib/services";
+import { SITE_URL } from "@/lib/blog-seo";
 import { CONTACT_EMAIL, telHref } from "@/lib/contact-details";
 import {
   clientLogos as defaultClientLogos,
@@ -502,6 +504,48 @@ function FullContentCards({ html }: { html: string }) {
 
 export const dynamic = "force-dynamic";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const service = await getService(slug);
+
+  if (!service) {
+    return {
+      title: "Service | Virtual Nexgen Solutions",
+      robots: "noindex, follow",
+    };
+  }
+
+  const title = `${service.name} | Virtual Nexgen Solutions`;
+  const description =
+    service.short?.trim() ||
+    `${service.name} services from Virtual Nexgen Solutions — expert virtual assistants and AI automation tailored to your industry.`;
+  const url = `${SITE_URL}/services/${service.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url,
+      siteName: "Virtual Nexgen Solutions",
+      images: service.image ? [{ url: service.image }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: service.image ? [service.image] : undefined,
+    },
+  };
+}
+
 const ICONS: Record<string, typeof Zap> = {
   Zap,
   Shield,
@@ -662,7 +706,7 @@ export default async function ServiceDetailPage({
 
       {/* Trust Badges Marquee */}
       <section className="border-y border-[#01012F]/10 bg-[#fffaf3] py-6 overflow-hidden">
-        <div className="flex gap-8 animate-[marquee-x_25s_linear_infinite] whitespace-nowrap">
+        <div className="service-trust-marquee-track flex gap-8 whitespace-nowrap">
           {[...trustBadges, ...trustBadges].map((b, i) => (
             <div key={i} className="flex items-center gap-2.5 shrink-0">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/10">

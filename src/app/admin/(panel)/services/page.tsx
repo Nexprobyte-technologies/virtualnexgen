@@ -10,26 +10,19 @@ import {
   X,
   CheckCircle2,
   Pencil,
-  Layers,
   Server,
   Sparkles,
   Users,
   ChevronLeft,
   ChevronRight,
+  FileText,
+  FolderOpen,
+  Quote,
+  type LucideIcon,
 } from "lucide-react";
 import type { Service, ServiceBenefit, ServiceStep, ServicePricing, ServiceTestimonial, ServiceFaq } from "@/lib/types";
 
-const MAX_SECTIONS = 5;
 const MAX_SERVICE_NAME = 60;
-
-interface SectionDraft {
-  id: string;
-  heading: string;
-  text: string;
-  imageUrl: string;
-  file: File | null;
-  preview: string;
-}
 
 interface LogoDraft {
   id: string;
@@ -37,17 +30,6 @@ interface LogoDraft {
   src: string;
   file: File | null;
   preview: string;
-}
-
-function makeSection(): SectionDraft {
-  return {
-    id: crypto.randomUUID(),
-    heading: "",
-    text: "",
-    imageUrl: "",
-    file: null,
-    preview: "",
-  };
 }
 
 function makeLogoDraft(): LogoDraft {
@@ -60,22 +42,33 @@ function makeLogoDraft(): LogoDraft {
   };
 }
 
-function serviceToSections(service: Service): SectionDraft[] {
-  const sections = service.sections?.length
-    ? service.sections
-    : service.content.slice(0, MAX_SECTIONS).map((text) => ({
-        heading: "",
-        text,
-        image: "" as const,
-      }));
-  return sections.map((section) => ({
-    id: crypto.randomUUID(),
-    heading: section.heading,
-    text: section.text,
-    imageUrl: section.image,
-    file: null,
-    preview: section.image,
-  }));
+/** Numbered card header so every group of fields is easy to scan. */
+function SectionCard({
+  step,
+  title,
+  icon: Icon,
+  badge,
+  children,
+}: {
+  step: number;
+  title: string;
+  icon: LucideIcon;
+  badge?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+      <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
+        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-brand/15 text-[11px] font-bold text-brand-dark">
+          {step}
+        </span>
+        <Icon className="h-4 w-4 text-brand-dark" />
+        <span className="truncate">{title}</span>
+        {badge}
+      </p>
+      {children}
+    </section>
+  );
 }
 
 export default function AdminServices() {
@@ -118,9 +111,6 @@ export default function AdminServices() {
   const [logosSectionMeta, setLogosSectionMeta] = useState<
     Service["logosSection"]
   >({});
-  const [sections, setSections] = useState<SectionDraft[]>(() => [
-    makeSection(),
-  ]);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
@@ -129,7 +119,6 @@ export default function AdminServices() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(5);
   const fileRef = useRef<HTMLInputElement>(null);
-  const sectionFileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const logoFileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -185,12 +174,6 @@ export default function AdminServices() {
     setPreview(URL.createObjectURL(f));
   }
 
-  function updateSection(index: number, patch: Partial<SectionDraft>) {
-    setSections((prev) =>
-      prev.map((s, i) => (i === index ? { ...s, ...patch } : s)),
-    );
-  }
-
   function updatePartnerLogo(index: number, patch: Partial<LogoDraft>) {
     setPartnerLogos((prev) =>
       prev.map((logo, i) => (i === index ? { ...logo, ...patch } : logo)),
@@ -207,30 +190,6 @@ export default function AdminServices() {
       file: selected,
       src: "",
       preview: URL.createObjectURL(selected),
-    });
-  }
-
-  function handleSectionFile(
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) {
-    const f = e.target.files?.[0];
-    if (!f) return;
-    updateSection(index, {
-      file: f,
-      imageUrl: "",
-      preview: URL.createObjectURL(f),
-    });
-  }
-
-  function removeSection(index: number) {
-    setSections((prev) => prev.filter((_, i) => i !== index));
-  }
-
-  function clearSections() {
-    setSections([makeSection()]);
-    sectionFileRefs.current.forEach((ref) => {
-      if (ref) ref.value = "";
     });
   }
 
@@ -258,7 +217,6 @@ export default function AdminServices() {
     logoFileRefs.current.forEach((ref) => {
       if (ref) ref.value = "";
     });
-    clearSections();
     setFormError("");
     setSuccess("");
     setEditingSlug(null);
@@ -363,13 +321,6 @@ export default function AdminServices() {
         form.append("logoImage", logo.file ?? "");
       });
 
-      sections.forEach((section, i) => {
-        form.append(`sectionHeading_${i}`, section.heading);
-        form.append(`sectionText_${i}`, section.text);
-        form.append(`sectionImageUrl_${i}`, section.imageUrl);
-        if (section.file) form.append(`sectionImage_${i}`, section.file);
-      });
-
       const res = await fetch(
         wasEditing ? `/api/services/${wasEditing}` : "/api/services",
         { method: wasEditing ? "PUT" : "POST", body: form },
@@ -452,14 +403,6 @@ export default function AdminServices() {
           }))
         : [makeLogoDraft()],
     );
-    setSections(
-      serviceToSections(service).length > 0
-        ? serviceToSections(service)
-        : [makeSection()],
-    );
-    sectionFileRefs.current.forEach((ref) => {
-      if (ref) ref.value = "";
-    });
     logoFileRefs.current.forEach((ref) => {
       if (ref) ref.value = "";
     });
@@ -538,273 +481,238 @@ export default function AdminServices() {
             onSubmit={handleSubmit}
             className="flex-1 overflow-y-auto overscroll-contain px-5 py-4"
           >
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <label className="block">
-            <span className="mb-1 block text-xs font-semibold text-slate-600">
-              Heading Name *
-            </span>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              maxLength={MAX_SERVICE_NAME}
-              placeholder="e.g. Bookkeeping Services"
-              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20"
-            />
-          </label>
-
-          <label className="block">
-            <span className="mb-1 block text-xs font-semibold text-slate-600">
-              Eyebrow Label
-            </span>
-            <input
-              value={eyebrow}
-              onChange={(e) => setEyebrow(e.target.value)}
-              placeholder="e.g. BOOKKEEPING SERVICES"
-              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20"
-            />
-          </label>
-
-          <label className="block sm:col-span-2">
-            <span className="mb-1 block text-xs font-semibold text-slate-600">
-              Short Text
-            </span>
-            <textarea
-              value={short}
-              onChange={(e) => setShort(e.target.value)}
-              rows={3}
-              placeholder="One or two sentence summary shown at the top of the page."
-              className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20"
-            />
-          </label>
-        </div>
-
-          <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2">
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Layers className="h-4 w-4 text-brand-dark" />
-              Page Sections
-              <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
-                {sections.length} / {MAX_SECTIONS}
-              </span>
-            </p>
-            <div className="space-y-2.5">
-              {sections.map((section, i) => (
-                <div key={section.id} className="rounded-xl border border-slate-200 bg-white p-2.5">
-                  <p className="mb-2 flex items-center justify-between text-xs font-bold text-slate-900">
-                    Section {i + 1}
-                    {sections.length > 1 && (
-                      <button type="button" onClick={() => removeSection(i)} className="grid h-6 w-6 place-items-center rounded-md bg-slate-100 text-slate-400 shadow-sm transition hover:text-red-500" aria-label={`Remove section ${i + 1}`}>
-                        <X className="h-3.5 w-3.5" />
-                      </button>
-                    )}
-                  </p>
-                  <input
-                    value={section.heading ?? ""}
-                    onChange={(e) => updateSection(i, { heading: e.target.value })}
-                    placeholder="Section heading"
-                    className="mb-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                  />
-                  <textarea
-                    value={section.text ?? ""}
-                    onChange={(e) => updateSection(i, { text: e.target.value })}
-                    rows={2}
-                    placeholder="Section content text"
-                    className="mb-2 w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                  />
-                  <div className="flex items-center gap-2">
-                    <button type="button" onClick={() => sectionFileRefs.current[i]?.click()} className="flex shrink-0 items-center gap-1.5 rounded-lg bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-sm transition hover:text-brand-dark">
-                      <Upload className="h-3.5 w-3.5" /> Image
-                    </button>
-                    <input ref={(el) => { sectionFileRefs.current[i] = el; }} type="file" accept="image/*" onChange={(e) => handleSectionFile(i, e)} className="hidden" />
-                    <input
-                      value={section.imageUrl ?? ""}
-                      onChange={(e) => updateSection(i, { imageUrl: e.target.value, file: null, preview: "" })}
-                      placeholder="or image URL"
-                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 outline-none transition focus:border-brand"
-                    />
-                  </div>
-                  {section.preview && (
-                    <img src={section.preview} alt={`Section ${i + 1} preview`} className="mt-2 h-16 w-full rounded-lg object-cover" />
-                  )}
-                </div>
-              ))}
-            </div>
-            {sections.length < MAX_SECTIONS && (
-              <button type="button" onClick={() => setSections((prev) => [...prev, makeSection()])} className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add Section
-              </button>
-            )}
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Sparkles className="h-4 w-4 text-brand-dark" />
-              Get Started (CTA)
-            </p>
-            <div className="space-y-3">
-              <label className="block">
-                <span className="mb-1 block text-xs font-semibold text-slate-600">Heading</span>
-                <input value={ctaTitle} onChange={(e) => setCtaTitle(e.target.value)} placeholder="e.g. Ready to get started with Insurance VS?" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
-              </label>
-              <label className="block">
-                <span className="mb-1 block text-xs font-semibold text-slate-600">Description</span>
-                <textarea value={ctaText} onChange={(e) => setCtaText(e.target.value)} rows={2} placeholder="Short paragraph shown under the heading." className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
-              </label>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                <label className="block">
-                  <span className="mb-1 block text-xs font-semibold text-slate-600">Button Label</span>
-                  <input value={ctaButton} onChange={(e) => setCtaButton(e.target.value)} placeholder="e.g. Book a Free Consultation" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
-                </label>
-                <label className="block">
-                  <span className="mb-1 block text-xs font-semibold text-slate-600">Phone Number</span>
-                  <input value={ctaPhone} onChange={(e) => setCtaPhone(e.target.value)} placeholder="e.g. +1 341 888 6504" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
-                </label>
-              </div>
-              <div>
-                <span className="mb-1 block text-xs font-semibold text-slate-600">Checklist Points (max 5)</span>
-                {ctaPoints.map((point, i) => (
-                  <div key={i} className="mb-2 flex items-center gap-2">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-white text-[11px] font-bold text-brand-dark shadow-sm">{i + 1}</span>
-                    <input value={point} onChange={(e) => setCtaPoints((prev) => prev.map((p, idx) => idx === i ? e.target.value : p))} placeholder={`Checklist point ${i + 1}`} className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonials */}
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Users className="h-4 w-4 text-brand-dark" />
-              Testimonials
-            </p>
-            <div className="space-y-2">
-              {testimonials.map((t, i) => (
-                <div key={i} className="rounded-lg bg-white p-2 shadow-sm space-y-1.5">
-                  <textarea value={t.quote} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, quote: e.target.value } : x))} rows={2} placeholder="Client quote" className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand" />
-                  <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-                    <input value={t.name} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, name: e.target.value } : x))} placeholder="Name" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
-                    <input value={t.role} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, role: e.target.value } : x))} placeholder="Role" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
-                  </div>
-                  {testimonials.length > 1 && (
-                    <button type="button" onClick={() => setTestimonials((prev) => prev.filter((_, idx) => idx !== i))} className="text-[11px] text-red-500 hover:underline">Remove</button>
-                  )}
-                </div>
-              ))}
-              <button type="button" onClick={() => setTestimonials((prev) => [...prev, { quote: "", name: "", role: "" }])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add Testimonial
-              </button>
-            </div>
-          </div>
-
-          {/* Folder Pop Items */}
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Layers className="h-4 w-4 text-brand-dark" />
-              Folder Pop Items
-              <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">{folderPopItems.length}</span>
-            </p>
-            <p className="mb-3 text-xs text-slate-500">Each item becomes a clickable chapter in the interactive folder.</p>
-            <div className="space-y-2">
-              {folderPopItems.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 rounded-lg bg-white p-2 shadow-sm">
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-brand/10 text-xs font-bold text-brand-dark">{i + 1}</span>
-                  <input value={item} onChange={(e) => setFolderPopItems((prev) => prev.map((x, idx) => idx === i ? e.target.value : x))} placeholder="e.g., Insurance Quote & Application Processing" className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none focus:border-brand" />
-                  {folderPopItems.length > 1 && (
-                    <button type="button" onClick={() => setFolderPopItems((prev) => prev.filter((_, idx) => idx !== i))} className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 hover:text-red-500">
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button type="button" onClick={() => setFolderPopItems((prev) => [...prev, ""])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
-                <Plus className="h-3.5 w-3.5" /> Add Folder Pop Item
-              </button>
-            </div>
-          </div>
-
-          {/* Trusted Partner Logos */}
-          <div className="col-span-1 rounded-xl border border-slate-200 bg-slate-50 p-3 sm:col-span-2">
-            <p className="mb-1 flex items-center gap-2 text-sm font-bold text-slate-900">
-              <Users className="h-4 w-4 text-brand-dark" />
-              Trusted Partners Logos
-            </p>
-            <p className="mb-3 text-xs text-slate-500">
-              Upload logos to display in this service page&apos;s Trusted Partners section.
-            </p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {partnerLogos.map((logo, i) => (
-                <div
-                  key={logo.id}
-                  className="space-y-2 rounded-xl border border-slate-200 bg-white p-2.5"
-                >
-                  <div className="flex items-center gap-2">
-                    <input
-                      value={logo.name}
-                      onChange={(e) =>
-                        updatePartnerLogo(i, { name: e.target.value })
-                      }
-                      placeholder={`Partner or software name ${i + 1}`}
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
-                    />
-                    {partnerLogos.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPartnerLogos((prev) =>
-                            prev.filter((_, index) => index !== i),
-                          )
-                        }
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-400 transition hover:text-red-500"
-                        aria-label={`Remove partner logo ${i + 1}`}
-                      >
-                        <X className="h-3.5 w-3.5" />
-                      </button>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => logoFileRefs.current[i]?.click()}
-                      className="flex shrink-0 items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:text-brand-dark"
-                    >
-                      <Upload className="h-3.5 w-3.5" /> Upload Logo
-                    </button>
-                    <input
-                      ref={(el) => {
-                        logoFileRefs.current[i] = el;
-                      }}
-                      type="file"
-                      accept=".png,.jpg,.jpeg,.webp,.gif,.svg"
-                      onChange={(e) => handlePartnerLogoFile(i, e)}
-                      className="hidden"
-                    />
-                    <span className="min-w-0 truncate text-xs text-slate-500">
-                      {logo.file?.name || (logo.src ? "Logo saved" : "No logo selected")}
+            <div className="space-y-4">
+              {/* 1 - Basics */}
+              <SectionCard step={1} title="Basics" icon={FileText}>
+                <div className="grid gap-3 lg:grid-cols-2">
+                  <label className="block">
+                    <span className="mb-1 block text-xs font-semibold text-slate-600">
+                      Heading Name *
                     </span>
-                  </div>
-                  {logo.preview && (
-                    <img
-                      src={logo.preview}
-                      alt={`${logo.name || `Partner ${i + 1}`} preview`}
-                      className="h-14 w-full rounded-lg bg-slate-50 p-2 object-contain"
+                    <input
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      maxLength={MAX_SERVICE_NAME}
+                      placeholder="e.g. Bookkeeping Services"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
                     />
-                  )}
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => setPartnerLogos((prev) => [...prev, makeLogoDraft()])}
-              className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark"
-            >
-              <Plus className="h-3.5 w-3.5" /> Add Partner Logo
-            </button>
-          </div>
+                  </label>
 
-          </div>
+                  <label className="block">
+                    <span className="mb-1 block text-xs font-semibold text-slate-600">
+                      Eyebrow Label
+                    </span>
+                    <input
+                      value={eyebrow}
+                      onChange={(e) => setEyebrow(e.target.value)}
+                      placeholder="e.g. BOOKKEEPING SERVICES"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+                    />
+                  </label>
+
+                  <label className="block lg:col-span-2">
+                    <span className="mb-1 block text-xs font-semibold text-slate-600">
+                      Short Text
+                    </span>
+                    <textarea
+                      value={short}
+                      onChange={(e) => setShort(e.target.value)}
+                      rows={2}
+                      placeholder="One or two sentence summary shown at the top of the page."
+                      className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+                    />
+                  </label>
+                </div>
+              </SectionCard>
+
+              {/* 2 - 5 pack into columns so short cards leave no empty space */}
+              <div className="columns-1 gap-4 xl:columns-2 [&>*]:mb-4 [&>*]:break-inside-avoid">
+                <SectionCard step={2} title="Get Started (CTA)" icon={Sparkles}>
+                  <div className="space-y-3">
+                    <label className="block">
+                      <span className="mb-1 block text-xs font-semibold text-slate-600">Heading</span>
+                      <input value={ctaTitle} onChange={(e) => setCtaTitle(e.target.value)} placeholder="e.g. Ready to get started with Insurance VS?" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
+                    </label>
+                    <label className="block">
+                      <span className="mb-1 block text-xs font-semibold text-slate-600">Description</span>
+                      <textarea value={ctaText} onChange={(e) => setCtaText(e.target.value)} rows={2} placeholder="Short paragraph shown under the heading." className="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
+                    </label>
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-semibold text-slate-600">Button Label</span>
+                        <input value={ctaButton} onChange={(e) => setCtaButton(e.target.value)} placeholder="e.g. Book a Free Consultation" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
+                      </label>
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-semibold text-slate-600">Phone Number</span>
+                        <input value={ctaPhone} onChange={(e) => setCtaPhone(e.target.value)} placeholder="e.g. +1 341 888 6504" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
+                      </label>
+                    </div>
+                    <div>
+                      <span className="mb-1 block text-xs font-semibold text-slate-600">Checklist Points (max 5)</span>
+                      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                        {ctaPoints.map((point, i) => (
+                          <div key={i} className="flex items-center gap-2">
+                            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-white text-[11px] font-bold text-brand-dark shadow-sm">{i + 1}</span>
+                            <input value={point} onChange={(e) => setCtaPoints((prev) => prev.map((p, idx) => idx === i ? e.target.value : p))} placeholder={`Checklist point ${i + 1}`} className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </SectionCard>
+
+                {/* Testimonials */}
+                <SectionCard
+                  step={3}
+                  title="Testimonials"
+                  icon={Quote}
+                  badge={
+                    <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+                      {testimonials.length}
+                    </span>
+                  }
+                >
+                  <div className="space-y-2">
+                    <div className="max-h-[26rem] space-y-2 overflow-y-auto pr-1">
+                      {testimonials.map((t, i) => (
+                        <div key={i} className="rounded-lg bg-white p-2 shadow-sm space-y-1.5">
+                          <textarea value={t.quote} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, quote: e.target.value } : x))} rows={2} placeholder="Client quote" className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 outline-none focus:border-brand" />
+                          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+                            <input value={t.name} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, name: e.target.value } : x))} placeholder="Name" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
+                            <input value={t.role} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, role: e.target.value } : x))} placeholder="Role" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
+                          </div>
+                          {testimonials.length > 1 && (
+                            <button type="button" onClick={() => setTestimonials((prev) => prev.filter((_, idx) => idx !== i))} className="text-[11px] text-red-500 hover:underline">Remove</button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <button type="button" onClick={() => setTestimonials((prev) => [...prev, { quote: "", name: "", role: "" }])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
+                      <Plus className="h-3.5 w-3.5" /> Add Testimonial
+                    </button>
+                  </div>
+                </SectionCard>
+
+                {/* Folder Pop Items */}
+                <SectionCard
+                  step={4}
+                  title="Folder Pop Items"
+                  icon={FolderOpen}
+                  badge={
+                    <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+                      {folderPopItems.length}
+                    </span>
+                  }
+                >
+                  <p className="mb-3 text-xs text-slate-500">Each item becomes a clickable chapter in the interactive folder.</p>
+                  <div className="space-y-2">
+                    <div className="max-h-[22rem] space-y-2 overflow-y-auto pr-1">
+                      {folderPopItems.map((item, i) => (
+                        <div key={i} className="flex items-center gap-2 rounded-lg bg-white p-2 shadow-sm">
+                          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-brand/10 text-xs font-bold text-brand-dark">{i + 1}</span>
+                          <input value={item} onChange={(e) => setFolderPopItems((prev) => prev.map((x, idx) => idx === i ? e.target.value : x))} placeholder="e.g., Insurance Quote & Application Processing" className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 outline-none focus:border-brand" />
+                          {folderPopItems.length > 1 && (
+                            <button type="button" onClick={() => setFolderPopItems((prev) => prev.filter((_, idx) => idx !== i))} className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 hover:text-red-500">
+                              <X className="h-3.5 w-3.5" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <button type="button" onClick={() => setFolderPopItems((prev) => [...prev, ""])} className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark">
+                      <Plus className="h-3.5 w-3.5" /> Add Folder Pop Item
+                    </button>
+                  </div>
+                </SectionCard>
+
+                {/* Trusted Partner Logos */}
+                <SectionCard
+                  step={5}
+                  title="Trusted Partners Logos"
+                  icon={Users}
+                  badge={
+                    <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+                      {partnerLogos.length}
+                    </span>
+                  }
+                >
+                  <p className="mb-3 text-xs text-slate-500">
+                    Upload logos to display in this service page&apos;s Trusted Partners section.
+                  </p>
+                  <div className="max-h-[26rem] overflow-y-auto pr-1">
+                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                      {partnerLogos.map((logo, i) => (
+                      <div
+                        key={logo.id}
+                        className="space-y-2 rounded-xl border border-slate-200 bg-white p-2.5"
+                      >
+                        <div className="flex items-center gap-2">
+                          <input
+                            value={logo.name}
+                            onChange={(e) =>
+                              updatePartnerLogo(i, { name: e.target.value })
+                            }
+                            placeholder={`Partner or software name ${i + 1}`}
+                            className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand"
+                          />
+                          {partnerLogos.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setPartnerLogos((prev) =>
+                                  prev.filter((_, index) => index !== i),
+                                )
+                              }
+                              className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-400 transition hover:text-red-500"
+                              aria-label={`Remove partner logo ${i + 1}`}
+                            >
+                              <X className="h-3.5 w-3.5" />
+                            </button>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => logoFileRefs.current[i]?.click()}
+                            className="flex shrink-0 items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:text-brand-dark"
+                          >
+                            <Upload className="h-3.5 w-3.5" /> Upload Logo
+                          </button>
+                          <input
+                            ref={(el) => {
+                              logoFileRefs.current[i] = el;
+                            }}
+                            type="file"
+                            accept=".png,.jpg,.jpeg,.webp,.gif,.svg"
+                            onChange={(e) => handlePartnerLogoFile(i, e)}
+                            className="hidden"
+                          />
+                          <span className="min-w-0 truncate text-xs text-slate-500">
+                            {logo.file?.name || (logo.src ? "Logo saved" : "No logo selected")}
+                          </span>
+                        </div>
+                        {logo.preview && (
+                          <img
+                            src={logo.preview}
+                            alt={`${logo.name || `Partner ${i + 1}`} preview`}
+                            className="h-14 w-full rounded-lg bg-slate-50 p-2 object-contain"
+                          />
+                        )}
+                      </div>
+                    ))}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setPartnerLogos((prev) => [...prev, makeLogoDraft()])}
+                    className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-brand hover:text-brand-dark"
+                  >
+                    <Plus className="h-3.5 w-3.5" /> Add Partner Logo
+                  </button>
+                </SectionCard>
+              </div>
+            </div>
 
            {formError && (
             <p className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm font-medium text-red-600">

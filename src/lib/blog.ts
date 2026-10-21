@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import type { BlogPost } from "./types";
 import { slugify } from "./services";
+import { invalidateJsonFile, readJsonFile } from "./json-store";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "blog.json");
@@ -82,33 +83,38 @@ type SummaryBlogPost = {
 };
 
 async function loadFullPosts(): Promise<FullBlogPost[]> {
-  try {
-    const raw = await fs.readFile(FULL_DATA_FILE, "utf-8");
-    const list = JSON.parse(raw) as FullBlogPost[];
-    return Array.isArray(list) ? list : [];
-  } catch {
-    return [];
-  }
+  const list = await readJsonFile<FullBlogPost[]>(FULL_DATA_FILE);
+  return Array.isArray(list) ? list : [];
 }
 
 async function loadSummaryPosts(): Promise<SummaryBlogPost[]> {
-  try {
-    const raw = await fs.readFile(SUMMARY_DATA_FILE, "utf-8");
-    const list = JSON.parse(raw) as SummaryBlogPost[];
-    return Array.isArray(list) ? list : [];
-  } catch {
-    return [];
-  }
+  const list = await readJsonFile<SummaryBlogPost[]>(SUMMARY_DATA_FILE);
+  return Array.isArray(list) ? list : [];
 }
+
+/**
+ * Slug -> full content lookup. Rebuilt only when the underlying file changes
+ * because `loadFullPosts` hands back the same array instance while the file on
+ * disk is untouched.
+ */
+let fullContentCache: {
+  source: FullBlogPost[];
+  map: Record<string, { contentHtml: string; contentText: string }>;
+} | null = null;
 
 async function loadFullContent(): Promise<Record<string, { contentHtml: string; contentText: string }>> {
   const list = await loadFullPosts();
+  if (fullContentCache && fullContentCache.source === list) {
+    return fullContentCache.map;
+  }
+
   const map: Record<string, { contentHtml: string; contentText: string }> = {};
   for (const item of list) {
     if (item.slug && item.contentHtml) {
       map[item.slug] = { contentHtml: item.contentHtml, contentText: item.contentText };
     }
   }
+  fullContentCache = { source: list, map };
   return map;
 }
 
@@ -185,6 +191,9 @@ async function writeBlogData(
   fullPosts: FullBlogPost[],
   summaryPosts: SummaryBlogPost[],
 ): Promise<void> {
+  invalidateJsonFile(DATA_FILE);
+  invalidateJsonFile(FULL_DATA_FILE);
+  invalidateJsonFile(SUMMARY_DATA_FILE);
   await Promise.all([
     fs.writeFile(DATA_FILE, JSON.stringify(posts, null, 2), "utf-8"),
     fs.writeFile(FULL_DATA_FILE, JSON.stringify(fullPosts, null, 2), "utf-8"),
@@ -194,16 +203,13 @@ async function writeBlogData(
 
 async function ensureFile(): Promise<BlogPost[]> {
   await fs.mkdir(DATA_DIR, { recursive: true });
-  try {
-    await fs.access(DATA_FILE);
-    const raw = await fs.readFile(DATA_FILE, "utf-8");
-    const list = JSON.parse(raw) as BlogPost[];
-    if (Array.isArray(list) && list.length > 0) return list;
-    throw new Error("empty");
-  } catch {
-    await fs.writeFile(DATA_FILE, JSON.stringify(seed, null, 2), "utf-8");
-    return seed;
-  }
+  const list = await readJsonFile<BlogPost[]>(DATA_FILE);
+  if (Array.isArray(list) && list.length > 0) return list;
+
+  await fs.writeFile(DATA_FILE, JSON.stringify(seed, null, 2), "utf-8");
+  invalidateJsonFile(DATA_FILE);
+  // Hand back a copy so callers that mutate the list cannot corrupt the seed.
+  return [...seed];
 }
 
 export function isBlogPostPublished(post: BlogPost): boolean {
@@ -212,15 +218,27 @@ export function isBlogPostPublished(post: BlogPost): boolean {
 
 export async function getBlogPosts(options?: {
   publishedOnly?: boolean;
+  /**
+   * When false the article body is left untouched, which keeps listing pages
+   * from pulling the full HTML of every post into memory.
+   */
+  includeContent?: boolean;
 }): Promise<BlogPost[]> {
-  const [posts, fullMap] = await Promise.all([ensureFile(), loadFullContent()]);
-  const merged = posts.map((post) => {
-    const full = fullMap[post.slug];
-    if (full) {
-      return { ...post, content: full.contentHtml };
-    }
-    return post;
-  });
+  const posts = await ensureFile();
+  const includeContent = options?.includeContent !== false;
+
+  let merged = posts;
+  if (includeContent) {
+    const fullMap = await loadFullContent();
+    merged = posts.map((post) => {
+      const full = fullMap[post.slug];
+      if (full) {
+        return { ...post, content: full.contentHtml };
+      }
+      return post;
+    });
+  }
+
   return options?.publishedOnly
     ? merged.filter(isBlogPostPublished)
     : merged;
@@ -230,8 +248,14 @@ export async function getBlogPost(
   slug: string,
   options?: { publishedOnly?: boolean },
 ): Promise<BlogPost | null> {
-  const all = await getBlogPosts(options);
-  return all.find((post) => post.slug === slug) ?? null;
+  const posts = await ensureFile();
+  const post = posts.find((item) => item.slug === slug);
+  if (!post) return null;
+  if (options?.publishedOnly && !isBlogPostPublished(post)) return null;
+
+  const fullMap = await loadFullContent();
+  const full = fullMap[slug];
+  return full ? { ...post, content: full.contentHtml } : post;
 }
 
 export type BlogPostInput = {
@@ -251,11 +275,15 @@ export type BlogPostInput = {
 };
 
 export async function addBlogPost(input: BlogPostInput): Promise<BlogPost> {
-  const [all, fullPosts, summaryPosts] = await Promise.all([
+  const [storedPosts, fullPosts, summaryPosts] = await Promise.all([
     ensureFile(),
     loadFullPosts(),
     loadSummaryPosts(),
   ]);
+  // Work on copies so the shared cache is never mutated in place.
+  const all = [...storedPosts];
+  const nextFullPosts = [...fullPosts];
+  const nextSummaryPosts = [...summaryPosts];
   const base = slugify(input.slug ?? input.title) || "post";
   let slug = base;
   let n = 2;
@@ -280,9 +308,9 @@ export async function addBlogPost(input: BlogPostInput): Promise<BlogPost> {
     metaDescription: input.metaDescription ?? "",
   };
   all.unshift(post);
-  upsertBySlug(fullPosts, createFullBlogPost(post, fullPosts));
-  upsertBySlug(summaryPosts, createSummaryBlogPost(post, summaryPosts));
-  await writeBlogData(all, fullPosts, summaryPosts);
+  upsertBySlug(nextFullPosts, createFullBlogPost(post, nextFullPosts));
+  upsertBySlug(nextSummaryPosts, createSummaryBlogPost(post, nextSummaryPosts));
+  await writeBlogData(all, nextFullPosts, nextSummaryPosts);
   return post;
 }
 
@@ -290,11 +318,14 @@ export async function updateBlogPost(
   slug: string,
   input: BlogPostInput,
 ): Promise<BlogPost | null> {
-  const [all, fullPosts, summaryPosts] = await Promise.all([
+  const [storedPosts, fullPosts, summaryPosts] = await Promise.all([
     ensureFile(),
     loadFullPosts(),
     loadSummaryPosts(),
   ]);
+  const all = [...storedPosts];
+  const nextFullPosts = [...fullPosts];
+  const nextSummaryPosts = [...summaryPosts];
   const index = all.findIndex((post) => post.slug === slug);
   if (index === -1) return null;
   const next: BlogPost = {
@@ -314,22 +345,22 @@ export async function updateBlogPost(
   };
   all[index] = next;
   upsertBySlug(
-    fullPosts,
+    nextFullPosts,
     createFullBlogPost(
       next,
-      fullPosts,
-      fullPosts.find((post) => post.slug === slug),
+      nextFullPosts,
+      nextFullPosts.find((post) => post.slug === slug),
     ),
   );
   upsertBySlug(
-    summaryPosts,
+    nextSummaryPosts,
     createSummaryBlogPost(
       next,
-      summaryPosts,
-      summaryPosts.find((post) => post.slug === slug),
+      nextSummaryPosts,
+      nextSummaryPosts.find((post) => post.slug === slug),
     ),
   );
-  await writeBlogData(all, fullPosts, summaryPosts);
+  await writeBlogData(all, nextFullPosts, nextSummaryPosts);
   return next;
 }
 

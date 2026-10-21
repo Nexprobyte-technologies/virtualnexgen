@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import type { Service, ServiceSection } from "./types";
+import { invalidateJsonFile, readJsonFile } from "./json-store";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "services.json");
@@ -77,20 +78,29 @@ const seed: Array<Omit<Service, "sections">> = [
   },
 ];
 
+/**
+ * Slug -> scraped content lookup. Rebuilt only when `services_full.json`
+ * changes on disk, because `loadFullContent` returns the same array instance
+ * while the file is untouched.
+ */
+let fullContentCache: { source: Array<{ slug?: string }>; map: Record<string, unknown> } | null =
+  null;
+
 async function loadFullContent(): Promise<Record<string, unknown>> {
-  try {
-    const raw = await fs.readFile(FULL_DATA_FILE, "utf-8");
-    const list = JSON.parse(raw) as Array<{ slug?: string }>;
-    const map: Record<string, unknown> = {};
-    for (const item of list) {
-      if (item?.slug) {
-        map[item.slug.toLowerCase().replace(/[^a-z0-9]+/g, '-')] = item;
-      }
-    }
-    return map;
-  } catch {
-    return {};
+  const list = await readJsonFile<Array<{ slug?: string }>>(FULL_DATA_FILE);
+  const source = Array.isArray(list) ? list : [];
+  if (fullContentCache && fullContentCache.source === source) {
+    return fullContentCache.map;
   }
+
+  const map: Record<string, unknown> = {};
+  for (const item of source) {
+    if (item?.slug) {
+      map[item.slug.toLowerCase().replace(/[^a-z0-9]+/g, '-')] = item;
+    }
+  }
+  fullContentCache = { source, map };
+  return map;
 }
 
 async function ensureFile(): Promise<void> {
@@ -165,9 +175,14 @@ function normalizeSections(
 /** Reads services.json verbatim. Use for writes so scraped content is never persisted. */
 async function loadRawServices(): Promise<Service[]> {
   await ensureFile();
-  const raw = await fs.readFile(DATA_FILE, "utf-8");
-  const list = JSON.parse(raw) as Service[];
+  const list = await readJsonFile<Service[]>(DATA_FILE);
   return Array.isArray(list) ? list : [];
+}
+
+/** Persists the service list and drops the cached parse for the next read. */
+async function writeServices(list: Service[]): Promise<void> {
+  invalidateJsonFile(DATA_FILE);
+  await fs.writeFile(DATA_FILE, JSON.stringify(list, null, 2), "utf-8");
 }
 
 /** Scraped content as the base, admin-authored fullContent keys layered on top. */
@@ -197,16 +212,41 @@ export async function getServices(): Promise<Service[]> {
   );
 }
 
+/** Lightweight projection for navigation menus and other listing surfaces. */
+export type ServiceSummary = {
+  id: string;
+  slug: string;
+  name: string;
+  eyebrow: string;
+  image: string;
+};
+
+export async function getServiceSummaries(): Promise<ServiceSummary[]> {
+  const list = await loadRawServices();
+  return list.map((service) => ({
+    id: service.id,
+    slug: service.slug,
+    name: service.name,
+    eyebrow: service.eyebrow,
+    image: service.image,
+  }));
+}
+
 export async function getService(
   slug: string,
 ): Promise<Service | null> {
-  const [all, fullMap] = await Promise.all([getServices(), loadFullContent()]);
-  const service = all.find((s) => s.slug === slug) ?? null;
-  if (!service) return null;
-  return {
-    ...service,
-    fullContent: mergeFullContent(fullMap[slug], service.fullContent),
-  };
+  const [list, fullMap] = await Promise.all([
+    loadRawServices(),
+    loadFullContent(),
+  ]);
+  const raw = list.find((s) => s.slug === slug);
+  if (!raw) return null;
+
+  // Normalise only the requested service instead of the whole catalogue.
+  return normalizeSections({
+    ...raw,
+    fullContent: mergeFullContent(fullMap[slug], raw.fullContent),
+  });
 }
 
 export function slugify(text: string): string {
@@ -287,7 +327,7 @@ function pickSectionCopy(
 }
 
 export async function addService(input: ServiceInput): Promise<Service> {
-  const all = await loadRawServices();
+  const all = [...(await loadRawServices())];
   const base = slugify(input.slug ?? input.name) || "service";
   let slug = base;
   let n = 2;
@@ -329,7 +369,7 @@ export async function addService(input: ServiceInput): Promise<Service> {
     },
   };
   all.unshift(record);
-  await fs.writeFile(DATA_FILE, JSON.stringify(all, null, 2), "utf-8");
+  await writeServices(all);
   return record;
 }
 
@@ -337,7 +377,7 @@ export async function deleteService(slug: string): Promise<boolean> {
   const all = await loadRawServices();
   const next = all.filter((s) => s.slug !== slug);
   if (next.length === all.length) return false;
-  await fs.writeFile(DATA_FILE, JSON.stringify(next, null, 2), "utf-8");
+  await writeServices(next);
   return true;
 }
 
@@ -345,10 +385,11 @@ export async function updateService(
   slug: string,
   input: ServiceInput,
 ): Promise<Service | null> {
-  const [all, fullMap] = await Promise.all([
+  const [currentServices, fullMap] = await Promise.all([
     loadRawServices(),
     loadFullContent(),
   ]);
+  const all = [...currentServices];
   const index = all.findIndex((s) => s.slug === slug);
   if (index === -1) return null;
   const prev: Service = normalizeSections({
@@ -423,7 +464,7 @@ const stored: Service = {
   fullContent: authoredFullContent(all[index], input.folderPopItems),
 };
 all[index] = stored;
-  await fs.writeFile(DATA_FILE, JSON.stringify(all, null, 2), "utf-8");
+  await writeServices(all);
   return next;
 }
 

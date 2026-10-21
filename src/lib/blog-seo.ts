@@ -34,13 +34,41 @@ function truncate(text: string, limit: number): string {
   return `${(lastSpace > limit * 0.6 ? cut.slice(0, lastSpace) : cut).trimEnd()}..`;
 }
 
+/** Minimum shape needed to render a listing card. */
+export type BlogCardPost = {
+  title: string;
+  excerpt?: string;
+  content?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+};
+
+/** Blog post without the article body, safe to send to the browser. */
+export type BlogPostSummary = Omit<BlogPost, "content"> & { excerpt: string };
+
+/**
+ * Strips the article body from a post so listing pages do not serialise
+ * megabytes of HTML to the client. The excerpt is kept meaningful by falling
+ * back to the body text when the author never wrote one.
+ */
+export function toBlogPostSummary(post: BlogPost): BlogPostSummary {
+  const { content, ...rest } = post;
+  const excerpt = rest.excerpt?.trim();
+  return {
+    ...rest,
+    excerpt:
+      excerpt ||
+      truncate(plainTextFromHtml(content ?? ""), CARD_DESCRIPTION_LENGTH),
+  };
+}
+
 /** Heading shown on listing cards: meta title wins, article title is the fallback. */
-export function getCardTitle(post: BlogPost): string {
+export function getCardTitle(post: BlogCardPost): string {
   return post.metaTitle?.trim() || post.title;
 }
 
 /** Body text shown on listing cards: meta description wins, then excerpt, then content. */
-export function getCardDescription(post: BlogPost): string {
+export function getCardDescription(post: BlogCardPost): string {
   const meta = post.metaDescription?.trim();
   if (meta) return truncate(meta, CARD_DESCRIPTION_LENGTH);
   const excerpt = post.excerpt?.trim();

@@ -27,6 +27,7 @@ interface SpeechRecognitionLike {
   interimResults: boolean;
   start: () => void;
   stop: () => void;
+  abort?: () => void;
   onresult: ((event: SpeechRecognitionEventLike) => void) | null;
   onerror: ((event: { error: string }) => void) | null;
   onend: (() => void) | null;
@@ -95,6 +96,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
   const [thinking, setThinking] = useState(false);
 
   const listRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -128,6 +130,16 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
   useEffect(() => {
     return () => {
       window.speechSynthesis?.cancel();
+      // Release the microphone, otherwise the browser keeps listening after
+      // the chat widget is unmounted.
+      const rec = recognitionRef.current;
+      if (rec) {
+        rec.onresult = null;
+        rec.onerror = null;
+        rec.onend = null;
+        rec.abort?.();
+        recognitionRef.current = null;
+      }
     };
   }, []);
 
@@ -278,6 +290,7 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
       alert("Voice input is not supported in this browser. Try Chrome or Edge.");
       return;
     }
+    recognitionRef.current = rec;
     rec.onresult = (event) => {
       let transcript = "";
       for (let i = 0; i < event.results.length; i++) {
@@ -296,7 +309,6 @@ export default function ChatBot({ variant = "site", open: openProp, onOpenChange
     setListening(true);
     rec.start();
   }, [getRecognition, send]);
-
   if (!mounted) return null;
 
   return (

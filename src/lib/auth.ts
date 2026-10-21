@@ -7,8 +7,9 @@ const SESSION_SECRET =
   process.env.ADMIN_SESSION_SECRET ??
   process.env.DATABASE_URL ??
   (process.env.NODE_ENV !== "production" ? "virtualnexgen-local-admin-session" : undefined);
-const INITIAL_ADMIN_USERNAME = "admin";
-const INITIAL_ADMIN_PASSWORD = "admin@123";
+const INITIAL_ADMIN_USERNAME = "virtualnexgen2025@gmail.com";
+const INITIAL_ADMIN_PASSWORD = "123456";
+const LEGACY_ADMIN_USERNAME = "admin";
 
 function verifyAdminPassword(password: string, stored: string): boolean {
   const [algorithm, salt, expectedHex] = stored.split(":");
@@ -36,7 +37,7 @@ export async function isValidCredentials(username: string, password: string): Pr
   ) {
     const [adminCount, legacyAdmin] = await Promise.all([
       prisma.adminUser.count(),
-      prisma.adminUser.findUnique({ where: { username: "admin" } }),
+      prisma.adminUser.findUnique({ where: { username: LEGACY_ADMIN_USERNAME } }),
     ]);
     const canReplaceLegacyAdmin = adminCount === 1 && legacyAdmin !== null;
 

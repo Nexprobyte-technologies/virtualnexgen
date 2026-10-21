@@ -45,7 +45,7 @@ export default function TestimonialsMarquee({
           )}
         </div>
 
-        <div className="mt-14 flex gap-6 animate-[testimonials-marquee_9s_linear_infinite]">
+        <div className="service-testimonials-track mt-14 flex gap-6">
           {items.map((t, i) => (
             <div
               key={i}

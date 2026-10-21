@@ -1,8 +1,15 @@
-import { addService, getServices } from "@/lib/services";
+import { addService, getServiceSummaries, getServices } from "@/lib/services";
 import { parseServiceRequest } from "@/lib/service-form";
 import { requireAdmin } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(request: Request) {
+  // Navigation only needs the names, so allow a slim response that skips the
+  // scraped content of every service.
+  const summaryOnly = new URL(request.url).searchParams.get("summary") === "1";
+  if (summaryOnly) {
+    return Response.json({ services: await getServiceSummaries() });
+  }
+
   const services = await getServices();
   return Response.json({ services });
 }

@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
-import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/casestudy";
-import { isAuthed } from "@/lib/auth";
+import { getAllCaseStudies } from "@/lib/casestudy";
+import { requireAdmin } from "@/lib/auth";
 
 export async function GET() {
   return NextResponse.json(getAllCaseStudies());
 }
 
 export async function POST(req: Request) {
-  const cookie = req.headers.get("cookie") || "";
-  const match = cookie.match(/vxs_admin=([^;]+)/);
-  if (!isAuthed(match?.[1])) {
+  try {
+    await requireAdmin();
+  } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

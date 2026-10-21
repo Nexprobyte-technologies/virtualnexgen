@@ -119,7 +119,8 @@ export default function Footer() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch("/api/blog", { cache: "no-store" })
+    // Only the six newest cards are rendered, so ask the API for just those.
+    fetch("/api/blog?sort=date&limit=6", { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : null))
       .then((data: { posts?: FooterBlogPost[] } | null) => {
         if (!data?.posts || cancelled) return;

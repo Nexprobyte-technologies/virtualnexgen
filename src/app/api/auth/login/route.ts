@@ -1,5 +1,11 @@
 import { cookies } from "next/headers";
 import { ADMIN_COOKIE, createAdminSessionToken, isValidCredentials } from "@/lib/auth";
+import {
+  clearLoginFailures,
+  getClientKey,
+  isLoginBlocked,
+  recordLoginFailure,
+} from "@/lib/rate-limit";
 
 function getLoginServiceError(error: unknown): string {
   if (!process.env.DATABASE_URL) {
@@ -35,14 +41,25 @@ export async function POST(request: Request) {
 
   const username = String(body?.username ?? "").trim().toLowerCase();
   const password = String(body?.password ?? "");
+  const clientKey = getClientKey(request, username);
+
+  if (isLoginBlocked(clientKey)) {
+    return Response.json(
+      { error: "Too many failed login attempts. Try again in 15 minutes." },
+      { status: 429 },
+    );
+  }
 
   try {
     if (!(await isValidCredentials(username, password))) {
+      recordLoginFailure(clientKey);
       return Response.json(
         { error: "Invalid username or password" },
         { status: 401 },
       );
     }
+
+    clearLoginFailures(clientKey);
 
     const store = await cookies();
     store.set(ADMIN_COOKIE, createAdminSessionToken(), {

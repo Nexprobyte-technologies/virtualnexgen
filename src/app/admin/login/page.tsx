@@ -70,7 +70,7 @@ export default function AdminLogin() {
               required
               autoComplete="username"
               className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white outline-none transition focus:border-[#12B4CF] focus:bg-white/10 focus:ring-2 focus:ring-white/20"
-              placeholder="admin"
+              placeholder="you@example.com"
             />
           </label>
 

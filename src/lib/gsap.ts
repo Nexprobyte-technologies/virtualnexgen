@@ -10,6 +10,9 @@ if (typeof window !== "undefined") {
 
   const refresh = () => ScrollTrigger.refresh();
 
+  // The listeners live for the lifetime of the page. They used to be
+  // registered inline, which meant the image handler below could never be
+  // removed and fanned a `load` listener onto every incomplete <img>.
   window.addEventListener("load", refresh);
   window.addEventListener("pageshow", refresh);
 
@@ -17,11 +20,16 @@ if (typeof window !== "undefined") {
     document.fonts.ready.then(refresh);
   }
 
-  window.addEventListener("load", () => {
-    document.querySelectorAll("img").forEach((img) => {
-      if (!img.complete) img.addEventListener("load", refresh, { once: true });
-    });
-  });
+  window.addEventListener(
+    "load",
+    () => {
+      const images = document.querySelectorAll("img");
+      images.forEach((img) => {
+        if (!img.complete) img.addEventListener("load", refresh, { once: true });
+      });
+    },
+    { once: true },
+  );
 }
 
 export { gsap, ScrollTrigger, useGSAP };
