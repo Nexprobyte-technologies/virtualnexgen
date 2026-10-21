@@ -37,6 +37,7 @@ import Reveal from "@/components/Reveal";
 import CTA from "@/components/CTA";
 import FAQ9 from "@/components/FAQ9";
 import type { AboutSection, AboutFeature } from "@/lib/types";
+import sanitizeHtml from "sanitize-html";
 
 // Icon resolver for dynamic features & sections
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -265,14 +266,17 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
       .catch(() => {});
   }, []);
 
-  const heroTitle =
-    data.heroTitle && data.heroTitle !== "About Us"
-      ? data.heroTitle
-      : "The Architecture of Modern Work";
+  const heroTitle = data.heroTitle || "Built on Trust Driven by Your Growth.";
   const heroSubtitle =
-    data.heroSubtitle ||
     data.heroDescription ||
+    data.heroSubtitle ||
     "Empowering Global Businesses with Dedicated Human Talent & Intelligent AI Automation Since 2016";
+  const quoteSection = data.sections?.[0];
+  const quoteHtml = sanitizeHtml(quoteSection?.content || "", {
+    allowedTags: ["p", "br", "strong", "b", "em", "i"],
+    allowedAttributes: {},
+  });
+  const quoteParagraph = quoteHtml.match(/<p\b[^>]*>[\s\S]*?<\/p>/i)?.[0];
 
   const missionText =
     data.missionText ||
@@ -344,11 +348,15 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
             <div className="lg:col-span-8">
               <Reveal y={25} delay={0.1}>
                 <h1 className="text-3xl min-[380px]:text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08]">
-                  Built on Trust <span className="text-[#12B4CF]">Driven</span> by Your{" "}
-                  <span className="relative inline-block">
-                    <span className="relative z-10 text-ink">Growth.</span>
-                    <span className="absolute bottom-2 left-0 h-3.5 w-full bg-[#12B4CF]/20 -z-0 rounded-sm" />
-                  </span>
+                  {heroTitle === "Built on Trust Driven by Your Growth." ? (
+                    <>
+                      Built on Trust <span className="text-[#12B4CF]">Driven</span> by Your{" "}
+                      <span className="relative inline-block">
+                        <span className="relative z-10 text-ink">Growth.</span>
+                        <span className="absolute bottom-2 left-0 h-3.5 w-full bg-[#12B4CF]/20 -z-0 rounded-sm" />
+                      </span>
+                    </>
+                  ) : heroTitle}
                 </h1>
               </Reveal>
 
@@ -448,12 +456,15 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                 {/* Floating Quote Badge on Image */}
                 <div className="absolute bottom-6 left-6 right-6 md:left-10 md:right-auto md:max-w-xl">
                   <div className="rounded-2xl border border-white/20 bg-[#01012F]/90 p-5 backdrop-blur-md text-white shadow-xl">
-                    <p className="text-sm md:text-base font-medium leading-relaxed italic text-white/95">
-                      &ldquo;Great work begins with great people. We bring together skilled professionals,
-                      structured processes, and a shared commitment to helping businesses grow.&rdquo;
-                    </p>
+                    <div
+                      className="text-sm md:text-base font-medium leading-relaxed italic text-white/95 [&_p]:m-0"
+                      dangerouslySetInnerHTML={{
+                        __html: quoteParagraph ||
+                          "<p>&ldquo;Great work begins with great people. We bring together skilled professionals, structured processes, and a shared commitment to helping businesses grow.&rdquo;</p>",
+                      }}
+                    />
                     <div className="mt-3 block text-xs text-white/50 font-semibold uppercase tracking-wider sm:flex sm:items-center sm:justify-between">
-                      <span className="block">VIRTUAL NEXGEN SOLUTIONS TEAM</span>
+                      <span className="block">{quoteSection?.title || "VIRTUAL NEXGEN SOLUTIONS TEAM"}</span>
                       <span className="block text-[#12B4CF]">COIMBATORE, INDIA</span>
                     </div>
                   </div>

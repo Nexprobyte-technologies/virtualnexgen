@@ -590,7 +590,8 @@ export default function AdminBlog() {
 
             <form
               onSubmit={handleSubmit}
-              className="flex-1 min-h-0 space-y-4 overflow-y-auto px-6 py-5"
+              data-lenis-prevent
+              className="flex-1 min-h-0 space-y-4 overflow-y-auto overscroll-contain px-6 py-5"
             >
               {/* Row 1: Meta Title + Meta Description */}
               <div className="flex gap-4">
