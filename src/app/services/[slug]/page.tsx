@@ -689,7 +689,7 @@ export default async function ServiceDetailPage({
           <Reveal delay={0.15}>
             <div className="relative h-[420px] sm:h-[520px]">
               <InfiniteSpiral
-                items={spiralImages}
+                items={spiralImages.map((src) => ({ src, alt: service.name }))}
                 animationMode="all"
                 speed={0.6}
                 radius={190}
