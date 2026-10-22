@@ -136,7 +136,7 @@ export default function BuiltFor() {
                   </div>
                   <a href="#contact" className="group pr-2 pl-5 py-2 border border-white/20 rounded-full flex items-center justify-between sm:justify-start gap-2.5 font-semibold w-full sm:w-auto flex-shrink-0 cursor-pointer">
                   <span className="text-sm font-bold text-[#02024E] whitespace-nowrap">
-                    Book a Demo
+                    Book a Call
                   </span>
                   <span className="bg-icon-circle w-6 h-6 flex items-center justify-center rounded-full bg-white/20 text-[#02024E] flex-shrink-0">
                         <svg

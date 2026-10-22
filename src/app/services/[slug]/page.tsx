@@ -611,7 +611,7 @@ export default async function ServiceDetailPage({
   const heroPrimaryUrl =
     service.heroButtons?.primaryUrl?.trim() || "https://calendly.com/virtualnexgen-info/30min";
   const heroPrimaryLabel =
-    service.heroButtons?.primaryLabel?.trim() || "Book Your Demo";
+    service.heroButtons?.primaryLabel?.trim() || "Book a Call";
   const heroSecondaryLabel =
     service.heroButtons?.secondaryLabel?.trim() || "Learn More";
   const ctaUrl = service.ctaUrl?.trim() || heroPrimaryUrl;

@@ -826,7 +826,7 @@ export default function ContactPage() {
                       className="shine inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-ink transition hover:shadow-[0_12px_32px_rgba(255,255,255,0.25)]"
                     >
                       <Clock className="h-4 w-4" />
-                      Book Your Demo
+                      Book a Call
                     </Link>
                     <a
                       href={`mailto:${CONTACT_EMAIL}`}

@@ -322,7 +322,9 @@ export default function SavingsCalculatorPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-[#fffaf3] text-[#02024E] pt-20 sm:pt-24">
+      <main className="min-h-screen bg-[#fffaf3] text-[#02024E] pt-12 sm:pt-16">
+        {false && (
+          <>
         {/* ======================================================== */}
         {/* HERO SECTION */}
         {/* ======================================================== */}
@@ -489,11 +491,13 @@ export default function SavingsCalculatorPage() {
             </div>
           </div>
         </section>
+          </>
+        )}
 
         {/* ======================================================== */}
         {/* INTERACTIVE CALCULATOR SECTION */}
         {/* ======================================================== */}
-        <section id="calculator-section" className="py-12 sm:py-16 md:py-20 lg:py-24">
+        <section id="calculator-section" className="mt-0 pt-0 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
           <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-10 lg:px-12">
             <div className="bg-white border-2 border-[#02024E]/10 rounded-3xl lg:rounded-[40px] shadow-[0_24px_70px_rgba(2,2,78,0.08)] overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -781,7 +785,7 @@ export default function SavingsCalculatorPage() {
                   rel="noopener noreferrer"
                   className="px-5 py-3 rounded-full bg-[#2CCBE6] hover:bg-[#12B4CF] text-[#02024E] font-bold text-sm transition-colors text-center w-full sm:w-auto"
                 >
-                  Book a Demo
+                  Book a Call
                 </a>
               </div>
             </div>
@@ -1044,7 +1048,7 @@ export default function SavingsCalculatorPage() {
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 rounded-full bg-[#02024E] text-white font-bold text-sm sm:text-base hover:bg-[#01012f] transition-all duration-300 shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
                 >
-                  <span>Book Your Demo</span>
+                  <span>Book a Call</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>

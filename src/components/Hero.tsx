@@ -317,7 +317,7 @@ export default function Hero() {
 
             <div ref={typewriterRef}>
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[#02024E] mb-3 sm:mb-4 lg:mb-6 leading-[1.1]">
-                Powered By Trained VAs in <br />
+                Experienced VAs for <br />
                 <span className="inline-block min-w-[10ch] sm:min-w-[12ch] text-[#12B4CF] font-semibold relative">
                   <TypewriterText words={typewriterWords} className="text-[#12B4CF]" onWordChange={setIndustryIndex} />
                 </span>
@@ -342,7 +342,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#2CCBE6] px-5 sm:px-6 py-2.5 sm:py-3 text-[#02024E] font-semibold text-sm sm:text-base shadow-sm transition-all duration-300 hover:bg-[#12B4CF] hover:shadow-[0_4px_16px_rgba(6,182,212,0.35)] w-full sm:w-auto"
               >
-                <span className="whitespace-nowrap">Book a Demo</span>
+                <span className="whitespace-nowrap">Book a Call</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
