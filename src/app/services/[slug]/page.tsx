@@ -623,10 +623,13 @@ export default async function ServiceDetailPage({
       authoredCarousel.length > 0
         ? authoredCarousel
         : [
+            service.image,
             ...(service.fullContent?.images ?? []),
             service.fullContent?.image,
-            service.image,
-          ].filter((src): src is string => Boolean(src)),
+          ].filter(
+            (src): src is string =>
+              Boolean(src) && !src.includes("virtualnexgen.com/assets/uploads"),
+          ),
     ),
   );
   const spiralImages = [...sourceSpiralImages];

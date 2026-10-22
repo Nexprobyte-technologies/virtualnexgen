@@ -299,6 +299,12 @@ const InfiniteSpiral = ({
               loading={index < 6 ? "eager" : "lazy"}
               draggable={false}
               style={imageStyle}
+              onError={(event) => {
+                const target = event.currentTarget;
+                if (!target.src.endsWith("/uploads/ser1.jpg")) {
+                  target.src = "/uploads/ser1.jpg";
+                }
+              }}
             />
           );
 
