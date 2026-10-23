@@ -30,7 +30,8 @@ export default function Marquee() {
       if (!trackRef.current) return;
       gsap.to(trackRef.current, {
         xPercent: -50,
-        duration: 30,
+        // Give the longer mobile word bar more time to cross the viewport.
+        duration: window.matchMedia("(max-width: 767px)").matches ? 60 : 30,
         ease: "none",
         repeat: -1,
       });

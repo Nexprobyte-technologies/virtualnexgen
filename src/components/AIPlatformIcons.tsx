@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, type MouseEvent } from "react";
 import { SiPerplexity } from "react-icons/si";
 
 const aiPrompt = `Analyze https://virtualnexgen.com and explain how Virtual Nexgen Solutions can help my business grow through dedicated Virtual Assistants and AI automation. Highlight the tasks I can delegate, potential cost savings, productivity improvements, industry-specific solutions, and opportunities to scale compared with hiring in-house staff. Provide practical recommendations tailored to my business and explain how Virtual Nexgen Solutions can improve operational efficiency and support sustainable growth.
@@ -14,16 +17,36 @@ const aiTools = [
   { name: "Perplexity AI", href: `https://www.perplexity.ai/search?q=${encodedAiPrompt}`, icon: "perplexity" },
   { name: "Claude AI", href: `https://claude.ai/new?q=${encodedAiPrompt}`, icon: "claude" },
   { name: "Gemini AI", href: `https://gemini.google.com/app?q=${encodedAiPrompt}`, icon: "gemini" },
-  { name: "Meta AI", href: `https://www.meta.ai/?q=${encodedAiPrompt}`, icon: "meta" },
+  { name: "Meta AI", href: `https://meta.ai/?q=${encodedAiPrompt}`, icon: "meta" },
 ];
 
 export default function AIPlatformIcons() {
+  const [copied, setCopied] = useState(false);
+
+  const handleAiClick = async (event: MouseEvent<HTMLAnchorElement>, ai: (typeof aiTools)[number]) => {
+    if (ai.icon !== "meta") return;
+
+    // Meta AI currently ignores the query-string prompt, so copy it for a
+    // one-step paste after the new chat page opens.
+    event.preventDefault();
+    window.open("https://meta.ai/", "_blank", "noopener,noreferrer");
+
+    try {
+      await navigator.clipboard.writeText(aiPrompt);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 5000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
   return (
     <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
       {aiTools.map((ai) => (
         <a
           key={ai.name}
           href={ai.href}
+          onClick={(event) => void handleAiClick(event, ai)}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={ai.name}
@@ -42,6 +65,7 @@ export default function AIPlatformIcons() {
           )}
         </a>
       ))}
+      {copied && <span className="basis-full text-xs text-[#02024E]/70">Prompt copied — paste it into the Meta AI chat box.</span>}
     </div>
   );
 }

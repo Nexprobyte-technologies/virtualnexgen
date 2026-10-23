@@ -53,12 +53,63 @@ const steps = [
   },
 ];
 
+function WorkflowCard({ step }: { step: (typeof steps)[number] }) {
+  return (
+    <div className="bg-gradient-to-br from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
+      <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-[#12B4CF]/[0.08]">
+        {step.num}
+      </div>
+
+      <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-4 sm:gap-6 lg:gap-8 items-center">
+        <div className="text-left">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-[30px] mb-2 sm:mb-2.5">
+            <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-[#02024E]/60">
+              {step.phase}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#fffaf3] flex items-center justify-center flex-shrink-0 shadow-sm">
+              <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#12B4CF]" />
+            </div>
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold text-[#02024E] leading-snug">
+              {step.title}
+            </h3>
+          </div>
+
+          <p className="text-sm sm:text-sm md:text-base lg:text-base font-normal text-[#02024E]/80 leading-relaxed mb-3 sm:mb-4 max-w-2xl">
+            {step.desc}
+          </p>
+
+          <div className="pt-2 sm:pt-3 border-t border-slate-200 flex flex-wrap gap-1.5 sm:gap-2.5">
+            {step.features.map((feature) => (
+              <div key={feature} className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-[#02024E]/75 bg-[#fffaf3]/90 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border border-white/20">
+                <CheckCircle className="w-3 h-3 text-[#12B4CF] flex-shrink-0" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="w-full hidden md:flex flex-col items-center justify-center p-5 bg-white/90 backdrop-blur-sm rounded-2xl border border-black/30 shadow-xs min-w-[130px] text-center mt-5">
+          <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-[#fffaf3] text-[#12B4CF]">
+            <step.icon className="w-5 h-5" />
+          </div>
+          <span className="text-xs font-bold text-[#02024E] tracking-wide">Step {step.num} of 05</span>
+          <span className="text-[10px] text-[#02024E]/50 font-medium">{step.label}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function HowWeSupport() {
   const [current, setCurrent] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const mobileCardsRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const lastWheelTimeRef = useRef(0);
 
@@ -67,6 +118,7 @@ export default function HowWeSupport() {
     if (!section) return;
 
     const handleWheel = (event: WheelEvent) => {
+      if (window.matchMedia("(max-width: 639px)").matches) return;
       const direction = Math.sign(event.deltaY);
       const hasNextStep = direction > 0 && current < steps.length - 1;
       const hasPreviousStep = direction < 0 && current > 0;
@@ -83,6 +135,19 @@ export default function HowWeSupport() {
     section.addEventListener("wheel", handleWheel, { passive: false });
     return () => section.removeEventListener("wheel", handleWheel);
   }, [current]);
+
+  useEffect(() => {
+    const scroller = mobileCardsRef.current;
+    if (!scroller) return;
+
+    const handleScroll = () => {
+      const cardWidth = scroller.clientWidth;
+      if (cardWidth > 0) setCurrent(Math.round(scroller.scrollLeft / cardWidth));
+    };
+
+    scroller.addEventListener("scroll", handleScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useGSAP(
     () => {
@@ -109,6 +174,13 @@ export default function HowWeSupport() {
         { width: "0%" },
         { width: `${((current + 1) / steps.length) * 100}%`, duration: 0.5, ease: "power2.out" },
       );
+    }
+
+    if (mobileCardsRef.current && mobileCardsRef.current.clientWidth > 0) {
+      mobileCardsRef.current.scrollTo({
+        left: current * mobileCardsRef.current.clientWidth,
+        behavior: "smooth",
+      });
     }
   }, [current]);
 
@@ -185,57 +257,18 @@ export default function HowWeSupport() {
           </div>
 
           {/* Content card */}
+          <div ref={cardRef} className="hidden sm:block w-full">
+            <WorkflowCard step={step} />
+          </div>
           <div
-            ref={cardRef}
-            className="w-full"
+            ref={mobileCardsRef}
+            className="flex sm:hidden w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            <div className="bg-gradient-to-br from-[#fffaf3] via-[#fffaf3] to-[#fffaf3] border border-[#12B4CF]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgba(19,47,74,0.06)] relative overflow-hidden">
-              <div className="absolute -right-4 -bottom-6 sm:-right-6 sm:-bottom-8 text-6xl sm:text-8xl lg:text-9xl font-black pointer-events-none select-none text-[#12B4CF]/[0.08]">
-                {step.num}
+            {steps.map((mobileStep) => (
+              <div key={mobileStep.num} className="w-full shrink-0 snap-center pr-1">
+                <WorkflowCard step={mobileStep} />
               </div>
-
-              <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-4 sm:gap-6 lg:gap-8 items-center">
-                <div className="text-left">
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 sm:mt-[30px] mb-2 sm:mb-2.5">
-                    <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-[#02024E]/60">
-                      {step.phase}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-3">
-                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#fffaf3] flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#12B4CF]" />
-                    </div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold text-[#02024E] leading-snug">
-                      {step.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-sm sm:text-sm md:text-base lg:text-base font-normal text-[#02024E]/80 leading-relaxed mb-3 sm:mb-4 max-w-2xl">
-                    {step.desc}
-                  </p>
-
-                  <div className="pt-2 sm:pt-3 border-t border-slate-200 flex flex-wrap gap-1.5 sm:gap-2.5">
-                    {step.features.map((f) => (
-                      <div key={f} className="inline-flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-[#02024E]/75 bg-[#fffaf3]/90 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border border-white/20">
-                        <CheckCircle className="w-3 h-3 text-[#12B4CF] flex-shrink-0" />
-                        <span>{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-<div className="w-full hidden md:flex flex-col items-center justify-center p-5 bg-white/90 backdrop-blur-sm rounded-2xl border border-black/30 shadow-xs min-w-[130px] text-center mt-5">
-  <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-base mb-1 bg-[#fffaf3] text-[#12B4CF]">
-    <step.icon className="w-5 h-5" />
-  </div>
-  <span className="text-xs font-bold text-[#02024E] tracking-wide">
-    Step {step.num} of 05
-  </span>
-  <span className="text-[10px] text-[#02024E]/50 font-medium">{step.label}</span>
-</div>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Progress bar */}
