@@ -208,7 +208,7 @@ export default function Footer() {
                 </a>
                 <a
                   href={telHref(CONTACT_PHONE_INDIA)}
-                  className="flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-[#12B4CF]"
+                  className="flex items-center gap-2 text-base font-semibold text-white transition hover:text-[#12B4CF]"
                 >
                   <Phone className="h-4 w-4" />
                   {CONTACT_PHONE_INDIA}

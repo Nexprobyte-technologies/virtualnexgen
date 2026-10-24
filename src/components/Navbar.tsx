@@ -288,7 +288,6 @@ export default function Navbar() {
                   )}
 
                   <div className="border-t border-slate-200 mt-2 pt-2">
-                    <p className="px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">About Us</p>
                     {aboutLinks.map((link) => (
                       <Link
                         key={link.label}

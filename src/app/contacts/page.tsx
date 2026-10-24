@@ -689,19 +689,7 @@ export default function ContactPage() {
                             <h3 className="text-2xl font-bold">{loc.country}</h3>
                             <p className="mt-1 text-sm text-[#02024E]/60">{loc.tagline}</p>
                           </div>
-                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#12B4CF]/10">
-                            <MapPin className="h-5 w-5 text-brand" />
-                          </span>
                         </div>
-                        <a
-                          href={loc.map}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#02024E]/80 transition hover:text-[#12B4CF]"
-                        >
-                          <MapPin className="h-4 w-4 text-brand" />
-                          View on map
-                        </a>
                       </div>
                     </div>
                   </Reveal>

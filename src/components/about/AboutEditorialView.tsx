@@ -351,10 +351,7 @@ export default function AboutEditorialView({ initialData }: AboutEditorialViewPr
                   {heroTitle === "Built on Trust Driven by Your Growth." ? (
                     <>
                       Built on Trust <span className="text-[#12B4CF]">Driven</span> by Your{" "}
-                      <span className="relative inline-block">
-                        <span className="relative z-10 text-ink">Growth.</span>
-                        <span className="absolute bottom-2 left-0 h-3.5 w-full bg-[#12B4CF]/20 -z-0 rounded-sm" />
-                      </span>
+                      <span className="text-ink">Growth.</span>
                     </>
                   ) : heroTitle}
                 </h1>
