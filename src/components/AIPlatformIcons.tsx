@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { SiPerplexity } from "react-icons/si";
 
 const aiPrompt = `Analyze https://virtualnexgen.com and explain how Virtual Nexgen Solutions can help my business grow through dedicated Virtual Assistants and AI automation. Highlight the tasks I can delegate, potential cost savings, productivity improvements, industry-specific solutions, and opportunities to scale compared with hiring in-house staff. Provide practical recommendations tailored to my business and explain how Virtual Nexgen Solutions can improve operational efficiency and support sustainable growth.
@@ -16,27 +16,67 @@ const aiTools = [
   { name: "ChatGPT", href: `https://chatgpt.com/?q=${encodedAiPrompt}`, icon: "openai" },
   { name: "Perplexity AI", href: `https://www.perplexity.ai/search?q=${encodedAiPrompt}`, icon: "perplexity" },
   { name: "Claude AI", href: `https://claude.ai/new?q=${encodedAiPrompt}`, icon: "claude" },
-  { name: "Gemini AI", href: `https://gemini.google.com/app?q=${encodedAiPrompt}`, icon: "gemini" },
+  { name: "Gemini AI", href: `https://www.google.com/search?udm=50&q=${encodedAiPrompt}`, icon: "gemini" },
   { name: "Meta AI", href: `https://meta.ai/?q=${encodedAiPrompt}`, icon: "meta" },
 ];
 
 export default function AIPlatformIcons() {
   const [copied, setCopied] = useState(false);
+  const copyResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleAiClick = async (event: MouseEvent<HTMLAnchorElement>, ai: (typeof aiTools)[number]) => {
-    if (ai.icon !== "meta") return;
+  // Clear any pending "copied" reset timer when the component unmounts.
+  useEffect(() => {
+    return () => {
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+    };
+  }, []);
 
-    // Meta AI currently ignores the query-string prompt, so copy it for a
-    // one-step paste after the new chat page opens.
-    event.preventDefault();
-    window.open("https://meta.ai/", "_blank", "noopener,noreferrer");
-
+  const copyPromptToClipboard = async (): Promise<boolean> => {
     try {
       await navigator.clipboard.writeText(aiPrompt);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 5000);
+      return true;
     } catch {
-      setCopied(false);
+      // Fall back to the legacy copy approach when the async Clipboard API
+      // is unavailable (insecure context, permission denied, etc.).
+    }
+
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = aiPrompt;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const succeeded = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      return succeeded;
+    } catch {
+      return false;
+    }
+  };
+
+  const clipboardFallbackIcons: string[] = [];
+
+  const handleAiClick = async (event: MouseEvent<HTMLAnchorElement>, ai: (typeof aiTools)[number]) => {
+    // All AI tools use direct ?q= autofill links now (ChatGPT, Perplexity,
+    // Claude, Gemini, Meta) — no clipboard fallback needed.
+    if (!clipboardFallbackIcons.includes(ai.icon)) return;
+
+    event.preventDefault();
+    window.open(ai.href, "_blank", "noopener,noreferrer");
+
+    const succeeded = await copyPromptToClipboard();
+
+    if (copyResetTimeoutRef.current) {
+      clearTimeout(copyResetTimeoutRef.current);
+    }
+
+    if (succeeded) {
+      setCopied(true);
+      copyResetTimeoutRef.current = setTimeout(() => setCopied(false), 5000);
     }
   };
 
@@ -65,7 +105,7 @@ export default function AIPlatformIcons() {
           )}
         </a>
       ))}
-      {copied && <span className="basis-full text-xs text-[#02024E]/70">Prompt copied — paste it into the Meta AI chat box.</span>}
+      {copied && <span className="basis-full text-xs text-[#02024E]/70">Prompt copied — paste it into the chat box.</span>}
     </div>
   );
 }
