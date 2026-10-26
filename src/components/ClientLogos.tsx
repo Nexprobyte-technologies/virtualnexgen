@@ -27,6 +27,10 @@ export default function ClientLogos({
   const isInsuranceSoftware = `${heading ?? "Our VAs Are Experts in All Major"} ${highlight ?? "Insurance Software"}`
     .toLowerCase()
     .includes("insurance software");
+  const headingText = (heading ?? "Our VAs Are Experts in All Major").trim() || "Our VAs Are Experts in All Major";
+  const highlightText = highlight === undefined
+    ? (isInsuranceSoftware ? "Software" : "")
+    : highlight.trim();
   const extraInsuranceTools = [
     "QQCatalyst",
     "NowCerts",
@@ -50,7 +54,7 @@ export default function ClientLogos({
   // Only show boxes that have an image; boxes without an image (and their
   // connecting lines) are skipped so the remaining logos stay aligned.
   const displayLogos = resolved.filter((logo) => !!logo.src);
-  const showHighlight = highlight !== undefined && highlight.trim() !== "";
+  const showHighlight = highlightText !== "";
   const centerLines = (centerText?.trim() || (isInsuranceSoftware ? "AMS\nExperts" : "VA\nExperts")).split("\n");
   const circuitLogoPositions = displayLogos.map((_, i) => {
     const ringIndex = Math.floor(i / 2);
@@ -76,12 +80,11 @@ export default function ClientLogos({
               {eyebrow?.trim() || "Trusted Partners"}
             </span>
             <h2 className="mt-3 sm:mt-5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
-              {(heading ?? "Our VAs Are Experts in All Major").trim() ||
-                "Our VAs Are Experts in All Major"}{" "}
+              {(isInsuranceSoftware ? headingText.replace(/\binsurance\b/gi, "").replace(/\s{2,}/g, " ").trim() : headingText)}{" "}
               {showHighlight ? (
-                <span className="text-[#12B4CF]">{highlight!.trim()}</span>
+                <span className="text-[#12B4CF]">{isInsuranceSoftware ? highlightText.replace(/\binsurance\b/gi, "").replace(/\s{2,}/g, " ").trim() : highlightText}</span>
               ) : isInsuranceSoftware ? (
-                <span className="text-[#12B4CF]">Insurance Software</span>
+                <span className="text-[#12B4CF]">Software</span>
               ) : null}
             </h2>
           </div>
