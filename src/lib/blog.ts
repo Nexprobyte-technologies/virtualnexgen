@@ -263,9 +263,11 @@ export async function getBlogPosts(options?: {
     });
   }
 
-  return options?.publishedOnly
+  const visiblePosts = options?.publishedOnly
     ? merged.filter(isBlogPostPublished)
     : merged;
+
+  return sortPostsByDateDesc(visiblePosts);
 }
 
 export async function getBlogPost(

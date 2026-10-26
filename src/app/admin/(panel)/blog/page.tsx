@@ -46,7 +46,7 @@ function buildEmptyDraft(): PostDraft {
     content: "",
     imageUrl: "",
     previewImageUrl: "",
-    status: "draft",
+    status: "published",
     date: new Date().toISOString().slice(0, 10),
     file: null,
     preview: "",
@@ -64,7 +64,7 @@ function generateSlug(title: string): string {
 }
 
 async function fetchBlogPosts(): Promise<BlogPost[]> {
-  const response = await fetch("/api/blog");
+  const response = await fetch("/api/blog?sort=date");
   const data = await response.json().catch(() => null);
   if (!response.ok) throw new Error(data?.error ?? "Failed to load blog posts");
   return Array.isArray(data?.posts) ? data.posts : [];

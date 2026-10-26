@@ -618,9 +618,10 @@ export default async function ServiceDetailPage({
   const relatedHeading = service.relatedTitle?.trim() || relatedTitle;
 
   const authoredCarousel = service.carouselImages?.filter(Boolean) ?? [];
+  const hasManagedCarousel = Array.isArray(service.carouselImages);
   const sourceSpiralImages = Array.from(
     new Set(
-      authoredCarousel.length > 0
+      hasManagedCarousel
         ? authoredCarousel
         : [
             service.image,
@@ -628,7 +629,9 @@ export default async function ServiceDetailPage({
             service.fullContent?.image,
           ].filter(
             (src): src is string =>
-              Boolean(src) && !src.includes("virtualnexgen.com/assets/uploads"),
+              typeof src === "string" &&
+              src.length > 0 &&
+              !src.includes("virtualnexgen.com/assets/uploads"),
           ),
     ),
   );

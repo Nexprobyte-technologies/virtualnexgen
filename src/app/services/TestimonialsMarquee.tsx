@@ -22,7 +22,7 @@ export default function TestimonialsMarquee({
 
   const showHighlight = highlight !== undefined && highlight.trim() !== "";
 
-  // Two matching sets let the track loop back without a visible jump.
+  // Keep every backend-provided testimonial in one seamless scrolling row.
   const items = [...testimonials, ...testimonials];
 
   return (
@@ -45,13 +45,13 @@ export default function TestimonialsMarquee({
           )}
         </div>
 
-        <div className="service-testimonials-track mt-14 flex gap-6">
+        <div className="service-testimonials-track service-testimonials-track-left mt-14 flex gap-6">
           {items.map((t, i) => (
             <div
               key={i}
-              className="w-[380px] shrink-0 rounded-2xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+              className="flex h-[270px] w-[min(380px,calc(100vw-3rem))] shrink-0 flex-col rounded-2xl border border-[#01012F]/10 bg-white p-7 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
             >
-              <p className="text-sm leading-relaxed text-[#02024E]/75 italic">
+              <p className="line-clamp-5 flex-1 text-sm leading-relaxed text-[#02024E]/75 italic">
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div className="mt-4 flex items-center gap-1">
@@ -59,7 +59,7 @@ export default function TestimonialsMarquee({
                   <Star key={idx} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
-              <div className="mt-5 flex items-center gap-3 border-t border-[#01012F]/15 pt-4">
+              <div className="mt-5 flex shrink-0 items-center gap-3 border-t border-[#01012F]/15 pt-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#12B4CF]/15 text-sm font-bold text-[#02024E]">
                   {t.name.charAt(0)}
                 </div>

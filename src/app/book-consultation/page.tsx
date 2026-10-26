@@ -3,17 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, Clock, Mail, MapPin, Phone, Video } from "lucide-react";
+import { CheckCircle2, Clock, Video } from "lucide-react";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
 import SaveToCalendar from "@/components/SaveToCalendar";
-import {
-  CONTACT_ADDRESS_INDIA,
-  CONTACT_ADDRESS_US,
-  CONTACT_EMAIL,
-  CONTACT_PHONE_INDIA,
-  CONTACT_PHONE_US,
-  telHref,
-} from "@/lib/contact-details";
 
 interface CalendlyPayload {
   event?: { start_time?: string; end_time?: string; name?: string };
@@ -80,32 +72,6 @@ export default function BookConsultationPage() {
                 </p>
                 <p className="flex items-center gap-2">
                   <Video className="h-4 w-4 text-[#12B4CF]" /> Google Meet
-                </p>
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="flex items-center gap-2 transition hover:text-[#02024E]"
-                >
-                  <Mail className="h-4 w-4 text-[#12B4CF]" /> {CONTACT_EMAIL}
-                </a>
-                <a
-                  href={telHref(CONTACT_PHONE_US)}
-                  className="flex items-center gap-2 transition hover:text-[#02024E]"
-                >
-                  <Phone className="h-4 w-4 text-[#12B4CF]" /> {CONTACT_PHONE_US}
-                </a>
-                <a
-                  href={telHref(CONTACT_PHONE_INDIA)}
-                  className="flex items-center gap-2 transition hover:text-[#02024E]"
-                >
-                  <Phone className="h-4 w-4 text-[#12B4CF]" /> {CONTACT_PHONE_INDIA}
-                </a>
-                <p className="flex items-start gap-2">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#12B4CF]" />
-                  {CONTACT_ADDRESS_US}
-                </p>
-                <p className="flex items-start gap-2">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#12B4CF]" />
-                  {CONTACT_ADDRESS_INDIA}
                 </p>
               </div>
             </aside>

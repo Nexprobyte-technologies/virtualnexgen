@@ -116,9 +116,38 @@ export async function parseServiceRequest(
       if (ci && typeof ci === "string") {
         const parsed = JSON.parse(ci);
         if (Array.isArray(parsed)) {
-          carouselImages = parsed
-            .map((v) => String(v ?? "").trim())
-            .filter(Boolean);
+          const uploadedFiles = form
+            .getAll("carouselImageFile")
+            .filter(
+              (entry): entry is File =>
+                typeof entry !== "string" && entry.size > 0,
+            );
+          let uploadIndex = 0;
+          const images: string[] = [];
+
+          for (const value of parsed) {
+            if (typeof value === "string") {
+              const src = value.trim();
+              if (src) images.push(src);
+              continue;
+            }
+
+            if (value && typeof value === "object") {
+              const src = String((value as { src?: unknown }).src ?? "").trim();
+              if (src) {
+                images.push(src);
+                continue;
+              }
+            }
+
+            const file = uploadedFiles[uploadIndex++];
+            if (file) {
+              const uploaded = await saveUpload(file);
+              if (uploaded) images.push(uploaded);
+            }
+          }
+
+          carouselImages = images;
         }
       }
     } catch {}

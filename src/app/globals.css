@@ -360,14 +360,18 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, input, textarea, select, 
   }
 }
 
-@keyframes testimonials-marquee {
+@keyframes testimonials-marquee-left {
   to {
     transform: translateX(calc(-50% - 12px));
   }
 }
 
+.service-testimonials-track-left {
+  animation: testimonials-marquee-left 32s linear infinite;
+}
+
 .service-testimonials-track {
-  animation: testimonials-marquee 9s linear infinite;
+  width: max-content;
 }
 
 /* Pause the testimonial carousel while the pointer is over it so the cards

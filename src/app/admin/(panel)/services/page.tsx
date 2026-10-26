@@ -18,6 +18,7 @@ import {
   FileText,
   FolderOpen,
   Quote,
+  Images,
   type LucideIcon,
 } from "lucide-react";
 import type { Service, ServiceBenefit, ServiceStep, ServicePricing, ServiceTestimonial, ServiceFaq } from "@/lib/types";
@@ -32,10 +33,26 @@ interface LogoDraft {
   preview: string;
 }
 
+interface CarouselImageDraft {
+  id: string;
+  src: string;
+  file: File | null;
+  preview: string;
+}
+
 function makeLogoDraft(): LogoDraft {
   return {
     id: crypto.randomUUID(),
     name: "",
+    src: "",
+    file: null,
+    preview: "",
+  };
+}
+
+function makeCarouselImageDraft(): CarouselImageDraft {
+  return {
+    id: crypto.randomUUID(),
     src: "",
     file: null,
     preview: "",
@@ -84,6 +101,7 @@ export default function AdminServices() {
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
+  const [carouselImages, setCarouselImages] = useState<CarouselImageDraft[]>([]);
   const [ctaTitle, setCtaTitle] = useState("");
   const [ctaText, setCtaText] = useState("");
   const [ctaButton, setCtaButton] = useState("");
@@ -119,6 +137,7 @@ export default function AdminServices() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(5);
   const fileRef = useRef<HTMLInputElement>(null);
+  const carouselFileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const logoFileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -174,6 +193,21 @@ export default function AdminServices() {
     setPreview(URL.createObjectURL(f));
   }
 
+  function handleCarouselImageFile(
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) {
+    const selected = e.target.files?.[0];
+    if (!selected) return;
+    setCarouselImages((prev) =>
+      prev.map((image, i) =>
+        i === index
+          ? { ...image, file: selected, src: "", preview: URL.createObjectURL(selected) }
+          : image,
+      ),
+    );
+  }
+
   function updatePartnerLogo(index: number, patch: Partial<LogoDraft>) {
     setPartnerLogos((prev) =>
       prev.map((logo, i) => (i === index ? { ...logo, ...patch } : logo)),
@@ -200,6 +234,7 @@ export default function AdminServices() {
     setImageUrl("");
     setFile(null);
     setPreview("");
+    setCarouselImages([]);
     setCtaTitle("");
     setCtaText("");
     setCtaButton("");
@@ -214,6 +249,9 @@ export default function AdminServices() {
     setPartnerLogos([makeLogoDraft()]);
     setLogosSectionMeta({});
     if (fileRef.current) fileRef.current.value = "";
+    carouselFileRefs.current.forEach((ref) => {
+      if (ref) ref.value = "";
+    });
     logoFileRefs.current.forEach((ref) => {
       if (ref) ref.value = "";
     });
@@ -271,6 +309,21 @@ export default function AdminServices() {
       form.append("short", short);
       form.append("imageUrl", imageUrl);
       if (file) form.append("image", file);
+
+      const savedCarouselImages = carouselImages.filter(
+        (image) => image.file || image.src.trim(),
+      );
+      form.append(
+        "carouselImages",
+        JSON.stringify(
+          savedCarouselImages.map((image) =>
+            image.file ? {} : { src: image.src.trim() },
+          ),
+        ),
+      );
+      savedCarouselImages.forEach((image) => {
+        if (image.file) form.append("carouselImageFile", image.file);
+      });
 
       form.append("ctaTitle", ctaTitle);
       form.append("ctaText", ctaText);
@@ -346,6 +399,18 @@ export default function AdminServices() {
   }
 
   function handleEdit(service: Service) {
+    const existingCarouselImages = Array.isArray(service.carouselImages)
+      ? service.carouselImages
+      : Array.from(
+          new Set(
+            [
+              service.image,
+              ...(service.fullContent?.images ?? []),
+              service.fullContent?.image,
+            ].filter((src): src is string => Boolean(src)),
+          ),
+        );
+
     setEditingSlug(service.slug);
     setName(service.name);
     setEyebrow(service.eyebrow ?? "");
@@ -353,6 +418,13 @@ export default function AdminServices() {
     setImageUrl(service.image ?? "");
     setPreview(service.image ?? "");
     setFile(null);
+    setCarouselImages(
+      existingCarouselImages.map((src) => ({
+        ...makeCarouselImageDraft(),
+        src,
+        preview: src,
+      })),
+    );
     if (fileRef.current) fileRef.current.value = "";
     setCtaTitle(service.ctaTitle ?? "");
     setCtaText(service.ctaText ?? "");
@@ -526,6 +598,91 @@ export default function AdminServices() {
                 </div>
               </SectionCard>
 
+              <SectionCard
+                step={2}
+                title="Hero Gallery Images"
+                icon={Images}
+                badge={
+                  <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+                    {carouselImages.length}
+                  </span>
+                }
+              >
+                <p className="mb-3 text-xs text-slate-500">
+                  These images appear in the scrolling gallery beside the service hero. Existing services keep their current image here automatically.
+                </p>
+                <div className="space-y-2">
+                  {carouselImages.length > 0 && (
+                    <div className="max-h-[22rem] space-y-2 overflow-y-auto pr-1">
+                      {carouselImages.map((image, i) => (
+                        <div
+                          key={image.id}
+                          className="flex items-center gap-2 rounded-lg bg-white p-2 shadow-sm"
+                        >
+                          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-brand/10 text-xs font-bold text-brand-dark">
+                            {i + 1}
+                          </span>
+                          <div className="min-w-0 flex-1 space-y-1.5">
+                            <input
+                              value={image.src}
+                              onChange={(e) =>
+                                setCarouselImages((prev) =>
+                                  prev.map((item, index) =>
+                                    index === i
+                                      ? { ...item, src: e.target.value, file: null, preview: e.target.value }
+                                      : item,
+                                  ),
+                                )
+                              }
+                              placeholder="Image URL (or upload a file)"
+                              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand"
+                            />
+                            <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => carouselFileRefs.current[i]?.click()}
+                                className="flex shrink-0 items-center gap-1.5 rounded-lg bg-slate-100 px-2.5 py-1.5 text-[11px] font-semibold text-slate-700 transition hover:text-brand-dark"
+                              >
+                                <Upload className="h-3.5 w-3.5" /> Upload
+                              </button>
+                              <input
+                                ref={(element) => {
+                                  carouselFileRefs.current[i] = element;
+                                }}
+                                type="file"
+                                accept=".png,.jpg,.jpeg,.webp,.gif,.svg"
+                                onChange={(e) => handleCarouselImageFile(i, e)}
+                                className="hidden"
+                              />
+                              <span className="min-w-0 truncate text-[11px] text-slate-500">
+                                {image.file?.name || (image.src ? "Image saved" : "No image selected")}
+                              </span>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setCarouselImages((prev) => prev.filter((_, index) => index !== i))
+                            }
+                            aria-label={`Remove hero image ${i + 1}`}
+                            className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-400 transition hover:text-red-500"
+                          >
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setCarouselImages((prev) => [...prev, makeCarouselImageDraft()])}
+                    className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-brand hover:text-brand-dark"
+                  >
+                    <Plus className="h-3.5 w-3.5" /> Add Hero Image
+                  </button>
+                </div>
+              </SectionCard>
+
               {/* 2 - 5 pack into columns so short cards leave no empty space */}
               <div className="columns-1 gap-4 xl:columns-2 [&>*]:mb-4 [&>*]:break-inside-avoid">
                 <SectionCard step={2} title="Get Started (CTA)" icon={Sparkles}>
@@ -583,7 +740,15 @@ export default function AdminServices() {
                             <input value={t.role} onChange={(e) => setTestimonials((prev) => prev.map((x, idx) => idx === i ? { ...x, role: e.target.value } : x))} placeholder="Role" className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-brand" />
                           </div>
                           {testimonials.length > 1 && (
-                            <button type="button" onClick={() => setTestimonials((prev) => prev.filter((_, idx) => idx !== i))} className="text-[11px] text-red-500 hover:underline">Remove</button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setTestimonials((prev) => prev.filter((_, idx) => idx !== i))
+                              }
+                              className="text-[11px] text-red-500 hover:underline"
+                            >
+                              Remove testimonial
+                            </button>
                           )}
                         </div>
                       ))}

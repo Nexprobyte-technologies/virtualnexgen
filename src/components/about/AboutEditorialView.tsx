@@ -813,7 +813,7 @@ className={`group relative flex flex-col items-start p-4 rounded-2xl text-left t
                           href="/book-consultation"
                           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#01012F] px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all hover:bg-[#12B4CF] hover:text-white"
                         >
-                          <span>Request Staffing Profile</span>
+                          <span>Book a Call</span>
                           <ArrowRight className="h-3.5 w-3.5" />
                         </Link>
                       </div>

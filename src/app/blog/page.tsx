@@ -35,10 +35,7 @@ export default async function BlogListPage() {
   return (
     <BlogListClient
       featuredPosts={summaries.slice(0, FEATURED_POSTS)}
-      initialPosts={summaries.slice(
-        FEATURED_POSTS,
-        FEATURED_POSTS + POSTS_PER_PAGE,
-      )}
+      initialPosts={summaries.slice(0, POSTS_PER_PAGE)}
       categories={categories}
       total={summaries.length}
     />

@@ -216,7 +216,12 @@
     },
     "folderSection": {
       "heading": "20 Essential Tasks an Insurance Virtual Assistant Can Handle"
-    }
+    },
+    "carouselImages": [
+      "/uploads/ser1.jpg",
+      "/uploads/ser2.jpg",
+      "/uploads/1792993955140-667022.jpg"
+    ]
   },
   {
     "id": "real-estate-virtual-assistants",
@@ -358,7 +363,19 @@
     },
     "folderSection": {
       "heading": "20 Essential Tasks a Real Estate Virtual Assistant Can Handle"
-    }
+    },
+    "carouselImages": [
+      "/uploads/ser2.jpg",
+      "/uploads/ser3.jpg",
+      "/uploads/ser4.jpg"
+    ],
+    "testimonials": [
+      {
+        "quote": "test2",
+        "name": "test2",
+        "role": "test2"
+      }
+    ]
   },
   {
     "id": "legal-virtual-assistants",

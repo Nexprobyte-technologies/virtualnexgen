@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { getCardDescription, getCardTitle } from "@/lib/blog-seo";
 import type { BlogPostSummary } from "@/lib/blog-seo";
-import { FEATURED_POSTS, POSTS_PER_PAGE } from "@/lib/blog-listing";
+import { POSTS_PER_PAGE } from "@/lib/blog-listing";
 
 /** Cards per row and per stacked column of the article list. */
 const GROUP_SIZE = 3;
@@ -122,34 +122,6 @@ interface BlogListClientProps {
   total: number;
 }
 
-/** Distance kept between the top of the viewport and the articles section. */
-const SCROLL_OFFSET = 88;
-
-/**
- * Scrolls to the articles section. The smooth scroll has to be driven by
- * Lenis, because the library cancels native smooth scrolling.
- */
-function scrollToArticles() {
-  const target = document.getElementById("all-articles");
-  if (!target) return;
-
-  const top = Math.max(
-    target.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET,
-    0,
-  );
-  const lenis = (
-    window as unknown as {
-      __lenis?: { scrollTo: (target: number, options?: Record<string, unknown>) => void };
-    }
-  ).__lenis;
-
-  if (lenis) {
-    lenis.scrollTo(top, { duration: 1.2 });
-    return;
-  }
-  window.scrollTo({ top, behavior: "smooth" });
-}
-
 /** Loads one page of articles for the active tab. */
 async function fetchBlogPage(filter: string, offset: number, limit: number) {
   const params = new URLSearchParams({
@@ -187,9 +159,7 @@ export default function BlogListClient({
   const [hasError, setHasError] = useState(false);
 
   const isRecent = activeFilter === RECENT_FILTER;
-  // The featured articles are the first entries of the "most recent" list, so
-  // the list starts after them and never repeats an article.
-  const offsetBase = isRecent ? FEATURED_POSTS : 0;
+  const offsetBase = 0;
   const currentTotal = isRecent ? total : (filterTotal ?? 0);
   const hasMore = !hasError && offsetBase + displayedPosts.length < currentTotal;
 
@@ -267,7 +237,7 @@ export default function BlogListClient({
         ) : (
           <>
             {/* Featured */}
-            {isRecent && featuredPosts.length > 0 && (
+            {featuredPosts.length > 0 && (
               <div className="mb-16 flex flex-col">
                 <h2 className="mb-8 text-2xl font-extrabold text-[#02024E] sm:text-3xl">
                   Featured
@@ -280,11 +250,6 @@ export default function BlogListClient({
                 <div className="mt-10 flex justify-center">
                   <a
                     href="#all-articles"
-                    onClick={(event) => {
-                      if (!document.getElementById("all-articles")) return;
-                      event.preventDefault();
-                      scrollToArticles();
-                    }}
                     className="inline-flex items-center gap-2 rounded-full border-2 border-[#12B4CF] px-8 py-3.5 text-base font-semibold text-[#12B4CF] transition-all duration-300 hover:border-[#12B4CF] hover:bg-[#12B4CF] hover:text-white"
                   >
                     Read all articles
