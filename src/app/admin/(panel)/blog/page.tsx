@@ -189,7 +189,7 @@ export default function AdminBlog() {
 
       const body = {
         title: draft.title.trim(),
-        slug: generateSlug(draft.title),
+        slug: editingSlug ? draft.link.trim() : generateSlug(draft.title),
         excerpt: draft.excerpt.trim(),
         content: draft.content.trim(),
         image: imageUrl,
@@ -252,7 +252,7 @@ export default function AdminBlog() {
     setDraft({
       metaTitle: post.metaTitle ?? "",
       metaDescription: post.metaDescription ?? "",
-      link: `/blog/${post.slug}`,
+      link: post.link ?? `/blog/${post.slug}`,
       title: post.title ?? "",
       excerpt: post.excerpt ?? "",
       content: fullContent,
@@ -646,7 +646,9 @@ export default function AdminBlog() {
                     <Link2 className="h-4 w-4 shrink-0 text-slate-400" />
                     <input
                       value={draft.link}
-                      readOnly
+                      onChange={(e) =>
+                        setDraft((prev) => ({ ...prev, link: e.target.value }))
+                      }
                       placeholder="/blog/..."
                       className="w-full bg-transparent py-2 text-sm text-slate-800 outline-none placeholder:text-slate-400"
                     />
@@ -665,7 +667,10 @@ export default function AdminBlog() {
                         return {
                           ...prev,
                           title: value,
-                          link: generateSlug(value) ? `/blog/${generateSlug(value)}` : "",
+                          link:
+                            editingSlug || !generateSlug(value)
+                              ? prev.link
+                              : `/blog/${generateSlug(value)}`,
                           metaTitle: shouldUpdateMeta ? value : prev.metaTitle,
                         };
                       });

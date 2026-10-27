@@ -59,6 +59,11 @@ const nextConfig: NextConfig = {
         destination: "/service/Insurance-Virtual-Assistants",
         permanent: true,
       },
+      {
+        source: "/blog/restoration-virtual-assistant-emergency-job-coordination",
+        destination: "/blog/restoration-virtual-assistant-emergency-job-coordinations",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

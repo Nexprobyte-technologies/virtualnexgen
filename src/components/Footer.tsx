@@ -6,6 +6,7 @@ import { Globe, Play, Share2, AtSign, Mail, Phone } from "lucide-react";
 import { SiPerplexity } from "react-icons/si";
 
 import Reveal from "./Reveal";
+import { getBlogPath } from "@/lib/blog-seo";
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_INDIA,
@@ -15,6 +16,7 @@ import {
 
 type FooterBlogPost = {
   slug: string;
+  link?: string;
   title: string;
   image: string;
   date: string;
@@ -70,7 +72,7 @@ const newestBlogPosts: FooterBlogPost[] = [
   {
     title:
       "From Incoming Calls to Confirmed Jobs: How Plumbing Virtual Assistants Help Contractors Manage Leads, Appointments, and Customer Communication",
-    slug: "plumbing-virtual-assistant-appointments-lead-management",
+    slug: "plumbing-virtual-assistant-appointments-lead-managements",
     date: "2026-10-12",
     createdAt: "2026-10-12T22:24:46.000Z",
     image: "/uploadss/50598.png",
@@ -78,7 +80,7 @@ const newestBlogPosts: FooterBlogPost[] = [
   {
     title:
       "When Every Minute Matters: How Restoration Virtual Assistants Help Contractors Coordinate Emergency Jobs and Manage Operations",
-    slug: "restoration-virtual-assistant-emergency-job-coordination",
+    slug: "restoration-virtual-assistant-emergency-job-coordinations",
     date: "2026-10-12",
     createdAt: "2026-10-12T22:40:14.000Z",
     image: "/uploadss/28702.png",
@@ -152,7 +154,7 @@ export default function Footer() {
       {blogPosts.map((post) => (
         <a
           key={post.slug}
-          href={`/blog/${post.slug}`}
+          href={getBlogPath(post)}
           tabIndex={duplicate ? -1 : undefined}
           className="group flex items-center gap-4"
         >

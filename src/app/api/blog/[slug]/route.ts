@@ -39,6 +39,7 @@ export async function PUT(
       metaTitle?: string;
       metaDescription?: string;
       tags?: string[];
+      slug?: string;
     } | null;
     const title = String(body?.title ?? "").trim();
     if (!title) {
@@ -60,6 +61,7 @@ export async function PUT(
       metaTitle: String(body?.metaTitle ?? "").trim(),
       metaDescription: String(body?.metaDescription ?? "").trim(),
       tags,
+      slug: String(body?.slug ?? "").trim(),
     });
     if (!post) {
       return Response.json({ error: "Post not found" }, { status: 404 });

@@ -14,7 +14,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import sanitizeHtml from "sanitize-html";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
-import { buildBlogPostMetadata } from "@/lib/blog-seo";
+import { buildBlogPostMetadata, getBlogPath } from "@/lib/blog-seo";
 import AskAboutUs from "@/components/AskAboutUs";
 import { CONTACT_EMAIL, telHref } from "@/lib/contact-details";
 
@@ -425,7 +425,7 @@ export default async function BlogDetailPage({
               {related.map((p) => (
                 <Link
                   key={p.id}
-                  href={`/blog/${p.slug}`}
+                  href={getBlogPath(p)}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)]"
                 >
                   <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden">

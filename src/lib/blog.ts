@@ -270,6 +270,18 @@ export async function getBlogPosts(options?: {
   return sortPostsByDateDesc(visiblePosts);
 }
 
+function slugFromLink(link: string, fallbackTitle: string): string {
+  const value = link.trim();
+  let pathname = value;
+  try {
+    if (/^https?:\/\//i.test(value)) pathname = new URL(value).pathname;
+  } catch {
+    // Fall back to the entered value when it is not a valid absolute URL.
+  }
+  const segment = pathname.split(/[?#]/, 1)[0].split("/").filter(Boolean).pop();
+  return slugify(segment ?? value) || slugify(fallbackTitle) || "post";
+}
+
 export async function getBlogPost(
   slug: string,
   options?: { publishedOnly?: boolean },
@@ -354,8 +366,16 @@ export async function updateBlogPost(
   const nextSummaryPosts = [...summaryPosts];
   const index = all.findIndex((post) => post.slug === slug);
   if (index === -1) return null;
+  const nextSlug = slugFromLink(input.slug ?? input.link, input.title);
+  const conflictingPost = all.find(
+    (post, postIndex) => postIndex !== index && post.slug === nextSlug,
+  );
+  if (conflictingPost) {
+    throw new Error("That blog link is already in use");
+  }
   const next: BlogPost = {
     ...all[index],
+    slug: nextSlug,
     title: input.title,
     excerpt: input.excerpt,
     content: input.content || all[index].content,
@@ -370,23 +390,20 @@ export async function updateBlogPost(
     metaDescription: input.metaDescription ?? all[index].metaDescription ?? "",
   };
   all[index] = next;
-  upsertBySlug(
-    nextFullPosts,
-    createFullBlogPost(
-      next,
-      nextFullPosts,
-      nextFullPosts.find((post) => post.slug === slug),
-    ),
+  const oldSlug = slug;
+  const fullWithoutOldSlug = nextFullPosts.filter((post) => post.slug !== oldSlug);
+  const summaryWithoutOldSlug = nextSummaryPosts.filter(
+    (post) => post.slug !== oldSlug,
   );
   upsertBySlug(
-    nextSummaryPosts,
-    createSummaryBlogPost(
-      next,
-      nextSummaryPosts,
-      nextSummaryPosts.find((post) => post.slug === slug),
-    ),
+    fullWithoutOldSlug,
+    createFullBlogPost(next, fullWithoutOldSlug),
   );
-  await writeBlogData(all, nextFullPosts, nextSummaryPosts);
+  upsertBySlug(
+    summaryWithoutOldSlug,
+    createSummaryBlogPost(next, summaryWithoutOldSlug),
+  );
+  await writeBlogData(all, fullWithoutOldSlug, summaryWithoutOldSlug);
   return next;
 }
 

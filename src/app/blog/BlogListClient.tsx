@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
-import { getCardDescription, getCardTitle } from "@/lib/blog-seo";
+import { getBlogPath, getCardDescription, getCardTitle } from "@/lib/blog-seo";
 import type { BlogPostSummary } from "@/lib/blog-seo";
 import { POSTS_PER_PAGE } from "@/lib/blog-listing";
 
@@ -57,7 +57,7 @@ function PostThumb({
 function FeaturedCard({ post }: { post: BlogPostSummary }) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={getBlogPath(post)}
       className="group flex min-w-0 grow basis-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)] md:basis-[46%]"
     >
       <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden">
@@ -88,7 +88,7 @@ function FeaturedCard({ post }: { post: BlogPostSummary }) {
 function GridCard({ post }: { post: BlogPostSummary }) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={getBlogPath(post)}
       className="group flex min-w-0 grow basis-full flex-col overflow-hidden rounded-2xl border border-[#01012F]/15 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(6,182,212,0.12)] sm:basis-[46%] md:basis-[30%]"
     >
       <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">

@@ -46,6 +46,20 @@ export type BlogCardPost = {
 /** Blog post without the article body, safe to send to the browser. */
 export type BlogPostSummary = Omit<BlogPost, "content"> & { excerpt: string };
 
+/** The frontend blog URL is taken from the editable admin Link field. */
+export function getBlogPath(post: { slug: string; link?: string }): string {
+  const link = post.link?.trim();
+  if (link) {
+    try {
+      const pathname = new URL(link, SITE_URL).pathname;
+      if (pathname.startsWith("/blog/")) return pathname;
+    } catch {
+      // Fall back to the synchronized slug below.
+    }
+  }
+  return `/blog/${post.slug}`;
+}
+
 /**
  * Strips the article body from a post so listing pages do not serialise
  * megabytes of HTML to the client. The excerpt is kept meaningful by falling
@@ -106,7 +120,7 @@ export function getCanonicalUrl(post: BlogPost): string {
       ? canonical
       : `${SITE_URL}${canonical.startsWith("/") ? "" : "/"}${canonical}`;
   }
-  return `${SITE_URL}/blog/${post.slug}`;
+  return `${SITE_URL}${getBlogPath(post)}`;
 }
 
 function absoluteUrl(url?: string): string | undefined {
