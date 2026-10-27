@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import NextLink from "next/link";
 import {
   CalendarDays,
   ChevronLeft,
@@ -251,7 +252,7 @@ export default function AdminBlog() {
     setDraft({
       metaTitle: post.metaTitle ?? "",
       metaDescription: post.metaDescription ?? "",
-      link: post.link ?? "",
+      link: `/blog/${post.slug}`,
       title: post.title ?? "",
       excerpt: post.excerpt ?? "",
       content: fullContent,
@@ -432,9 +433,14 @@ export default function AdminBlog() {
                               <p className="max-w-[220px] truncate font-semibold text-slate-800">
                                 {post.title}
                               </p>
-                              <p className="mt-0.5 truncate text-xs text-slate-400">
+                              <NextLink
+                                href={`/blog/${post.slug}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="mt-0.5 block truncate text-xs text-slate-400 transition hover:text-brand-dark hover:underline"
+                              >
                                 /blog/{post.slug}
-                              </p>
+                              </NextLink>
                             </div>
                           </div>
                         </td>
@@ -640,10 +646,8 @@ export default function AdminBlog() {
                     <Link2 className="h-4 w-4 shrink-0 text-slate-400" />
                     <input
                       value={draft.link}
-                      onChange={(e) =>
-                        setDraft((prev) => ({ ...prev, link: e.target.value }))
-                      }
-                      placeholder="https://..."
+                      readOnly
+                      placeholder="/blog/..."
                       className="w-full bg-transparent py-2 text-sm text-slate-800 outline-none placeholder:text-slate-400"
                     />
                   </div>
@@ -661,6 +665,7 @@ export default function AdminBlog() {
                         return {
                           ...prev,
                           title: value,
+                          link: generateSlug(value) ? `/blog/${generateSlug(value)}` : "",
                           metaTitle: shouldUpdateMeta ? value : prev.metaTitle,
                         };
                       });
@@ -669,9 +674,6 @@ export default function AdminBlog() {
                     placeholder="e.g. AI Automation for Small Businesses"
                     className={inputClass}
                   />
-                  <span className="mt-1 block truncate text-[11px] text-slate-400">
-                    Slug: /blog/{generateSlug(draft.title) || "…"}
-                  </span>
                 </label>
               </div>
 
