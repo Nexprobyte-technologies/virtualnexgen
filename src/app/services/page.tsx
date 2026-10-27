@@ -5,6 +5,7 @@ import { getServices } from "@/lib/services";
 import { SITE_URL } from "@/lib/blog-seo";
 import Reveal from "@/components/Reveal";
 import FAQ9 from "@/components/FAQ9";
+import { getServicePath } from "@/lib/service-routes";
 
 export const dynamic = "force-dynamic";
 
@@ -54,7 +55,7 @@ export default async function ServicesListPage() {
             {services.map((service, i) => (
               <Reveal key={service.slug} delay={i * 0.08}>
                 <Link
-                  href={`/services/${service.slug}`}
+                  href={getServicePath(service.slug)}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white backdrop-blur-sm transition-all duration-500 hover:border-[#12B4CF]/50 hover:bg-[#02024E]/5 hover:shadow-[0_16px_40px_rgba(6,182,212,0.15)]"
                 >
                   {service.image ? (

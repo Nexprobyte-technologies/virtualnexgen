@@ -13,7 +13,7 @@ const services = [
     description:
       "Policy management, claims processing, and seamless insurance support that ensures accuracy and efficiency.",
     image: "/uploads/ser1.jpg",
-    href: "/services/insurance-virtual-assistants",
+    href: "/service/Insurance-Virtual-Assistants",
   },
   {
     title: "Real Estate Virtual Assistants",

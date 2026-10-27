@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import TestimonialsMarquee from "../TestimonialsMarquee";
 import { getService, getServices } from "@/lib/services";
+import { getServicePath } from "@/lib/service-routes";
 import { SITE_URL } from "@/lib/blog-seo";
 import { CONTACT_EMAIL, telHref } from "@/lib/contact-details";
 import {
@@ -523,7 +524,7 @@ export async function generateMetadata({
   const description =
     service.short?.trim() ||
     `${service.name} services from Virtual Nexgen Solutions — expert virtual assistants and AI automation tailored to your industry.`;
-  const url = `${SITE_URL}/services/${service.slug}`;
+  const url = `${SITE_URL}${getServicePath(service.slug)}`;
 
   return {
     title,
@@ -1020,7 +1021,7 @@ export default async function ServiceDetailPage({
                   {related.map((s, i) => (
                     <Reveal key={s.slug} delay={i * 0.1}>
                       <Link
-                        href={`/services/${s.slug}`}
+                        href={getServicePath(s.slug)}
                         className="group block overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50"
                       >
                         {s.image && (

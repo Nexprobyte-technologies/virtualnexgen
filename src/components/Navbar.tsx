@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 import { motion } from "framer-motion";
 import type { ServiceSummary } from "@/lib/services";
+import { getServicePath } from "@/lib/service-routes";
 import ChatBot from "@/components/ChatBot";
 import {
   CONTACT_EMAIL,
@@ -26,12 +27,12 @@ const staticLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/services") || pathname.startsWith("/about") || pathname.startsWith("/casestudy") || pathname.startsWith("/contacts") || pathname.startsWith("/calculator");
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/services") || pathname.startsWith("/service/") || pathname.startsWith("/about") || pathname.startsWith("/casestudy") || pathname.startsWith("/contacts") || pathname.startsWith("/calculator");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeNav, setActiveNav] = useState(() => {
     if (pathname.startsWith("/blog")) return "Blog";
     if (pathname.startsWith("/contacts")) return "Contact Us";
-    if (pathname.startsWith("/services")) return "Services";
+    if (pathname.startsWith("/services") || pathname.startsWith("/service/")) return "Services";
     if (pathname.startsWith("/about") || pathname.startsWith("/casestudy")) return "About Us";
     return "Home";
   });
@@ -186,7 +187,7 @@ export default function Navbar() {
                         {services.map((s) => (
                           <Link
                             key={s.slug}
-                            href={`/services/${s.slug}`}
+                            href={getServicePath(s.slug)}
                             onClick={() => setServicesOpen(false)}
                             className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-ink/80 hover:bg-cream-2 hover:text-brand transition-colors"
                           >
@@ -331,7 +332,7 @@ export default function Navbar() {
                         {services.map((s) => (
                           <Link
                             key={s.slug}
-                            href={`/services/${s.slug}`}
+                            href={getServicePath(s.slug)}
                             onClick={() => {
                               setMobileServicesOpen(false);
                               setMobileOpen(false);

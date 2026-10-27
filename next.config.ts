@@ -52,6 +52,23 @@ const nextConfig: NextConfig = {
     ],
     minimumCacheTTL: 2678400,
   },
+  async redirects() {
+    return [
+      {
+        source: "/services/insurance-virtual-assistants",
+        destination: "/service/Insurance-Virtual-Assistants",
+        permanent: true,
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/service/Insurance-Virtual-Assistants",
+        destination: "/services/insurance-virtual-assistants",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
