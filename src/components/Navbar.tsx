@@ -174,7 +174,7 @@ export default function Navbar() {
                   </button>
 
 {servicesOpen && (
-                    <div className="absolute top-full right-0 mt-3 w-140 rounded-2xl border border-line bg-white shadow-2xl py-3 z-50">
+                    <div className="absolute top-full right-0 z-50 mt-3 w-max min-w-64 max-w-[calc(100vw-2rem)] rounded-2xl border border-line bg-white py-3 shadow-2xl">
                       <Link
                         href="/services"
                         onClick={() => setServicesOpen(false)}
@@ -183,13 +183,13 @@ export default function Navbar() {
                         All Services
                       </Link>
                       {services.length > 0 && <div className="border-t border-line my-1" />}
-                      <div className="grid grid-cols-2 gap-1 px-2">
+                      <div className="grid grid-cols-[max-content_max-content] gap-1 px-2">
                         {services.map((s) => (
                           <Link
                             key={s.slug}
                             href={getServicePath(s.slug)}
                             onClick={() => setServicesOpen(false)}
-                            className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-ink/80 hover:bg-cream-2 hover:text-brand transition-colors"
+                            className="flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm text-ink/80 transition-colors hover:bg-cream-2 hover:text-brand"
                           >
                             {s.name}
                           </Link>

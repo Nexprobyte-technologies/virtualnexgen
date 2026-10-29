@@ -985,8 +985,8 @@ export default async function ServiceDetailPage({
               </div>
 
               <div className="mt-8 grid gap-3 text-sm text-white/70 sm:grid-cols-2">
-                {ctaPoints.map((point) => (
-                  <div key={point} className="flex items-center gap-2.5">
+                {ctaPoints.map((point, index) => (
+                  <div key={`${point}-${index}`} className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-accent" />
                     {point}
                   </div>
@@ -1024,10 +1024,21 @@ export default async function ServiceDetailPage({
                         href={getServicePath(s.slug)}
                         className="group block overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50"
                       >
-                        {s.image && (
+                        {(s.image ||
+                          s.carouselImages?.find(Boolean) ||
+                          s.fullContent?.image ||
+                          s.fullContent?.images?.find(Boolean) ||
+                          s.sections?.find((section) => section.image?.trim())?.image) && (
                           <div className="relative aspect-[16/9] overflow-hidden">
                             <img
-                              src={s.image}
+                              src={
+                                s.image ||
+                                s.carouselImages?.find(Boolean) ||
+                                s.fullContent?.image ||
+                                s.fullContent?.images?.find(Boolean) ||
+                                s.sections?.find((section) => section.image?.trim())?.image ||
+                                ""
+                              }
                               alt={s.name}
                               className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                             />
