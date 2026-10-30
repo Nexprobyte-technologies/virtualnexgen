@@ -7,6 +7,8 @@ import { SiPerplexity } from "react-icons/si";
 
 import Reveal from "./Reveal";
 import { getBlogPath } from "@/lib/blog-seo";
+import { getServicePath } from "@/lib/service-routes";
+import Link from "next/link";
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_INDIA,
@@ -25,15 +27,18 @@ type FooterBlogPost = {
 };
 
 const services = [
-  "Insurance Virtual Assistants",
-  "Real Estate Virtual Assistants",
-  "Legal Virtual Assistants",
-  "Healthcare Virtual Assistants",
-  "Marketing Virtual Assistants",
-  "Administrative Support",
-  "Bookkeeping Virtual Assistants",
-  "AI Automation Services",
-  "Manufacturing & Engineering Services",
+  { name: "Insurance Virtual Assistants", slug: "insurance-virtual-assistants" },
+  { name: "Real Estate Virtual Assistants", slug: "real-estate-virtual-assistants" },
+  { name: "Legal Virtual Assistants", slug: "legal-virtual-assistants" },
+  { name: "Healthcare Virtual Assistants", slug: "healthcare-virtual-assistants" },
+  { name: "Marketing Virtual Assistants", slug: "marketing-virtual-assistants" },
+  { name: "Administrative Support", slug: "administrative-support" },
+  { name: "Bookkeeping Virtual Assistants", slug: "bookkeeping-virtual-assistants" },
+  { name: "AI Automation Services", slug: "ai-automation-services" },
+  {
+    name: "Manufacturing & Engineering Services",
+    slug: "manufacturing-engineering-services-with-excellence",
+  },
 ];
 
 const newestBlogPosts: FooterBlogPost[] = [
@@ -303,14 +308,14 @@ export default function Footer() {
                 Our Services
               </h4>
               <ul className="space-y-3">
-                {services.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#services"
+                {services.map((service) => (
+                  <li key={service.slug}>
+                    <Link
+                      href={getServicePath(service.slug)}
                       className="text-sm text-white/60 transition hover:text-white"
                     >
-                      {link}
-                    </a>
+                      {service.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

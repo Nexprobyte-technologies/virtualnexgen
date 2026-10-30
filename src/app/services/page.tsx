@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { getServices } from "@/lib/services";
 import { SITE_URL } from "@/lib/blog-seo";
-import Reveal from "@/components/Reveal";
 import FAQ9 from "@/components/FAQ9";
 import { getServicePath } from "@/lib/service-routes";
+import ServicesGrid from "./ServicesGrid";
 
 export const dynamic = "force-dynamic";
 
@@ -51,53 +49,19 @@ export default async function ServicesListPage() {
             </p>
           </div>
         ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, i) => {
-              const cardImage =
+          <ServicesGrid
+            services={services.map((service) => ({
+              slug: service.slug,
+              href: getServicePath(service.slug),
+              name: service.name,
+              eyebrow: service.eyebrow,
+              short: service.short,
+              image:
                 service.image?.trim() ||
-                service.carouselImages?.find((image) => image?.trim());
-
-              return (
-                <Reveal key={service.slug} delay={i * 0.08}>
-                  <Link
-                    href={getServicePath(service.slug)}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#01012F]/10 bg-white backdrop-blur-sm transition-all duration-500 hover:border-[#12B4CF]/50 hover:bg-[#02024E]/5 hover:shadow-[0_16px_40px_rgba(6,182,212,0.15)]"
-                  >
-                    {cardImage ? (
-                      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">
-                        <img
-                          src={cardImage}
-                          alt={service.name}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                        />
-                      </div>
-                    ) : (
-                      <div className="relative grid aspect-[16/10] w-full shrink-0 place-items-center overflow-hidden bg-gradient-to-br from-[#02024E] to-[#12B4CF]">
-                        <span className="text-5xl font-extrabold text-white/80">
-                          {service.name.charAt(0)}
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex flex-1 flex-col p-6">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#12B4CF]/60">
-                        {service.eyebrow || service.name}
-                      </span>
-                      <h2 className="mt-2 text-xl font-extrabold leading-snug text-[#02024E] transition group-hover:text-[#12B4CF]">
-                        {service.name}
-                      </h2>
-                      <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-[#02024E]/60">
-                        {service.short}
-                      </p>
-                      <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#12B4CF] transition group-hover:gap-2.5">
-                        Learn More <ArrowUpRight className="h-4 w-4" />
-                      </span>
-                    </div>
-                  </Link>
-                </Reveal>
-              );
-            })}
-          </div>
+                service.carouselImages?.find((image) => image?.trim()) ||
+                "",
+            }))}
+          />
         )}
       </section>
       <FAQ9 />

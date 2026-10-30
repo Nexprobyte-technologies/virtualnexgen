@@ -607,7 +607,7 @@ export default async function ServiceDetailPage({
   const logoItems = logosSection?.logos?.length
     ? logosSection.logos.filter((logo) => logo.name || logo.src)
     : defaultClientLogos;
-  const logoCenter = logosSection?.centerText?.trim() || "AMS\nExperts";
+  const logoCenter = "EXPERTS";
 
   const heroPrimaryUrl =
     service.heroButtons?.primaryUrl?.trim() || "https://calendly.com/virtualnexgen-info/30min";

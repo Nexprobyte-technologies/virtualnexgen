@@ -55,7 +55,7 @@ export default function ClientLogos({
   // connecting lines) are skipped so the remaining logos stay aligned.
   const displayLogos = resolved.filter((logo) => !!logo.src);
   const showHighlight = highlightText !== "";
-  const centerLines = (centerText?.trim() || (isInsuranceSoftware ? "AMS\nExperts" : "VA\nExperts")).split("\n");
+  const centerLines = (centerText?.trim() || "EXPERTS").split("\n");
   const circuitLogoPositions = displayLogos.map((_, i) => {
     const ringIndex = Math.floor(i / 2);
     const isOuterRing = i % 2 === 0;
